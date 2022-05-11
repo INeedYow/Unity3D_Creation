@@ -9,8 +9,7 @@ public class Monster : Character
 
     public override void Death(){
         //
+        base.Death();
         onDeath?.Invoke(this);
-        Destroy(gameObject);
-        Debug.Log(name + "죽음");
     }
 }

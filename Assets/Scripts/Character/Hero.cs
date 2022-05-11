@@ -5,14 +5,11 @@ using UnityEngine;
 // 캐릭터 전투, 비전투 구분하여 관리하는 법.?
 public class Hero : Character
 {
-    [Header("GFX")]
-    public GameObject grxHero;      // 전투 중에 보여질 캐릭터
     [Header("Macro")]
     [SerializeField] ConditionMacro[]   conditionMacros;
     [SerializeField] ActionMacro[]      actionMacros;
     int maxMacroCount = 5;          // 매니저에 둘 변수
     [Header("Additional")]
-    public bool isDead;
     public Vector3 beginPos;
 
     private void Start() {
@@ -21,7 +18,7 @@ public class Hero : Character
         
         beginPos = gameObject.transform.position;
 
-        conditionMacros[0] = new Condition_Self("체력 70% 이상일 때", this, Condition_Self.EInfo.HP, Condition_Self.EType.Least, 70f);
+        conditionMacros[0] = new Condition_FindTarget_Most("HP가 가장 낮은 적", this, Condition_FindTarget_Most.EGroup.Enemy, Condition_FindTarget_Most.EValue.HP, Condition_FindTarget_Most.EMost.Least);
         actionMacros[0] = new Action_NormalAttack("일반 공격", this);
 
         conditionMacros[1] = new Condition_Self("체력 35% 이하일 때", this, Condition_Self.EInfo.HP, Condition_Self.EType.Most, 35f);
@@ -51,8 +48,8 @@ public class Hero : Character
 
     public override void Death()
     {
-        isDead = true;
-        grxHero.SetActive(false);
+        base.Death();
+        //
     }
 
     public bool IsTargetInRange()

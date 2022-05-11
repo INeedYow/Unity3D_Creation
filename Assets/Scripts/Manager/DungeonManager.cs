@@ -30,13 +30,5 @@ public class DungeonManager : MonoBehaviour
     {
         curDungeon.RemoveMonster(monster);
     }
-    
-    //테스트용
-    // private void Update() {
-    //     if(Input.GetKeyDown(KeyCode.Q))
-    //     {
-    //         IDamagable target = curDungeon.curMonsters[Random.Range(0, curDungeon.curMonsters.Count)].GetComponent<IDamagable>();
-    //         target?.Damaged(100f, 10f);
-    //     }
-    // }
+
 }

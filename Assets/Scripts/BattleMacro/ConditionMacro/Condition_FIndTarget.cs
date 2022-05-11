@@ -3,52 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO macro,, class 및 enum으로 나눌 영역 확실히 정하기
-public class Condition_FindTarget : ConditionMacro
+public abstract class Condition_FindTarget : ConditionMacro
 {
-    public enum ETarget { Self, Ally, Enemy };
-    public enum EType { 
-        LowestHP,
-        HighestHP,
-        LowestPower,
-        HighestPower,
-        LowestArmor,
-        HighestArmor,
-        LowestMagicPower,
-        HighestMagicPower,
-        LowestMagicArmor,
-        HightestMagicArmor,
+    public enum EGroup { Ally, Enemy };
+    public enum EValue { 
+        HP,
+        Power,
+        Armor,
+        MagicPower,
+        MagicArmor,
+        AttackRange,
+        AttackSpeed,
+        Distance,
+        MoveSpeed,
     };
 
-    public ETarget eTarget;
-    Character m_target; 
-    float m_value;
+    public EGroup eGroup;
+    public EValue eValue;
 
-    public Condition_FindTarget(string desc, Hero hero, ETarget eTarget) : base(desc, hero)
+    protected Character target; 
+    protected float value;
+
+    public Condition_FindTarget(string desc, Hero hero, EGroup eGroup, EValue eValue) 
+        : base(desc, hero)
     {
-        this.eTarget = eTarget;
+        this.eGroup = eGroup;
+        this.eValue = eValue;
     }
 
-    public override bool IsSatisfy()
-    {   // TODO
-        if (eTarget == ETarget.Self)
-        {
-            owner.target = owner;
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    //
-    bool SetTarget_LowestHP()
-    {
-        if (eTarget == ETarget.Ally)
-        {
-            return false;
-        }
-        else{   // Self인 경우는 IsSatisfy()에서 이미 제외
-            return false;
-        }
-    }
+    //public abstract bool IsSatisfy();
 }

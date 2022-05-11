@@ -48,7 +48,7 @@ public class Dungeon : MonoBehaviour
     }
 
     public void RemoveMonster(Monster monster)
-    {
+    {   // TODO 수정필요 isDead로 관리,, wave끝나면 배열 clear
         curMonsters.Remove(monster);
         curMosterCount--;
         if (curMosterCount <= 0)
@@ -79,6 +79,18 @@ public class Dungeon : MonoBehaviour
         Debug.Log(curWave + " 웨이브 시작");
         spawnTransformIndex = 0;
         waves[curWave - 1].SpawnWave();
+    }
+
+    public Monster GetAliveMonster()
+    {
+        foreach (Monster aliveMons in curMonsters)
+        {
+            if (aliveMons.isDead == false)
+            {
+                return aliveMons;
+            }
+        }
+        return null;
     }
 
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour, IDamagable
 {
     new public string name;
+    [Header("GFX")]
+    public GameObject grx;      // 전투 중에 보여질 캐릭터
 
     [Header("Spec")]
     public float curHp;
@@ -35,8 +37,9 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float magicArmorRate = 0f;           // 마법방어율 (%)
 
     [Header("Additional")]
-    public bool isBattleStart;
+    public bool isBattleStart;  // TODO 전투 개시
     public Character target;
+    public bool isDead;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -66,7 +69,17 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (curHp <= 0) Death();
     }
 
-    public abstract void Death();
+    public virtual void Death(){
+        isDead = true;
+        grx.SetActive(false);
+    }
+
+    public void Revive(float rateHP_0f_to_1f)
+    {
+        isDead = false;
+        grx.SetActive(true);
+        curHp = rateHP_0f_to_1f * maxHp;
+    }
 
     public void Move(Transform destTransform)
     {

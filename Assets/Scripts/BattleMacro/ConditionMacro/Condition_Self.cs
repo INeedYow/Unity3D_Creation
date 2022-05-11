@@ -9,7 +9,7 @@ public class Condition_Self : ConditionMacro
     public EInfo eInfo;
     public EType eType;
     public float value;
-
+    
     public Condition_Self(string desc, Hero hero, EInfo eInfo, EType eType, float value) : base(desc, hero) 
     {
         this.eInfo = eInfo;

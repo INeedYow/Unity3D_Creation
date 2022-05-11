@@ -29,4 +29,16 @@ public class PartyManager : MonoBehaviour
     {
         heroParty.Remove(hero);
     }
+
+    public Hero GetAliveHero()
+    {
+        foreach (Hero aliveHero in heroParty)
+        {
+            if (aliveHero.isDead == false)
+            {
+                return aliveHero;
+            }
+        }
+        return null;
+    }
 }
