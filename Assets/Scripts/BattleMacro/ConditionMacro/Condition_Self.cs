@@ -39,15 +39,10 @@ public class Condition_Self : ConditionMacro
     }
 
     void UpdateHp(){
-        switch (eType)
-            {
-            case EType.Least:
-                isSatisfy = owner.curHp / owner.maxHp * 100f >= value;
-                break;
-            case EType.Most:
-                isSatisfy = owner.curHp / owner.maxHp * 100f <= value;
-                break;
-            }
+        switch (eType){
+        case EType.Least:   isSatisfy = owner.curHp / owner.maxHp * 100f >= value; break;
+        case EType.Most:    isSatisfy = owner.curHp / owner.maxHp * 100f <= value; break;
+        }
     }
 
 }

@@ -88,7 +88,7 @@ public class Dungeon : MonoBehaviour
 
     void WaveStart()
     {
-        DungeonManager.instance.BattleStart();
+        DungeonManager.instance.WaveStart();
     }
 
     public Monster GetAliveMonster()

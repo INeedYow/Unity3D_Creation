@@ -13,6 +13,7 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnyAttackRange;
     public UnityAction onChangeAnyAttackSpeed;
     public UnityAction onChangeAnyMoveSpeed;
+    public UnityAction onWaveStart;
     public UnityAction onWaveEnd;
 
     public static DungeonManager instance { get; private set; }
@@ -31,8 +32,9 @@ public class DungeonManager : MonoBehaviour
         curDungeon.gameObject.SetActive(true);
     }
 
-    public void BattleStart()
+    public void WaveStart()
     {
+        onWaveStart?.Invoke();
         foreach (Character hero in PartyManager.instance.heroParty){
             hero.Resume();
         }

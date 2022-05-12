@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
+    public UnityAction onDeath;
 
     new public string name;
     [Header("GFX")]
@@ -98,11 +99,11 @@ public abstract class Character : MonoBehaviour, IDamagable
         gfx.SetActive(false);
     }
 
-    public void Revive(float rateHP_0f_to_1f)
+    public void Revive(float rateHp)
     {
         isDead = false;
         gfx.SetActive(true);
-        curHp = rateHP_0f_to_1f * maxHp;
+        curHp = 0.01f * rateHp * maxHp;
     }
 
     public void Move(Transform destTransform)

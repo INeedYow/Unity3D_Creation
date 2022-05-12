@@ -19,8 +19,11 @@ public class Hero : Character
         
         beginPos = gameObject.transform.position;
 
-        conditionMacros[0] = new Condition_FindTarget_Most("테스트", this, Condition_FindTarget_Most.EGroup.Enemy, Condition_FindTarget_Most.EValue.Distance, Condition_FindTarget_Most.EMost.Least);
+        conditionMacros[0] = new Condition_FindDistanceTarget("테스트", this, EMost.Least, EGroup.Enemy, 10f);
         actionMacros[0] = new Action_NormalAttack("일반 공격", this);
+
+        conditionMacros[1] = new Condition_FindHpTarget("테스트", this, EMost.Most, EGroup.Enemy, 50f);
+        actionMacros[1] = new Action_NormalAttack("일반 공격", this);
 
         //conditionMacros[0] = new Condition_FindTarget_Most("HP가 가장 낮은 적", this, Condition_FindTarget_Most.EGroup.Enemy, Condition_FindTarget_Most.EValue.HP, Condition_FindTarget_Most.EMost.Least);
         //actionMacros[0] = new Action_NormalAttack("일반 공격", this);
@@ -42,12 +45,6 @@ public class Hero : Character
                 actionMacros[i].Execute();
                 break;
             }
-        }
-
-        //test
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            this.Damaged(1f, 0f);
         }
     }
 
