@@ -15,26 +15,39 @@ public class Condition_Self : ConditionMacro
         this.eInfo = eInfo;
         this.eType = eType;
         this.value = value;
+
+        if (eInfo == EInfo.HP)
+        {
+            owner.onHpChange += UpdateHp;
+        }
+    }
+
+    private void OnDestroy() {
+        owner.onHpChange -= UpdateHp;
     }
 
     public override bool IsSatisfy(){
-        //Debug.Log("IsSatisfy()");
         if (eInfo == EInfo.None)
         {
             owner.target = owner;
+            return true;
         }
-        else if (eInfo == EInfo.HP)
+        else// if (eInfo == EInfo.HP)   // 더 추가되면 else if
         {
-            //Debug.Log("eInfo == EInfo.HP");
-            switch (eType)
+           return isSatisfy;
+        }
+    }
+
+    void UpdateHp(){
+        switch (eType)
             {
             case EType.Least:
-                return owner.curHp / owner.maxHp * 100f >= value;
-
+                isSatisfy = owner.curHp / owner.maxHp * 100f >= value;
+                break;
             case EType.Most:
-                return owner.curHp / owner.maxHp * 100f <= value;
+                isSatisfy = owner.curHp / owner.maxHp * 100f <= value;
+                break;
             }
-        }
-        return false;
     }
+
 }

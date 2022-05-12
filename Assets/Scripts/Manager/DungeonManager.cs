@@ -1,9 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DungeonManager : MonoBehaviour
-{
+{   //
+    public UnityAction onChangeAnyHP;
+    public UnityAction onChangeAnyPower;
+    public UnityAction onChangeAnyArmor;
+    public UnityAction onChangeAnyMagicPower;
+    public UnityAction onChangeAnyMagicArmor;
+    public UnityAction onChangeAnyAttackRange;
+    public UnityAction onChangeAnyAttackSpeed;
+    public UnityAction onChangeAnyMoveSpeed;
+    public UnityAction onWaveEnd;
+
     public static DungeonManager instance { get; private set; }
 
     public Transform spawnTransform;
@@ -17,18 +28,28 @@ public class DungeonManager : MonoBehaviour
     public void Enter(int index)
     {   // TODO
         curDungeon = listDungeon[index];
+        curDungeon.gameObject.SetActive(true);
+    }
+
+    public void BattleStart()
+    {
+        foreach (Character hero in PartyManager.instance.heroParty){
+            hero.Resume();
+        }
+        foreach (Character mons in curDungeon.curMonsters){
+            mons.Resume();
+        }
     }
 
     public void AddMonster(Monster monster)
     {
         curDungeon.curMonsters.Add(monster);
-        curDungeon.curMosterCount++;        // 카운트 변수가 필요한가? 리스트.count 써도 될듯
+        curDungeon.curMosterCount++; 
         monster.onDeath += OnMonsterDie;
     }
 
-    public void OnMonsterDie(Monster monster)
-    {
-        curDungeon.RemoveMonster(monster);
+    public void OnMonsterDie()
+    {   // TODO count, isdead
+        curDungeon.MonsterDie();
     }
-
 }

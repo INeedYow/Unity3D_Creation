@@ -9,8 +9,8 @@ public class Dungeon : MonoBehaviour
     public int maxWave;
 
     public List<Wave> waves;
-    public List<Monster> curMonsters;
-    public int curMosterCount;
+    public List<Monster> curMonsters;   // isDead ture, false 모두 갖고 있음
+    public int curMosterCount;          // isDead false인 몬스터의 수
 
     public Transform spawnAreaParent;
     public Transform[] spawnTransforms;
@@ -21,18 +21,20 @@ public class Dungeon : MonoBehaviour
         Init();
     }
 
-    private void OnEnable() {
-        Enter();
-    }
-
     void Init(){
         spawnTransforms = new Transform[spawnAreaParent.childCount];
-
         for (int i = 0; i < spawnTransforms.Length; i++)
         {
             spawnTransforms[i] = spawnAreaParent.GetChild(i);
         }
         maxWave = waves.Count;
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Enter();
+        }
     }
 
     void Enter() {
@@ -47,14 +49,16 @@ public class Dungeon : MonoBehaviour
         return spawnTransforms[curIndex];
     }
 
-    public void RemoveMonster(Monster monster)
-    {   // TODO 수정필요 isDead로 관리,, wave끝나면 배열 clear
-        curMonsters.Remove(monster);
+    public void MonsterDie()
+    {   
         curMosterCount--;
         if (curMosterCount <= 0)
         {   // 웨이브 클리어
+            curMonsters.Clear();
             curWave++;
+            DungeonManager.instance.onWaveEnd?.Invoke();
             PartyManager.instance.ResetHeroPos();
+            
             if (curWave > maxWave) {
                 ClearDungeon();
                 return;
@@ -79,6 +83,12 @@ public class Dungeon : MonoBehaviour
         Debug.Log(curWave + " 웨이브 시작");
         spawnTransformIndex = 0;
         waves[curWave - 1].SpawnWave();
+        Invoke("WaveStart", 1f);
+    }
+
+    void WaveStart()
+    {
+        DungeonManager.instance.BattleStart();
     }
 
     public Monster GetAliveMonster()

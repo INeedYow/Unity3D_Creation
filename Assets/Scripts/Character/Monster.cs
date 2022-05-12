@@ -5,11 +5,15 @@ using UnityEngine.Events;
 
 public class Monster : Character
 {
-    public UnityAction<Monster> onDeath;
+    public UnityAction onDeath;
 
+    private void Start() {
+        base.Start();
+        isStop = true;
+    }
     public override void Death(){
         //
         base.Death();
-        onDeath?.Invoke(this);
+        onDeath?.Invoke();
     }
 }

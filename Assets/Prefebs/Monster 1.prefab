@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: TestMonster
+  gfx: {fileID: 7670549869331680741}
   curHp: 1000
   maxHp: 1000
   minDamage: 0
@@ -63,6 +64,7 @@ MonoBehaviour:
   armorRate: 0
   magicArmorRate: 0
   target: {fileID: 0}
+  isDead: 0
 --- !u!54 &-668873210940481693
 Rigidbody:
   m_ObjectHideFlags: 0

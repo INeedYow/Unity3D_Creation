@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class ConditionMacro : BattleMacro
 {
+    protected bool isSatisfy;
     public abstract bool IsSatisfy();
 
     public ConditionMacro(string desc, Hero hero) : base(desc, hero) {}
