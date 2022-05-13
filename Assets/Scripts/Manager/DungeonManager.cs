@@ -17,8 +17,6 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onWaveEnd;
 
     public static DungeonManager instance { get; private set; }
-    public Camera dungeonCam;
-    //public Transform spawnTransform;
     public List<Dungeon> listDungeon = new List<Dungeon>();
     public Dungeon curDungeon;
 
@@ -35,11 +33,11 @@ public class DungeonManager : MonoBehaviour
     }
 
     public void Enter(int index)
-    {   // TODO
+    {
         curDungeon = listDungeon[index];
         curDungeon.gameObject.SetActive(true);
-        Camera.main.transform.position = dungeonCam.transform.position;
-        Camera.main.transform.rotation = dungeonCam.transform.rotation;
+        PartyManager.instance.SwapDummy2GFX();
+        PartyManager.instance.ResetHeroPos();
     }
 
     public void WaveStart()

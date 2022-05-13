@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Condition_FindDistanceTarget : ConditionMacro
-{
+{   // spherecast로 해도 좋을듯
     public EMost eMost;
     public EGroup eGroup;
     float m_sqrValue;
     float m_sqrDist;
-    float m_lastFindTime;
-    float m_findDelay = 0.2f;
+    //float m_lastFindTime;
+    //float m_findDelay = 0.2f;
 
     public Condition_FindDistanceTarget(string desc, Hero hero, EMost eMost, EGroup eGroup, float value) 
         : base(desc, hero)

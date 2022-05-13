@@ -15,7 +15,7 @@ public class Dungeon : MonoBehaviour
     public Transform spawnAreaParent;
     public Transform[] spawnTransforms;
     public int spawnTransformIndex;
-    public Transform homeTransform; // 모든 던전이 같은 방향이라면 월드 스페이스 Vector로 정해줘도 될듯
+    public Transform beginTf;
 
     private void Awake() {
         Init();
@@ -47,11 +47,8 @@ public class Dungeon : MonoBehaviour
         curMosterCount--;
         if (curMosterCount <= 0)
         {   // 웨이브 클리어
-            curMonsters.Clear();
-            m_curWave++;
-            DungeonManager.instance.onWaveEnd?.Invoke();
-            PartyManager.instance.ResetHeroPos();
-            
+            WaveClear();
+
             if (m_curWave > maxWave) {
                 ClearDungeon();
                 return;
@@ -68,6 +65,7 @@ public class Dungeon : MonoBehaviour
 
     void ClearDungeon()
     {
+        // TODO 던전 클리어
         Debug.Log("Dungeon Clear");
     }
     
@@ -79,6 +77,17 @@ public class Dungeon : MonoBehaviour
         Invoke("WaveStart", 1f);
     }
 
+    void WaveClear()
+    {
+        foreach(Monster mons in curMonsters)
+        {
+            Destroy(mons.gameObject);
+        }
+        curMonsters.Clear();
+        m_curWave++;
+        DungeonManager.instance.onWaveEnd?.Invoke();
+        PartyManager.instance.ResetHeroPos();
+    }
     void WaveStart()
     {
         DungeonManager.instance.WaveStart();
@@ -88,10 +97,7 @@ public class Dungeon : MonoBehaviour
     {
         foreach (Monster aliveMons in curMonsters)
         {
-            if (aliveMons.isDead == false)
-            {
-                return aliveMons;
-            }
+            if (aliveMons.isDead == false) return aliveMons;
         }
         return null;
     }

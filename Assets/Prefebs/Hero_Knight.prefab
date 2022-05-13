@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb50cf758ac914fbb83b87f86e77b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 0}
+  hero: {fileID: 4771493527925500085}
 --- !u!1 &4771493527925500084
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +42,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4771493526772236677}
+  - {fileID: 3630621230232762387}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,14 +58,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f86b8a7bf788594fa983c542f3c347b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Hero 1
+  name: Knight
+  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   curHp: 300
   maxHp: 300
   minDamage: 12
   maxDamage: 20
   lastAttackTime: 0
   attackDelay: 2
-  attackRange: 4
+  attackRange: 3
   aoeRange: 0
   moveSpeed: 4
   criticalChance: 10
@@ -74,12 +76,13 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
-  isStop: 0
   target: {fileID: 0}
+  isStop: 0
   isDead: 0
-  heroGFX: {fileID: 0}
+  heroGFX: {fileID: 4771493526772089886}
+  dummy: {fileID: 3630621230233018382}
   maxMacroCount: 5
-  beginPos: {x: 0, y: 0, z: 0}
+  eClass: 0
   level: 1
   maxExp: 0
 --- !u!1001 &4771493526772089883
@@ -151,3 +154,95 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4771493526772089883}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9174109534604690242
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4771493527925500090}
+    m_Modifications:
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562634684529435468, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 4771493527925500085}
+    - target: {fileID: 5562634684529435471, guid: 64d6c02cbc925a640831471221e995b8,
+        type: 3}
+      propertyPath: m_Name
+      value: Dummy_Knight
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 64d6c02cbc925a640831471221e995b8, type: 3}
+--- !u!4 &3630621230232762387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 9174109534604690242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3630621230233018382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5562634684529435468, guid: 64d6c02cbc925a640831471221e995b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 9174109534604690242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e4dc54c91f3204d8969c24137e3892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

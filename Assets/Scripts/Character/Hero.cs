@@ -8,6 +8,7 @@ public class Hero : Character
     public enum EClass { Knight, Archer }
     [Header("GFX")]
     public Hero_GFX heroGFX;
+    public Dummy dummy;
     // [Macro]
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
@@ -39,38 +40,21 @@ public class Hero : Character
         
         //beginPos = gameObject.transform.position;
 
-        // conditionMacros[0] = new Condition_FindDistanceTarget("테스트", this, EMost.Least, EGroup.Enemy, 10f);
-        // actionMacros[0] = new Action_NormalAttack("일반 공격", this);
+         conditionMacros[0] = new Condition_FindDistanceTarget("거리 6f 이상인 적", this, EMost.Least, EGroup.Enemy, 6f);
+         actionMacros[0] = new Action_NormalAttack("일반 공격", this);
 
-        // conditionMacros[1] = new Condition_FindHpTarget("테스트", this, EMost.Most, EGroup.Enemy, 50f);
-        // actionMacros[1] = new Action_NormalAttack("일반 공격", this);
+         conditionMacros[1] = new Condition_FindHpTarget("체력 50%이하인 적", this, EMost.Most, EGroup.Enemy, 50f);
+         actionMacros[1] = new Action_NormalAttack("일반 공격", this);
     }
 
     void Init(){
-        heroGFX = GetComponentInChildren<Hero_GFX>(true);
-        dummy = GetComponentInChildren<Dummy>(true);
         heroGFX.hero = this;
         dummy.owner = this;
         conditionMacros = new ConditionMacro[maxMacroCount];
         actionMacros = new ActionMacro[maxMacroCount];
+        heroGFX.gameObject.SetActive(false);
+        dummy.gameObject.SetActive(false);
     }
-
-    // private void Update() {
-    //     if (isDead || isStop) return;
-
-    //     for (int i = 0; i < maxMacroCount; i++)
-    //     {
-    //         if (conditionMacros[i] == null) continue;
-
-    //         if (conditionMacros[i].IsSatisfy())
-    //         {
-    //             if (actionMacros[i] == null) continue;
-
-    //             if (actionMacros[i].Execute()) break;
-    //             else continue;
-    //         }
-    //     }
-    // }
 
     public override void Death()
     {
@@ -87,7 +71,9 @@ public class Hero : Character
 
     public void ResetPos()
     {
-        transform.position = dummy.beginPos;// + DungeonManager.instance.curDungeon.; // TODO
+        Debug.Log(dummy.beginPos);
+        Debug.Log(DungeonManager.instance.curDungeon.beginTf.position);
+        transform.position = dummy.beginPos + DungeonManager.instance.curDungeon.beginTf.position; // TODO
         target = null;
     }
 }

@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: RedSlime
+  dummy: {fileID: 0}
   curHp: 100
   maxHp: 100
   minDamage: 10
@@ -61,10 +62,10 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
-  isStop: 0
   target: {fileID: 0}
+  isStop: 0
   isDead: 0
-  monsGFX: {fileID: 0}
+  monsGFX: {fileID: 2627326091903351765}
 --- !u!1001 &1599188172207784423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,6 +121,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3622958993517853234, guid: e5bf32a70c2e58f4f9ec61dad9659a4b,
+        type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 7500355691490229467}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5bf32a70c2e58f4f9ec61dad9659a4b, type: 3}
 --- !u!4 &1603022741129981153 stripped
@@ -128,3 +134,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1599188172207784423}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2627326091903351765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3622958993517853234, guid: e5bf32a70c2e58f4f9ec61dad9659a4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1599188172207784423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61bb52e3617f7ef4b9ca468646988bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

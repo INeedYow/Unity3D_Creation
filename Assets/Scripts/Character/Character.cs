@@ -10,7 +10,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public UnityAction onDeath;
 
     new public string name;
-    public Dummy dummy;
+    public Sprite icon;
 
     [Header("Spec")]
     public float curHp;

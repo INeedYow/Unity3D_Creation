@@ -5,10 +5,6 @@ using UnityEngine;
 public class Hero_GFX : MonoBehaviour
 {
     public Hero hero;
-    // void Awake()    // awake enable start 순으로 호출
-    // {
-    //     hero = GetComponentInParent<Hero>(); // hero에서 해주기로
-    // }
 
     private void OnEnable() {
         hero.isStop = true;

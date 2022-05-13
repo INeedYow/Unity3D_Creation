@@ -56,6 +56,54 @@ public class Board : MonoBehaviour
             edge.transform.SetParent(transform);
             edge.transform.position = new Vector3(i - halfH - 1, transform.position.y, +halfV + 1);
         }
+
+        // 현재 맞게 회전 추가 (변경가능)
+        StartCoroutine("SetRot");
+        StartCoroutine("SetPos");
+        transform.rotation = Quaternion.Euler(-20f,-40f,0f);
+        transform.position = new Vector3(0f,4f,0f);
     }
 
+
+    IEnumerator SetRot(){
+
+        float rot = 0f;
+        while (rot > -20f){
+            transform.rotation = Quaternion.Euler(rot, 0f, 0f);
+            rot -= Time.deltaTime * 12f;
+            yield return null;
+        }
+        transform.rotation = Quaternion.Euler(-20f, 0f, 0f);
+
+        rot = 0f;
+        while (rot > -40f){
+            transform.rotation = Quaternion.Euler(-20f, rot, 0f);
+            rot -= Time.deltaTime * 24f;
+            yield return null;
+        }
+        transform.rotation = Quaternion.Euler(-20f, -40f, 0f);
+        yield return null;
+    }
+
+    IEnumerator SetPos(){
+
+        float rot = 0f;
+        while (rot < 4f){
+            transform.position = new Vector3(0f, rot, 0f);
+            rot += Time.deltaTime * 1.2f;
+            yield return null;
+        }
+        transform.position = new Vector3(0f, 4f, 0f);
+        yield return null;
+    }
+
+    // void BlockInit(){
+    //     for (int j = 0; j < vSize; j ++)
+    //     {
+    //         for (int i = 0; i < hSize; i++)
+    //         {
+    //             blocks[j, i].Init();
+    //         }
+    //     }
+    // }
 }
