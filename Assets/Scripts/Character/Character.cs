@@ -10,8 +10,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public UnityAction onDeath;
 
     new public string name;
-    [Header("GFX")]
-    public GameObject gfx;      // 전투 중에 보여질 캐릭터 obj
+    public Dummy dummy;
 
     [Header("Spec")]
     public float curHp;
@@ -20,7 +19,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         get{ 
             if (IsCritical()) 
                 return Random.Range(minDamage, maxDamage) * 0.01f * (100f + criticalRate);
-            return Random.Range(minDamage, maxDamage); 
+            return Random.Range(minDamage, maxDamage);
         }
     }
     public float minDamage;
@@ -41,8 +40,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float magicArmorRate = 0f;           // 마법방어율 (%)
 
     [Header("Additional")]
-    protected bool isStop;     // TODO 전투 개시
     public Character target;
+    public bool isStop;    
     public bool isDead;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
@@ -54,11 +53,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     public void Pause(float duration) { Invoke("Pause", duration); }
     public void Resume(float duration) { Invoke("Resume", duration); }
 
-    protected void Start() {
+    protected void Awake() {
         DungeonManager.instance.onWaveEnd += Pause;
     }
     public void SetTarget(Character target)
-    {   // 이러면 이벤트 때만 타겟 정해주는 매크로인 경우 타겟 계속 안 바라볼듯
+    {   
         this.target = target;
         if (target != this) transform.LookAt(target.transform);
     }
@@ -72,8 +71,8 @@ public abstract class Character : MonoBehaviour, IDamagable
             DungeonManager.instance.onChangeAnyHP?.Invoke();
         }
         else {
-            if (IsDodge())
-                {// TODO 회피효과 출력
+            if (IsDodge()) { 
+                // TODO 회피효과 출력
                 Debug.Log(name + "가 회피");
             } 
             else{
@@ -96,13 +95,11 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     public virtual void Death(){
         isDead = true;
-        gfx.SetActive(false);
     }
 
     public void Revive(float rateHp)
     {
         isDead = false;
-        gfx.SetActive(true);
         curHp = 0.01f * rateHp * maxHp;
     }
 

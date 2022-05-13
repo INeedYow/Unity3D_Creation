@@ -17,19 +17,29 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onWaveEnd;
 
     public static DungeonManager instance { get; private set; }
-
-    public Transform spawnTransform;
+    public Camera dungeonCam;
+    //public Transform spawnTransform;
     public List<Dungeon> listDungeon = new List<Dungeon>();
     public Dungeon curDungeon;
 
     private void Awake() {
         instance = this;
+        Init();
+    }
+
+    void Init(){
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            listDungeon.Add(transform.GetChild(i).GetComponent<Dungeon>());
+        }
     }
 
     public void Enter(int index)
     {   // TODO
         curDungeon = listDungeon[index];
         curDungeon.gameObject.SetActive(true);
+        Camera.main.transform.position = dungeonCam.transform.position;
+        Camera.main.transform.rotation = dungeonCam.transform.rotation;
     }
 
     public void WaveStart()
@@ -51,7 +61,7 @@ public class DungeonManager : MonoBehaviour
     }
 
     public void OnMonsterDie()
-    {   // TODO count, isdead
+    {   // count, isdead 확인필요
         curDungeon.MonsterDie();
     }
 }

@@ -6,7 +6,10 @@ public class Action_FallBack : ActionMacro
 {
     public Action_FallBack(string desc, Hero hero) : base(desc, hero) {}
 
-    public override void Execute(){
-        owner.Move(DungeonManager.instance.curDungeon.homeTransform);
+    public override bool Execute(){
+        //owner.Move(DungeonManager.instance.curDungeon.homeTransform);
+        owner.transform.LookAt(Vector3.back);
+        owner.transform.Translate(Vector3.forward * owner.moveSpeed * Time.deltaTime);
+        return true;
     }
 }

@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: TestMonster
-  gfx: {fileID: 7670549869331680741}
   curHp: 1000
   maxHp: 1000
   minDamage: 0
@@ -63,8 +62,10 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
+  isStop: 0
   target: {fileID: 0}
   isDead: 0
+  monsGFX: {fileID: 0}
 --- !u!54 &-668873210940481693
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93,6 +94,7 @@ GameObject:
   - component: {fileID: 7670549869331680737}
   - component: {fileID: 7670549869331680736}
   - component: {fileID: 7670549869331680739}
+  - component: {fileID: 684926331735895318}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
@@ -174,3 +176,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &684926331735895318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7670549869331680741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61bb52e3617f7ef4b9ca468646988bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 0}

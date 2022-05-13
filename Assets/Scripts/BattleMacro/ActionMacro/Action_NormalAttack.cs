@@ -8,22 +8,24 @@ public class Action_NormalAttack : ActionMacro
 {
     public Action_NormalAttack(string desc, Hero hero) : base(desc, hero) {}
 
-    public override void Execute(){
+    public override bool Execute(){
         //Debug.Log("Action_NormalAttack.Execute()");
         if (owner.target == null)
         {   
             owner.target = DungeonManager.instance.curDungeon.GetRandMonster();
-            return;
+            if (owner.target == null) return false;
         }
         
         if (owner.IsTargetInRange())
         {
-            if (Time.time < owner.lastAttackTime + owner.attackDelay) return;
+            if (Time.time < owner.lastAttackTime + owner.attackDelay) return true;
             Attack();
         }
         else{
             MoveToTarget();
         }
+
+        return true;
     }
 
     void Attack(){

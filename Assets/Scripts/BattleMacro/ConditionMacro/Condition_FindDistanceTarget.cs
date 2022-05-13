@@ -24,7 +24,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
     }
 
     bool FindTarget()
-    {   
+    {   // 최적화 방법.?
         // if (Time.time < m_lastFindTime + m_findDelay) {
         //     return true;    // 그 사이 죽었거나 없어진 경우에 예외처리 필요할듯..
         // }

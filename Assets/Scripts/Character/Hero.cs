@@ -5,53 +5,79 @@ using UnityEngine;
 // 캐릭터 전투, 비전투 구분하여 관리하는 법.?
 public class Hero : Character
 {
-    [Header("Macro")]
-    [SerializeField] ConditionMacro[]   conditionMacros;
-    [SerializeField] ActionMacro[]      actionMacros;
-    int maxMacroCount = 5;          // 매니저에 둘 변수
-    [Header("Additional")]
-    public Vector3 beginPos;
+    public enum EClass { Knight, Archer }
+    [Header("GFX")]
+    public Hero_GFX heroGFX;
+    // [Macro]
+    public ConditionMacro[]   conditionMacros;
+    public ActionMacro[]      actionMacros;
+    public int maxMacroCount = 5;          // 매니저에 둘 변수?
 
-    new protected void Start() {
-        base.Start();
-        conditionMacros = new ConditionMacro[maxMacroCount];
-        actionMacros = new ActionMacro[maxMacroCount];
-        
-        beginPos = gameObject.transform.position;
+    [Header("Additional Info")]
+    public EClass eClass;   // TODO 직업에 따라 다른 프리팹, 스킬 생성되게
 
-        conditionMacros[0] = new Condition_FindDistanceTarget("테스트", this, EMost.Least, EGroup.Enemy, 10f);
-        actionMacros[0] = new Action_NormalAttack("일반 공격", this);
-
-        conditionMacros[1] = new Condition_FindHpTarget("테스트", this, EMost.Most, EGroup.Enemy, 50f);
-        actionMacros[1] = new Action_NormalAttack("일반 공격", this);
-
-        //conditionMacros[0] = new Condition_FindTarget_Most("HP가 가장 낮은 적", this, Condition_FindTarget_Most.EGroup.Enemy, Condition_FindTarget_Most.EValue.HP, Condition_FindTarget_Most.EMost.Least);
-        //actionMacros[0] = new Action_NormalAttack("일반 공격", this);
-
-        //conditionMacros[1] = new Condition_Self("체력 35% 이하일 때", this, Condition_Self.EInfo.HP, Condition_Self.EType.Most, 35f);
-        //actionMacros[1] = new Action_FallBack("후퇴", this);
-    }
-    private void Update() {
-        if (isDead || isStop) return;
-
-        for (int i = 0; i < maxMacroCount; i++)
-        {
-            if (conditionMacros[i] == null) continue;
-
-            if (conditionMacros[i].IsSatisfy())
+    [Header("Level")]
+    public int level = 1;
+    public float maxExp;
+    float _curExp;  //TODO
+    public float curExp {
+        get { return _curExp; } 
+        set { 
+            _curExp = value ;
+            if (_curExp >= maxExp)
             {
-                if (actionMacros[i] == null) continue;
-
-                actionMacros[i].Execute();
-                break;
+                level++;
+                _curExp -= maxExp;
+                maxExp += 100f; // 임시로
             }
         }
     }
 
+    new protected void Awake() {
+        base.Awake();
+        Init();
+        
+        //beginPos = gameObject.transform.position;
+
+        // conditionMacros[0] = new Condition_FindDistanceTarget("테스트", this, EMost.Least, EGroup.Enemy, 10f);
+        // actionMacros[0] = new Action_NormalAttack("일반 공격", this);
+
+        // conditionMacros[1] = new Condition_FindHpTarget("테스트", this, EMost.Most, EGroup.Enemy, 50f);
+        // actionMacros[1] = new Action_NormalAttack("일반 공격", this);
+    }
+
+    void Init(){
+        heroGFX = GetComponentInChildren<Hero_GFX>(true);
+        dummy = GetComponentInChildren<Dummy>(true);
+        heroGFX.hero = this;
+        dummy.owner = this;
+        conditionMacros = new ConditionMacro[maxMacroCount];
+        actionMacros = new ActionMacro[maxMacroCount];
+    }
+
+    // private void Update() {
+    //     if (isDead || isStop) return;
+
+    //     for (int i = 0; i < maxMacroCount; i++)
+    //     {
+    //         if (conditionMacros[i] == null) continue;
+
+    //         if (conditionMacros[i].IsSatisfy())
+    //         {
+    //             if (actionMacros[i] == null) continue;
+
+    //             if (actionMacros[i].Execute()) break;
+    //             else continue;
+    //         }
+    //     }
+    // }
+
     public override void Death()
     {
         base.Death();
-        //
+        // 바로 사라지게 하는 게 아니라 코루틴이나 애니메이션 이벤트 써서 죽는 애니메이션 후 사망 처리 하고 싶은데
+        // 사망 모션동안 충돌 처리, 공격 처리 어떻게 막지? .. bool 변수 하나 더 해야하나
+        heroGFX.gameObject.SetActive(false);
     }
 
     public bool IsTargetInRange()
@@ -61,8 +87,7 @@ public class Hero : Character
 
     public void ResetPos()
     {
-        Debug.Log("ResetPos()");
-        transform.position = beginPos;
+        transform.position = dummy.beginPos;// + DungeonManager.instance.curDungeon.; // TODO
         target = null;
     }
 }

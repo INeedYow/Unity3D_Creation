@@ -5,10 +5,10 @@ using UnityEngine;
 public class Dungeon : MonoBehaviour
 {
     public int dungeonLevel;
-    public int curWave;
+    int m_curWave;
     public int maxWave;
 
-    public List<Wave> waves;
+    public List<Wave> waves;            // Q. Awake()에서 자식 Wave들 가져오게 하면 큐브 등 자식 오브젝트 많아서 부담되나?
     public List<Monster> curMonsters;   // isDead ture, false 모두 갖고 있음
     public int curMosterCount;          // isDead false인 몬스터의 수
 
@@ -30,15 +30,8 @@ public class Dungeon : MonoBehaviour
         maxWave = waves.Count;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Enter();
-        }
-    }
-
-    void Enter() {
-        curWave = 1;
+    void OnEnable() {
+        m_curWave = 1;
         SpawnWave();
     }
 
@@ -55,11 +48,11 @@ public class Dungeon : MonoBehaviour
         if (curMosterCount <= 0)
         {   // 웨이브 클리어
             curMonsters.Clear();
-            curWave++;
+            m_curWave++;
             DungeonManager.instance.onWaveEnd?.Invoke();
             PartyManager.instance.ResetHeroPos();
             
-            if (curWave > maxWave) {
+            if (m_curWave > maxWave) {
                 ClearDungeon();
                 return;
             }
@@ -80,9 +73,9 @@ public class Dungeon : MonoBehaviour
     
     void SpawnWave()
     {
-        Debug.Log(curWave + " 웨이브 시작");
+        Debug.Log(m_curWave + " 웨이브 시작");
         spawnTransformIndex = 0;
-        waves[curWave - 1].SpawnWave();
+        waves[m_curWave - 1].SpawnWave();
         Invoke("WaveStart", 1f);
     }
 

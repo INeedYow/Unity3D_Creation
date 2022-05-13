@@ -22,7 +22,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
         return true;
     }
 
-    void GetTarget()   // 처음 null일때, 누군가의 HP가 변했을 때 타겟 재설정
+    void GetTarget()   // 처음 null일때, 누군가의 HP가 변했을 때 타겟 재설정 (좁은 곳에서 계속 싸우는 방식이라 HP는 거의 실시간으로 하는 거랑 다름 없는듯)
     {
         if (eGroup == EGroup.Ally)
         {   // 아군

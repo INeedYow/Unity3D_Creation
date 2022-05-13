@@ -5,10 +5,9 @@ using UnityEngine.Events;
 
 public class Monster : Character
 {
-    new protected void Start() {
-        base.Start();
-        isStop = true;
-    }
+    [Header("GFX")]
+    public Monster_GFX monsGFX;
+    
     public override void Death(){
         //
         base.Death();
