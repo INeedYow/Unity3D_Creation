@@ -15,8 +15,9 @@ public class Hero : Character
     public int maxMacroCount = 5;          // 매니저에 둘 변수?
 
     [Header("Additional Info")]
-    public EClass eClass;   // TODO 직업에 따라 다른 프리팹, 스킬 생성되게
-
+    public EClass eClass;   
+    public bool isJoin;
+    
     [Header("Level")]
     public int level = 1;
     public float maxExp;
@@ -75,5 +76,12 @@ public class Hero : Character
         Debug.Log(DungeonManager.instance.curDungeon.beginTf.position);
         transform.position = dummy.beginPos + DungeonManager.instance.curDungeon.beginTf.position; // TODO
         target = null;
+    }
+
+    public bool Join(){
+        if (isJoin) return false;
+        PartyManager.instance.Join(this);
+        isJoin = true;
+        return true;
     }
 }

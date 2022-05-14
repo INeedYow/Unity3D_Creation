@@ -68,20 +68,20 @@ public class Board : MonoBehaviour
     IEnumerator SetRot(){
 
         float rot = 0f;
-        while (rot > -20f){
+        while (rot > -30f){
             transform.rotation = Quaternion.Euler(rot, 0f, 0f);
-            rot -= Time.deltaTime * 12f;
+            rot -= Time.deltaTime * 18f;
             yield return null;
         }
-        transform.rotation = Quaternion.Euler(-20f, 0f, 0f);
+        transform.rotation = Quaternion.Euler(-30f, 0f, 0f);
 
         rot = 0f;
         while (rot > -40f){
-            transform.rotation = Quaternion.Euler(-20f, rot, 0f);
+            transform.rotation = Quaternion.Euler(-30f, rot, 0f);
             rot -= Time.deltaTime * 24f;
             yield return null;
         }
-        transform.rotation = Quaternion.Euler(-20f, -40f, 0f);
+        transform.rotation = Quaternion.Euler(-30f, -40f, 0f);
         yield return null;
     }
 

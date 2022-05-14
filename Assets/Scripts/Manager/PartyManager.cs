@@ -16,6 +16,7 @@ public class PartyManager : MonoBehaviour
     public void SwapDummy2GFX(){
         foreach(Hero hero in heroParty)
         {
+            Debug.Log("SwapDummy2GFX");
             hero.dummy.gameObject.SetActive(false);
             hero.heroGFX.gameObject.SetActive(true);
         }

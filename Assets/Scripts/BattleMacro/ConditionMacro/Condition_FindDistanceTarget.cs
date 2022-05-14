@@ -62,7 +62,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
                 if (eMost == EMost.Least)
                 {   // value 이상
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
-                    Debug.Log("sqrDist : " + m_sqrDist + " / sqrValue : " + m_sqrValue);
+                    //Debug.Log("sqrDist : " + m_sqrDist + " / sqrValue : " + m_sqrValue);
                     if (m_sqrValue <= m_sqrDist)
                     {
                         owner.target = ch;
