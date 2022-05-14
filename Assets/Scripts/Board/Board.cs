@@ -56,54 +56,46 @@ public class Board : MonoBehaviour
             edge.transform.SetParent(transform);
             edge.transform.position = new Vector3(i - halfH - 1, transform.position.y, +halfV + 1);
         }
-
-        // 현재 맞게 회전 추가 (변경가능)
-        StartCoroutine("SetRot");
-        StartCoroutine("SetPos");
-        transform.rotation = Quaternion.Euler(-20f,-40f,0f);
-        transform.position = new Vector3(0f,4f,0f);
+        Init();
     }
 
+    void Init(){
+        // transform.rotation = Quaternion.Euler(0f,0f,0f);
+        // transform.position = new Vector3(0f,0f,00f);
+        StartCoroutine("SetRot");
+        StartCoroutine("SetPos");
+    }
 
     IEnumerator SetRot(){
 
         float rot = 0f;
-        while (rot > -30f){
-            transform.rotation = Quaternion.Euler(rot, 0f, 0f);
-            rot -= Time.deltaTime * 18f;
+        while (rot < 75f){
+            transform.rotation = Quaternion.Euler(-rot, 0f, 0f);
+            rot += Time.deltaTime * 40f;
             yield return null;
         }
-        transform.rotation = Quaternion.Euler(-30f, 0f, 0f);
-
-        rot = 0f;
-        while (rot > -40f){
-            transform.rotation = Quaternion.Euler(-30f, rot, 0f);
-            rot -= Time.deltaTime * 24f;
-            yield return null;
-        }
-        transform.rotation = Quaternion.Euler(-30f, -40f, 0f);
+        transform.rotation = Quaternion.Euler(-75f, 0f, 0f);
         yield return null;
     }
 
     IEnumerator SetPos(){
 
         float rot = 0f;
-        while (rot < 4f){
-            transform.position = new Vector3(0f, rot, 0f);
-            rot += Time.deltaTime * 1.2f;
+        while (rot < 5f){
+            transform.position = new Vector3(rot, 0f, 3f * rot);
+            rot += Time.deltaTime * 5f;
             yield return null;
         }
-        transform.position = new Vector3(0f, 4f, 0f);
+        transform.position = new Vector3(5f, 0f, 15f);
+        yield return null;
+
+        rot = 0f;
+        while (rot < 1f){
+            transform.position = new Vector3(5f, rot, 15f);
+            rot += Time.deltaTime * 1f;
+            yield return null;
+        }
+        transform.position = new Vector3(5f, 1f, 15f);
         yield return null;
     }
-
-    // void BlockInit(){
-    //     for (int j = 0; j < vSize; j ++)
-    //     {
-    //         for (int i = 0; i < hSize; i++)
-    //         {
-    //             blocks[j, i].Init();
-    //         }
-    //     }
-    // }
 }

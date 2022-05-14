@@ -83,6 +83,7 @@ MonoBehaviour:
   dummy: {fileID: 3630621230233018382}
   maxMacroCount: 5
   eClass: 0
+  isJoin: 0
   level: 1
   maxExp: 0
 --- !u!1001 &4771493526772089883
@@ -184,27 +185,27 @@ PrefabInstance:
     - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7933534
       objectReference: {fileID: 0}
     - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.60876137
       objectReference: {fileID: 0}
     - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 5562634684529179473, guid: 64d6c02cbc925a640831471221e995b8,
         type: 3}

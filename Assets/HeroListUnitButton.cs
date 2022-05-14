@@ -7,6 +7,6 @@ public class HeroListUnitButton : MonoBehaviour
     public HeroListUnit unit;
 
     public void SelectButton(){
-        GameManager.instance.SelectHero(unit.hero);
+        HeroManager.instance.SelectHero(unit.hero);
     }
 }

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeroListUnit : MonoBehaviour
+public class HeroInfoUI : MonoBehaviour
 {
-    public Hero hero;
+    Hero m_curHero;
+
     public Image icon;
     public Text nameText;
-    public Button button;
 
-    public void SetHero(Hero hero){
-        this.hero = hero;
-        icon.sprite = hero.icon;
+    // TODO spec part
+
+    public void RenewUI(Hero hero){
+        //icon.sprite = m_curHero.icon; // 왜 에러
         nameText.text = hero.name;
     }
 }

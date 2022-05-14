@@ -84,4 +84,11 @@ public class Hero : Character
         isJoin = true;
         return true;
     }
+
+    public void Leave(){
+        if (!isJoin) return;
+        PartyManager.instance.Leave(this);
+        isJoin = false;
+        dummy.gameObject.SetActive(false);
+    }
 }
