@@ -12,7 +12,6 @@ public class Hero : Character
     // [Macro]
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
-    public int maxMacroCount = 5;          // 매니저에 둘 변수?
 
     [Header("Additional Info")]
     public EClass eClass;   
@@ -51,8 +50,8 @@ public class Hero : Character
     void Init(){
         heroGFX.hero = this;
         dummy.owner = this;
-        conditionMacros = new ConditionMacro[maxMacroCount];
-        actionMacros = new ActionMacro[maxMacroCount];
+        conditionMacros = new ConditionMacro[HeroManager.instance.maxMacroCount];
+        actionMacros = new ActionMacro[HeroManager.instance.maxMacroCount];
         heroGFX.gameObject.SetActive(false);
         dummy.gameObject.SetActive(false);
     }

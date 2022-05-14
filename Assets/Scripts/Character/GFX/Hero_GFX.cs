@@ -5,7 +5,9 @@ using UnityEngine;
 public class Hero_GFX : MonoBehaviour
 {
     public Hero hero;
+    int m_repeat;
 
+    private void Awake() { m_repeat = HeroManager.instance.maxMacroCount; }
     private void OnEnable() {
         hero.isStop = true;
     }
@@ -14,7 +16,7 @@ public class Hero_GFX : MonoBehaviour
     {
         if (hero.isDead || hero.isStop) return;
 
-        for (int i = 0; i < hero.maxMacroCount; i++)
+        for (int i = 0; i < m_repeat; i++)
         {
             if (hero.conditionMacros[i] == null) continue;
 

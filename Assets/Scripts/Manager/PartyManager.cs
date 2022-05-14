@@ -13,11 +13,33 @@ public class PartyManager : MonoBehaviour
 
     private void Awake() { instance = this; }
 
-    public void SwapDummy2GFX(){
+    public void EnterDungeon(){
+        SwapDummy2GFX();
+        ResetHeroPos();
+        board.gameObject.SetActive(false);
+    }
+
+    void SwapDummy2GFX(){
         foreach(Hero hero in heroParty)
         {
             hero.dummy.gameObject.SetActive(false);
             hero.heroGFX.gameObject.SetActive(true);
+        }
+    }
+
+    public void ShowDummy(){
+        if (heroParty.Count == 0) return;
+        foreach(Hero hero in heroParty)
+        {
+            hero.dummy.gameObject.SetActive(true);
+        }
+    }
+
+    public void HideDummy(){
+        if (heroParty.Count == 0) return;
+        foreach(Hero hero in heroParty)
+        {
+            hero.dummy.gameObject.SetActive(false);
         }
     }
 

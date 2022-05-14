@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Knight
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: f5aba59dbd0a1cf4b87dfbb2fc698216, type: 3}
   curHp: 300
   maxHp: 300
   minDamage: 12

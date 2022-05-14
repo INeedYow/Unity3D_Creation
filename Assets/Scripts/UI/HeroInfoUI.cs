@@ -5,15 +5,12 @@ using UnityEngine.UI;
 
 public class HeroInfoUI : MonoBehaviour
 {
-    Hero m_curHero;
-
     public Image icon;
     public Text nameText;
 
     // TODO spec part
-
     public void RenewUI(Hero hero){
-        //icon.sprite = m_curHero.icon; // 왜 에러
+        icon.sprite = hero.icon;
         nameText.text = hero.name;
     }
 }

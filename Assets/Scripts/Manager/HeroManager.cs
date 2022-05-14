@@ -12,9 +12,15 @@ public class HeroManager : MonoBehaviour
     public HeroListUI heroListUI;
     public HeroSetUI heroSetUI;
     
-    private void Awake() { instance = this; }
+    public int maxMacroCount { get { return 5; } }
 
-    
+    private void Awake() { instance = this; }
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GetNewHero(Hero.EClass.Knight);
+        }
+    }
 
     public void SelectHero(Hero hero){
         if (null != selectedHero)
@@ -40,5 +46,13 @@ public class HeroManager : MonoBehaviour
 
         heroList.Add(hero);
         heroListUI.AddHeroUnit(hero);
+    }
+
+    public void ToggleSetUI(){
+        heroSetUI.MenuToggle();
+    }
+
+    public void SetMacro(){
+        Debug.Log("On Value Changed");
     }
 }

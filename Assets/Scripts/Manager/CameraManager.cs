@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager instance { get; private set; }
 
     public Camera mainCam;
+    public Transform defaultTf;     
+    public Transform setTf;         
+    public Transform DungeonTf;
 
-    public Transform[] camTransforms;
-
-    private void Awake() {
-        instance = this;
+    private void Awake() { 
+        instance = this; 
+        SetCam(defaultTf);
     }
 
-    public void SetCam(int index){
-        mainCam.transform.position = camTransforms[index].position;
-        mainCam.transform.rotation = camTransforms[index].rotation;
+    public void SetCam(Transform tf){
+        mainCam.transform.position = tf.position;
+        mainCam.transform.rotation = tf.rotation;
     }
 }

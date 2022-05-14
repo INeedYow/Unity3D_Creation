@@ -36,8 +36,10 @@ public class DungeonManager : MonoBehaviour
     {
         curDungeon = listDungeon[index];
         curDungeon.gameObject.SetActive(true);
-        PartyManager.instance.SwapDummy2GFX();
-        PartyManager.instance.ResetHeroPos();
+        PartyManager.instance.EnterDungeon();
+
+        //Temp
+        GameManager.instance.SetMap2Dungeon();
     }
 
     public void WaveStart()

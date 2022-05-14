@@ -11,10 +11,22 @@ public class Board : MonoBehaviour
     public int vSize = 7;
     public BoardBlock[,] blocks;
 
-    private void Start() {
+    private void Awake() {
         blocks = new BoardBlock[vSize, hSize];
         CreateBlocks();
+        gameObject.SetActive(false);
     }
+
+    private void OnEnable() {
+        Init();
+    }
+
+    private void OnDisable() {
+        if (PartyManager.instance != null) HideDummy();
+    }
+
+    void ShowDummy() { PartyManager.instance.ShowDummy(); }
+    void HideDummy() { PartyManager.instance.HideDummy(); }
 
     void CreateBlocks()
     {
@@ -56,7 +68,6 @@ public class Board : MonoBehaviour
             edge.transform.SetParent(transform);
             edge.transform.position = new Vector3(i - halfH - 1, transform.position.y, +halfV + 1);
         }
-        Init();
     }
 
     void Init(){
@@ -71,7 +82,7 @@ public class Board : MonoBehaviour
         float rot = 0f;
         while (rot < 75f){
             transform.rotation = Quaternion.Euler(-rot, 0f, 0f);
-            rot += Time.deltaTime * 40f;
+            rot += Time.deltaTime * 60f;
             yield return null;
         }
         transform.rotation = Quaternion.Euler(-75f, 0f, 0f);
@@ -83,7 +94,7 @@ public class Board : MonoBehaviour
         float rot = 0f;
         while (rot < 5f){
             transform.position = new Vector3(rot, 0f, 3f * rot);
-            rot += Time.deltaTime * 5f;
+            rot += Time.deltaTime * 6f;
             yield return null;
         }
         transform.position = new Vector3(5f, 0f, 15f);
@@ -96,6 +107,7 @@ public class Board : MonoBehaviour
             yield return null;
         }
         transform.position = new Vector3(5f, 1f, 15f);
+        ShowDummy();
         yield return null;
     }
 }
