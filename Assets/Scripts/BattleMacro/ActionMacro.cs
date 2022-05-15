@@ -8,5 +8,5 @@ public abstract class ActionMacro : BattleMacro
         // 그럼 BattleMacro에서 한 번에 정의가능
     public abstract bool Execute();
 
-    public ActionMacro(string desc, Hero hero) : base(desc, hero) {}
+    public ActionMacro(Hero hero) : base(hero) {}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Action_FallBack : ActionMacro
 {
-    public Action_FallBack(string desc, Hero hero) : base(desc, hero) {}
+    public Action_FallBack(Hero hero) : base(hero) {}
 
     public override bool Execute(){
         //owner.Move(DungeonManager.instance.curDungeon.homeTransform);

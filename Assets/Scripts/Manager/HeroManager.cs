@@ -1,12 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 public class HeroManager : MonoBehaviour
 {  
+    public UnityAction<Hero> onChangeSelectedHero;
     public static HeroManager instance { get; private set; }
 
     public List<Hero> heroList = new List<Hero>();
-    public Hero selectedHero = null;
+    Hero _selectedHero;
+    public Hero selectedHero{
+        get { return _selectedHero; }
+        set { 
+            _selectedHero = value;
+            Debug.Log(_selectedHero);
+            if (_selectedHero != value)
+            {
+                Debug.Log("_selectedHero changed");
+                onChangeSelectedHero?.Invoke(_selectedHero);
+            }
+        }
+    }
     [Header("UI")]
     public HeroInfoUI heroInfoUI;
     public HeroListUI heroListUI;
@@ -57,7 +72,4 @@ public class HeroManager : MonoBehaviour
         heroSetUI.MenuToggle();
     }
 
-    public void SetMacro(){
-        Debug.Log("On Value Changed");
-    }
 }

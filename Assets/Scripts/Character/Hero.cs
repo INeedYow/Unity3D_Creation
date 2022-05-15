@@ -37,14 +37,6 @@ public class Hero : Character
     new protected void Awake() {
         base.Awake();
         Init();
-        
-        //beginPos = gameObject.transform.position;
-
-         conditionMacros[0] = new Condition_FindDistanceTarget("거리 6f 이상인 적", this, EMost.Least, EGroup.Enemy, 6f);
-         actionMacros[0] = new Action_NormalAttack("일반 공격", this);
-
-         conditionMacros[1] = new Condition_FindHpTarget("체력 50%이하인 적", this, EMost.Most, EGroup.Enemy, 50f);
-         actionMacros[1] = new Action_NormalAttack("일반 공격", this);
     }
 
     void Init(){

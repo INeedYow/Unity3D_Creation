@@ -6,24 +6,15 @@ using UnityEngine.UI;
 public class MacroManager : MonoBehaviour
 {
     public static MacroManager instance { get; private set; }
+    public HeroMacroUI macroUI;
 
-    public Dropdown[] conditions;
-    public Dropdown[] actions;
+    public List<ConditionMacro> prfConditionMacros;
+    public List<ActionMacro> prfActionMacros;
 
-    private void Awake() { 
-        instance = this; 
-        Init();
+    private void Awake() { instance = this; }
+
+    public void SetMacro(int value){
+        Debug.Log("value = " + value);
     }
 
-    void Init(){
-        //conditions = new Dropdown[HeroManager.instance.maxMacroCount];
-        //actions = new Dropdown[HeroManager.instance.maxMacroCount];
-
-        Dropdown.OptionData option = new Dropdown.OptionData();
-        for (int i = 0; i < 5; i++)
-        {
-            option.text = "dropdown test";
-            conditions[0].options.Add(option);
-        }
-    }
 }

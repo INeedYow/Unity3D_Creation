@@ -9,8 +9,8 @@ public class Condition_FindHpTarget : ConditionMacro
     public EGroup eGroup;
     public float value;
 
-    public Condition_FindHpTarget(string desc, Hero hero, EMost eMost, EGroup eGroup, float value) 
-        : base(desc, hero)
+    public Condition_FindHpTarget(Hero hero, EMost eMost, EGroup eGroup, float value) 
+        : base(hero)
     {
         this.eMost = eMost;
         this.eGroup = eGroup;

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class BattleMacro
+public abstract class BattleMacro : MonoBehaviour
 {
-    public string desc;
+    public BattleMacroData data;
     protected Hero owner;
-    public BattleMacro(string desc, Hero hero){
-        this.desc = desc;
+    public BattleMacro(Hero hero){
         this.owner = hero;
     }
 }

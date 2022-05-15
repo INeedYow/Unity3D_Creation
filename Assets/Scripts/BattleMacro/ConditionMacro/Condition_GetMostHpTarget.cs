@@ -9,8 +9,8 @@ public class Condition_GetMostHpTarget : ConditionMacro
     Character m_target;
     float m_value;
 
-    public Condition_GetMostHpTarget(string desc, Hero hero, EMost eMost, EGroup eGroup) 
-        : base(desc, hero) 
+    public Condition_GetMostHpTarget(Hero hero, EMost eMost, EGroup eGroup) 
+        : base(hero)
     {
         this.eMost = eMost;
         this.eGroup = eGroup;

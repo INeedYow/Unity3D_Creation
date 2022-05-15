@@ -11,8 +11,8 @@ public class Condition_FindDistanceTarget : ConditionMacro
     //float m_lastFindTime;
     //float m_findDelay = 0.2f;
 
-    public Condition_FindDistanceTarget(string desc, Hero hero, EMost eMost, EGroup eGroup, float value) 
-        : base(desc, hero)
+    public Condition_FindDistanceTarget(Hero hero, EMost eMost, EGroup eGroup, float value) 
+        : base(hero)
     {
         this.eMost = eMost;
         this.eGroup = eGroup;

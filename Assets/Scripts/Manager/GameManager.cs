@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     public void SetMap2Dungeon(){
         eMenu = EMenu.Dungeon;
+        CameraManager.instance.SetCam(CameraManager.instance.DungeonTf);
         ground.gameObject.SetActive(false);
         enterance.gameObject.SetActive(false);
         player.gameObject.SetActive(false);

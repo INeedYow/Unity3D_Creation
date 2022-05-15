@@ -10,8 +10,8 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     float m_value;
     float m_sqrDist;
 
-    public Condition_GetMostDistanceTarget(string desc, Hero hero, EMost eMost, EGroup eGroup) 
-        : base(desc, hero) 
+    public Condition_GetMostDistanceTarget(Hero hero, EMost eMost, EGroup eGroup) 
+        : base(hero) 
     {
         this.eMost = eMost;
         this.eGroup = eGroup;
