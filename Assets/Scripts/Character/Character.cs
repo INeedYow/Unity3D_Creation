@@ -40,6 +40,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float magicArmorRate = 0f;           // 마법방어율 (%)
 
     [Header("Additional")]
+    public Animator anim;
     public Character target;
     public bool isStop;    
     public bool isDead;
@@ -55,6 +56,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     protected void Awake() {
         DungeonManager.instance.onWaveEnd += Pause;
+        anim = GetComponentInChildren<Animator>();
     }
     public void SetTarget(Character target)
     {   

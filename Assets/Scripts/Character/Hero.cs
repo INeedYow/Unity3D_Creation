@@ -5,7 +5,7 @@ using UnityEngine;
 // 캐릭터 전투, 비전투 구분하여 관리하는 법.?
 public class Hero : Character
 {
-    public enum EClass { Knight, Archer }
+    public enum EClass { Knight, Archer, }
     [Header("GFX")]
     public Hero_GFX heroGFX;
     public Dummy dummy;
@@ -33,6 +33,9 @@ public class Hero : Character
             }
         }
     }
+    [Header("Skill")]   // TODO
+    public int maxSkillCount = 4;
+    public Skill[] skills = new Skill[4];
 
     new protected void Awake() {
         base.Awake();

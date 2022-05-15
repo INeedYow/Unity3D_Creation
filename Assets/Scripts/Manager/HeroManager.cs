@@ -18,7 +18,7 @@ public class HeroManager : MonoBehaviour
             if (_selectedHero != value)
             {
                 Debug.Log("_SelectedHero = " + _selectedHero + " / " + "value = " + value);
-                onChangeSelectedHero?.Invoke(_selectedHero);
+                //onChangeSelectedHero?.Invoke(_selectedHero);
             }
             _selectedHero = value;
         }

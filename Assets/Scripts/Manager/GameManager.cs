@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
 
     public EMenu eMenu = EMenu.Map;
     public int gold;
-    public int level = 1;
+    public int playerLevel = 1;
 
     // temp test
     public GameObject ground;
     public GameObject enterance;
     public GameObject player;
     [Header("Prefabs")]
-    public Projectile_Ally prfArcherArrow;  // TODO 투사체등 조건문 달거면 그냥 Hero를 직업군별로 상속하는 게 나을 것 같음
+    public Projectile_Ally prfArcherArrow; //
 
     private void Awake() { 
         instance = this; 
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     void SetBoard2Setting(){
         eMenu = EMenu.Setting;
-        HeroManager.instance.selectedHero = HeroManager.instance.heroList[0];
+        HeroManager.instance.selectedHero = null;
         PartyManager.instance.board.gameObject.SetActive(false);
         HeroManager.instance.heroSetUI.gameObject.SetActive(true);
     }
