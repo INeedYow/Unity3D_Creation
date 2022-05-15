@@ -61,7 +61,6 @@ public class Condition_GetMostHpTarget : ConditionMacro
                 foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
                 {
                     if (ch.isDead) continue;
-                    Debug.Log("Least" + ch.curHp / ch.maxHp);
                     if (m_value > ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;

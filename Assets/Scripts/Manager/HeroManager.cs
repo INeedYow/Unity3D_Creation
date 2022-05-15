@@ -30,6 +30,10 @@ public class HeroManager : MonoBehaviour
     public HeroInfoUI heroInfoUI;
     public HeroListUI heroListUI;
     public HeroSetUI heroSetUI;
+
+    [Header("Hero Prf")]
+    public Hero prfKngiht;
+    public Hero prfArcher;
     
     public int maxMacroCount { get { return 5; } }
 
@@ -38,6 +42,10 @@ public class HeroManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             GetNewHero(Hero.EClass.Knight);
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            GetNewHero(Hero.EClass.Archer);
         }
     }
 
@@ -65,6 +73,7 @@ public class HeroManager : MonoBehaviour
             if (selectedHero == hero) return;
             selectedHero = hero;
             MacroManager.instance.macroUI.RenewUI(hero);
+            heroInfoUI.RenewUI(selectedHero);
             break;
         }
         default:
@@ -81,20 +90,38 @@ public class HeroManager : MonoBehaviour
         switch(eClass)
         {
             case Hero.EClass.Knight:
-            hero = Instantiate(GameManager.instance.prfKngiht);
+            {
+                hero = Instantiate(prfKngiht);
             
-            for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-            {
-                hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
-                hero.conditionMacros[i].owner = hero;
-            }
-            for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-            {
-                hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
-                hero.actionMacros[i].owner = hero;
+                for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+                {
+                    hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
+                    hero.conditionMacros[i].owner = hero;
+                }
+                for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+                {
+                    hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
+                    hero.actionMacros[i].owner = hero;
+                }
+                break;
             }
 
-            break;
+            case Hero.EClass.Archer:
+            {
+                hero = Instantiate(prfArcher);
+            
+                for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+                {
+                    hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
+                    hero.conditionMacros[i].owner = hero;
+                }
+                for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+                {
+                    hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
+                    hero.actionMacros[i].owner = hero;
+                }
+                break;
+            }
 
             // 직업 추가
 

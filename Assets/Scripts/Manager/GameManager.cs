@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum EMenu { Map, Dungeon, Board, Setting, Store, End };
+public enum EMenu { Map, Dungeon, Board, Setting, Store, };
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
@@ -12,17 +12,16 @@ public class GameManager : MonoBehaviour
     public int gold;
     public int level = 1;
 
-    [Header("Hero Prf")]
-    public Hero prfKngiht;
-
     // temp test
     public GameObject ground;
     public GameObject enterance;
     public GameObject player;
+    [Header("Prefabs")]
+    public Projectile_Ally prfArcherArrow;  // TODO 투사체등 조건문 달거면 그냥 Hero를 직업군별로 상속하는 게 나을 것 같음
 
     private void Awake() { 
         instance = this; 
-        Application.targetFrameRate = 30;   // 프레임 제한
+        Application.targetFrameRate = 40;   // 프레임 제한
     }
 
     private void Update() {

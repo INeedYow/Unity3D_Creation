@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Action_NormalAttack : ActionMacro
 {
-    //public Action_NormalAttack(Hero hero) : base(hero) {}
 
     public override bool Execute(){
         //Debug.Log("Action_NormalAttack.Execute()");
