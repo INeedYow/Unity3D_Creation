@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// 범위 공격 layermask enemy 써서 몬스터에는 이 코드 못씀
 public class Action_NormalAttack : ActionMacro
 {
-    public Action_NormalAttack(Hero hero) : base(hero) {}
+    //public Action_NormalAttack(Hero hero) : base(hero) {}
 
     public override bool Execute(){
         //Debug.Log("Action_NormalAttack.Execute()");

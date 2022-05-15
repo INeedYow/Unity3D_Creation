@@ -8,14 +8,10 @@ public class Condition_Self : ConditionMacro
     public enum EType { Least, Most };      // 최소, 최대 %
     public EInfo eInfo;
     public EType eType;
+    [Tooltip("value (0f ~ 100f)")]
     public float value;
     
-    public Condition_Self(Hero hero, EInfo eInfo, EType eType, float value) : base(hero) 
-    {
-        this.eInfo = eInfo;
-        this.eType = eType;
-        this.value = value;
-
+    private void Start() {
         if (eInfo == EInfo.HP)
         {
             owner.onHpChange += UpdateHp;

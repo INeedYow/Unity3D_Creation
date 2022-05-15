@@ -7,15 +7,8 @@ public class Condition_FindHpTarget : ConditionMacro
 {
     public EMost eMost;
     public EGroup eGroup;
+    [Tooltip("value (0f ~ 100f)")]
     public float value;
-
-    public Condition_FindHpTarget(Hero hero, EMost eMost, EGroup eGroup, float value) 
-        : base(hero)
-    {
-        this.eMost = eMost;
-        this.eGroup = eGroup;
-        this.value = value;
-    }
 
     public override bool IsSatisfy(){
         return FindTarget();

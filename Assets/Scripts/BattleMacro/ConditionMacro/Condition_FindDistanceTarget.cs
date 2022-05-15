@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Condition_FindDistanceTarget : ConditionMacro
-{   // spherecast로 해도 좋을듯
+{
     public EMost eMost;
     public EGroup eGroup;
+    [Tooltip("distance")]
+    public float value;
     float m_sqrValue;
     float m_sqrDist;
-    //float m_lastFindTime;
-    //float m_findDelay = 0.2f;
 
-    public Condition_FindDistanceTarget(Hero hero, EMost eMost, EGroup eGroup, float value) 
-        : base(hero)
-    {
-        this.eMost = eMost;
-        this.eGroup = eGroup;
-        this.m_sqrValue = value * value;
+    private void Start() {
+        m_sqrValue = value * value;
     }
 
     public override bool IsSatisfy(){  
@@ -24,12 +20,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
     }
 
     bool FindTarget()
-    {   // 최적화 방법.?
-        // if (Time.time < m_lastFindTime + m_findDelay) {
-        //     return true;    // 그 사이 죽었거나 없어진 경우에 예외처리 필요할듯..
-        // }
-
-        // m_lastFindTime = Time.time;
+    {   
 
         if (eGroup == EGroup.Ally)
         {   // 아군

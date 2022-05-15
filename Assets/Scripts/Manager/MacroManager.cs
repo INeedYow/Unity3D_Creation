@@ -18,30 +18,30 @@ public class MacroManager : MonoBehaviour
     }
     void SetMacroDataID(){ 
         int id = 0;
-        foreach (BattleMacro macro in prfConditionMacros)
-        {
+        foreach (BattleMacro macro in prfConditionMacros){
             macro.data.ID = id++;
         }
 
         id = 0;
-        foreach (BattleMacro macro in prfActionMacros)
-        {
+        foreach (BattleMacro macro in prfActionMacros){
             macro.data.ID = id++;
         }
     }
 
     public void SetMacro(bool isCondition, int macroUnitID, int value){
-        if (HeroManager.instance.selectedHero == null)
-            Debug.Log("null");
-            
+        Hero hero = HeroManager.instance.selectedHero;
+        if (null == hero) return;
+
         if (isCondition)
         {
-            HeroManager.instance.selectedHero.conditionMacros[macroUnitID] 
-                = Instantiate(prfConditionMacros[value]);
+            Destroy(hero.conditionMacros[macroUnitID].gameObject);
+            hero.conditionMacros[macroUnitID] = Instantiate(prfConditionMacros[value]);
+            hero.conditionMacros[macroUnitID].owner = hero;
         }
         else{
-            HeroManager.instance.selectedHero.actionMacros[macroUnitID] 
-                = Instantiate(prfActionMacros[value]);
+            Destroy(hero.actionMacros[macroUnitID].gameObject);
+            hero.actionMacros[macroUnitID] = Instantiate(prfActionMacros[value]);
+            hero.actionMacros[macroUnitID].owner = hero;
         }
     }
 

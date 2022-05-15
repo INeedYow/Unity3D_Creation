@@ -81,7 +81,8 @@ MonoBehaviour:
   isDead: 0
   heroGFX: {fileID: 4771493526772089886}
   dummy: {fileID: 3630621230233018382}
-  maxMacroCount: 5
+  conditionMacros: []
+  actionMacros: []
   eClass: 0
   isJoin: 0
   level: 1

@@ -13,6 +13,8 @@ public class HeroManager : MonoBehaviour
     public Hero selectedHero{
         get { return _selectedHero; }
         set { 
+            test = value;
+            if (value == null) Debug.Log("SelectHero null");
             if (_selectedHero != value)
             {
                 Debug.Log("_SelectedHero = " + _selectedHero + " / " + "value = " + value);
@@ -21,6 +23,9 @@ public class HeroManager : MonoBehaviour
             _selectedHero = value;
         }
     }
+
+    public Hero test;
+
     [Header("UI")]
     public HeroInfoUI heroInfoUI;
     public HeroListUI heroListUI;
@@ -37,26 +42,38 @@ public class HeroManager : MonoBehaviour
     }
 
     public void SelectHero(Hero hero){
-        // switch (GameManager.instance.eMenu)
-        // {
-        //     case EMenu.Board:
-        //     {
-
-        //         break;
-        //     }
-        // }
-        if (null != selectedHero)
+        switch (GameManager.instance.eMenu)
         {
-            selectedHero.dummy.gameObject.SetActive(false);
-        }
-        else if (hero.dummy.placedBlock != null)    // 이미 배치된 경우
+        case EMenu.Board:
         {
-            hero.dummy.placedBlock.dummy = null;
-            hero.dummy.placedBlock = null;
+            if (null != selectedHero)
+            {
+                selectedHero.dummy.gameObject.SetActive(false);
+            }
+            else if (hero.dummy.placedBlock != null)    // 이미 배치된 경우
+            {
+                hero.dummy.placedBlock.dummy = null;
+                hero.dummy.placedBlock = null;
+            }
+            selectedHero = hero;
+            hero.dummy.gameObject.SetActive(true);
+            heroInfoUI.RenewUI(selectedHero);
+            break;
         }
-        selectedHero = hero;
-        hero.dummy.gameObject.SetActive(true);
-        heroInfoUI.RenewUI(selectedHero);
+        case EMenu.Setting:
+        {
+            if (selectedHero == hero) return;
+            selectedHero = hero;
+            MacroManager.instance.macroUI.RenewUI(hero);
+            break;
+        }
+        default:
+        {
+            selectedHero = hero;
+            break;
+        }
+        }
+        
     }
 
     public void GetNewHero(Hero.EClass eClass){
@@ -65,6 +82,18 @@ public class HeroManager : MonoBehaviour
         {
             case Hero.EClass.Knight:
             hero = Instantiate(GameManager.instance.prfKngiht);
+            
+            for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+            {
+                hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
+                hero.conditionMacros[i].owner = hero;
+            }
+            for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+            {
+                hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
+                hero.actionMacros[i].owner = hero;
+            }
+
             break;
 
             // 직업 추가

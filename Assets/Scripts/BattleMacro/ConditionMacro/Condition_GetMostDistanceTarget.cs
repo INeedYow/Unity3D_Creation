@@ -10,16 +10,8 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     float m_value;
     float m_sqrDist;
 
-    public Condition_GetMostDistanceTarget(Hero hero, EMost eMost, EGroup eGroup) 
-        : base(hero) 
-    {
-        this.eMost = eMost;
-        this.eGroup = eGroup;
-    }
-
-    public override bool IsSatisfy(){   // 거리는 전투 중 매 순간 확인해야
-        UpdateDistance();
-        owner.target = m_target;
+    public override bool IsSatisfy(){  
+        InvokeRepeating("UpdateDistance", 0f, 0.2f);
         return true;
     }
     

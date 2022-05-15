@@ -10,5 +10,5 @@ public abstract class ConditionMacro : BattleMacro
     protected bool isSatisfy;
     public abstract bool IsSatisfy();
 
-    public ConditionMacro(Hero hero) : base(hero) {}
+    //public ConditionMacro(Hero hero) : base(hero) {}
 }

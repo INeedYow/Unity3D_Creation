@@ -5,17 +5,21 @@ using UnityEngine.UI;
 
 public class HeroMacroUI : MonoBehaviour
 {
-    public HeroMacroUnit[] conditonMacroUnits ;
-    public HeroMacroUnit[] actionMacroUnits ;
+    public HeroMacroUnit[] conditonMacroUnits = new HeroMacroUnit[5];
+    public HeroMacroUnit[] actionMacroUnits = new HeroMacroUnit[5];
 
     private void Start() {
-        HeroManager.instance.onChangeSelectedHero += RenewUI;
         InitConditionUnits();
         InitActionUnits();
     }
 
     private void OnEnable() {
+        HeroManager.instance.onChangeSelectedHero += RenewUI;
         RenewUI(HeroManager.instance.selectedHero);
+    }
+
+    private void OnDisable() {
+        HeroManager.instance.onChangeSelectedHero -= RenewUI;
     }
 
     void InitConditionUnits()
@@ -55,6 +59,7 @@ public class HeroMacroUI : MonoBehaviour
     }
 
     public void RenewUI(Hero hero){
+        Debug.Log("RenewUI");
         if (null == hero){  
             foreach (HeroMacroUnit unit in conditonMacroUnits)  { unit.SetValue(0); }
             foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.SetValue(0); }
@@ -62,11 +67,10 @@ public class HeroMacroUI : MonoBehaviour
         else{
             for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
             { 
-                conditonMacroUnits[i].SetValue(hero.conditionMacros[i].data.ID);
-            }
-            for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-            { 
-                actionMacroUnits[i].SetValue(hero.actionMacros[i].data.ID);
+                if (null != hero.conditionMacros[i])
+                    conditonMacroUnits[i].SetValue(hero.conditionMacros[i].data.ID);
+                if (null != hero.actionMacros[i])
+                    actionMacroUnits[i].SetValue(hero.actionMacros[i].data.ID);
             }
         }
     }

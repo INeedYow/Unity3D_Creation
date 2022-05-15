@@ -9,11 +9,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
     Character m_target;
     float m_value;
 
-    public Condition_GetMostHpTarget(Hero hero, EMost eMost, EGroup eGroup) 
-        : base(hero)
-    {
-        this.eMost = eMost;
-        this.eGroup = eGroup;
+    private void Start() {
         DungeonManager.instance.onChangeAnyHP += GetTarget;
     }
 
@@ -65,6 +61,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
                 foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
                 {
                     if (ch.isDead) continue;
+                    Debug.Log("Least" + ch.curHp / ch.maxHp);
                     if (m_value > ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;

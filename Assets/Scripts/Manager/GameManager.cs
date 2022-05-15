@@ -68,12 +68,14 @@ public class GameManager : MonoBehaviour
 
     void SetBoard2Setting(){
         eMenu = EMenu.Setting;
+        HeroManager.instance.selectedHero = HeroManager.instance.heroList[0];
         PartyManager.instance.board.gameObject.SetActive(false);
         HeroManager.instance.heroSetUI.gameObject.SetActive(true);
     }
 
     void SetSetting2Board(){
         eMenu = EMenu.Board;
+        HeroManager.instance.selectedHero = null;
         PartyManager.instance.board.gameObject.SetActive(true);
         HeroManager.instance.heroSetUI.gameObject.SetActive(false);
     }
