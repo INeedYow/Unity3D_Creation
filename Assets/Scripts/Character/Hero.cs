@@ -71,17 +71,16 @@ public class Hero : Character
 
     public void ResetPos()
     {
-        Debug.Log(dummy.beginPos);
-        Debug.Log(DungeonManager.instance.curDungeon.beginTf.position);
-        transform.position = dummy.beginPos + DungeonManager.instance.curDungeon.beginTf.position; // TODO
+        // Debug.Log(dummy.placedBlock.beginPos);
+        // Debug.Log(DungeonManager.instance.curDungeon.beginTf.position);
+        transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; // TODO
         target = null;
     }
 
-    public bool Join(){
-        if (isJoin) return false;
+    public void Join(){
+        if (isJoin) return;
         PartyManager.instance.Join(this);
         isJoin = true;
-        return true;
     }
 
     public void Leave(){

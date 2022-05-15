@@ -27,6 +27,11 @@ public class HeroManager : MonoBehaviour
         {
             selectedHero.dummy.gameObject.SetActive(false);
         }
+        else if (hero.dummy.placedBlock != null)    // 이미 배치된 경우
+        {
+            hero.dummy.placedBlock.dummy = null;
+            hero.dummy.placedBlock = null;
+        }
         selectedHero = hero;
         hero.dummy.gameObject.SetActive(true);
         heroInfoUI.RenewUI(selectedHero);

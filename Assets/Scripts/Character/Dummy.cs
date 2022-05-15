@@ -5,5 +5,6 @@ using UnityEngine;
 public class Dummy : MonoBehaviour
 {
     public Character owner;
-    public Vector3 beginPos;
+    public BoardBlock placedBlock;  // 보드에 세팅된 자기 위치 블럭
+    //public Vector3 beginPos;
 }

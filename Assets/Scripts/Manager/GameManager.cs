@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour
     public GameObject enterance;
     public GameObject player;
 
-    private void Awake() { instance = this; }
+    private void Awake() { 
+        instance = this; 
+        Application.targetFrameRate = 30;   // 프레임 제한
+    }
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.S) && eMenu == EMenu.Map)
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
         PartyManager.instance.board.gameObject.SetActive(true);
         HeroManager.instance.heroSetUI.gameObject.SetActive(false);
     }
+
     public void SetMap2Dungeon(){
         eMenu = EMenu.Dungeon;
         ground.gameObject.SetActive(false);

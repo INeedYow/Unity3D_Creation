@@ -10,6 +10,7 @@ public class Board : MonoBehaviour
     public int hSize = 13;
     public int vSize = 7;
     public BoardBlock[,] blocks;
+    public List<Dummy> dummies = new List<Dummy>();
 
     private void Awake() {
         blocks = new BoardBlock[vSize, hSize];

@@ -24,26 +24,26 @@ public class BoardBlock : MonoBehaviour
         
         if (null == dummy)
         {   // TODO 최대 인원제한 필요
-            SetNewDummy();
+            SetDummy();
         }
         else{   // 이미 다른 영웅이 있던 경우
             Hero hero = dummy.GetComponentInParent<Hero>();
             if (hero == null) return;
             hero.Leave();
 
-            SetNewDummy();
+            SetDummy();
         }
     }
 
-    void SetNewDummy()
+    void SetDummy()
     {
         Hero hero = HeroManager.instance.selectedHero.GetComponent<Hero>();
             
         if (hero == null) return;
-        if (!hero.Join()) return;
 
+        hero.Join();
         dummy = HeroManager.instance.selectedHero.dummy;
-        dummy.beginPos = beginPos;
+        dummy.placedBlock = this;
         HeroManager.instance.selectedHero = null;
     }
 }
