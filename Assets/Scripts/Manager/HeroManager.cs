@@ -13,13 +13,12 @@ public class HeroManager : MonoBehaviour
     public Hero selectedHero{
         get { return _selectedHero; }
         set { 
-            _selectedHero = value;
-            Debug.Log(_selectedHero);
             if (_selectedHero != value)
             {
-                Debug.Log("_selectedHero changed");
+                Debug.Log("_SelectedHero = " + _selectedHero + " / " + "value = " + value);
                 onChangeSelectedHero?.Invoke(_selectedHero);
             }
+            _selectedHero = value;
         }
     }
     [Header("UI")]
@@ -38,6 +37,14 @@ public class HeroManager : MonoBehaviour
     }
 
     public void SelectHero(Hero hero){
+        // switch (GameManager.instance.eMenu)
+        // {
+        //     case EMenu.Board:
+        //     {
+
+        //         break;
+        //     }
+        // }
         if (null != selectedHero)
         {
             selectedHero.dummy.gameObject.SetActive(false);
@@ -60,7 +67,7 @@ public class HeroManager : MonoBehaviour
             hero = Instantiate(GameManager.instance.prfKngiht);
             break;
 
-            //
+            // 직업 추가
 
         }
 

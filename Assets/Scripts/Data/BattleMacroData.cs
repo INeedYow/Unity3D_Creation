@@ -7,4 +7,6 @@ public class BattleMacroData : ScriptableObject
 {
     [Header("Description")] [TextArea]
     public string desc;
+    [Header("ID")]
+    public int ID;
 }
