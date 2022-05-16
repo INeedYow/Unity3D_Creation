@@ -10,4 +10,8 @@ public class Monster_GFX : MonoBehaviour
         monster.isStop = true;
     }
 
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(monster.transform.position, 1.5f);
+    }
+
 }

@@ -15,6 +15,7 @@ public class Hero : Character
 
     [Header("Additional Info")]
     public EClass eClass;   
+    public Projectile_Ally projectile;
     public bool isJoin;
     
     [Header("Level")]

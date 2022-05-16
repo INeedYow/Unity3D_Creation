@@ -76,6 +76,7 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
+  anim: {fileID: 0}
   target: {fileID: 0}
   isStop: 0
   isDead: 0
@@ -87,6 +88,12 @@ MonoBehaviour:
   isJoin: 0
   level: 1
   maxExp: 0
+  maxSkillCount: 4
+  skills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &8930943930485441400
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8930943930485201806
 Transform:
   m_ObjectHideFlags: 0
