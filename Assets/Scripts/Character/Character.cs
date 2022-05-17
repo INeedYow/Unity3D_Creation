@@ -39,8 +39,12 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float armorRate = 0f;                // 방어율 (%)
     public float magicArmorRate = 0f;           // 마법방어율 (%)
 
+    [Header("Macro")]
+    public ConditionMacro[]   conditionMacros;
+    public ActionMacro[]      actionMacros;
+
     [Header("Additional")]
-    public Animator anim;
+    [HideInInspector] public Animator anim;
     public Character target;
     public bool isStop;    
     public bool isDead;
@@ -57,12 +61,14 @@ public abstract class Character : MonoBehaviour, IDamagable
     protected void Awake() {
         DungeonManager.instance.onWaveEnd += Pause;
         anim = GetComponentInChildren<Animator>();
+        conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
+        actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
     }
-    public void SetTarget(Character target)
-    {   
-        this.target = target;
-        if (target != this) transform.LookAt(target.transform);
-    }
+    // public void SetTarget(Character target)
+    // {   
+    //     this.target = target;
+    //     if (target != this) transform.LookAt(target.transform);
+    // }
 
     public void Damaged(float damage, float damageRate, bool isMagic = false)
     {                // 공격자의 공격력, 공격자의 공격력 증가량, 물리마법공격 구분
@@ -109,5 +115,9 @@ public abstract class Character : MonoBehaviour, IDamagable
     {
         gameObject.transform.LookAt(destTransform);
         gameObject.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

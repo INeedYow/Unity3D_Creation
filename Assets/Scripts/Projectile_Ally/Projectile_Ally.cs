@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Projectile_Ally : MonoBehaviour
+public class Projectile_Ally : Projectile
 {
-    public Vector3 targetPos;
-    public float speed;
-    public float duration;
-    public float damage;
+    public void SetInfo(Character target, float damage, float area)
+    {
+        this.target = target;
+        this.damage = damage;
+        this.area = area;
+    }
 
-    public abstract void Fire();
+    // TODO Update()에서 움직임, 데미지 처리, 삭제 등
 }

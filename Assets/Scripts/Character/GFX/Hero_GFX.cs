@@ -7,9 +7,14 @@ public class Hero_GFX : MonoBehaviour
     public Hero hero;
     int m_repeat;
 
-    private void Awake() { m_repeat = HeroManager.instance.maxMacroCount; }
-    private void OnEnable() {
-        hero.isStop = true;
+    private void Start() { m_repeat = MacroManager.instance.maxMacroCount; }
+    private void OnEnable() { 
+        hero.isStop = true; 
+        InvokeRepeating("LookTarget", 0f, 0.2f);
+    }
+
+    private void OnDisable() {
+        CancelInvoke("LookTarget");
     }
 
     void Update()
@@ -25,8 +30,15 @@ public class Hero_GFX : MonoBehaviour
                 if (hero.actionMacros[i] == null) continue;
 
                 if (hero.actionMacros[i].Execute()) break;
-                else continue;
             }
+        }
+    }
+
+    void LookTarget()
+    {
+        if (hero.target != null && hero.target != hero)
+        {
+            hero.transform.LookAt(hero.target.transform);
         }
     }
 }

@@ -9,22 +9,8 @@ public class HeroManager : MonoBehaviour
     public static HeroManager instance { get; private set; }
 
     public List<Hero> heroList = new List<Hero>();
-    Hero _selectedHero;
-    public Hero selectedHero{
-        get { return _selectedHero; }
-        set { 
-            test = value;
-            if (value == null) Debug.Log("SelectHero null");
-            if (_selectedHero != value)
-            {
-                Debug.Log("_SelectedHero = " + _selectedHero + " / " + "value = " + value);
-                //onChangeSelectedHero?.Invoke(_selectedHero);
-            }
-            _selectedHero = value;
-        }
-    }
 
-    public Hero test;
+    public Hero selectedHero;
 
     [Header("UI")]
     public HeroInfoUI heroInfoUI;
@@ -34,9 +20,6 @@ public class HeroManager : MonoBehaviour
     [Header("Hero Prf")]
     public Hero prfKngiht;
     public Hero prfArcher;
-    
-    public int maxMacroCount { get { return 5; } }
-
     private void Awake() { instance = this; }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.K))

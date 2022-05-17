@@ -9,10 +9,6 @@ public class Hero : Character
     [Header("GFX")]
     public Hero_GFX heroGFX;
     public Dummy dummy;
-    // [Macro]
-    public ConditionMacro[]   conditionMacros;
-    public ActionMacro[]      actionMacros;
-
     [Header("Additional Info")]
     public EClass eClass;   
     public Projectile_Ally projectile;
@@ -46,8 +42,6 @@ public class Hero : Character
     void Init(){
         heroGFX.hero = this;
         dummy.owner = this;
-        conditionMacros = new ConditionMacro[HeroManager.instance.maxMacroCount];
-        actionMacros = new ActionMacro[HeroManager.instance.maxMacroCount];
         heroGFX.gameObject.SetActive(false);
         dummy.gameObject.SetActive(false);
     }
@@ -67,8 +61,6 @@ public class Hero : Character
 
     public void ResetPos()
     {
-        // Debug.Log(dummy.placedBlock.beginPos);
-        // Debug.Log(DungeonManager.instance.curDungeon.beginTf.position);
         transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; // TODO
         target = null;
     }

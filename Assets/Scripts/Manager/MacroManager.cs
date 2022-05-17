@@ -10,7 +10,7 @@ public class MacroManager : MonoBehaviour
 
     public List<ConditionMacro> prfConditionMacros;
     public List<ActionMacro> prfActionMacros;
-    public int maxMacroCount = 5;
+    public int maxMacroCount { get { return 5; } }
 
     private void Awake() { 
         instance = this; 
