@@ -11,7 +11,10 @@ public class Monster_GFX : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(monster.transform.position, 1.5f);
+        Gizmos.DrawWireSphere(monster.transform.position, 2f);
+        Gizmos.DrawWireSphere(monster.transform.position, 3f);
+        Gizmos.DrawWireSphere(monster.transform.position, 4f);
+        Gizmos.DrawWireSphere(monster.transform.position, 5f);
     }
 
 }

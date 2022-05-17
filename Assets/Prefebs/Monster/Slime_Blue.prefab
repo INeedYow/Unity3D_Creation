@@ -513,10 +513,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Blue Slime
   icon: {fileID: 0}
-  curHp: 150
-  maxHp: 150
-  minDamage: 15
-  maxDamage: 21
+  curHp: 130
+  maxHp: 130
+  minDamage: 13
+  maxDamage: 19
   lastAttackTime: 0
   attackDelay: 1.8
   attackRange: 2

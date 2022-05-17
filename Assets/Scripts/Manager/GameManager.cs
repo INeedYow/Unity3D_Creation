@@ -25,22 +25,22 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.S) && eMenu == EMenu.Map)
-        {   // 임시로 보드, 배치 메뉴로 가게
-            SetMap2Board();
-        }
-        else if (Input.GetKeyDown(KeyCode.W) && eMenu == EMenu.Board)
-        {
-            SetBoard2Map();
-        }
-        else if (Input.GetKeyDown(KeyCode.D) && eMenu == EMenu.Board)
-        {
-            SetBoard2Setting();
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && eMenu == EMenu.Setting)
-        {
-            SetSetting2Board();
-        }
+        // if (Input.GetKeyDown(KeyCode.S) && eMenu == EMenu.Map)
+        // {   // 임시로 보드, 배치 메뉴로 가게
+        //     SetMap2Board();
+        // }
+        // else if (Input.GetKeyDown(KeyCode.W) && eMenu == EMenu.Board)
+        // {
+        //     SetBoard2Map();
+        // }
+        // else if (Input.GetKeyDown(KeyCode.D) && eMenu == EMenu.Board)
+        // {
+        //     SetBoard2Setting();
+        // }
+        // else if (Input.GetKeyDown(KeyCode.A) && eMenu == EMenu.Setting)
+        // {
+        //     SetSetting2Board();
+        // }
     }
 
     void SetMap2Board(){
