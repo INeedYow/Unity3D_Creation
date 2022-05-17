@@ -28,6 +28,13 @@ public class PartyManager : MonoBehaviour
         board.gameObject.SetActive(false);
     }
 
+    public void TurnOffBoard()
+    {
+        HideDummy();
+        board.transform.localPosition = Vector3.zero;
+        board.isActive = false;
+    }
+
     void SwapDummy2GFX(){
         foreach(Hero hero in heroParty)
         {

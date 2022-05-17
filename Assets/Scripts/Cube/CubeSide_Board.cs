@@ -16,7 +16,6 @@ public class CubeSide_Board : CubeSide
     {
         HeroManager.instance.heroInfoUI.gameObject.SetActive(false);
         HeroManager.instance.heroListUI.gameObject.SetActive(false);
-        PartyManager.instance.board.gameObject.SetActive(false);
-        PartyManager.instance.board.isActive = false;
+        PartyManager.instance.TurnOffBoard();
     }
 }

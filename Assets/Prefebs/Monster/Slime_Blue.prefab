@@ -493,7 +493,7 @@ Transform:
   m_GameObject: {fileID: 5625915739511746793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 774576237881992142}
   m_Father: {fileID: 0}
@@ -534,3 +534,13 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   monsGFX: {fileID: 6019308926277162015}
+  conditionMacros:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  actionMacros:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
