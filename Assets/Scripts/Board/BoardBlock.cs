@@ -9,18 +9,30 @@ public class BoardBlock : MonoBehaviour
     public Transform dummyTf;
     public Vector3 beginPos;
 
-    public void Init() {
-        beginPos = transform.position;
+    void Start()
+    {
+        SetBeginPos(PartyManager.instance.board.centerTf);
+    }
+
+    public void SetBeginPos(Transform tf)
+    {
+        beginPos = new Vector3(
+            tf.position.y-transform.position.y,
+            0f,
+            tf.position.z - transform.position.z);
     }
 
     private void OnMouseEnter() {
+        Debug.Log("OnMouseEnter");
         if (HeroManager.instance.selectedHero != null)
         {
             HeroManager.instance.selectedHero.dummy.transform.position = dummyTf.position;
         }
     }
     private void OnMouseDown() {
+        Debug.Log("OnMouseDown, selectedhero null");
         if (HeroManager.instance.selectedHero == null) return;
+        Debug.Log("OnMouseDown");
         
         if (null == dummy)
         {   // TODO 최대 인원제한 필요
@@ -29,6 +41,7 @@ public class BoardBlock : MonoBehaviour
         else{   // 이미 다른 영웅이 있던 경우
             Hero hero = dummy.GetComponentInParent<Hero>();
             if (hero == null) return;
+            
             hero.Leave();
 
             SetDummy();

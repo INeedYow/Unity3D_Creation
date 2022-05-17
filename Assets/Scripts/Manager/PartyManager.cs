@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class PartyManager : MonoBehaviour
 {
-    public static PartyManager instance { get; private set; }
+    static PartyManager _instance;
+    public static PartyManager instance { 
+        get{ 
+            if (_instance == null)
+            {
+                _instance = new PartyManager();
+            }
+            return _instance;
+        }
+    }
 
     public List<Hero> heroParty = new List<Hero>();
     public int maxCount = 2;
     [Header("Board")]
     public Board board;
 
-    private void Awake() { instance = this; }
+    private void Awake() { _instance = this; }
 
     public void EnterDungeon(){
         SwapDummy2GFX();

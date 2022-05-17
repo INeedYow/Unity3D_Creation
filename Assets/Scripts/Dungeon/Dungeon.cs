@@ -8,7 +8,7 @@ public class Dungeon : MonoBehaviour
     int m_curWave;
     public int maxWave;
 
-    public List<Wave> waves;            // Q. Awake()에서 자식 Wave들 가져오게 하면 큐브 등 자식 오브젝트 많아서 부담되나?
+    public List<Wave> waves;            
     public List<Monster> curMonsters;   // isDead ture, false 모두 갖고 있음
     public int curMosterCount;          // isDead false인 몬스터의 수
 
