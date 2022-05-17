@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12669b97feb931142925b6acb711d66c, type: 3}
-  m_Name: SpawnData DG1.Wave1.A
+  m_Name: SpawnData DG1.RedSlime 3
   m_EditorClassIdentifier: 
-  prfMonster: {fileID: 2132754815999918885, guid: 572e1511774442e4c888f949b70aeb1f,
+  prfMonster: {fileID: 7500355691490229467, guid: 9b0e0e64b0abebf42b7f2ad0279a2c25,
     type: 3}
-  count: 2
+  count: 3

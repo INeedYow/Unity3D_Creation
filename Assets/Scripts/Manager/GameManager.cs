@@ -12,10 +12,6 @@ public class GameManager : MonoBehaviour
     public int gold;
     public int playerLevel = 1;
 
-    // temp test
-    public GameObject ground;
-    public GameObject enterance;
-    public GameObject player;
     [Header("Prefabs")]
     public Projectile_Ally prfArcherArrow; //
 
@@ -43,16 +39,13 @@ public class GameManager : MonoBehaviour
         // }
     }
 
-    void SetMap2Board(){
-        eMenu = EMenu.Board;
-        HeroManager.instance.heroInfoUI.gameObject.SetActive(true);
-        HeroManager.instance.heroListUI.gameObject.SetActive(true);
-        PartyManager.instance.board.gameObject.SetActive(true);
-        CameraManager.instance.SetCam(CameraManager.instance.setTf);
-        ground.gameObject.SetActive(false);
-        enterance.gameObject.SetActive(false);
-        player.gameObject.SetActive(false);
-    }
+    // void SetMap2Board(){
+    //     eMenu = EMenu.Board;
+    //     HeroManager.instance.heroInfoUI.gameObject.SetActive(true);
+    //     HeroManager.instance.heroListUI.gameObject.SetActive(true);
+    //     PartyManager.instance.board.gameObject.SetActive(true);
+    //     CameraManager.instance.SetCam(CameraManager.instance.setTf);
+    // }
 
     void SetBoard2Map(){
         eMenu = EMenu.Map;
@@ -60,9 +53,6 @@ public class GameManager : MonoBehaviour
         HeroManager.instance.heroListUI.gameObject.SetActive(false);
         PartyManager.instance.board.gameObject.SetActive(false);
         CameraManager.instance.SetCam(CameraManager.instance.defaultTf);
-        ground.gameObject.SetActive(true);
-        enterance.gameObject.SetActive(true);
-        player.gameObject.SetActive(true);
     }
 
     void SetBoard2Setting(){
@@ -81,9 +71,5 @@ public class GameManager : MonoBehaviour
 
     public void SetMap2Dungeon(){
         eMenu = EMenu.Dungeon;
-        CameraManager.instance.SetCam(CameraManager.instance.DungeonTf);
-        ground.gameObject.SetActive(false);
-        enterance.gameObject.SetActive(false);
-        player.gameObject.SetActive(false);
     }
 }

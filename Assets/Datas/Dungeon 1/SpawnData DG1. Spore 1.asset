@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12669b97feb931142925b6acb711d66c, type: 3}
-  m_Name: SpawnData DG1.Wave3.B
+  m_Name: SpawnData DG1. Spore 1
   m_EditorClassIdentifier: 
-  prfMonster: {fileID: 5085157515104649589, guid: d17f4d93a246962498dd70938734ae2c,
+  prfMonster: {fileID: 9110007209250463088, guid: be1aeb300d60c254b866199dc2317fb5,
     type: 3}
-  count: 7
+  count: 1

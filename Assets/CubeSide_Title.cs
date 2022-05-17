@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class CubeSide_Title : CubeSide
 {
-    // playerLv UI등 필요한 UI
+    public override void Enter()
+    {
+        
+    }
+
+    public override void Exit()
+    {
+        
+    }
 }
