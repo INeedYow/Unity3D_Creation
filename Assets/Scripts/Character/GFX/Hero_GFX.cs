@@ -2,26 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero_GFX : MonoBehaviour
+public class Hero_GFX : GFX
 {
     public Hero hero;
-    int m_repeat;
 
-    private void Start() { m_repeat = MacroManager.instance.maxMacroCount; }
-    private void OnEnable() { 
+    new protected void OnEnable() { 
+        base.OnEnable();
         hero.isStop = true; 
-        InvokeRepeating("LookTarget", 0f, 0.2f);
-    }
-
-    private void OnDisable() {
-        CancelInvoke("LookTarget");
     }
 
     void Update()
     {
         if (hero.isDead || hero.isStop) return;
 
-        for (int i = 0; i < m_repeat; i++)
+        for (int i = 0; i < repeat; i++)
         {
             if (hero.conditionMacros[i] == null) continue;
 
@@ -34,11 +28,20 @@ public class Hero_GFX : MonoBehaviour
         }
     }
 
-    void LookTarget()
+    protected override void LookTarget()
     {
         if (hero.target != null && hero.target != hero)
         {
             hero.transform.LookAt(hero.target.transform);
         }
+    }
+
+    void Hit(){ Debug.Log("GFX.Hit()");
+        IDamagable target = hero.target.GetComponent<IDamagable>();
+        target?.Damaged(hero.curDamage, hero.powerRate);
+    }
+
+    void Launch(){
+        hero.LaunchProjectile();
     }
 }

@@ -12,8 +12,6 @@ public class NormalAttackCommand : AttackCommand
         if (Time.time < lastAttackTime + owner.attackDelay) return;
 
         lastAttackTime = Time.time;
-
-        IDamagable target = owner.target.GetComponent<IDamagable>();
-        target?.Damaged(owner.curDamage, owner.powerRate);
+        owner.anim.SetTrigger("Attack");
     }
 }

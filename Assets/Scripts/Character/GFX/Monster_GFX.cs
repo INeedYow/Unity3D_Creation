@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster_GFX : MonoBehaviour
+public class Monster_GFX : GFX
 {
     public Monster monster;
-    int m_repeat;
 
-    private void Start() { m_repeat = MacroManager.instance.maxMacroCount; }
-    private void OnEnable() { 
+    new protected void OnEnable() { 
+        base.OnEnable();
         monster.isStop = true; 
-        InvokeRepeating("LookTarget", 0f, 0.2f);
-    }
-    void OnDisable() {
-        CancelInvoke("LookTarget");
     }
 
     private void Update() 
@@ -32,7 +27,7 @@ public class Monster_GFX : MonoBehaviour
         }  
     }
 
-    void LookTarget()
+    protected override void LookTarget()
     {
         if (monster.target != null && monster.target != monster)
         {

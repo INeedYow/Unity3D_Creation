@@ -9,9 +9,8 @@ public class ProjectileAttackCommand : AttackCommand
     public override void Attack()
     {
         if (Time.time < lastAttackTime + owner.attackDelay) return;
-        Debug.Log(Time.time + " / " + owner.attackDelay);
-        lastAttackTime = Time.time;
         
-        owner.LaunchProjectile();
+        lastAttackTime = Time.time;
+        owner.anim.SetTrigger("Attack"); 
     }
 }

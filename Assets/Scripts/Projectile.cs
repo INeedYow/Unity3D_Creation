@@ -37,8 +37,9 @@ public class Projectile : MonoBehaviour
         if (!m_isLaunch) return;
         m_sqrDist = (transform.position - m_lastPos).sqrMagnitude;
         
-        if (m_sqrDist < 0.1f)
+        if (m_sqrDist < 1.4f)
         {   
+            m_isLaunch = false;
             if (m_area != 0f)   { AreaHit(); }
             else                { Hit(); }
         }
@@ -88,8 +89,8 @@ public class Projectile : MonoBehaviour
         if (null != m_target)
         {
             m_lastPos = m_target.transform.position;
-            transform.LookAt(new Vector3(m_lastPos));
-            //Debug.Log(m_sqrDist);
+            //transform.LookAt(m_lastPos);
+            transform.LookAt(new Vector3(m_lastPos.x, m_lastPos.y + 1f, m_lastPos.z));
         }
         else{
             StopCoroutine("LookTarget");
