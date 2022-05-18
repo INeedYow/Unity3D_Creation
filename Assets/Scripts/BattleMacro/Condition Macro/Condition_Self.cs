@@ -5,7 +5,7 @@ using UnityEngine;
 public class Condition_Self : ConditionMacro
 {   
     public enum EInfo { None, HP };         // None : 항상 자기자신, HP : 자신의 체력
-    public enum EType { Least, Most };      // 최소, 최대 %
+    public enum EType { Lower, Higher };      //  %
     public EInfo eInfo;
     public EType eType;
     [Tooltip("value (0f ~ 100f)")] public float value;
@@ -35,8 +35,8 @@ public class Condition_Self : ConditionMacro
 
     void UpdateHp(){
         switch (eType){
-        case EType.Least:   isSatisfy = owner.curHp / owner.maxHp * 100f >= value; break;
-        case EType.Most:    isSatisfy = owner.curHp / owner.maxHp * 100f <= value; break;
+        case EType.Lower:   isSatisfy = owner.curHp / owner.maxHp * 100f <= value; break;
+        case EType.Higher:    isSatisfy = owner.curHp / owner.maxHp * 100f >= value; break;
         }
     }
 

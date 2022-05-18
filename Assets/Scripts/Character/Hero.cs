@@ -60,7 +60,7 @@ public class Hero : Character
     }
 
     public void ResetPos()
-    {
+    {   Debug.Log(dummy.placedBlock.beginPos + " / " + DungeonManager.instance.curDungeon.beginTf.position);
         transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; // TODO
         target = null;
     }

@@ -19,23 +19,24 @@ public class BoardBlock : MonoBehaviour
         beginPos = new Vector3(
             tf.position.y-transform.position.y,
             0f,
-            tf.position.z - transform.position.z);
+            -tf.position.z + transform.position.z);
     }
 
     private void OnMouseEnter() {
-        Debug.Log("OnMouseEnter");
-        if (HeroManager.instance.selectedHero != null)
+        //Debug.Log("OnMouseEnter");
+        if (HeroManager.instance.selectedHero != null && PartyManager.instance.board.isActive)
         {
             HeroManager.instance.selectedHero.dummy.transform.position = dummyTf.position;
         }
     }
     private void OnMouseDown() {
-        Debug.Log("OnMouseDown, selectedhero null");
+        //Debug.Log("OnMouseDown, selectedhero null");
         if (HeroManager.instance.selectedHero == null) return;
-        Debug.Log("OnMouseDown");
+        if (!PartyManager.instance.board.isActive) return;
+        //Debug.Log("OnMouseDown");
         
         if (null == dummy)
-        {   // TODO 최대 인원제한 필요
+        {   
             SetDummy();
         }
         else{   // 이미 다른 영웅이 있던 경우

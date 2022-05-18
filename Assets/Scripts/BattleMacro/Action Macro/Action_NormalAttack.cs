@@ -29,7 +29,7 @@ public class Action_NormalAttack : ActionMacro
         //Debug.Log("Attack()");
         owner.lastAttackTime = Time.time;
 
-        if (owner.projectile != null)
+        if (owner.projectile == null)
         {   // 투사체없이 즉시 공격
             if (owner.aoeRange == 0f)
             {   // 단일 타겟 공격
@@ -50,8 +50,8 @@ public class Action_NormalAttack : ActionMacro
             }
         }
         else{
-            Projectile_Ally proj = Instantiate(owner.projectile, transform.position, Quaternion.identity);
-            proj.
+            //Projectile_Ally proj = Instantiate(owner.projectile, transform.position, Quaternion.identity);
+            //proj.SetInfo(owner.target, owner.curDamage, 0f);
         }
     }
 

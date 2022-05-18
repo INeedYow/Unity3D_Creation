@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public int gold;
     public int playerLevel = 1;
 
+    public CameraMove cam;
+    public CubePlanet cube;
+
     [Header("Prefabs")]
     public Projectile_Ally prfArcherArrow; //
 

@@ -33,7 +33,7 @@ public class HeroMacroUI : MonoBehaviour
 
         int id = 0;
         foreach (HeroMacroUnit unit in conditonMacroUnits)
-        {   // 생성한 list unit에 전달
+        {   // id : 자신이 몇 번째 매크로인지 알아야 해서 id 부여했음
             unit.SetOptions(optionDatas);
             unit.ID = id++;
             unit.isConditionMacro = true;
@@ -61,8 +61,8 @@ public class HeroMacroUI : MonoBehaviour
     public void RenewUI(Hero hero){
         Debug.Log("RenewUI");
         if (null == hero){  
-            foreach (HeroMacroUnit unit in conditonMacroUnits)  { unit.SetValue(0); }
-            foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.SetValue(0); }
+            // foreach (HeroMacroUnit unit in conditonMacroUnits)  { unit.SetValue(0); }
+            // foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.SetValue(0); }
         }
         else{
             for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)

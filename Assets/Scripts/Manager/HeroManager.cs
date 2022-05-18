@@ -80,12 +80,14 @@ public class HeroManager : MonoBehaviour
             }
             
             selectedHero = hero;
+            onChangeSelectedHero?.Invoke(selectedHero);
             hero.dummy.gameObject.SetActive(true);
             heroInfoUI.RenewUI(selectedHero);
         }
         else{
             if (selectedHero == hero) return;
             selectedHero = hero;
+            onChangeSelectedHero?.Invoke(selectedHero);
             MacroManager.instance.macroUI.RenewUI(hero);
             heroInfoUI.RenewUI(selectedHero);
         }

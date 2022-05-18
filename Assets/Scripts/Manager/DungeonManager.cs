@@ -40,6 +40,7 @@ public class DungeonManager : MonoBehaviour
 
         //Temp
         GameManager.instance.SetMap2Dungeon();
+        GameManager.instance.cam.ToggleView();
     }
 
     public void WaveStart()

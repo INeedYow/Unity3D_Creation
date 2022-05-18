@@ -15,7 +15,6 @@ public class CubePlanet : MonoBehaviour
     private void Update() 
     {
         if (isRolling) return;
-
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (null != curSide.forwardSide)

@@ -6,7 +6,7 @@ public class CubeSide_Store : CubeSide
 {
     public override void Enter()
     {
-        
+        Debug.Log("Store");
     }
 
     public override void Exit()
