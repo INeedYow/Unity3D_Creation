@@ -1,0 +1,17 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ProjectileAttackCommand : AttackCommand
+{
+
+    public ProjectileAttackCommand(Character owner) : base(owner){}
+    public override void Attack()
+    {
+        if (Time.time < lastAttackTime + owner.attackDelay) return;
+        Debug.Log(Time.time + " / " + owner.attackDelay);
+        lastAttackTime = Time.time;
+        
+        owner.LaunchProjectile();
+    }
+}

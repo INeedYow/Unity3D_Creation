@@ -39,7 +39,7 @@ public class DungeonManager : MonoBehaviour
         PartyManager.instance.EnterDungeon();
 
         //Temp
-        GameManager.instance.SetMap2Dungeon();
+        //GameManager.instance.SetMap2Dungeon();
         GameManager.instance.cam.ToggleView();
     }
 

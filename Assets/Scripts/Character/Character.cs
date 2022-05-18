@@ -24,10 +24,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     }
     public float minDamage;
     public float maxDamage;
+    [HideInInspector]
     public float lastAttackTime;
     public float attackDelay;
     public float attackRange;                   // 사정거리
-    public float aoeRange;                      // 공격범위
+    public float aoeRange;                      // 범위공격
     public float moveSpeed = 3f;
 
     public float criticalChance = 10f;
@@ -38,16 +39,22 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float magicPowerRate = 0f;           // 추가 마법피해량 (%)
     public float armorRate = 0f;                // 방어율 (%)
     public float magicArmorRate = 0f;           // 마법방어율 (%)
+    public Character target;            
 
     [Header("Macro")]
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
 
-    [Header("Additional")]
+    [Header("Projectile")]
+    public Projectile projectile;
+    public Transform projectileTF;      // 발사체 생성 위치
+    public Transform targetTF;          // 발사체 도착 위치
+
+    [Tooltip("for Debug")]  //[HideInInspector] // 디버그 목적으로 보이게
+    [HideInInspector] public AttackCommand attackCommand;
     [HideInInspector] public Animator anim;
-    public Character target;
-    public bool isStop;    
-    public bool isDead;
+    [HideInInspector] public bool isStop;    
+    [HideInInspector] public bool isDead;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -64,11 +71,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
     }
-    // public void SetTarget(Character target)
-    // {   
-    //     this.target = target;
-    //     if (target != this) transform.LookAt(target.transform);
-    // }
 
     public void Damaged(float damage, float damageRate, bool isMagic = false)
     {                // 공격자의 공격력, 공격자의 공격력 증가량, 물리마법공격 구분
@@ -115,6 +117,13 @@ public abstract class Character : MonoBehaviour, IDamagable
     {
         gameObject.transform.LookAt(destTransform);
         gameObject.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+    }
+
+    public void LaunchProjectile()
+    {   
+        if (target == null) return;
+        Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.identity);
+        proj.Launch(target, curDamage, powerRate, aoeRange);
     }
 
     private void OnDrawGizmos() {

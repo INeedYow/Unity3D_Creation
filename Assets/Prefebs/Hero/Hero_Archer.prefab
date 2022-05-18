@@ -1747,7 +1747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8264988555016932372}
   - component: {fileID: 3191463545495333849}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hero_Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1767,6 +1767,8 @@ Transform:
   m_Children:
   - {fileID: 1887225081490357960}
   - {fileID: 4839077747593105023}
+  - {fileID: 4806247788938896005}
+  - {fileID: 7011910697539786449}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1790,9 +1792,9 @@ MonoBehaviour:
   maxDamage: 22
   lastAttackTime: 0
   attackDelay: 1.5
-  attackRange: 6
+  attackRange: 12
   aoeRange: 0
-  moveSpeed: 4
+  moveSpeed: 6
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 50
@@ -1800,16 +1802,19 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
-  anim: {fileID: 0}
   target: {fileID: 0}
+  conditionMacros: []
+  actionMacros: []
+  projectile: {fileID: 4371020904711442883, guid: a6149df73104bb440b82e5d8d41fc347,
+    type: 3}
+  projectileTF: {fileID: 4806247788938896005}
+  targetTF: {fileID: 7011910697539786449}
+  anim: {fileID: 0}
   isStop: 0
   isDead: 0
   heroGFX: {fileID: 2436992690794004522}
   dummy: {fileID: 4020090406503507079}
-  conditionMacros: []
-  actionMacros: []
   eClass: 1
-  projectile: {fileID: 0}
   isJoin: 0
   level: 1
   maxExp: 0
@@ -1908,6 +1913,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5813626452354981458}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2988944906718641022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7011910697539786449}
+  m_Layer: 9
+  m_Name: Target TF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7011910697539786449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2988944906718641022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8264988555016932372}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2996560646046226510
 GameObject:
@@ -2089,6 +2124,36 @@ Transform:
   m_Children:
   - {fileID: 1884857367284370684}
   m_Father: {fileID: 7147502250413732191}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3567228881549650711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4806247788938896005}
+  m_Layer: 9
+  m_Name: Projectile TF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4806247788938896005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567228881549650711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.765, z: 0.575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8264988555016932372}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3599919252088340186

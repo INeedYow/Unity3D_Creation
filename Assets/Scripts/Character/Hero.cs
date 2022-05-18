@@ -9,10 +9,9 @@ public class Hero : Character
     [Header("GFX")]
     public Hero_GFX heroGFX;
     public Dummy dummy;
-    [Header("Additional Info")]
+    [Header("Class")]
     public EClass eClass;   
-    public Projectile_Ally projectile;
-    public bool isJoin;
+    [HideInInspector] public bool isJoin;
     
     [Header("Level")]
     public int level = 1;
@@ -37,6 +36,7 @@ public class Hero : Character
     new protected void Awake() {
         base.Awake();
         Init();
+        SetAttackCommand();
     }
 
     void Init(){
@@ -44,6 +44,17 @@ public class Hero : Character
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);
         dummy.gameObject.SetActive(false);
+    }
+
+    void SetAttackCommand(){
+        if (projectile == null) 
+        {
+            attackCommand = new NormalAttackCommand(this);
+        }
+        else{
+            attackCommand = new ProjectileAttackCommand(this);
+        }
+
     }
 
     public override void Death()

@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum EMenu { Map, Dungeon, Board, Setting, Store, };
+//public enum EMenu { Map, Dungeon, Board, Setting, Store, };
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    public EMenu eMenu = EMenu.Map;
+    //public EMenu eMenu = EMenu.Map;
     public int gold;
     public int playerLevel = 1;
 
     public CameraMove cam;
     public CubePlanet cube;
-
-    [Header("Prefabs")]
-    public Projectile_Ally prfArcherArrow; //
 
     private void Awake() { 
         instance = this; 
@@ -50,29 +47,29 @@ public class GameManager : MonoBehaviour
     //     CameraManager.instance.SetCam(CameraManager.instance.setTf);
     // }
 
-    void SetBoard2Map(){
-        eMenu = EMenu.Map;
-        HeroManager.instance.heroInfoUI.gameObject.SetActive(false);
-        HeroManager.instance.heroListUI.gameObject.SetActive(false);
-        PartyManager.instance.board.gameObject.SetActive(false);
-        CameraManager.instance.SetCam(CameraManager.instance.defaultTf);
-    }
+    // void SetBoard2Map(){
+    //     eMenu = EMenu.Map;
+    //     HeroManager.instance.heroInfoUI.gameObject.SetActive(false);
+    //     HeroManager.instance.heroListUI.gameObject.SetActive(false);
+    //     PartyManager.instance.board.gameObject.SetActive(false);
+    //     CameraManager.instance.SetCam(CameraManager.instance.defaultTf);
+    // }
 
-    void SetBoard2Setting(){
-        eMenu = EMenu.Setting;
-        HeroManager.instance.selectedHero = null;
-        PartyManager.instance.board.gameObject.SetActive(false);
-        HeroManager.instance.heroSetUI.gameObject.SetActive(true);
-    }
+    // void SetBoard2Setting(){
+    //     eMenu = EMenu.Setting;
+    //     HeroManager.instance.selectedHero = null;
+    //     PartyManager.instance.board.gameObject.SetActive(false);
+    //     HeroManager.instance.heroSetUI.gameObject.SetActive(true);
+    // }
 
-    void SetSetting2Board(){
-        eMenu = EMenu.Board;
-        HeroManager.instance.selectedHero = null;
-        PartyManager.instance.board.gameObject.SetActive(true);
-        HeroManager.instance.heroSetUI.gameObject.SetActive(false);
-    }
+    // void SetSetting2Board(){
+    //     eMenu = EMenu.Board;
+    //     HeroManager.instance.selectedHero = null;
+    //     PartyManager.instance.board.gameObject.SetActive(true);
+    //     HeroManager.instance.heroSetUI.gameObject.SetActive(false);
+    // }
 
-    public void SetMap2Dungeon(){
-        eMenu = EMenu.Dungeon;
-    }
+    // public void SetMap2Dungeon(){
+    //     eMenu = EMenu.Dungeon;
+    // }
 }
