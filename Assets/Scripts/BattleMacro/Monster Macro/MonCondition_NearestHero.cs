@@ -9,7 +9,7 @@ public class MonCondition_NearestHero : ConditionMacro
     Hero m_target;
 
     public override bool IsSatisfy()
-    {   // 타겟이 없어졌을 때 찾기
+    {   // 타겟이 없을 때 찾기
         if (owner.target == null) owner.target = FindHero();
         return true;
     }

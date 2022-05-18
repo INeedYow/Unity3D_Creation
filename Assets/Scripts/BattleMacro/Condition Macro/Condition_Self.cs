@@ -11,8 +11,7 @@ public class Condition_Self : ConditionMacro
     [Tooltip("value (0f ~ 100f)")] public float value;
     
     private void Start() {
-        if (eInfo == EInfo.HP)
-        {
+        if (eInfo == EInfo.HP){
             owner.onHpChange += UpdateHp;
         }
     }
@@ -27,8 +26,7 @@ public class Condition_Self : ConditionMacro
             owner.target = owner;
             return true;
         }
-        else// if (eInfo == EInfo.HP)   // 더 추가되면 else if
-        {
+        else{
            return isSatisfy;
         }
     }
@@ -39,5 +37,4 @@ public class Condition_Self : ConditionMacro
         case EType.Higher:    isSatisfy = owner.curHp / owner.maxHp * 100f >= value; break;
         }
     }
-
 }

@@ -36,7 +36,7 @@ public class Hero_GFX : GFX
         }
     }
 
-    void Hit(){ Debug.Log("GFX.Hit()");
+    void Hit(){ //Debug.Log("GFX.Hit()");
         IDamagable target = hero.target.GetComponent<IDamagable>();
         target?.Damaged(hero.curDamage, hero.powerRate);
     }
@@ -44,4 +44,5 @@ public class Hero_GFX : GFX
     void Launch(){
         hero.LaunchProjectile();
     }
+
 }

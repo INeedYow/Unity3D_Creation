@@ -9,9 +9,9 @@ public class NormalAttackCommand : AttackCommand
 
     public override void Attack()
     {
-        if (Time.time < lastAttackTime + owner.attackDelay) return;
+        // if (Time.time < lastAttackTime + owner.attackDelay) return;
 
-        lastAttackTime = Time.time;
-        owner.anim.SetTrigger("Attack");
+        // lastAttackTime = Time.time;
+        // owner.anim.SetTrigger("Attack");
     }
 }

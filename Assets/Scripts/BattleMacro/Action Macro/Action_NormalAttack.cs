@@ -15,17 +15,15 @@ public class Action_NormalAttack : ActionMacro
         
         if (owner.IsTargetInRange())
         {
-            owner.attackCommand.Attack();
+            owner.Attack();
         }
         else{
             MoveToTarget();
         }
-
         return true;
     }
 
     void MoveToTarget(){
-        //Debug.Log("MoveToTarget()");
         owner.Move(owner.target.transform);
     }
 

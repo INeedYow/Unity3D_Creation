@@ -36,7 +36,7 @@ public class Hero : Character
     new protected void Awake() {
         base.Awake();
         Init();
-        SetAttackCommand();
+        //SetAttackCommand();
     }
 
     void Init(){
@@ -46,16 +46,16 @@ public class Hero : Character
         dummy.gameObject.SetActive(false);
     }
 
-    void SetAttackCommand(){
-        if (projectile == null) 
-        {
-            attackCommand = new NormalAttackCommand(this);
-        }
-        else{
-            attackCommand = new ProjectileAttackCommand(this);
-        }
+    // void SetAttackCommand(){
+    //     if (projectile == null) 
+    //     {
+    //         attackCommand = new NormalAttackCommand(this);
+    //     }
+    //     else{
+    //         attackCommand = new ProjectileAttackCommand(this);
+    //     }
 
-    }
+    // }
 
     public override void Death()
     {

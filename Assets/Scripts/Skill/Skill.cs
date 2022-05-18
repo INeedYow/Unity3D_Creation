@@ -4,4 +4,8 @@ using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
+    public float curCooldown;
+    public float cooldown;
+
+    public abstract void Use();
 }

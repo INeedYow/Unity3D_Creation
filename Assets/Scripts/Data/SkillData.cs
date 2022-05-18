@@ -1,18 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SkillData : MonoBehaviour
+[CreateAssetMenu (fileName = "SkillData", menuName = "Data/Skill")]
+public abstract class SkillData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string skillName;
+    public string description;
+    public Image icon;
+    public int requireLevel;
 }

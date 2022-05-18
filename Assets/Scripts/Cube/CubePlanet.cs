@@ -12,10 +12,15 @@ public class CubePlanet : MonoBehaviour
     float m_duration;
     Vector3 m_rot;
 
+    float m_input;
+
     private void Update() 
     {
         if (isRolling) return;
-        if (Input.GetKeyDown(KeyCode.W))
+
+        m_input = Input.GetAxisRaw("Vertical");
+        
+        if (m_input > 0f)
         {
             if (null != curSide.forwardSide)
             {
@@ -28,7 +33,7 @@ public class CubePlanet : MonoBehaviour
                 curSide.Enter();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (m_input < 0f)
         {
             if (null != curSide.backwardSide)
             {
@@ -41,7 +46,10 @@ public class CubePlanet : MonoBehaviour
                 curSide.Enter();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+
+        m_input = Input.GetAxisRaw("Horizontal");
+
+        if (m_input < 0f)
         {   
             if (null != curSide.leftSide)
             {
@@ -54,7 +62,7 @@ public class CubePlanet : MonoBehaviour
                 curSide.Enter();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (m_input > 0f)
         {
             if (null != curSide.rightSide)
             {

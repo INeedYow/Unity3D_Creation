@@ -1791,10 +1791,10 @@ MonoBehaviour:
   minDamage: 15
   maxDamage: 22
   lastAttackTime: 0
-  attackDelay: 1.5
+  attackDelay: 0.8
   attackRange: 12
   aoeRange: 0
-  moveSpeed: 6
+  moveSpeed: 9
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 50
@@ -1802,13 +1802,13 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
+  targetTF: {fileID: 7011910697539786449}
   target: {fileID: 0}
   conditionMacros: []
   actionMacros: []
   projectile: {fileID: 4371020904711442883, guid: a6149df73104bb440b82e5d8d41fc347,
     type: 3}
   projectileTF: {fileID: 4806247788938896005}
-  targetTF: {fileID: 7011910697539786449}
   anim: {fileID: 0}
   isStop: 0
   isDead: 0

@@ -491,14 +491,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5625915739511746793}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
   m_Children:
   - {fileID: 774576237881992142}
+  - {fileID: 8754851228247374062}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &5625915739511746794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,9 +520,9 @@ MonoBehaviour:
   maxDamage: 19
   lastAttackTime: 0
   attackDelay: 1.8
-  attackRange: 2
+  attackRange: 4
   aoeRange: 0
-  moveSpeed: 3
+  moveSpeed: 6
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 50
@@ -529,11 +530,8 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
-  anim: {fileID: 864249744641415556}
+  targetTF: {fileID: 8754851228247374062}
   target: {fileID: 0}
-  isStop: 0
-  isDead: 0
-  monsGFX: {fileID: 6019308926277162015}
   conditionMacros:
   - {fileID: 0}
   - {fileID: 0}
@@ -544,3 +542,39 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  projectile: {fileID: 0}
+  projectileTF: {fileID: 0}
+  anim: {fileID: 864249744641415556}
+  isStop: 0
+  isDead: 0
+  monsGFX: {fileID: 6019308926277162015}
+--- !u!1 &5828866951282910914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8754851228247374062}
+  m_Layer: 0
+  m_Name: Target TF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8754851228247374062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828866951282910914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5625915739511746795}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

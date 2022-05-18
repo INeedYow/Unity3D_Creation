@@ -33,40 +33,6 @@ public class HeroManager : MonoBehaviour
     }
 
     public void SelectHero(Hero hero){
-        // switch (GameManager.instance.eMenu)
-        // {
-        // case EMenu.Board:
-        // {
-        //     if (null != selectedHero)
-        //     {   
-        //         selectedHero.dummy.gameObject.SetActive(false);
-        //     }
-        //     else if (hero.dummy.placedBlock != null)    // 이미 배치된 경우
-        //     {   
-        //         hero.dummy.placedBlock.dummy = null;
-        //         hero.dummy.placedBlock = null;
-        //     }
-            
-        //     selectedHero = hero;
-        //     hero.dummy.gameObject.SetActive(true);
-        //     heroInfoUI.RenewUI(selectedHero);
-        //     break;
-        // }
-        // case EMenu.Setting:
-        // {
-        //     if (selectedHero == hero) return;
-        //     selectedHero = hero;
-        //     MacroManager.instance.macroUI.RenewUI(hero);
-        //     heroInfoUI.RenewUI(selectedHero);
-        //     break;
-        // }
-        // default:
-        // {
-        //     selectedHero = hero;
-        //     break;
-        // }
-        // }
-        //
         if (PartyManager.instance.board.isActive)
         {
             if (null != selectedHero)                   // 이미 선택한 영웅이 있던 경우
@@ -102,7 +68,7 @@ public class HeroManager : MonoBehaviour
                 hero = Instantiate(prfKngiht);
             
                 for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-                {
+                {   
                     hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
                     hero.conditionMacros[i].owner = hero;
                 }

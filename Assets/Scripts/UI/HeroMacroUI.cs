@@ -60,7 +60,7 @@ public class HeroMacroUI : MonoBehaviour
 
     public void RenewUI(Hero hero){
         Debug.Log("RenewUI");
-        if (null == hero){  
+        if (null == hero){ 
             // foreach (HeroMacroUnit unit in conditonMacroUnits)  { unit.SetValue(0); }
             // foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.SetValue(0); }
         }

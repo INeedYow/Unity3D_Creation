@@ -34,4 +34,9 @@ public class Monster_GFX : GFX
             monster.transform.LookAt(monster.target.transform);
         }
     }
+
+    void Hit(){ Debug.Log("Mon_GFX.Hit()");
+        IDamagable target = monster.target.GetComponent<IDamagable>();
+        target?.Damaged(monster.curDamage, monster.powerRate);
+    }
 }

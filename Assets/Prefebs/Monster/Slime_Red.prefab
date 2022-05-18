@@ -426,7 +426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600934740452321701}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -434,7 +434,7 @@ Transform:
   - {fileID: 1602728537864370595}
   m_Father: {fileID: 4340373865636682193}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1685005099766121913
 Animator:
   serializedVersion: 3
@@ -492,14 +492,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732011073813981753}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1603022741129981153}
+  - {fileID: 3676630892619571858}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &7500355691490229467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,9 +521,9 @@ MonoBehaviour:
   maxDamage: 15
   lastAttackTime: 0
   attackDelay: 2
-  attackRange: 2
+  attackRange: 4
   aoeRange: 0
-  moveSpeed: 3
+  moveSpeed: 6
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 50
@@ -530,11 +531,8 @@ MonoBehaviour:
   magicPowerRate: 0
   armorRate: 0
   magicArmorRate: 0
-  anim: {fileID: 1685005099766121913}
+  targetTF: {fileID: 3676630892619571858}
   target: {fileID: 0}
-  isStop: 0
-  isDead: 0
-  monsGFX: {fileID: 2627326091903351765}
   conditionMacros:
   - {fileID: 0}
   - {fileID: 0}
@@ -545,6 +543,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  projectile: {fileID: 0}
+  projectileTF: {fileID: 0}
+  anim: {fileID: 1685005099766121913}
+  isStop: 0
+  isDead: 0
+  monsGFX: {fileID: 2627326091903351765}
 --- !u!95 &-2027850141561464052
 Animator:
   serializedVersion: 3
@@ -564,3 +568,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &4788446888218397363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3676630892619571858}
+  m_Layer: 0
+  m_Name: Target TF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3676630892619571858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788446888218397363}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4340373865636682193}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
