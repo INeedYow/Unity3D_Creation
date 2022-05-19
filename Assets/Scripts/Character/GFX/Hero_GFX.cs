@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +26,7 @@ public class Hero_GFX : GFX
                 if (hero.actionMacros[i].Execute()) break;
             }
         }
+        hero.transform.position = transform.position;
     }
 
     protected override void LookTarget()

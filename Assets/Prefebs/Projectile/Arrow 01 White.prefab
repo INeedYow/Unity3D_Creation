@@ -93,6 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eOwnerGroup: 0
-  speed: 25
+  speed: 20
   isMagic: 0
   remainTime: 1

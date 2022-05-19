@@ -40,9 +40,14 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float magicPowerRate = 0f;           // 추가 마법피해량 (%)
     public float armorRate = 0f;                // 방어율 (%)
     public float magicArmorRate = 0f;           // 마법방어율 (%)
-    public Transform targetTF;          // 발사체 도착 위치(맞을 위치)
+   
+    [Header("Transform")]
+    public Transform targetTF;              // 발사체 도착 위치(맞을 위치)
+    //public Transform gfxTF;                 // 
+    
     [HideInInspector]
     public Character target;      
+    
     [Header("NavMesh")]
     public NavMeshAgent nav;
 
@@ -77,8 +82,10 @@ public abstract class Character : MonoBehaviour, IDamagable
     protected void Awake() {
         DungeonManager.instance.onWaveEnd += Pause;
         anim = GetComponentInChildren<Animator>();
-        nav = GetComponentInChildren<NavMeshAgent>();
+        nav = GetComponent<NavMeshAgent>();
         nav.enabled = false;
+        nav.speed = moveSpeed;
+        nav.stoppingDistance = attackRange;
         conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
     }
@@ -125,21 +132,15 @@ public abstract class Character : MonoBehaviour, IDamagable
     }
 
     public void Move(Vector3 destPos)
-    {   Debug.Log("Move");
-        // gameObject.transform.LookAt(destTransform);
-        // gameObject.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-        //if (nav.isPathStale)
-        //
+    {   
         if(nav.velocity == Vector3.zero)
-        {   Debug.Log("nav Move");
+        {  
             nav.SetDestination(destPos);
         }
-        //}
     }
 
-    public void Attack(){   Debug.Log("Att");
+    public void Attack(){ 
         if (Time.time < lastAttackTime + attackDelay) return;
-
         lastAttackTime = Time.time;
         anim.SetTrigger("Attack");
     }
@@ -151,7 +152,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         proj.Launch(target, curDamage, powerRate, aoeRange);
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
