@@ -42,14 +42,10 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float magicArmorRate = 0f;           // 마법방어율 (%)
    
     [Header("Transform")]
-    public Transform targetTF;              // 발사체 도착 위치(맞을 위치)
-    //public Transform gfxTF;                 // 
+    public Transform targetTF;                  // 발사체 도착 위치(맞을 위치)
     
-    [HideInInspector]
-    public Character target;      
-    
-    [Header("NavMesh")]
-    public NavMeshAgent nav;
+    [HideInInspector]   public Character target;      
+    [HideInInspector]   public NavMeshAgent nav;
 
     [Header("Macro")]
     public ConditionMacro[]   conditionMacros;
@@ -79,7 +75,9 @@ public abstract class Character : MonoBehaviour, IDamagable
     public void Pause(float duration) { Invoke("Pause", duration); }
     public void Resume(float duration) { Invoke("Resume", duration); }
 
-    protected void Awake() {
+    protected void Awake() { InitCharacter(); }
+
+    void InitCharacter(){
         DungeonManager.instance.onWaveEnd += Pause;
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();

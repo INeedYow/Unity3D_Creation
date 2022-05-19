@@ -30,8 +30,7 @@ public class Hero : Character
         }
     }
     [Header("Skill")]   // TODO
-    public int maxSkillCount = 4;
-    public Skill[] skills = new Skill[4];
+    public Skill[] skills;
 
     new protected void Awake() {
         base.Awake();

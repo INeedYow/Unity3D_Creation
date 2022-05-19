@@ -26,7 +26,13 @@ public class Hero_GFX : GFX
                 if (hero.actionMacros[i].Execute()) break;
             }
         }
-        hero.transform.position = transform.position;
+        
+        CheckAnimation();
+    }
+
+    void CheckAnimation()
+    {
+        hero.anim.SetFloat("MoveSpeed", hero.nav.velocity.sqrMagnitude);
     }
 
     protected override void LookTarget()
@@ -37,7 +43,8 @@ public class Hero_GFX : GFX
         }
     }
 
-    void Hit(){ //Debug.Log("GFX.Hit()");
+    //// Animation Event 함수들
+    void Hit(){ 
         if (null == hero.target) return;
         IDamagable target = hero.target.GetComponent<IDamagable>();
         target?.Damaged(hero.curDamage, hero.powerRate);
@@ -47,4 +54,7 @@ public class Hero_GFX : GFX
         hero.LaunchProjectile();
     }
 
+    void FinishSkill(int number){
+        hero.skills[number].FinishSKill();
+    }
 }

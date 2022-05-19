@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BattleMacroData", menuName = " Data/BattleMacro")]
+[CreateAssetMenu(fileName = "BattleMacroData", menuName = "Data/BattleMacro")]
 public class BattleMacroData : ScriptableObject
 {
     [Header("Description")] [TextArea]

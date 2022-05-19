@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = " SpawnData", menuName = " Data/Spawn")]
+[CreateAssetMenu(fileName = " SpawnData", menuName = "Data/Spawn")]
 public class SpawnData : ScriptableObject
 {
     public Monster prfMonster;
