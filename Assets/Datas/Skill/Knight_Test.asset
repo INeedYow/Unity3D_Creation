@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: Knight_Test
   m_EditorClassIdentifier: 
-  skillName: test skill
-  description: testestest
+  skillName: Test Skill
+  description: skill desc
   icon: {fileID: 0}
   requireLevel: 1
-  cooldown: 3
-  skillRange: 4
+  cooldown: 4
+  skillRange: 0
+  damage: 45
+  area: 0
+  count: 0
+  ratio: 0
+  duration: 0
+  isMagic: 0

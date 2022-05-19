@@ -14,4 +14,12 @@ public class SkillData : ScriptableObject
     public float cooldown;
     [Range(0, 20)]
     public float skillRange;
+
+    [Header("Spec")]
+    public float damage;
+    public float area;
+    public int count;
+    public float ratio;
+    public float duration;
+    public bool isMagic;
 }

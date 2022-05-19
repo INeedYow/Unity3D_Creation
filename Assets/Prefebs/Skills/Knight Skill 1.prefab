@@ -46,5 +46,3 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 3b753843a7e412a45b03b2f63b9b7d6e, type: 2}
   owner: {fileID: 0}
   ID: 1
-  lastSkillTime: 0
-  isUsing: 0

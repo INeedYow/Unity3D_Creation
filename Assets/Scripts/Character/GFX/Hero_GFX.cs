@@ -54,8 +54,12 @@ public class Hero_GFX : GFX
         hero.LaunchProjectile();
     }
 
-    void FinishSkill(int number){   Debug.Log("HeroGFX.FinishSkill()");
+    void FinishSkill(int number){   
         hero.skills[number - 1].FinishSKill();
         hero.anim.SetBool(string.Format("Skill {0}", number), false);
+    }
+
+    void EffectSkill(int number){
+        hero.skills[number - 1].EffectSkill();
     }
 }

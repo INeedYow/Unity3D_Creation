@@ -162,7 +162,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (target == null) return false;
 
         if (range == 0f)
-        {   // 입력없으면 캐릭터 사거리랑 비교
+        {   // 파라미터 없으면 캐릭터 사거리랑 비교
             return (target.transform.position - transform.position).sqrMagnitude <= 
                 attackRange * attackRange;
         }
