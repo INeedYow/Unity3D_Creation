@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Action_UseSkill : ActionMacro
 {
-    [Range(1, 4)]
+    [Tooltip("몇 번째 스킬인지")] [Range(1, 4)] 
     public int skillNumber;
 
     public override bool Execute()
     {
-        return owner.skills[skillNumber].Use();
+        if (owner.skills[skillNumber - 1] == null) return false;
+        return owner.skills[skillNumber - 1].Use();
     }
 }

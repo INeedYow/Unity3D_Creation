@@ -8,7 +8,7 @@ public class Condition_Self : ConditionMacro
     public enum EType { Lower, Higher };      //  %
     public EInfo eInfo;
     public EType eType;
-    [Tooltip("value (0f ~ 100f)")] public float value;
+    [Tooltip("HpRate")] [Range(0f, 100f)] public float value;
     
     private void Start() {
         if (eInfo == EInfo.HP){

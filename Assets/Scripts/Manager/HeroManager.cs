@@ -20,6 +20,11 @@ public class HeroManager : MonoBehaviour
     [Header("Hero Prf")]
     public Hero prfKngiht;
     public Hero prfArcher;
+
+    [Header("Hero prfSkill")]
+    public Skill[] prfKnightSkills;
+    public Skill[] prfArcherSkills;
+
     private void Awake() { instance = this; }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.K))
@@ -66,7 +71,7 @@ public class HeroManager : MonoBehaviour
             case Hero.EClass.Knight:
             {
                 hero = Instantiate(prfKngiht);
-            
+                // 매크로 생성
                 for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
                 {   
                     hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
@@ -77,13 +82,19 @@ public class HeroManager : MonoBehaviour
                     hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
                     hero.actionMacros[i].owner = hero;
                 }
+                // 스킬 생성
+                for (int i = 0; i < prfKnightSkills.Length; i++)
+                {
+                    hero.skills[i] = Instantiate(prfKnightSkills[i]);
+                    hero.skills[i].Init(hero, i + 1);
+                }
                 break;
             }
 
             case Hero.EClass.Archer:
             {
                 hero = Instantiate(prfArcher);
-            
+
                 for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
                 {
                     hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
@@ -93,6 +104,12 @@ public class HeroManager : MonoBehaviour
                 {
                     hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
                     hero.actionMacros[i].owner = hero;
+                }
+
+                for (int i = 0; i < prfArcherSkills.Length; i++)
+                {
+                    hero.skills[i] = Instantiate(prfArcherSkills[i]);
+                    hero.skills[i].Init(hero, i + 1);
                 }
                 break;
             }

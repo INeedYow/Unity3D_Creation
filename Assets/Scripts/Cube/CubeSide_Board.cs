@@ -5,7 +5,7 @@ using UnityEngine;
 public class CubeSide_Board : CubeSide
 {
     public override void Enter()
-    {   Debug.Log("Board");
+    {   //Debug.Log("Board");
         HeroManager.instance.heroInfoUI.gameObject.SetActive(true);
         HeroManager.instance.heroListUI.gameObject.SetActive(true);
         PartyManager.instance.board.gameObject.SetActive(true);

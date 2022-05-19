@@ -29,13 +29,12 @@ public class Hero : Character
             }
         }
     }
-    [Header("Skill")]   // TODO
-    public Skill[] skills;
+    // [Header("Skill")]
+    // public Skill[] skills;
 
     new protected void Awake() {
         base.Awake();
         Init();
-        //SetAttackCommand();
     }
 
     void Init(){
@@ -51,10 +50,10 @@ public class Hero : Character
         heroGFX.gameObject.SetActive(false);
     }
 
-    public bool IsTargetInRange()
-    {   //Debug.Log("isTargetInRange()");
-        return (target.transform.position - heroGFX.transform.position).sqrMagnitude <= attackRange * attackRange;
-    }
+    // public bool IsTargetInRange()
+    // {   //Debug.Log("isTargetInRange()");
+    //     return (target.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange;
+    // }
 
     public void ResetPos()
     {   

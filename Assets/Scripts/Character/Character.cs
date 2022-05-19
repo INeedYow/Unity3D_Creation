@@ -53,7 +53,10 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     [Header("Projectile")]
     public Projectile projectile;
-    public Transform projectileTF;      // 발사체 생성 위치
+    public Transform projectileTF;      // 투사체 생성 위치
+
+    [Header("Skill")]
+    public Skill[] skills;
 
     [HideInInspector] public AttackCommand attackCommand;
     [HideInInspector] public Animator anim;
@@ -78,12 +81,16 @@ public abstract class Character : MonoBehaviour, IDamagable
     protected void Awake() { InitCharacter(); }
 
     void InitCharacter(){
+        // 이벤트 함수등록
         DungeonManager.instance.onWaveEnd += Pause;
+        // get컴포넌트
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
+        // 컴포넌트 설정
         nav.enabled = false;
         nav.speed = moveSpeed;
         nav.stoppingDistance = attackRange;
+        // 매크로 배열 초기화
         conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
     }
@@ -148,6 +155,28 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (target == null) return;
         Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.identity);
         proj.Launch(target, curDamage, powerRate, aoeRange);
+    }
+
+    public bool IsTargetInRange(float range = 0f)
+    {   //Debug.Log("isTargetInRange()");
+        if (target == null) return false;
+
+        if (range == 0f)
+        {   // 입력없으면 캐릭터 사거리랑 비교
+            return (target.transform.position - transform.position).sqrMagnitude <= 
+                attackRange * attackRange;
+        }
+        else{   // 입력해준 값이랑 비교
+            return (target.transform.position - transform.position).sqrMagnitude <= 
+                range * range;
+        }
+    }
+
+    public void MoveToTarget(){
+        if (target == null) return;
+        if (nav.velocity == Vector3.zero){
+            nav.SetDestination(target.transform.position);
+        }
     }
 
     private void OnDrawGizmosSelected() {

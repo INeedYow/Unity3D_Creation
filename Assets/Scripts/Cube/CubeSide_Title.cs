@@ -6,7 +6,7 @@ public class CubeSide_Title : CubeSide
 {
     public override void Enter()
     {
-        Debug.Log("Title");
+        //Debug.Log("Title");
         // TODO UI..
     }
 
