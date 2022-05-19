@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 
-// 상태 이상?
+
 public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
@@ -42,6 +43,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Transform targetTF;          // 발사체 도착 위치(맞을 위치)
     [HideInInspector]
     public Character target;      
+    [Header("NavMesh")]
+    public NavMeshAgent nav;
 
     [Header("Macro")]
     public ConditionMacro[]   conditionMacros;
@@ -59,8 +62,14 @@ public abstract class Character : MonoBehaviour, IDamagable
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
 
-    public void Pause() { isStop = true; }
-    public void Resume() { isStop = false; }
+    public void Pause() { 
+        isStop = true;    
+        if (nav != null) nav.enabled = false; 
+    }
+    public void Resume() { 
+        isStop = false;  
+        if (nav != null) nav.enabled = true; 
+    }
 
     public void Pause(float duration) { Invoke("Pause", duration); }
     public void Resume(float duration) { Invoke("Resume", duration); }
@@ -68,6 +77,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     protected void Awake() {
         DungeonManager.instance.onWaveEnd += Pause;
         anim = GetComponentInChildren<Animator>();
+        nav = GetComponentInChildren<NavMeshAgent>();
+        nav.enabled = false;
         conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
     }
@@ -113,13 +124,20 @@ public abstract class Character : MonoBehaviour, IDamagable
         curHp = 0.01f * rateHp * maxHp;
     }
 
-    public void Move(Transform destTransform)
-    {
-        gameObject.transform.LookAt(destTransform);
-        gameObject.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+    public void Move(Vector3 destPos)
+    {   Debug.Log("Move");
+        // gameObject.transform.LookAt(destTransform);
+        // gameObject.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        //if (nav.isPathStale)
+        //
+        if(nav.velocity == Vector3.zero)
+        {   Debug.Log("nav Move");
+            nav.SetDestination(destPos);
+        }
+        //}
     }
 
-    public void Attack(){
+    public void Attack(){   Debug.Log("Att");
         if (Time.time < lastAttackTime + attackDelay) return;
 
         lastAttackTime = Time.time;

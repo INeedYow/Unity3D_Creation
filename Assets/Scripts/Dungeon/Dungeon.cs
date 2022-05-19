@@ -78,7 +78,7 @@ public class Dungeon : MonoBehaviour
     }
 
     void WaveClear()
-    {
+    {   // 비활성화 했던 몬스터들 제거
         foreach(Monster mons in curMonsters)
         {
             Destroy(mons.gameObject);
@@ -88,6 +88,7 @@ public class Dungeon : MonoBehaviour
         DungeonManager.instance.onWaveEnd?.Invoke();
         PartyManager.instance.ResetHeroPos();
     }
+
     void WaveStart()
     {
         DungeonManager.instance.WaveStart();

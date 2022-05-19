@@ -19,6 +19,6 @@ public class MonAction_Attack : ActionMacro
     }
 
     void MoveToTarget(){
-        owner.Move(owner.target.transform);
+        owner.Move(owner.target.transform.position);
     }
 }

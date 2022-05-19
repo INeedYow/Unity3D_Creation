@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
 
         InvokeRepeating("LookTarget", 0f, 0.2f);
         m_isLaunch = true;
+        Destroy(gameObject, 10f);
     }
 
     private void Update() {

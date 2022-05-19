@@ -46,33 +46,20 @@ public class Hero : Character
         dummy.gameObject.SetActive(false);
     }
 
-    // void SetAttackCommand(){
-    //     if (projectile == null) 
-    //     {
-    //         attackCommand = new NormalAttackCommand(this);
-    //     }
-    //     else{
-    //         attackCommand = new ProjectileAttackCommand(this);
-    //     }
-
-    // }
-
     public override void Death()
     {
         base.Death();
-        // 바로 사라지게 하는 게 아니라 코루틴이나 애니메이션 이벤트 써서 죽는 애니메이션 후 사망 처리 하고 싶은데
-        // 사망 모션동안 충돌 처리, 공격 처리 어떻게 막지? .. bool 변수 하나 더 해야하나
         heroGFX.gameObject.SetActive(false);
     }
 
     public bool IsTargetInRange()
-    {
-        return (target.transform.position - gameObject.transform.position).sqrMagnitude <= attackRange * attackRange;
+    {   //Debug.Log("isTargetInRange()");
+        return (target.transform.position - heroGFX.transform.position).sqrMagnitude <= attackRange * attackRange;
     }
 
     public void ResetPos()
-    {   Debug.Log(dummy.placedBlock.beginPos + " / " + DungeonManager.instance.curDungeon.beginTf.position);
-        transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; // TODO
+    {   
+        transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; 
         target = null;
     }
 

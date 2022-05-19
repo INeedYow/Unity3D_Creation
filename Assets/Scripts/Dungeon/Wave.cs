@@ -11,7 +11,7 @@ public class Wave : MonoBehaviour
     public void SpawnWave()
     {
         for (int j = 0; j < prfMonsters.Count; j++)
-        {   // 0번째 몬스터가 0번째 int 만큼 생성
+        {   // 0번째 몬스터를 0번째 int 만큼 생성
             for (int i = 0; i < counts[j]; i++)
             {
                 DungeonManager.instance.AddMonster(

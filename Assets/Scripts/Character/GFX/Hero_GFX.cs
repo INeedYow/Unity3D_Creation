@@ -37,6 +37,7 @@ public class Hero_GFX : GFX
     }
 
     void Hit(){ //Debug.Log("GFX.Hit()");
+        if (null == hero.target) return;
         IDamagable target = hero.target.GetComponent<IDamagable>();
         target?.Damaged(hero.curDamage, hero.powerRate);
     }

@@ -14,17 +14,13 @@ public class Action_NormalAttack : ActionMacro
         }
         
         if (owner.IsTargetInRange())
-        {
+        {   //Debug.Log("isTargetInRng");
+            owner.nav.isStopped = true;
             owner.Attack();
         }
         else{
-            MoveToTarget();
+            owner.Move(owner.target.transform.position);
         }
         return true;
     }
-
-    void MoveToTarget(){
-        owner.Move(owner.target.transform);
-    }
-
 }
