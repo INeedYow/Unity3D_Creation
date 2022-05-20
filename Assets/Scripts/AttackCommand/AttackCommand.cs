@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class AttackCommand
 {
     protected Character owner;
-    protected float lastAttackTime;
 
     public AttackCommand(Character owner)
     {

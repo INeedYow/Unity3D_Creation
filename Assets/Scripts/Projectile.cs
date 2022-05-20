@@ -26,7 +26,8 @@ public class Projectile : MonoBehaviour
 
         InvokeRepeating("LookTarget", 0f, 0.2f);
         m_isLaunch = true;
-        Destroy(gameObject, 10f);
+        //Destroy(gameObject, 10f);
+        Invoke("Return", 10f);
     }
 
     private void Update() {
@@ -59,10 +60,12 @@ public class Projectile : MonoBehaviour
         }
         
         if (m_target != null)
-        {
-            gameObject.transform.SetParent(m_target.transform);
+        {   // 오브젝트 풀 적용 중인데 몬스터 삭제하면서 화살도 같이 사라져버려서 일단 주석처리
+            // gameObject.transform.SetParent(m_target.transform);
         }
-        Destroy(gameObject, remainTime);
+        //Destroy(gameObject, remainTime);
+        CancelInvoke("Return");
+        Invoke("Return", remainTime);
     }
 
     void AreaHit()
@@ -82,8 +85,10 @@ public class Projectile : MonoBehaviour
             damagableTarget?.Damaged(m_damage, m_powerRate);
         }
 
-        gameObject.transform.SetParent(m_target.transform);
-        Destroy(gameObject, remainTime);
+        //gameObject.transform.SetParent(m_target.transform);
+        //Destroy(gameObject, remainTime);
+        CancelInvoke("Return");
+        Invoke("Return", remainTime);
     }
 
     void LookTarget()
@@ -96,5 +101,9 @@ public class Projectile : MonoBehaviour
         else{
             StopCoroutine("LookTarget");
         }
+    }
+
+    void Return(){
+        ObjectPool.instance.ReturnObj(gameObject);
     }
 }

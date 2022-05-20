@@ -44,22 +44,15 @@ public class Hero_GFX : GFX
     }
 
     //// Animation Event 함수들
-    void Hit(){ 
-        if (null == hero.target) return;
-        IDamagable target = hero.target.GetComponent<IDamagable>();
-        target?.Damaged(hero.curDamage, hero.powerRate);
-    }
 
-    void Launch(){
-        hero.LaunchProjectile();
-    }
+    void OnAttack() { hero.attackCommand.Attack(); }
 
-    void FinishSkill(int number){   
+    void OnFinishSkill(int number){   
         hero.skills[number - 1].FinishSKill();
         hero.anim.SetBool(string.Format("Skill {0}", number), false);
     }
 
-    void EffectSkill(int number){
+    void OnEffectSkill(int number){
         hero.skills[number - 1].EffectSkill();
     }
 }

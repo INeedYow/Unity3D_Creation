@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum EProjectile { Arrow, };
 public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool instance { get; private set; }
@@ -16,10 +16,12 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake() {
         instance = this;
-        Init();
+        InitPool();
     }
 
-    void Init(){
+    void InitPool(){
+        poolArrow = new List<Projectile>();
+
         if (null != prfArrow)
         {
             for(int i = 0; i < count; i++){
@@ -28,9 +30,9 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    Projectile CreateNewArrow() {
+    Projectile CreateNewArrow(bool isActive = false) { //Debug.Log("Pool.CreateNew()");
         var obj = Instantiate(prfArrow);
-        obj.gameObject.SetActive(false);
+        obj.gameObject.SetActive(isActive);
         obj.transform.SetParent(transform);
         return obj;
     }
@@ -38,19 +40,22 @@ public class ObjectPool : MonoBehaviour
     public Projectile GetArrow(){
         foreach (Projectile arrow in poolArrow){
             if (!arrow.gameObject.activeSelf)
-            {   Debug.Log("ObjPool, 기존 반환");
+            {   //Debug.Log("Pool.GetObject()");
                 arrow.transform.SetParent(null);
                 arrow.gameObject.SetActive(true);
                 return arrow;
             }
         }
-        Debug.Log("ObjPool,, 새로 생성");
-        // var obj = 
-        // poolArrow.Add(CreateNewArrow());
-        return poolArrow[poolArrow.Count - 1];
+        
+        var newObj = CreateNewArrow(true);
+        poolArrow.Add(newObj);
+        //Debug.Log("Pool.Count : " + poolArrow.Count);
+        return newObj;
     }
 
     public void ReturnObj(GameObject obj){
-        //switch (obj)
+        //Debug.Log("Pool.ReturnObj()");
+        obj.SetActive(false);
+        obj.transform.SetParent(transform);
     }
 }

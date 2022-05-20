@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class ProjectileAttackCommand : AttackCommand
 {
+    EProjectile m_eProj;
+    public ProjectileAttackCommand(Character owner, EProjectile eProj) 
+        : base(owner) { m_eProj = eProj; }
 
-    public ProjectileAttackCommand(Character owner) : base(owner){}
     public override void Attack()
     {
-        // if (Time.time < lastAttackTime + owner.attackDelay) return;
-        
-        // lastAttackTime = Time.time;
-        // owner.anim.SetTrigger("Attack"); 
+        if (null == owner.target) return;
+
+        Projectile proj = null;
+        switch (m_eProj)
+        {
+            case EProjectile.Arrow: proj = ObjectPool.instance.GetArrow(); break;
+        }
+
+        if (null == proj) return;
+        proj.transform.position = owner.projectileTF.position;
+        proj.Launch(owner.target, owner.curDamage, owner.powerRate, owner.aoeRange);
     }
 }

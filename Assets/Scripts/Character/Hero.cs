@@ -34,14 +34,19 @@ public class Hero : Character
 
     new protected void Awake() {
         base.Awake();
-        Init();
+        InitHero();
     }
 
-    void Init(){
+    void InitHero(){
         heroGFX.hero = this;
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);
         dummy.gameObject.SetActive(false);
+        // Attack Command
+        switch(eClass){
+            case EClass.Knight: attackCommand = new NormalAttackCommand(this); break;
+            case EClass.Archer: attackCommand = new ProjectileAttackCommand(this, EProjectile.Arrow); break;
+        }
     }
 
     public override void Death()

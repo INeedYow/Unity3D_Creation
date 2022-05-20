@@ -9,9 +9,8 @@ public class NormalAttackCommand : AttackCommand
 
     public override void Attack()
     {
-        // if (Time.time < lastAttackTime + owner.attackDelay) return;
-
-        // lastAttackTime = Time.time;
-        // owner.anim.SetTrigger("Attack");
+        if (null == owner.target) return;
+        IDamagable target = owner.target.GetComponent<IDamagable>();
+        target?.Damaged(owner.curDamage, owner.powerRate);
     }
 }

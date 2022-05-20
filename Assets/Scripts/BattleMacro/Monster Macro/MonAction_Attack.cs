@@ -10,7 +10,7 @@ public class MonAction_Attack : ActionMacro
         
         if (owner.IsTargetInRange())
         {
-            owner.Attack();
+            owner.AttackInit();
         }
         else{
             MoveToTarget();

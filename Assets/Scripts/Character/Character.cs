@@ -58,7 +58,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Header("Skill")]
     public Skill[] skills;
 
-    //[HideInInspector] public AttackCommand attackCommand;
+    [HideInInspector] public AttackCommand attackCommand;
     [HideInInspector] public Animator anim;
     [HideInInspector] public bool isStop;    
     [HideInInspector] public bool isDead;
@@ -156,16 +156,19 @@ public abstract class Character : MonoBehaviour, IDamagable
         }
     }
 
-    public void Attack(){ 
+    public void AttackInit(){           // ActionMacro_NormalAttack 에서 호출
         if (Time.time < lastAttackTime + attackDelay) return;
         lastAttackTime = Time.time;
-        anim.SetTrigger("Attack");
+        anim.SetTrigger("Attack");      // 애니메이션에서 Event함수로 GFX의 Attack() 호출하게 됨
     }
 
     public void LaunchProjectile()
     {   
         if (target == null) return;
-        Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.LookRotation(targetTF.position));
+        //Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.LookRotation(targetTF.position));
+        //proj.Launch(target, curDamage, powerRate, aoeRange);
+        Projectile proj = ObjectPool.instance.GetArrow();
+        proj.transform.position = projectileTF.position;
         proj.Launch(target, curDamage, powerRate, aoeRange);
     }
 

@@ -16,7 +16,7 @@ public class Action_NormalAttack : ActionMacro
         if (owner.IsTargetInRange())
         {   //Debug.Log("isTargetInRng");
             owner.nav.isStopped = true;
-            owner.Attack();
+            owner.AttackInit();
         }
         else{
             owner.Move(owner.target.transform.position);
