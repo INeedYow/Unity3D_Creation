@@ -13,7 +13,7 @@ public class Monster : Character
    
     public override void Death(){
         //
-        base.Death();
+        isDead = true;
         monsGFX.gameObject.SetActive(false);
         onDeath?.Invoke();
     }

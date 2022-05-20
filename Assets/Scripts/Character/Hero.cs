@@ -50,7 +50,7 @@ public class Hero : Character
 
     public override void Death()
     {
-        base.Death();
+        isDead = true;
         heroGFX.gameObject.SetActive(false);
     }
 

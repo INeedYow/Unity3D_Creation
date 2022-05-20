@@ -44,7 +44,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Header("Transform")]
     public Transform targetTF;                  // 발사체 도착 위치(맞을 위치)
     
-    [HideInInspector]   public Character target;      
+    //[HideInInspector]
+    public Character target;      
     [HideInInspector]   public NavMeshAgent nav;
 
     [Header("Macro")]
@@ -100,7 +101,6 @@ public abstract class Character : MonoBehaviour, IDamagable
     {                // 공격자의 공격력, 공격자의 공격력 증가량, 물리마법공격 구분
         if (isMagic)
         {
-            
             getDamage = Mathf.RoundToInt(damage * 0.01f * (100f + damageRate - magicArmorRate));
             curHp -= getDamage;
             onHpChange?.Invoke();
@@ -139,9 +139,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         DungeonManager.instance.onChangeAnyHP?.Invoke();
     }
 
-    public virtual void Death(){
-        isDead = true;
-    }
+    public abstract void Death();
 
     public void Revive(float rateHp)
     {
@@ -151,10 +149,10 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     public void Move(Vector3 destPos)
     {   
-        if(nav.velocity == Vector3.zero)
-        {  
-            nav.SetDestination(destPos);
-        }
+        if(nav.velocity == Vector3.zero) 
+        { nav.SetDestination(destPos); }
+        if (nav.isStopped) 
+        { nav.isStopped = false; }
     }
 
     public void AttackInit(){           // ActionMacro_NormalAttack 에서 호출
@@ -163,36 +161,29 @@ public abstract class Character : MonoBehaviour, IDamagable
         anim.SetTrigger("Attack");      // 애니메이션에서 Event함수로 GFX의 Attack() 호출하게 됨
     }
 
-    public void LaunchProjectile()
-    {   
-        if (target == null) return;
-        //Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.LookRotation(targetTF.position));
-        //proj.Launch(target, curDamage, powerRate, aoeRange);
-        Projectile proj = ObjectPool.instance.GetArrow();
-        proj.transform.position = projectileTF.position;
-        proj.Launch(target, curDamage, powerRate, aoeRange);
-    }
+    // public void LaunchProjectile()
+    // {   
+    //     if (target == null) return;
+    //     //Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.LookRotation(targetTF.position));
+    //     //proj.Launch(target, curDamage, powerRate, aoeRange);
+    //     Projectile proj = ObjectPool.instance.GetArrow();
+    //     proj.transform.position = projectileTF.position;
+    //     proj.Launch(target, curDamage, powerRate, aoeRange);
+    // }
 
-    public bool IsTargetInRange(float range = 0f)
+    public bool IsTargetInRange(float range)
     {   //Debug.Log("isTargetInRange()");
         if (target == null) return false;
-
-        if (range == 0f)    // 파라미터 없으면 캐릭터 사거리랑 비교
-        {   
-            return (target.transform.position - transform.position).sqrMagnitude <= 
-                attackRange * attackRange;
-        }
-        else{   // 입력해준 값이랑 비교
-            return (target.transform.position - transform.position).sqrMagnitude <= 
-                range * range;
-        }
+        //Debug.Log(string.Format("target pos : {0} // my pos : {1} // rng : {2}", target.transform.position, transform.position, range));
+        return (target.transform.position - transform.position).sqrMagnitude <= range * range;
     }
 
     public void MoveToTarget(){
         if (target == null) return;
-        if (nav.velocity == Vector3.zero){
-            nav.SetDestination(target.transform.position);
-        }
+        if (nav.velocity == Vector3.zero)
+        { nav.SetDestination(target.transform.position); }
+        if (nav.isStopped) 
+        { nav.isStopped = false; }
     }
 
     private void OnDrawGizmosSelected() {
