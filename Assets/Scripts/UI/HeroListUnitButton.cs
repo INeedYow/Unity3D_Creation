@@ -6,7 +6,7 @@ public class HeroListUnitButton : MonoBehaviour
 {
     public HeroListUnit unit;
 
-    public void SelectButton(){ Debug.Log("Select Button");
+    public void SelectButton(){ //Debug.Log("Select Button");
         HeroManager.instance.SelectHero(unit.hero);
     }
 }

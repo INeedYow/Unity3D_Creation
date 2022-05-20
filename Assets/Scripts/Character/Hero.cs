@@ -10,7 +10,7 @@ public class Hero : Character
     public Hero_GFX heroGFX;
     public Dummy dummy;
     [Header("Class")]
-    public EClass eClass;   
+    public EClass eClass;
     [HideInInspector] public bool isJoin;
     
     [Header("Level")]
@@ -29,8 +29,6 @@ public class Hero : Character
             }
         }
     }
-    // [Header("Skill")]
-    // public Skill[] skills;
 
     new protected void Awake() {
         base.Awake();
@@ -42,6 +40,7 @@ public class Hero : Character
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);
         dummy.gameObject.SetActive(false);
+        skills = new Skill[4];
         // Attack Command
         switch(eClass){
             case EClass.Knight: attackCommand = new NormalAttackCommand(this); break;

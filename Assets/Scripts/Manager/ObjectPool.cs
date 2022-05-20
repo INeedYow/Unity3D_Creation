@@ -8,15 +8,24 @@ public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool instance { get; private set; }
 
-
-    [Header("Pool Prefabs")]
-    List<BattleInfoText> poolBattleInfoText;
+    [Header("BattleInfoText Pool")]
     public BattleInfoText prfBattleInfoText;
     [Range(1,100)] public int count_infoText;
-    [Space(10f)]
-    List<Projectile> poolArrow; 
+    List<BattleInfoText> poolBattleInfoText;
+
+    [Space(15f)]
+
+    [Header("Arrow Pool")]
     public Projectile prfArrow;
-    [Range(1, 100)] public int count_arrow;
+    [Range(1, 30)] public int count_arrow;
+    List<Projectile> poolArrow; 
+
+    [Space(15f)]
+
+    [Header("Monster Pool")]
+    public Monster[] prfMonsters;
+    [Range(1, 10)] public int[] count_monsters;
+    List<Monster>[] poolMonsters;
 
 
     private void Awake() {
@@ -27,12 +36,24 @@ public class ObjectPool : MonoBehaviour
     void InitPool(){
         poolArrow = new List<Projectile>();
         poolBattleInfoText = new List<BattleInfoText>();
+        // poolMonsters = new List<Monster>[prfMonsters.Length];
+        // for(int i = 0; i < prfMonsters.Length; i++){
+        //     //Debug.Log(prfMonsters.Length);
+        //     //Debug.Log(poolMonsters[i]);
+        //     poolMonsters[i] = new List<Monster>();
+        // }
 
         if (null != prfBattleInfoText)
         { for(int i = 0; i < count_infoText; i++)   { poolBattleInfoText.Add(CreateNewInfoText()); } }
 
         if (null != prfArrow) 
         { for(int i = 0; i < count_arrow; i++)      { poolArrow.Add(CreateNewArrow()); } }
+
+        // for (int i = 0; i < prfMonsters.Length; i++){
+        //     if (null != prfMonsters[i]){
+        //         { for(int j = 0; j < count_monsters[i]; j++) { poolMonsters[i].Add(CreateNewMonster(i)); } }
+        //     }
+        // }
     }
 
     BattleInfoText CreateNewInfoText(bool isActive = false){
@@ -44,6 +65,13 @@ public class ObjectPool : MonoBehaviour
 
     Projectile CreateNewArrow(bool isActive = false){ //Debug.Log("Pool.CreateNew()");
         var obj = Instantiate(prfArrow);
+        obj.gameObject.SetActive(isActive);
+        obj.transform.SetParent(transform);
+        return obj;
+    }
+
+    Monster CreateNewMonster(int index, bool isActive = false){
+        var obj = Instantiate(prfMonsters[index]);
         obj.gameObject.SetActive(isActive);
         obj.transform.SetParent(transform);
         return obj;
@@ -78,6 +106,22 @@ public class ObjectPool : MonoBehaviour
         var newObj = CreateNewInfoText(true);
         poolBattleInfoText.Add(newObj);
         //Debug.Log("Pool.Count : " + poolArrow.Count);
+        return newObj;
+    }
+
+    public Monster GetMonster(int monsterId){
+        foreach (Monster mons in poolMonsters[monsterId]){
+            if (!mons.gameObject.activeSelf)
+            {   
+                mons.transform.SetParent(null);
+                mons.gameObject.SetActive(true);
+                return mons;
+            }
+        }
+        
+        var newObj = CreateNewMonster(monsterId, true);
+        poolMonsters[monsterId].Add(newObj);
+        
         return newObj;
     }
 

@@ -116,7 +116,7 @@ MonoBehaviour:
   projectile: {fileID: 0}
   projectileTF: {fileID: 0}
   skills:
-  - {fileID: 5671694435843634990, guid: 173980bb43c31ee49b17aa9466aa6686, type: 3}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

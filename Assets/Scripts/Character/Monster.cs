@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class Monster : Character
 {
+    // [Header("Pool ID")][Range(0, 99)]
+    // public int pool_ID;
+
     [Header("GFX")]
     public Monster_GFX monsGFX;
    

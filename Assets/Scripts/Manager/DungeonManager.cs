@@ -57,7 +57,7 @@ public class DungeonManager : MonoBehaviour
     public void AddMonster(Monster monster)
     {
         curDungeon.curMonsters.Add(monster);
-        curDungeon.curMosterCount++; 
+        curDungeon.curMonsterCount++; 
         monster.onDeath += OnMonsterDie;
     }
 

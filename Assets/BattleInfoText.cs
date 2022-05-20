@@ -9,7 +9,7 @@ public class BattleInfoText : MonoBehaviour
     public float duration;
     public float alphaSpeed;
     public float ySpeed;
-    public Color myColor;
+    [HideInInspector] public Color myColor;
 
     private void OnEnable()     { StartCoroutine("FadeMove"); }
     private void OnDisable()    { StopCoroutine("FadeMove"); }

@@ -58,17 +58,17 @@ public class HeroMacroUI : MonoBehaviour
         }
     }
 
-    public void RenewUI(Hero hero){
-        Debug.Log("RenewUI");
+    public void RenewUI(Hero hero){ Debug.Log("RenewUI");
         if (null == hero){ 
-            // foreach (HeroMacroUnit unit in conditonMacroUnits)  { unit.SetValue(0); }
-            // foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.SetValue(0); }
+            foreach (HeroMacroUnit unit in conditonMacroUnits)  { unit.dropdown.interactable = false; }
+            foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.dropdown.interactable = false; }
         }
         else{
             for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
             { 
                 if (null != hero.conditionMacros[i])
                     conditonMacroUnits[i].SetValue(hero.conditionMacros[i].data.ID);
+                
                 if (null != hero.actionMacros[i])
                     actionMacroUnits[i].SetValue(hero.actionMacros[i].data.ID);
             }

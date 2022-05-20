@@ -9,8 +9,8 @@ public class Dungeon : MonoBehaviour
     public int maxWave;
 
     public List<Wave> waves;            
-    public List<Monster> curMonsters;   // isDead ture, false 모두 갖고 있음
-    public int curMosterCount;          // isDead false인 몬스터의 수
+    public List<Monster> curMonsters;       // isDead ture, false 모두 갖고 있음
+    public int curMonsterCount;             // isDead false인 몬스터의 수
 
     public Transform spawnAreaParent;
     public Transform[] spawnTransforms;
@@ -44,8 +44,9 @@ public class Dungeon : MonoBehaviour
 
     public void MonsterDie()
     {   
-        curMosterCount--;
-        if (curMosterCount <= 0)
+        curMonsterCount--;
+        Debug.Log(curMonsterCount);
+        if (curMonsterCount <= 0)
         {   // 웨이브 클리어
             WaveClear();
 

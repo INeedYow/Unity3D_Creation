@@ -874,18 +874,12 @@ MonoBehaviour:
   magicArmorRate: 0
   targetTF: {fileID: 2632091679261891676}
   target: {fileID: 0}
-  conditionMacros:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  actionMacros:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  nav: {fileID: 0}
+  conditionMacros: []
+  actionMacros: []
   projectile: {fileID: 0}
   projectileTF: {fileID: 0}
+  skills: []
   anim: {fileID: 5849252279337308520}
   isStop: 0
   isDead: 0

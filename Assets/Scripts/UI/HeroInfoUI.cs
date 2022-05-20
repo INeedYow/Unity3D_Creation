@@ -10,7 +10,13 @@ public class HeroInfoUI : MonoBehaviour
 
     // TODO spec part
     public void RenewUI(Hero hero){
-        icon.sprite = hero.icon;
-        nameText.text = hero.name;
+        if (hero == null){
+            icon.sprite = null;
+            nameText.text = null;
+        }
+        else{
+            icon.sprite = hero.icon;
+            nameText.text = hero.name;
+        }
     }
 }

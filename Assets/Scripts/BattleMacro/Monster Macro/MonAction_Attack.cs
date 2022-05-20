@@ -8,13 +8,9 @@ public class MonAction_Attack : ActionMacro
     {
         if (owner.target == null)  return false;
         
-        if (owner.IsTargetInRange())
-        {
-            owner.AttackInit();
-        }
-        else{
-            MoveToTarget();
-        }
+        if (owner.IsTargetInRange())    { owner.AttackInit(); }
+        else                            { MoveToTarget(); }
+        
         return true;
     }
 

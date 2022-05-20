@@ -19,6 +19,10 @@ public class HeroMacroUnit : MonoBehaviour
     }
 
     public void SetValue(int value){
+        if (dropdown.interactable == false) 
+        {
+            dropdown.interactable = true;
+        }
         dropdown.value = value;
     }
 }

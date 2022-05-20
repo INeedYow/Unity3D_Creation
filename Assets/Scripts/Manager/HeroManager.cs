@@ -26,6 +26,7 @@ public class HeroManager : MonoBehaviour
     public Skill[] prfArcherSkills;
 
     private void Awake() { instance = this; }
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -56,11 +57,11 @@ public class HeroManager : MonoBehaviour
             heroInfoUI.RenewUI(selectedHero);
         }
         else{
-            if (selectedHero == hero) return;
+            //if (selectedHero == hero) return;
             selectedHero = hero;
-            onChangeSelectedHero?.Invoke(selectedHero);
             MacroManager.instance.macroUI.RenewUI(hero);
             heroInfoUI.RenewUI(selectedHero);
+            onChangeSelectedHero?.Invoke(selectedHero);
         }
     }
 
