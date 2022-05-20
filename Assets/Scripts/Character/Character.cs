@@ -62,7 +62,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     [HideInInspector] public Animator anim;
     [HideInInspector] public bool isStop;    
     [HideInInspector] public bool isDead;
-    float getDamage;
+    int getDamage;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -100,7 +100,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     {                // 공격자의 공격력, 공격자의 공격력 증가량, 물리마법공격 구분
         if (isMagic)
         {
-            getDamage = (int)(damage * 0.01f * (100f + damageRate - magicArmorRate));
+            
+            getDamage = Mathf.RoundToInt(damage * 0.01f * (100f + damageRate - magicArmorRate));
             curHp -= getDamage;
             onHpChange?.Invoke();
             DungeonManager.instance.onChangeAnyHP?.Invoke();
@@ -112,7 +113,7 @@ public abstract class Character : MonoBehaviour, IDamagable
                 Debug.Log(name + "가 회피");
             } 
             else{
-                getDamage = (int)(damage * 0.01f * (100f + damageRate - armorRate));
+                getDamage = Mathf.RoundToInt(damage * 0.01f * (100f + damageRate - armorRate));
                 curHp -= getDamage;
                 onHpChange?.Invoke();
                 DungeonManager.instance.onChangeAnyHP?.Invoke();

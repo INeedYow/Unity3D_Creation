@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 800606572170341129}
   - component: {fileID: 800606572170341131}
   - component: {fileID: 800606572170341130}
+  - component: {fileID: 801581272693664987}
   m_Layer: 31
   m_Name: Battle Info Text
   m_TagString: Untagged
@@ -78,3 +79,20 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: text
+--- !u!114 &801581272693664987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800606572170341128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22269cc910e6b2147883555ce85264ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoText: {fileID: 800606572170341130}
+  duration: 1
+  alphaSpeed: 2
+  ySpeed: 0.1
+  myColor: {r: 0, g: 0, b: 0, a: 0}

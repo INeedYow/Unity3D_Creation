@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("Game UI")]
     public GameObject worldCanvas;
     public Text prfText;
-    Text m_text;
+    BattleInfoText m_battleInfotext;
     
     [Header("Player Info")]
     public int LV = 1;
@@ -43,12 +43,17 @@ public class GameManager : MonoBehaviour
     }
 
     public void ShowBattleInfoText(BattleInfoType infoType, Vector3 position, float value){
-        m_text = Instantiate(prfText, worldCanvas.transform, true);
-        m_text.transform.position = position;
-        //m_text.transform.localPosition = Camera.main.ScreenToWorldPoint(position);
-        m_text.text = value.ToString();
-        m_text.color = GetColorByInfoType(infoType);
-        Destroy(m_text, 2f);
+        // m_text = Instantiate(prfText, worldCanvas.transform, true);
+        // m_text.transform.position = position;
+        // m_text.text = value.ToString();
+        // m_text.color = GetColorByInfoType(infoType);
+        // Destroy(m_text, 2f);
+
+        m_battleInfotext = ObjectPool.instance.GetInfoText();
+        m_battleInfotext.transform.SetParent(worldCanvas.transform);
+        m_battleInfotext.transform.position = position;
+        m_battleInfotext.infoText.text = value.ToString();
+        m_battleInfotext.myColor = GetColorByInfoType(infoType);
     }
 
     Color GetColorByInfoType(BattleInfoType infoType){
