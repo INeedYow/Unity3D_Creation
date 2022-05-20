@@ -26,10 +26,12 @@ public class Hero_GFX : GFX
                 if (hero.actionMacros[i].Execute()) break;
             }
         }
-        
-        CheckAnimation();
     }
 
+    private void FixedUpdate() {
+        CheckAnimation();
+    }
+    
     void CheckAnimation()
     {
         hero.anim.SetFloat("MoveSpeed", hero.nav.velocity.sqrMagnitude);

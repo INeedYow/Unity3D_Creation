@@ -13,8 +13,8 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnyAttackRange;
     public UnityAction onChangeAnyAttackSpeed;
     public UnityAction onChangeAnyMoveSpeed;
-    public UnityAction onWaveStart;
-    public UnityAction onWaveEnd;
+    //public UnityAction onWaveStart;
+    //public UnityAction onWaveEnd;
 
     public static DungeonManager instance { get; private set; }
     public List<Dungeon> listDungeon = new List<Dungeon>();
@@ -39,30 +39,46 @@ public class DungeonManager : MonoBehaviour
         PartyManager.instance.EnterDungeon();
 
         //Temp
-        //GameManager.instance.SetMap2Dungeon();
         GameManager.instance.cam.ToggleView();
+    }
+
+    public void Exit()
+    {
+        // TODO
+        curDungeon = null;
+        curDungeon.gameObject.SetActive(false);
+        PartyManager.instance.ExitDungeon();
     }
 
     public void WaveStart()
     {
-        onWaveStart?.Invoke();
-        foreach (Character hero in PartyManager.instance.heroParty){
-            hero.Resume();
-        }
-        foreach (Character mons in curDungeon.curMonsters){
-            mons.Resume();
-        }
+        //onWaveStart?.Invoke();
+        foreach (Character hero in PartyManager.instance.heroParty)
+        { hero.Resume(); }
+        foreach (Character mons in curDungeon.curMonsters)
+        { mons.Resume(); }
+    }
+
+    public void WaveEnd()
+    {
+        //onWaveStart?.Invoke();
+        foreach (Character hero in PartyManager.instance.heroParty)
+        { hero.Pause(); }
+        foreach (Character mons in curDungeon.curMonsters)
+        { mons.Pause(); }
     }
 
     public void AddMonster(Monster monster)
     {
+        monster.transform.position = curDungeon.GetNextSpawnTransform().position;
         curDungeon.curMonsters.Add(monster);
-        curDungeon.curMonsterCount++; 
+        curDungeon.curMonsterCount++; //Debug.Log("count++ : " + curDungeon.curMonsterCount);
         monster.onDeath += OnMonsterDie;
     }
 
-    public void OnMonsterDie()
+    public void OnMonsterDie(Character character)
     {   // count, isdead 확인필요
         curDungeon.MonsterDie();
+        character.onDeath -= OnMonsterDie;
     }
 }

@@ -75,18 +75,20 @@ public class HeroManager : MonoBehaviour
                 // 매크로 생성
                 for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
                 {   
-                    hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
+                    hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0], hero.transform);
                     hero.conditionMacros[i].owner = hero;
+                    //hero.conditionMacros[i].transform.SetParent(hero.transform);
                 }
                 for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
                 {
-                    hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
+                    hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0], hero.transform);
                     hero.actionMacros[i].owner = hero;
+                    //hero.actionMacros[i].transform.SetParent(hero.transform);
                 }
                 // 스킬 생성
                 for (int i = 0; i < prfKnightSkills.Length; i++)
                 {
-                    hero.skills[i] = Instantiate(prfKnightSkills[i]);
+                    hero.skills[i] = Instantiate(prfKnightSkills[i], hero.transform);
                     hero.skills[i].Init(hero, i + 1);
                 }
                 break;
@@ -98,18 +100,18 @@ public class HeroManager : MonoBehaviour
 
                 for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
                 {
-                    hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0]);
+                    hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0], hero.transform);
                     hero.conditionMacros[i].owner = hero;
                 }
                 for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
                 {
-                    hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0]);
+                    hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0], hero.transform);
                     hero.actionMacros[i].owner = hero;
                 }
 
                 for (int i = 0; i < prfArcherSkills.Length; i++)
                 {
-                    hero.skills[i] = Instantiate(prfArcherSkills[i]);
+                    hero.skills[i] = Instantiate(prfArcherSkills[i], hero.transform);
                     hero.skills[i].Init(hero, i + 1);
                 }
                 break;

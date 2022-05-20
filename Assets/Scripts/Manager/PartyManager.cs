@@ -27,6 +27,10 @@ public class PartyManager : MonoBehaviour
         ResetHeroPos();
     }
 
+    public void ExitDungeon(){
+        // TODO
+    }
+
     public void TurnOffBoard()
     {
         HideDummy();

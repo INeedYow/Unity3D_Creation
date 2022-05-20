@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
-    public UnityAction onDeath;
+    public UnityAction<Character> onDeath;
 
     new public string name;
     public Sprite icon;
@@ -45,7 +45,16 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Transform targetTF;                  // 발사체 도착 위치(맞을 위치)
     
     //[HideInInspector]
-    public Character target;      
+
+    Character _target;
+    public Character target{
+        get { return _target; } 
+        set { 
+            _target = value;
+            if (null != _target)
+            { _target.onDeath += TargetDead; }
+        }
+    }      
     [HideInInspector]   public NavMeshAgent nav;
 
     [Header("Macro")]
@@ -83,9 +92,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     protected void Awake() { InitCharacter(); }
 
     void InitCharacter(){
-        // 이벤트 함수등록
-        DungeonManager.instance.onWaveEnd += Pause;
-        // get컴포넌트
+        // 컴포넌트 초기화
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
         // 컴포넌트 설정
@@ -110,7 +117,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         else {
             if (IsDodge()) { 
                 // TODO 회피효과 출력
-                Debug.Log(name + "가 회피");
+                Debug.Log(name + "가 회피함");
             } 
             else{
                 getDamage = Mathf.RoundToInt(damage * 0.01f * (100f + damageRate - armorRate));
@@ -140,6 +147,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     }
 
     public abstract void Death();
+
+    void TargetDead(Character character) { 
+        character.onDeath -= TargetDead;
+        target = null; 
+    }
 
     public void Revive(float rateHp)
     {

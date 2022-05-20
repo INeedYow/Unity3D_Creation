@@ -42,13 +42,8 @@ public class GameManager : MonoBehaviour
         if (LV % 3 == 1) PartyManager.instance.maxCount++;
     }
 
-    public void ShowBattleInfoText(BattleInfoType infoType, Vector3 position, float value){
-        // m_text = Instantiate(prfText, worldCanvas.transform, true);
-        // m_text.transform.position = position;
-        // m_text.text = value.ToString();
-        // m_text.color = GetColorByInfoType(infoType);
-        // Destroy(m_text, 2f);
-
+    public void ShowBattleInfoText(BattleInfoType infoType, Vector3 position, float value)
+    {
         m_battleInfotext = ObjectPool.instance.GetInfoText();
         m_battleInfotext.transform.SetParent(worldCanvas.transform);
         m_battleInfotext.transform.position = position;

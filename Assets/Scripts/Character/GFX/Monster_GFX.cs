@@ -15,7 +15,7 @@ public class Monster_GFX : GFX
     {   // 몬스터는 내가 매크로 설정해줄거라 null이면 break;했음
         if (monster.isStop || monster.isDead) return;  
 
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < repeat; i++){
             if (monster.conditionMacros[i] == null) break;
 
             if (monster.conditionMacros[i].IsSatisfy())
@@ -27,6 +27,15 @@ public class Monster_GFX : GFX
         }  
     }
 
+    //private void FixedUpdate() {
+    //    CheckAnimation();
+    //}
+    
+    void CheckAnimation()
+    {
+        //monster.anim.SetFloat("MoveSpeed", monster.nav.velocity.sqrMagnitude);
+    }
+
     protected override void LookTarget()
     {
         if (monster.target != null && monster.target != monster)
@@ -35,8 +44,14 @@ public class Monster_GFX : GFX
         }
     }
 
-    void Hit(){ Debug.Log("Mon_GFX.Hit()");
-        IDamagable target = monster.target.GetComponent<IDamagable>();
-        target?.Damaged(monster.curDamage, monster.powerRate);
+    //void OnAttack() { monster.attackCommand.Attack(); }
+
+    void OnFinishSkill(int number){   
+        //monster.skills[number - 1].FinishSKill();
+        //monster.anim.SetBool(string.Format("Skill {0}", number), false);
+    }
+
+    void OnEffectSkill(int number){
+        //monster.skills[number - 1].EffectSkill();
     }
 }

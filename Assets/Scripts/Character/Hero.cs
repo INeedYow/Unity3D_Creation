@@ -52,12 +52,8 @@ public class Hero : Character
     {
         isDead = true;
         heroGFX.gameObject.SetActive(false);
+        onDeath?.Invoke(this);
     }
-
-    // public bool IsTargetInRange()
-    // {   //Debug.Log("isTargetInRange()");
-    //     return (target.transform.position - transform.position).sqrMagnitude <= attackRange * attackRange;
-    // }
 
     public void ResetPos()
     {   

@@ -5,20 +5,23 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    public List<Monster> prfMonsters;
+    //public List<Monster> prfMonsters;
+    public List<EMonster> eMonsters;
     public List<int> counts;
 
     public void SpawnWave()
     {
-        for (int j = 0; j < prfMonsters.Count; j++)
-        {   // 0번째 몬스터를 0번째 int 만큼 생성
+        //Monster monster;
+        for (int j = 0; j < eMonsters.Count; j++)
+        {
             for (int i = 0; i < counts[j]; i++)
             {
+                // monster = ObjectPool.instance.GetMonster((int)eMonsters[j]);
+                // DungeonManager.instance.AddMonster(monster);
+
                 DungeonManager.instance.AddMonster(
-                    Instantiate(
-                        prfMonsters[j],
-                        DungeonManager.instance.curDungeon.GetNextSpawnTransform().position,
-                        Quaternion.identity));
+                    ObjectPool.instance.GetMonster((int)eMonsters[j])
+                );
             }
         }
     }

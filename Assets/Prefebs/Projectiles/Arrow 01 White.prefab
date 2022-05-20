@@ -96,7 +96,7 @@ MonoBehaviour:
   eOwnerGroup: 0
   speed: 20
   isMagic: 0
-  remainTime: 1
+  remainTime: 0.75
 --- !u!96 &2935928314665768627
 TrailRenderer:
   serializedVersion: 2
@@ -140,7 +140,7 @@ TrailRenderer:
   m_Time: 0.8
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:

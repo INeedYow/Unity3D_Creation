@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class Monster : Character
 {
-    // [Header("Pool ID")][Range(0, 99)]
-    // public int pool_ID;
-
     [Header("GFX")]
     public Monster_GFX monsGFX;
    
@@ -15,6 +12,6 @@ public class Monster : Character
         //
         isDead = true;
         monsGFX.gameObject.SetActive(false);
-        onDeath?.Invoke();
+        onDeath?.Invoke(this);
     }
 }
