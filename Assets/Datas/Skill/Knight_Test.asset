@@ -17,7 +17,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   requireLevel: 1
   cooldown: 4
-  skillRange: 0
+  skillRange: 6
   damage: 45
   area: 0
   count: 0

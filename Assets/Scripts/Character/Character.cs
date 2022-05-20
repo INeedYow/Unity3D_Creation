@@ -58,10 +58,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Header("Skill")]
     public Skill[] skills;
 
-    [HideInInspector] public AttackCommand attackCommand;
+    //[HideInInspector] public AttackCommand attackCommand;
     [HideInInspector] public Animator anim;
     [HideInInspector] public bool isStop;    
     [HideInInspector] public bool isDead;
+    float getDamage;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -99,9 +100,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     {                // 공격자의 공격력, 공격자의 공격력 증가량, 물리마법공격 구분
         if (isMagic)
         {
-            curHp -= (int)(damage * 0.01f * (100f + damageRate - magicArmorRate));
+            getDamage = (int)(damage * 0.01f * (100f + damageRate - magicArmorRate));
+            curHp -= getDamage;
             onHpChange?.Invoke();
             DungeonManager.instance.onChangeAnyHP?.Invoke();
+            Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
         }
         else {
             if (IsDodge()) { 
@@ -109,14 +112,23 @@ public abstract class Character : MonoBehaviour, IDamagable
                 Debug.Log(name + "가 회피");
             } 
             else{
-                curHp -= (int)(damage * 0.01f * (100f + damageRate - armorRate));
+                getDamage = (int)(damage * 0.01f * (100f + damageRate - armorRate));
+                curHp -= getDamage;
                 onHpChange?.Invoke();
                 DungeonManager.instance.onChangeAnyHP?.Invoke();
-                Debug.Log(name + "가 " + (int)(damage * 0.01f * (100f + damageRate - armorRate)) + " 물리피해 입음");
+                Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
         }
-
+        ShowDamageText();
         if (curHp <= 0) Death();
+    }
+
+    void ShowDamageText(){
+        GameManager.instance.ShowBattleInfoText(
+            BattleInfoType.Ally_Damage, //
+            transform.position + Vector3.up * 5f,
+            getDamage
+        );
     }
 
     public void Healed(float heal)
@@ -153,7 +165,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public void LaunchProjectile()
     {   
         if (target == null) return;
-        Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.identity);
+        Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.LookRotation(targetTF.position));
         proj.Launch(target, curDamage, powerRate, aoeRange);
     }
 
@@ -161,8 +173,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     {   //Debug.Log("isTargetInRange()");
         if (target == null) return false;
 
-        if (range == 0f)
-        {   // 파라미터 없으면 캐릭터 사거리랑 비교
+        if (range == 0f)    // 파라미터 없으면 캐릭터 사거리랑 비교
+        {   
             return (target.transform.position - transform.position).sqrMagnitude <= 
                 attackRange * attackRange;
         }

@@ -25,7 +25,6 @@ public class PartyManager : MonoBehaviour
     public void EnterDungeon(){
         SwapDummy2GFX();
         ResetHeroPos();
-        board.gameObject.SetActive(false);
     }
 
     public void TurnOffBoard()

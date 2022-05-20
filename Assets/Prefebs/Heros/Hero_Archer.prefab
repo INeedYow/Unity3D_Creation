@@ -1811,6 +1811,11 @@ MonoBehaviour:
   projectile: {fileID: 4371020904711442883, guid: a6149df73104bb440b82e5d8d41fc347,
     type: 3}
   projectileTF: {fileID: 4806247788938896005}
+  skills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
@@ -1820,12 +1825,6 @@ MonoBehaviour:
   isJoin: 0
   level: 1
   maxExp: 0
-  maxSkillCount: 4
-  skills:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!195 &6579901502582636224
 NavMeshAgent:
   m_ObjectHideFlags: 0

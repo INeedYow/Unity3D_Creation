@@ -7,14 +7,14 @@ public class Projectile : MonoBehaviour
     public EGroup eOwnerGroup;
     public float speed;
     public bool isMagic;
-    public float remainTime;      // 도착 후 잔존시간
+    public float remainTime;        // 도착 후 잔존시간
 
     bool        m_isLaunch;
     float       m_damage;
     float       m_powerRate;
     float       m_area;
     Character   m_target;
-    Vector3     m_lastPos;      // 중간에 타겟이 죽으면 그 때 가지고 있던 최종 위치까지 날아가고 사라지게
+    Vector3     m_lastPos;          // 중간에 타겟이 죽으면 그 때 가지고 있던 최종 위치까지 날아가고 사라지게
     float       m_sqrDist;
 
     public void Launch(Character target, float damage, float powerRate, float area)
@@ -46,8 +46,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    // 처음에 Space.World로 안 해줬더니 휘어서 날아감
     void Move(){
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
 
     void Hit(){
@@ -90,7 +91,7 @@ public class Projectile : MonoBehaviour
         if (null != m_target)
         {
             m_lastPos = m_target.targetTF.position;
-            transform.LookAt(m_lastPos);
+            transform.LookAt(m_lastPos);    
         }
         else{
             StopCoroutine("LookTarget");

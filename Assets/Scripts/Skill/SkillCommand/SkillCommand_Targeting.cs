@@ -13,6 +13,7 @@ public class SkillCommand_Targeting : SkillCommand
         //Debug.Log("2");
         if (Time.time < lastSkillTime + skill.data.cooldown || skill.owner.target == null) return false;
         //Debug.Log("3 " + Time.time + " / " + lastSkillTime + " / " + skill.data.cooldown);
+        Debug.Log("skillrange : " + skill.data.skillRange);
         if (!skill.owner.IsTargetInRange(skill.data.skillRange)) { 
             skill.owner.MoveToTarget();
             return true;

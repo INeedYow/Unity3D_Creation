@@ -11,7 +11,7 @@ public class EffectCommand_SingleAttack : EffectCommand
 
         IDamagable target = skill.owner.target.GetComponentInChildren<IDamagable>();
         if (target != null)
-        {   Debug.Log("Skill dmg");
+        {   //
             target.Damaged(
                 skill.data.damage,
                 skill.data.isMagic ? skill.owner.magicPowerRate : skill.owner.powerRate,

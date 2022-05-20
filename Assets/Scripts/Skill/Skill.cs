@@ -7,16 +7,16 @@ public class Skill : MonoBehaviour
     public SkillData data;
     
     //[SerializeField]
-    public Character owner;
-    public int ID;                  // 몇 번째 스킬인지(0~3)
-    public SkillCommand skillcommand;
-    public EffectCommand effCommand;
+    public Character        owner;
+    public int              ID;                  // 몇 번째 스킬인지
+    public SkillCommand     skillcommand;
+    public EffectCommand    effCommand;
 
     private void Awake() { SetCommand(); }
     void SetCommand(){ 
         if (data.skillRange > 0f)   { skillcommand = new SkillCommand_Targeting(this); }
         else                        { skillcommand = new SkillCommand_Instant(this); }
-
+        //
         effCommand = new EffectCommand_SingleAttack(this);
     }
     public bool Use() { return skillcommand.Use(); }
@@ -26,8 +26,8 @@ public class Skill : MonoBehaviour
         ID = id; 
     }
 
-    public void FinishSKill(){                          //Debug.Log(command.lastSkillTime + " before ");
-        skillcommand.lastSkillTime = Time.time;         //Debug.Log(command.lastSkillTime + " / " + Time.time);
+    public void FinishSKill(){                         
+        skillcommand.lastSkillTime = Time.time;         
         skillcommand.isUsing = false;
         Debug.Log("isUsing : " + skillcommand.isUsing);
     }
