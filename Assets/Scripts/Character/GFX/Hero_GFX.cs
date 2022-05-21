@@ -23,7 +23,8 @@ public class Hero_GFX : GFX
             if (hero.conditionMacros[i].IsSatisfy())
             {
                 if (hero.actionMacros[i] == null) continue;
-
+                
+                hero.onMacroChange?.Invoke(i);                  
                 if (hero.actionMacros[i].Execute()) break;
             }
         }

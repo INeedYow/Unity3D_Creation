@@ -12,10 +12,10 @@ public class CameraMove : MonoBehaviour
     {
         if (isDefault)
         {
-            transform.Translate(40f, 0f, 0f);
+            transform.Translate(80f, 0f, 0f);
         }
         else{
-            transform.Translate(-40f, 0f, 0f);
+            transform.Translate(-80f, 0f, 0f);
         }
     }
 }

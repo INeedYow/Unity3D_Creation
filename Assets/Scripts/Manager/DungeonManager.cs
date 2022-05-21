@@ -20,6 +20,10 @@ public class DungeonManager : MonoBehaviour
     public List<Dungeon> listDungeon = new List<Dungeon>();
     public Dungeon curDungeon;
 
+    [Space(10f)] [Header("Dungeon UI")]
+    public HeroBattleInfoUI heroBattleInfoUI;
+    public DungeonInfoUI dungeonInfoUI;
+
     private void Awake() {
         instance = this;
         Init();
@@ -38,6 +42,11 @@ public class DungeonManager : MonoBehaviour
         curDungeon.gameObject.SetActive(true);
         PartyManager.instance.EnterDungeon();
 
+        // UI
+        heroBattleInfoUI.gameObject.SetActive(true);
+        dungeonInfoUI.gameObject.SetActive(true);
+        dungeonInfoUI.Init(curDungeon);
+
         //Temp
         GameManager.instance.cam.ToggleView();
     }
@@ -48,6 +57,7 @@ public class DungeonManager : MonoBehaviour
         curDungeon = null;
         curDungeon.gameObject.SetActive(false);
         PartyManager.instance.ExitDungeon();
+        heroBattleInfoUI.gameObject.SetActive(false);
     }
 
     public void WaveStart()
@@ -74,11 +84,15 @@ public class DungeonManager : MonoBehaviour
         curDungeon.curMonsters.Add(monster);
         curDungeon.curMonsterCount++; //Debug.Log("count++ : " + curDungeon.curMonsterCount);
         monster.onDeath += OnMonsterDie;
+
+        dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
     }
 
     public void OnMonsterDie(Character character)
     {   
         curDungeon.MonsterDie();
         character.onDeath -= OnMonsterDie;
+
+        dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
     }
 }

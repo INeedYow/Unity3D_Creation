@@ -32,7 +32,6 @@ public class ObjectPool : MonoBehaviour
     [Range(1, 10)] public int[] count_monsters;
     List<Monster>[] poolMonsters;
 
-
     private void Awake() { instance = this; }
 
     private void Start() { InitPool(); }

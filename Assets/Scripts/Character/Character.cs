@@ -8,6 +8,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
     public UnityAction<Character> onDeath;
+    public UnityAction<int> onMacroChange;
 
     new public string name;
     public Sprite icon;

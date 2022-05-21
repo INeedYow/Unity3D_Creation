@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Dungeon : MonoBehaviour
 {
+    public string DGName;
     public int dungeonLevel;
     int m_curWave;
     public int maxWave;
@@ -78,6 +79,8 @@ public class Dungeon : MonoBehaviour
         spawnTransformIndex = 0;
         waves[m_curWave - 1].SpawnWave();
         Invoke("WaveStart", 1f);
+        
+        DungeonManager.instance.dungeonInfoUI.SetCurWave(m_curWave);
     }
 
     void WaveStart()
