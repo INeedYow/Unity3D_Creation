@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4180303499257133154}
   - component: {fileID: 4631062498851437391}
   m_Layer: 0
-  m_Name: MCMacro_GetNearestHero
+  m_Name: CMacro_GetNearestHero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

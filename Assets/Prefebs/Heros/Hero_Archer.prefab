@@ -1787,6 +1787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Archer
   icon: {fileID: 21300000, guid: bc50d57e504400f4ca5635a41cc3f2ac, type: 3}
+  eGroup: 0
   curHp: 200
   maxHp: 200
   minDamage: 15
@@ -1804,6 +1805,7 @@ MonoBehaviour:
   armorRate: 0
   magicArmorRate: 0
   targetTF: {fileID: 7011910697539786449}
+  targetForDebug: {fileID: 0}
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
@@ -1833,7 +1835,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2192653559810952866}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 100
   avoidancePriority: 50
@@ -1845,7 +1847,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1 &2546697130309925405
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,8 +19,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float maxHp;
     public float curDamage{ 
         get{ 
-            if (IsCritical()) 
-                return Random.Range(minDamage, maxDamage) * criticalRate;
+            if (IsCritical()) return Random.Range(minDamage, maxDamage) * criticalRate;
             return Random.Range(minDamage, maxDamage);
         }
     }

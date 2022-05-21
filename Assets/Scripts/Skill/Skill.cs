@@ -5,10 +5,9 @@ using UnityEngine;
 public class Skill : MonoBehaviour
 {
     public SkillData data;
-    
-    //[SerializeField]
-    public Character        owner;
-    public int              ID;                  // 몇 번째 스킬인지
+
+    [HideInInspector] public Character  owner;
+    [HideInInspector] public int ID;                  // 몇 번째 스킬인지
     public SkillCommand     skillcommand;
     public EffectCommand    effCommand;
 
