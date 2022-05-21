@@ -1791,6 +1791,7 @@ MonoBehaviour:
   maxHp: 200
   minDamage: 15
   maxDamage: 22
+  magicDamage: 0
   lastAttackTime: 0
   attackDelay: 0.8
   attackRange: 10
@@ -1798,13 +1799,11 @@ MonoBehaviour:
   moveSpeed: 9
   criticalChance: 10
   dodgeChance: 1
-  criticalRate: 50
-  powerRate: 0
-  magicPowerRate: 0
+  criticalRate: 1.5
+  powerRate: 1
   armorRate: 0
   magicArmorRate: 0
   targetTF: {fileID: 7011910697539786449}
-  target: {fileID: 0}
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []

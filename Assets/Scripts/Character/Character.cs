@@ -19,27 +19,26 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float curDamage{ 
         get{ 
             if (IsCritical()) 
-                return Random.Range(minDamage, maxDamage) * (1f + 0.01f * criticalRate);
+                return Random.Range(minDamage, maxDamage) * criticalRate;
             return Random.Range(minDamage, maxDamage);
         }
     }
     public float minDamage;
     public float maxDamage;
-    [HideInInspector]
-    public float lastAttackTime;
-    public float attackDelay;
-    public float attackRange;                   // 사정거리
-    public float aoeRange;                      // 범위공격
-    public float moveSpeed = 3f;
+    public float magicDamage;
+    [HideInInspector] public float lastAttackTime;
+    [Range(0.2f, 5f)] public float attackDelay;
+    [Range(2f, 20f)] public float attackRange;                      // 사정거리
+    [Range(0f, 10f)] public float aoeRange;                         // 범위공격
+    [Range(1f, 20f)] public float moveSpeed;                        // 
 
     public float criticalChance = 10f;
     public float dodgeChance = 1f;
 
-    public float criticalRate = 50f;            // 치명타 피해량 (%)
-    public float powerRate = 0f;                // 추가 공격피해량 (%)
-    public float magicPowerRate = 0f;           // 추가 마법피해량 (%)
-    public float armorRate = 0f;                // 방어율 (%)
-    public float magicArmorRate = 0f;           // 마법방어율 (%)
+    [Range(1f, 3f)] public float criticalRate = 1.5f;               // 치명타 배율 (%)
+    [Range(0f, 2f)] public float powerRate = 1f;                    // 추가 피해 (%)
+    [Range(0f, 1f)] public float armorRate = 0f;                    // 방어율 (%)
+    [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
    
     [Header("Transform")]
     public Transform targetTF;                  // 발사체 도착 위치(맞을 위치)
@@ -72,7 +71,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     [HideInInspector] public Animator anim;
     [HideInInspector] public bool isStop;    
     [HideInInspector] public bool isDead;
-    int getDamage;
+    protected int getDamage;
+    protected Character attacker;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -86,8 +86,8 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (nav != null) nav.enabled = true; 
     }
 
-    public void Pause(float duration) { Invoke("Pause", duration); }
-    public void Resume(float duration) { Invoke("Resume", duration); }
+    public void Pause(float duration)   { Invoke("Pause", duration); }
+    public void Resume(float duration)  { Invoke("Resume", duration); }
 
     protected void Awake() { InitCharacter(); }
 
@@ -104,15 +104,15 @@ public abstract class Character : MonoBehaviour, IDamagable
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
     }
 
-    public void Damaged(float damage, float damageRate, bool isMagic = false)
-    {                // 공격자의 공격력, 공격자의 공격력 증가량, 물리마법공격 구분
+    public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
+    {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리마법공격 구분
         if (isMagic)
         {
-            getDamage = Mathf.RoundToInt(damage * 0.01f * (100f + damageRate - magicArmorRate));
+            getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate));
             curHp -= getDamage;
             onHpChange?.Invoke();
             DungeonManager.instance.onChangeAnyHP?.Invoke();
-            Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
+            //Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
         }
         else {
             if (IsDodge()) { 
@@ -120,24 +120,19 @@ public abstract class Character : MonoBehaviour, IDamagable
                 Debug.Log(name + "가 회피함");
             } 
             else{
-                getDamage = Mathf.RoundToInt(damage * 0.01f * (100f + damageRate - armorRate));
+                getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate));
                 curHp -= getDamage;
                 onHpChange?.Invoke();
                 DungeonManager.instance.onChangeAnyHP?.Invoke();
-                Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
+                //Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
         }
-        ShowDamageText();
+        attacker = newAttacker; 
+        ShowDamageText(getDamage, isMagic);
         if (curHp <= 0) Death();
     }
 
-    void ShowDamageText(){
-        GameManager.instance.ShowBattleInfoText(
-            BattleInfoType.Ally_Damage, //
-            transform.position + Vector3.up * 5f,
-            getDamage
-        );
-    }
+    protected abstract void ShowDamageText(float damage, bool isMagic = false);
 
     public void Healed(float heal)
     {

@@ -48,6 +48,15 @@ public class Hero : Character
         }
     }
 
+    protected override void ShowDamageText(float damage, bool isMagic = false)
+    {
+        GameManager.instance.ShowBattleInfoText(
+            isMagic ? BattleInfoType.Enemy_Magic : BattleInfoType.Enemy_Damage, 
+            transform.position + Vector3.up * 5f, 
+            damage
+        );
+    }
+
     public override void Death()
     {
         isDead = true;

@@ -49,12 +49,14 @@ public class Hero_GFX : GFX
 
     void OnAttack() { hero.attackCommand.Attack(); }
 
+    void OnEffectSkill(int number){
+        hero.skills[number - 1].EffectSkill();
+    }
+
     void OnFinishSkill(int number){   
         hero.skills[number - 1].FinishSKill();
         hero.anim.SetBool(string.Format("Skill {0}", number), false);
     }
 
-    void OnEffectSkill(int number){
-        hero.skills[number - 1].EffectSkill();
-    }
+    
 }

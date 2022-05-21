@@ -29,7 +29,6 @@ public class Skill : MonoBehaviour
     public void FinishSKill(){                         
         skillcommand.lastSkillTime = Time.time;         
         skillcommand.isUsing = false;
-        Debug.Log("isUsing : " + skillcommand.isUsing);
     }
 
     public void EffectSkill(){

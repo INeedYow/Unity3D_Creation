@@ -11,6 +11,6 @@ public class NormalAttackCommand : AttackCommand
     {
         if (null == owner.target) return;
         IDamagable target = owner.target.GetComponent<IDamagable>();
-        target?.Damaged(owner.curDamage, owner.powerRate);
+        target?.Damaged(owner.curDamage, owner.powerRate, owner);
     }
 }

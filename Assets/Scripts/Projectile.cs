@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public bool isMagic;
     public float remainTime;        // 도착 후 잔존시간
 
+    Character   m_owner;
     bool        m_isLaunch;
     float       m_damage;
     float       m_powerRate;
@@ -26,7 +27,6 @@ public class Projectile : MonoBehaviour
 
         InvokeRepeating("LookTarget", 0f, 0.2f);
         m_isLaunch = true;
-        //Destroy(gameObject, 10f);
         Invoke("Return", 10f);
     }
 
@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour
         if (null != m_target)
         {
             IDamagable target = m_target.GetComponent<IDamagable>();
-            target?.Damaged(m_damage, m_powerRate, isMagic);
+            target?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
         }
         
         if (m_target != null)
@@ -82,7 +82,7 @@ public class Projectile : MonoBehaviour
         foreach (Collider coll in colls)
         {
             IDamagable damagableTarget = coll.gameObject.GetComponent<IDamagable>();
-            damagableTarget?.Damaged(m_damage, m_powerRate);
+            damagableTarget?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
         }
 
         //gameObject.transform.SetParent(m_target.transform);

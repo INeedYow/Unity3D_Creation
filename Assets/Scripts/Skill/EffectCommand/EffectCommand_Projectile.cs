@@ -10,7 +10,7 @@ public class EffectCommand_Projectile : EffectCommand
     { eProj = eProjectile; }
 
     public override void Works(){
-        //
+        // 
     }
 
     

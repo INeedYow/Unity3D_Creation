@@ -10,16 +10,14 @@ public class SkillData : ScriptableObject
     public string description;
     public Image icon;
     [Space(10f)]
-    [Tooltip("습득 레벨")] public int requireLevel;
-    public float cooldown;
-    [Range(0, 20)]
-    public float skillRange;
+    [Tooltip("습득 레벨")]  public int requireLevel;
+    [Range(1f, 30f)]       public float cooldown;
+    [Range(0f, 20f)]       public float skillRange;
 
     [Header("Spec")]
-    public float damage;
-    public float area;
-    public int count;
-    public float ratio;
-    public float duration;
     public bool isMagic;
+    [Range(0.1f, 4f)]      public float powerRatio;    // 계수
+    [Range(0f, 30f)]       public float area;
+    [Tooltip("개수")]      public int count;
+    [Range(0f, 20f)]       public float duration;
 }

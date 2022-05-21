@@ -16,11 +16,10 @@ MonoBehaviour:
   description: skill desc
   icon: {fileID: 0}
   requireLevel: 1
-  cooldown: 4
-  skillRange: 6
-  damage: 45
+  cooldown: 5
+  skillRange: 4
+  isMagic: 0
+  powerRatio: 2
   area: 0
   count: 0
-  ratio: 0
   duration: 0
-  isMagic: 0
