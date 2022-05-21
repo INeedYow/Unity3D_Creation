@@ -13,10 +13,8 @@ public class ProjectileAttackCommand : AttackCommand
         if (null == owner.target) return;
 
         Projectile proj = null;
-        switch (m_eProj)
-        {
-            case EProjectile.Arrow: proj = ObjectPool.instance.GetArrow(); break;
-        }
+        
+        proj = ObjectPool.instance.GetProjectile((int)m_eProj);
 
         if (null == proj) return;
         proj.transform.position = owner.projectileTF.position;

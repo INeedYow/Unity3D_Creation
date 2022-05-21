@@ -7,7 +7,8 @@ public class Monster : Character
 {
     [Header("GFX")]
     public Monster_GFX monsGFX;
-
+    [Header("Macros")]
+    public GameObject macrosParent;
     new protected void Awake() {
         base.Awake();
         InitMonster();
@@ -25,21 +26,34 @@ public class Monster : Character
             case EMonster.RedSlime:
             {
                 monster = Instantiate(ObjectPool.instance.prfMonsters[(int)eMonster]);
-                // 매크로
-                monster.monsGFX.SetMacroSize(1);
+                // Attack Command
+                monster.attackCommand = new NormalAttackCommand(monster);
+                break;
+            }
 
-                monster.conditionMacros[0] = Instantiate(MacroManager.instance.prfMonConditionMacros[0], monster.transform);
-                monster.conditionMacros[0].owner = monster;
-
-                monster.actionMacros[0] = Instantiate(MacroManager.instance.prfActionMacros[0], monster.transform);
-                monster.actionMacros[0].owner = monster;
-
+            case EMonster.BlueSlime:
+            {
+                monster = Instantiate(ObjectPool.instance.prfMonsters[(int)eMonster]);
                 // Attack Command
                 monster.attackCommand = new NormalAttackCommand(monster);
                 break;
             }
         }
+        // Macro
+        monster.SetMacro();
         return monster;
+    }
+
+    public void SetMacro(){
+        conditionMacros = macrosParent.GetComponentsInChildren<ConditionMacro>();
+        foreach (ConditionMacro macro in conditionMacros)
+        { macro.owner = this; }
+
+        actionMacros = macrosParent.GetComponentsInChildren<ActionMacro>();
+        foreach (ActionMacro macro in actionMacros)
+        { macro.owner = this; }
+        
+        monsGFX.repeat = conditionMacros.Length;
     }
    
     protected override void ShowDamageText(float damage, bool isMagic = false)

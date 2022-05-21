@@ -10,7 +10,7 @@ public class Monster_GFX : GFX
         base.OnEnable();
         monster.isStop = true; 
     }
-
+      
     private void Update() 
     {   // 몬스터는 내가 매크로 설정해줄거라 null이면 break;했음
         if (monster.isStop || monster.isDead) return;  
@@ -27,11 +27,11 @@ public class Monster_GFX : GFX
         }  
     }
 
-    public void SetMacroSize(int size){ 
-        this.repeat = size;
-        monster.conditionMacros = new ConditionMacro[size];
-        monster.actionMacros = new ActionMacro[size];
-    }
+    // public void SetMacroSize(int size){ 
+    //     this.repeat = size;
+    //     monster.conditionMacros = new ConditionMacro[size];
+    //     monster.actionMacros = new ActionMacro[size];
+    // }
 
     private void FixedUpdate() {
        CheckAnimation();

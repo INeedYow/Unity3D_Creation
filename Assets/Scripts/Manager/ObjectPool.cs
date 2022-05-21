@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum EProjectile { Arrow, };
+public enum EProjectile { 
+    Arrow, 
+}
 public enum EMonster { 
-    RedSlime,   BlueSlime,  Spore,
+    RedSlime, BlueSlime, Spore,
 }
 public class ObjectPool : MonoBehaviour
 {
@@ -18,14 +20,14 @@ public class ObjectPool : MonoBehaviour
 
     [Space(15f)]
 
-    [Header("Arrow Pool")]
-    public Projectile prfArrow;
-    [Range(1, 30)] public int count_arrow;
-    List<Projectile> poolArrow; 
+    [Header("Projectile Pools")]
+    public Projectile[] prfProjectiles;
+    [Range(1, 30)] public int[] count_projectiles;
+    List<Projectile>[] poolProjectiles; 
 
     [Space(15f)]
 
-    [Header("Monster Pool")]
+    [Header("Monster Pools")]
     public Monster[] prfMonsters;
     [Range(1, 10)] public int[] count_monsters;
     List<Monster>[] poolMonsters;
@@ -36,21 +38,34 @@ public class ObjectPool : MonoBehaviour
     private void Start() { InitPool(); }
 
     void InitPool(){
-        poolArrow = new List<Projectile>();
+        // list 초기화
         poolBattleInfoText = new List<BattleInfoText>();
+        poolProjectiles = new List<Projectile>[prfProjectiles.Length];
         poolMonsters = new List<Monster>[prfMonsters.Length];
+        
+        for(int i = 0; i < prfProjectiles.Length; i++){
+            poolProjectiles[i] = new List<Projectile>();
+        }
+
         for(int i = 0; i < prfMonsters.Length; i++){
-            //Debug.Log(prfMonsters.Length);
-            //Debug.Log(poolMonsters[i]);
             poolMonsters[i] = new List<Monster>();
         }
 
-        if (null != prfBattleInfoText)
-        { for(int i = 0; i < count_infoText; i++)   { poolBattleInfoText.Add(CreateNewInfoText()); } }
+        // 생성
+        if (null != prfBattleInfoText){ 
+            for(int i = 0; i < count_infoText; i++)
+            { 
+                poolBattleInfoText.Add(CreateNewInfoText()); 
+            } 
+        }
 
-        if (null != prfArrow) 
-        { for(int i = 0; i < count_arrow; i++)      { poolArrow.Add(CreateNewArrow()); } }
-
+        for (int i = 0; i < prfProjectiles.Length; i++){
+            if (null != prfProjectiles[i])
+            {
+                for(int j = 0; j < count_projectiles[i]; j++) { poolProjectiles[i].Add(CreateNewProjectile(i)); }
+            }
+        }
+        
         for (int i = 0; i < prfMonsters.Length; i++){
             if (null != prfMonsters[i])
             {
@@ -65,6 +80,7 @@ public class ObjectPool : MonoBehaviour
         obj.transform.SetParent(transform);
     }
     
+    // BattleInfoText
     BattleInfoText CreateNewInfoText(bool isActive = false){
         var obj = Instantiate(prfBattleInfoText);
         obj.gameObject.SetActive(isActive);
@@ -88,30 +104,32 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
-    Projectile CreateNewArrow(bool isActive = false){ 
-        var obj = Instantiate(prfArrow);
+    // Projectiles
+    Projectile CreateNewProjectile(int index, bool isActive = false){
+        var obj = Instantiate(prfProjectiles[index]);
         obj.gameObject.SetActive(isActive);
         obj.transform.SetParent(transform);
         return obj;
     }
 
-    public Projectile GetArrow(){
-        foreach (Projectile arrow in poolArrow){
-            if (!arrow.gameObject.activeSelf)
-            {   //Debug.Log("Pool.GetObject()");
-                arrow.transform.SetParent(null);
-                arrow.gameObject.SetActive(true);
-                return arrow;
+    public Projectile GetProjectile(int ProjectileId){
+        foreach (Projectile proj in poolProjectiles[ProjectileId]){
+            if (!proj.gameObject.activeSelf)
+            {   
+                proj.transform.SetParent(null);
+                proj.gameObject.SetActive(true);
+                return proj;
             }
         }
         
-        var newObj = CreateNewArrow(true);
-        poolArrow.Add(newObj);
+        var newObj = CreateNewProjectile(ProjectileId, true);
         newObj.transform.SetParent(null);
-        //Debug.Log("Pool.Count : " + poolArrow.Count);
+        poolProjectiles[ProjectileId].Add(newObj);
+        
         return newObj;
     }
 
+    // Monsters
     Monster CreateNewMonster(int index, bool isActive = false){
         var obj = Monster.Create((EMonster)index);
         obj.gameObject.SetActive(isActive);

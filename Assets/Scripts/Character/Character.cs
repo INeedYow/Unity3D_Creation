@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
-
 public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
