@@ -20,7 +20,7 @@ public class PartyManager : MonoBehaviour
     [Header("Board")]
     public Board board;
 
-    private void Awake() { _instance = this; }
+    private void Awake() { _instance = this; maxCount = 2;}
 
     public void EnterDungeon(){
         SwapDummy2GFX();

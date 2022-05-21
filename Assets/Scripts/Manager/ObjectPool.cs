@@ -113,10 +113,9 @@ public class ObjectPool : MonoBehaviour
     }
 
     Monster CreateNewMonster(int index, bool isActive = false){
-        var obj = Instantiate(prfMonsters[index]);
+        var obj = Monster.Create((EMonster)index);
         obj.gameObject.SetActive(isActive);
         obj.transform.SetParent(transform);
-
         return obj;
     }
 
@@ -140,28 +139,5 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
-    // public static Monster CreateNowMonster(EMonster eMonster){
-    //     Monster monster = null;
-    //     switch (eMonster)
-    //     {
-    //         case EMonster.RedSlime:
-    //         {
-    //             monster = Instantiate(ObjectPool.instance.prfMonsters[(int)eMonster]);
-    //             // 매크로
-    //             for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-    //             {   
-    //                 monster.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0], hero.transform);
-    //                 monster.conditionMacros[i].owner = monster;
-    //                 //hero.conditionMacros[i].transform.SetParent(hero.transform);
-    //             }
-    //             for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-    //             {
-    //                 monster.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0], hero.transform);
-    //                 monster.actionMacros[i].owner = monster;
-    //                 //hero.actionMacros[i].transform.SetParent(hero.transform);
-    //             }
-    //             break;
-    //         }
-    //     }
-    // }
+    
 }

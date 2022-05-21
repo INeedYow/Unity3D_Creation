@@ -6,6 +6,7 @@ public class Hero_GFX : GFX
 {
     public Hero hero;
 
+    private void Start() { repeat = MacroManager.instance.maxMacroCount; }
     new protected void OnEnable() { 
         base.OnEnable();
         hero.isStop = true; 
@@ -45,8 +46,7 @@ public class Hero_GFX : GFX
         }
     }
 
-    //// Animation Event 함수들
-
+    //// Animation Event 함수들 ////
     void OnAttack() { hero.attackCommand.Attack(); }
 
     void OnEffectSkill(int number){

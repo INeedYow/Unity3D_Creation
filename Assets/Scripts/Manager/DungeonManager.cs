@@ -13,8 +13,8 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnyAttackRange;
     public UnityAction onChangeAnyAttackSpeed;
     public UnityAction onChangeAnyMoveSpeed;
-    //public UnityAction onWaveStart;
-    //public UnityAction onWaveEnd;
+    public UnityAction onWaveStart;
+    public UnityAction onWaveEnd;
 
     public static DungeonManager instance { get; private set; }
     public List<Dungeon> listDungeon = new List<Dungeon>();
@@ -52,7 +52,7 @@ public class DungeonManager : MonoBehaviour
 
     public void WaveStart()
     {
-        //onWaveStart?.Invoke();
+        onWaveStart?.Invoke();
         foreach (Character hero in PartyManager.instance.heroParty)
         { hero.Resume(); }
         foreach (Character mons in curDungeon.curMonsters)
@@ -61,7 +61,7 @@ public class DungeonManager : MonoBehaviour
 
     public void WaveEnd()
     {
-        //onWaveStart?.Invoke();
+        onWaveEnd?.Invoke();
         foreach (Character hero in PartyManager.instance.heroParty)
         { hero.Pause(); }
         foreach (Character mons in curDungeon.curMonsters)
@@ -77,7 +77,7 @@ public class DungeonManager : MonoBehaviour
     }
 
     public void OnMonsterDie(Character character)
-    {   // count, isdead 확인필요
+    {   
         curDungeon.MonsterDie();
         character.onDeath -= OnMonsterDie;
     }

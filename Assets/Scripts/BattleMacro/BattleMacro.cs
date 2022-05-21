@@ -6,6 +6,5 @@ using UnityEngine;
 public abstract class BattleMacro : MonoBehaviour
 {
     public BattleMacroData data;
-    //public Hero owner;
-    public Character owner;
+    [HideInInspector] public Character owner;
 }

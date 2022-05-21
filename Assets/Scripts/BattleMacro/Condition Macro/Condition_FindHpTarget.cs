@@ -6,7 +6,7 @@ using UnityEngine;
 public class Condition_FindHpTarget : ConditionMacro
 {
     public EMost eMost;
-    public EGroup eGroup;
+    public EGroup eTargetGroup;
     [Tooltip("value (0f ~ 100f)")]
     public float value;
 
@@ -16,7 +16,7 @@ public class Condition_FindHpTarget : ConditionMacro
 
     bool FindTarget()
     {
-        if (eGroup == EGroup.Ally)
+        if (eTargetGroup == EGroup.Ally)
         {   // 아군
             foreach (Character ch in PartyManager.instance.heroParty)
             {

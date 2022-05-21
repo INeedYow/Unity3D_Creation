@@ -27,13 +27,19 @@ public class Monster_GFX : GFX
         }  
     }
 
-    //private void FixedUpdate() {
-    //    CheckAnimation();
-    //}
+    public void SetMacroSize(int size){ 
+        this.repeat = size;
+        monster.conditionMacros = new ConditionMacro[size];
+        monster.actionMacros = new ActionMacro[size];
+    }
+
+    private void FixedUpdate() {
+       CheckAnimation();
+    }
     
     void CheckAnimation()
     {
-        //monster.anim.SetFloat("MoveSpeed", monster.nav.velocity.sqrMagnitude);
+        monster.anim.SetFloat("MoveSpeed", monster.nav.velocity.sqrMagnitude);
     }
 
     protected override void LookTarget()
@@ -44,14 +50,15 @@ public class Monster_GFX : GFX
         }
     }
 
-    //void OnAttack() { monster.attackCommand.Attack(); }
+     //// Animation Event 함수 ////
+    void OnAttack() { monster.attackCommand.Attack(); }
 
     void OnFinishSkill(int number){   
-        //monster.skills[number - 1].FinishSKill();
-        //monster.anim.SetBool(string.Format("Skill {0}", number), false);
+        monster.skills[number - 1].FinishSKill();
+        monster.anim.SetBool(string.Format("Skill {0}", number), false);
     }
 
     void OnEffectSkill(int number){
-        //monster.skills[number - 1].EffectSkill();
+        monster.skills[number - 1].EffectSkill();
     }
 }

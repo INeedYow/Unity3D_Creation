@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         {
             case BattleInfoType.Ally_Damage:    return Color.red;
             case BattleInfoType.Ally_Heal:      return Color.green;
+            case BattleInfoType.Enemy_Damage:   return Color.magenta;
             //
             default:                            return Color.black;
         }

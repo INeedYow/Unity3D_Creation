@@ -36,11 +36,15 @@ public class Hero : Character
     }
 
     void InitHero(){
+        eGroup = EGroup.Ally;
         heroGFX.hero = this;
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);
         dummy.gameObject.SetActive(false);
         skills = new Skill[4];
+        // 매크로 배열 초기화
+        conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
+        actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
         // Attack Command
         switch(eClass){
             case EClass.Knight: attackCommand = new NormalAttackCommand(this); break;

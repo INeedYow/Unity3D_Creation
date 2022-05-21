@@ -8,8 +8,12 @@ public class MacroManager : MonoBehaviour
     public static MacroManager instance { get; private set; }
     public HeroMacroUI macroUI;
 
+    [Header("Hero Macro")]
     public List<ConditionMacro> prfConditionMacros;
-    public List<ActionMacro> prfActionMacros;
+    public List<ActionMacro>    prfActionMacros;
+    [Header("Monster Macro")]
+    public List<ConditionMacro> prfMonConditionMacros;
+    public List<ActionMacro>    prfMonActionMacros;
     public int maxMacroCount { get { return 5; } }
 
     private void Awake() { 

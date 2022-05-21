@@ -5,7 +5,7 @@ using UnityEngine;
 public class Condition_FindDistanceTarget : ConditionMacro
 {
     public EMost eMost;
-    public EGroup eGroup;
+    public EGroup eTargetGroup;
     [Tooltip("distance")]
     public float value;
     float m_sqrValue;
@@ -15,14 +15,28 @@ public class Condition_FindDistanceTarget : ConditionMacro
         m_sqrValue = value * value;
     }
 
-    public override bool IsSatisfy(){  
-        return FindTarget();
+    private void OnEnable() 
+    {   
+        DungeonManager.instance.onWaveStart += OnBattle; 
+        DungeonManager.instance.onWaveEnd += OffBattle;   }
+    private void OnDisable()    
+    {   
+        DungeonManager.instance.onWaveStart -= OnBattle; 
+        DungeonManager.instance.onWaveEnd -= OffBattle;  }
+
+    public override bool IsSatisfy()
+    {  
+        if (null == owner.target) { FindTarget(); }
+        
+        return isSatisfy;
     }
 
-    bool FindTarget()
-    {   
+    public void OnBattle() { InvokeRepeating("FindTarget", 0f, 0.2f); }
+    public void OffBattle() { CancelInvoke("FindTarget"); }
 
-        if (eGroup == EGroup.Ally)
+    void FindTarget()
+    {   
+        if (eTargetGroup == EGroup.Ally)
         {   // 아군
             foreach (Character ch in PartyManager.instance.heroParty)
             {
@@ -33,7 +47,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
                     if (m_sqrValue <= m_sqrDist)
                     {
                         owner.target = ch;
-                        return true;
+                        isSatisfy = true;
                     }
                 }
                 else{   // value 이하
@@ -41,7 +55,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
                     if (m_sqrValue >= m_sqrDist)
                     {
                         owner.target = ch;
-                        return true;
+                        isSatisfy = true;
                     }
                 }
             }
@@ -57,7 +71,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
                     if (m_sqrValue <= m_sqrDist)
                     {
                         owner.target = ch;
-                        return true;
+                        isSatisfy = true;
                     }
                 }
                 else{   // value 이하
@@ -65,11 +79,11 @@ public class Condition_FindDistanceTarget : ConditionMacro
                     if (m_sqrValue >= m_sqrDist)
                     {
                         owner.target = ch;
-                        return true;
+                        isSatisfy = true;
                     }
                 }
             }
         }
-        return false;
+        isSatisfy = false;
     }
 }

@@ -514,24 +514,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Blue Slime
   icon: {fileID: 0}
+  eGroup: 1
   curHp: 130
   maxHp: 130
   minDamage: 13
   maxDamage: 19
+  magicDamage: 0
   lastAttackTime: 0
   attackDelay: 1.8
-  attackRange: 4
+  attackRange: 2
   aoeRange: 0
-  moveSpeed: 6
+  moveSpeed: 7
   criticalChance: 10
   dodgeChance: 1
-  criticalRate: 50
-  powerRate: 0
-  magicPowerRate: 0
+  criticalRate: 1.5
+  powerRate: 1
   armorRate: 0
   magicArmorRate: 0
   targetTF: {fileID: 8754851228247374062}
-  target: {fileID: 0}
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []

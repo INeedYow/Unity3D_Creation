@@ -5,19 +5,32 @@ using UnityEngine;
 public class Condition_GetMostDistanceTarget : ConditionMacro
 {
     public EMost eMost;
-    public EGroup eGroup;
+    public EGroup eTargetGroup;
     Character m_target;
     float m_value;
     float m_sqrDist;
 
+    private void OnEnable() 
+    {   
+        DungeonManager.instance.onWaveStart += OnBattle; 
+        DungeonManager.instance.onWaveEnd += OffBattle;   }
+    private void OnDisable()    
+    {   
+        DungeonManager.instance.onWaveStart -= OnBattle; 
+        DungeonManager.instance.onWaveEnd -= OffBattle;  }
+
     public override bool IsSatisfy(){  
-        InvokeRepeating("UpdateDistance", 0f, 0.2f);
+        if (null == owner.target) { GetTarget(); }
+        
         return true;
     }
+
+    public void OnBattle() { InvokeRepeating("GetTarget", 0f, 0.2f); }
+    public void OffBattle() { CancelInvoke("GetTarget"); }
     
-    void UpdateDistance()
-    {
-       if (eGroup == EGroup.Ally)
+    void GetTarget()
+    {   
+       if (eTargetGroup == EGroup.Ally)
         {   // 아군
             m_target = PartyManager.instance.GetAliveHero();
             if (m_target == null) return;

@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     new public string name;
     public Sprite icon;
+    [HideInInspector] public EGroup eGroup;
 
     [Header("Spec")]
     public float curHp;
@@ -31,10 +32,10 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Range(2f, 20f)] public float attackRange;                      // 사정거리
     [Range(0f, 10f)] public float aoeRange;                         // 범위공격
     [Range(1f, 20f)] public float moveSpeed;                        // 
-
-    public float criticalChance = 10f;
-    public float dodgeChance = 1f;
-
+    [Space(10f)]
+    [Range(1f, 50f)] public float criticalChance = 10f;
+    [Range(0f, 20f)] public float dodgeChance = 1f;
+    [Space(10f)]
     [Range(1f, 3f)] public float criticalRate = 1.5f;               // 치명타 배율 (%)
     [Range(0f, 2f)] public float powerRate = 1f;                    // 추가 피해 (%)
     [Range(0f, 1f)] public float armorRate = 0f;                    // 방어율 (%)
@@ -44,12 +45,12 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Transform targetTF;                  // 발사체 도착 위치(맞을 위치)
     
     //[HideInInspector]
-
+    public Character targetForDebug;
     Character _target;
     public Character target{
         get { return _target; } 
         set { 
-            _target = value;
+            _target = value;        targetForDebug = _target;
             if (null != _target)
             { _target.onDeath += TargetDead; }
         }
@@ -69,7 +70,8 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     [HideInInspector] public AttackCommand attackCommand;
     [HideInInspector] public Animator anim;
-    [HideInInspector] public bool isStop;    
+   // [HideInInspector] 
+    public bool isStop;    
     [HideInInspector] public bool isDead;
     protected int getDamage;
     protected Character attacker;
@@ -99,9 +101,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.enabled = false;
         nav.speed = moveSpeed;
         nav.stoppingDistance = attackRange;
-        // 매크로 배열 초기화
-        conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
-        actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
@@ -167,16 +166,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         lastAttackTime = Time.time;
         anim.SetTrigger("Attack");      // 애니메이션에서 Event함수로 GFX의 Attack() 호출하게 됨
     }
-
-    // public void LaunchProjectile()
-    // {   
-    //     if (target == null) return;
-    //     //Projectile proj = Instantiate(projectile, projectileTF.position, Quaternion.LookRotation(targetTF.position));
-    //     //proj.Launch(target, curDamage, powerRate, aoeRange);
-    //     Projectile proj = ObjectPool.instance.GetArrow();
-    //     proj.transform.position = projectileTF.position;
-    //     proj.Launch(target, curDamage, powerRate, aoeRange);
-    // }
 
     public bool IsTargetInRange(float range)
     {   //Debug.Log("isTargetInRange()");

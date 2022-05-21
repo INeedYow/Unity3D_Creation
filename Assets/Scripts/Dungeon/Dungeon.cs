@@ -45,7 +45,7 @@ public class Dungeon : MonoBehaviour
     public void MonsterDie()
     {   
         curMonsterCount--;
-        Debug.Log("count-- : " + curMonsterCount);
+        //Debug.Log("count-- : " + curMonsterCount);
         if (curMonsterCount <= 0)
         {   // 웨이브 클리어
             Invoke("WaveClear", 1f);

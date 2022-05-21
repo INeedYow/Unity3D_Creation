@@ -7,5 +7,5 @@ public class BattleMacroData : ScriptableObject
 {
     [Header("Description")] [TextArea]
     public string desc;
-    [SerializeField] public int ID;
+    [HideInInspector] public int ID;
 }
