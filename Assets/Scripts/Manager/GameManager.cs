@@ -7,9 +7,15 @@ public enum BattleInfoType { Ally_Damage, Ally_Magic, Ally_Heal, Enemy_Damage, E
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
+    [Header("Cube Planet")]
+    public CubePlanet cubePlanet;
+    [Header("Transparent Plane")]
+    public GameObject dummyPlane;
+    public DummyCursor cursor;
+    
     [Header("Game UI")]
     public GameObject worldCanvas;
-    public Text prfText;
+
     BattleInfoText m_battleInfotext;
     
     [Header("Player Info")]
@@ -60,5 +66,15 @@ public class GameManager : MonoBehaviour
             //
             default:                            return Color.black;
         }
+    }
+
+    public void OnDummyDrag(){
+        dummyPlane.SetActive(true);
+        cursor.gameObject.SetActive(true);
+    }
+
+    public void OnDummyDrop(){
+        dummyPlane.SetActive(false);
+        cursor.DropDummy();
     }
 }

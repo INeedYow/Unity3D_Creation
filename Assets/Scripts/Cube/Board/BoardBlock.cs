@@ -11,15 +11,18 @@ public class BoardBlock : MonoBehaviour
 
     void Start()
     {
-        SetBeginPos(PartyManager.instance.board.centerTf);
+        //SetBeginPos(PartyManager.instance.board.centerTf);
+        SetBeginPos();
     }
 
-    public void SetBeginPos(Transform tf)
+    public void SetBeginPos()
     {
-        beginPos = new Vector3(
-            tf.position.y-transform.position.y,
-            0f,
-            -tf.position.z + transform.position.z);
+        // beginPos = new Vector3(
+        //     tf.position.y-transform.position.y,
+        //     0f,
+        //     -tf.position.z + transform.position.z);
+        
+        beginPos = new Vector3(-transform.position.x, 0f, transform.position.z);
     }
 
     private void OnMouseEnter() {

@@ -11,6 +11,6 @@ public class CubeSide_PlayerSetting : CubeSide
 
     public override void Exit()
     {
-        
+        onExitFinish?.Invoke(this);
     }
 }

@@ -42,6 +42,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb50cf758ac914fbb83b87f86e77b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repeat: 0
   hero: {fileID: 4771493527925500085}
 --- !u!1 &4771493527925500084
 GameObject:
@@ -315,13 +316,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8930943930485201806}
   - component: {fileID: 8939804448577567632}
+  - component: {fileID: 8038379427137922207}
   m_Layer: 0
   m_Name: Dummy_Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8930943930485201806
 Transform:
   m_ObjectHideFlags: 0
@@ -364,6 +366,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 4771493527925500085}
   placedBlock: {fileID: 0}
+  hasClicked: 0
+--- !u!65 &8038379427137922207
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930943930485457808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 1.2, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &8930943930485461778
 GameObject:
   m_ObjectHideFlags: 0

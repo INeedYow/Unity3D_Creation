@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,6 +36,16 @@ public class HeroManager : MonoBehaviour
         {
             GetNewHero(Hero.EClass.Archer);
         }
+    }
+
+    public void PickUpDummy(Hero hero){
+        selectedHero = hero;
+        GameManager.instance.OnDummyDrag();
+    }
+
+    public void PutDownDummy(){
+        selectedHero = null;
+        GameManager.instance.OnDummyDrop();
     }
 
     public void SelectHero(Hero hero){
@@ -121,8 +131,19 @@ public class HeroManager : MonoBehaviour
 
         }
 
+        AddHero(hero);
+    }
+
+    public void AddHero(Hero hero){
         heroList.Add(hero);
         heroListUI.AddHeroUnit(hero);
+        GameManager.instance.cubePlanet.AddFloatingBlock(hero);
+    }
+
+    public void RemoveHero(Hero hero){
+        heroList.Remove(hero);
+        heroListUI.RemoveHeroUnit(hero);
+        GameManager.instance.cubePlanet.RemoveFloatingBlock(hero);
     }
 
     public void ToggleSetUI(){

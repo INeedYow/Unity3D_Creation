@@ -11,6 +11,6 @@ public class CubeSide_Store : CubeSide
 
     public override void Exit()
     {
-        
+        onExitFinish?.Invoke(this);
     }
 }
