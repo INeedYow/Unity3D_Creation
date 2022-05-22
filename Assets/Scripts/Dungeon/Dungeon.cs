@@ -80,7 +80,8 @@ public class Dungeon : MonoBehaviour
         waves[m_curWave - 1].SpawnWave();
         Invoke("WaveStart", 1f);
         
-        DungeonManager.instance.dungeonInfoUI.SetCurWave(m_curWave);
+        //DungeonManager.instance.dungeonInfoUI.SetCurWave(m_curWave);
+        DungeonManager.instance.dungeonUI.SetCurWave(m_curWave);
     }
 
     void WaveStart()

@@ -21,8 +21,7 @@ public class DungeonManager : MonoBehaviour
     public Dungeon curDungeon;
 
     [Space(10f)] [Header("Dungeon UI")]
-    public HeroBattleInfoUI heroBattleInfoUI;
-    public DungeonInfoUI dungeonInfoUI;
+    public DungeonUI dungeonUI;
 
     private void Awake() {
         instance = this;
@@ -43,9 +42,11 @@ public class DungeonManager : MonoBehaviour
         PartyManager.instance.EnterDungeon();
 
         // UI
-        heroBattleInfoUI.gameObject.SetActive(true);
-        dungeonInfoUI.gameObject.SetActive(true);
-        dungeonInfoUI.Init(curDungeon);
+        dungeonUI.gameObject.SetActive(true);
+        dungeonUI.Init(curDungeon);
+        // heroBattleInfoUI.gameObject.SetActive(true);
+        // dungeonInfoUI.gameObject.SetActive(true);
+        // dungeonInfoUI.Init(curDungeon);
 
         //Temp
         GameManager.instance.cam.ToggleView();
@@ -57,7 +58,8 @@ public class DungeonManager : MonoBehaviour
         curDungeon = null;
         curDungeon.gameObject.SetActive(false);
         PartyManager.instance.ExitDungeon();
-        heroBattleInfoUI.gameObject.SetActive(false);
+        //heroBattleInfoUI.gameObject.SetActive(false);
+        dungeonUI.gameObject.SetActive(true);
     }
 
     public void WaveStart()
@@ -85,7 +87,8 @@ public class DungeonManager : MonoBehaviour
         curDungeon.curMonsterCount++; //Debug.Log("count++ : " + curDungeon.curMonsterCount);
         monster.onDeath += OnMonsterDie;
 
-        dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
+        //dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
+        dungeonUI.SetCount(curDungeon.curMonsterCount);
     }
 
     public void OnMonsterDie(Character character)
@@ -93,6 +96,7 @@ public class DungeonManager : MonoBehaviour
         curDungeon.MonsterDie();
         character.onDeath -= OnMonsterDie;
 
-        dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
+        //dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
+        dungeonUI.SetCount(curDungeon.curMonsterCount);
     }
 }
