@@ -75,6 +75,6 @@ public class GameManager : MonoBehaviour
 
     public void OnDummyDrop(){
         dummyPlane.SetActive(false);
-        cursor.DropDummy();
+        cursor.gameObject.SetActive(false);
     }
 }

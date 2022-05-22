@@ -7,6 +7,7 @@ public class CubePlanet : MonoBehaviour
 {
     public CubeSide[] cubeSides = new CubeSide[4];
     public CubeSide curSide;
+    CubeSide m_nextSide;
     [Space(6f)][Header("-------------------------------------------------")]
     public GameObject floatingblocksParent;
     public FloatingBlock[] floatingBlocks;
@@ -21,10 +22,19 @@ public class CubePlanet : MonoBehaviour
     private void Awake() { Init(); }
 
     void Init(){
-        foreach(CubeSide cube in cubeSides){ cube.onExitFinish += ExitFinish; }
+        // 이벤트 함수
+        foreach(CubeSide cube in cubeSides){ 
+            cube.onExitFinish += ExitFinish; 
+            cube.onEnterFinish += EnterFinish;
+        }
+
         // floating block 배열 초기화
         floatingBlocks = new FloatingBlock[floatingblocksParent.transform.childCount];
         floatingBlocks = floatingblocksParent.GetComponentsInChildren<FloatingBlock>();
+    }
+
+    private void Start() {
+        curSide.Enter();
     }
 
     private void Update() 
@@ -34,18 +44,20 @@ public class CubePlanet : MonoBehaviour
         m_input = Input.GetAxisRaw("Vertical");
         
         if (m_input > 0f)
-        {
+        {   
             if (null != curSide.forwardSide)
             {
                 LockInput(true);
+                m_nextSide = curSide.forwardSide;
                 curSide.Exit();
             }
         }
         else if (m_input < 0f)
-        {
+        {   
             if (null != curSide.backwardSide)
             {
                 LockInput(true);
+                m_nextSide = curSide.backwardSide;
                 curSide.Exit();
             }
         }
@@ -53,18 +65,20 @@ public class CubePlanet : MonoBehaviour
         m_input = Input.GetAxisRaw("Horizontal");
 
         if (m_input < 0f)
-        {   
+        {    
             if (null != curSide.leftSide)
             {
                 LockInput(true);
+                m_nextSide = curSide.leftSide;
                 curSide.Exit();
             }
         }
         else if (m_input > 0f)
-        {
+        {   
             if (null != curSide.rightSide)
             {
                 LockInput(true);
+                m_nextSide = curSide.rightSide;
                 curSide.Exit();
             }
         }
@@ -79,13 +93,13 @@ public class CubePlanet : MonoBehaviour
         LockInput(false);
     }
 
-    void ExitFinish(CubeSide side){ Debug.Log("ExitFinish()");
-        curSide = side;
-        m_rot = curSide.rot;
+    void ExitFinish(CubeSide side){ //Debug.Log("ExitFinish()");
+        curSide = m_nextSide;
+        m_rot = m_nextSide.rot;
         StartCoroutine("Roll"); 
     }
 
-    IEnumerator Roll(){ Debug.Log("Roll()" + m_rot);
+    IEnumerator Roll(){ //Debug.Log("Roll()" + m_rot);
         m_duration = 0f;
         while (m_duration < 1f)
         {

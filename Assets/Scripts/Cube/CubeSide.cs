@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public abstract class CubeSide : MonoBehaviour
 {
+    public UnityAction onEnterFinish;
     public UnityAction<CubeSide> onExitFinish;
 
     public CubePlanet cube;

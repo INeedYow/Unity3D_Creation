@@ -5,21 +5,43 @@ using UnityEngine;
 public class DummyCursor : MonoBehaviour
 {
     public Dummy dummy;
+    RaycastHit hit;
+    Ray ray;
+    Collider[] colls;
+    Vector3 half = new Vector3 (0.3f, 1f, 0.3f);
+    BoardBlock block;
+
     private void OnEnable() {
         dummy = HeroManager.instance.selectedHero.dummy;
     }
+
     void Update()
     {
-        RaycastHit hit;
+        if (dummy == null) return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("DummyPlane")))
         {
-            if (dummy != null) dummy.transform.position = hit.point;
+            //blockChecker.transform.position = hit.point;
+            transform.position = hit.point;
+            if (!dummy.isOnBlock)
+            {
+                dummy.transform.position = hit.point;
+            }
         }
     }
 
-    public void DropDummy(){
-        gameObject.SetActive(false);
+    private void FixedUpdate() {
+        colls = Physics.OverlapBox(transform.position, half, Quaternion.identity, LayerMask.GetMask("BoardBlock"));
+        if (colls.Length > 0){
+            //Debug.Log(colls.Length + "length");
+            block = colls[0].transform.GetComponent<BoardBlock>();
+            if (block != null){
+                dummy.SetBlock(block);
+            }
+        }
+        else{
+            dummy.SetBlock(null);
+        }
     }
 }

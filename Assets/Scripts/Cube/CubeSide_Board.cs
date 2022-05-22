@@ -20,8 +20,8 @@ public class CubeSide_Board : CubeSide
     }
 
     public override void Exit()
-    {   Debug.Log("boardside Exit()");
-        if (board.isActive){ 
+    {   //Debug.Log("boardside Exit()");
+        if (board.isActive){ Debug.Log("if board.isActive");
             m_isExit = true;
             StartCoroutine("CloseBoard"); 
         }
@@ -42,7 +42,7 @@ public class CubeSide_Board : CubeSide
         StartCoroutine("CloseBoard");
     }
 
-    IEnumerator OpenBoard(){
+    IEnumerator OpenBoard(){    //Debug.Log("co open()");
         float dura = 0f;
         m_boardRot = 180f;
         board.isActive = false;
@@ -58,11 +58,11 @@ public class CubeSide_Board : CubeSide
         groundTF.rotation = Quaternion.Euler(0f, 0f, m_boardRot);
         board.isActive = true;
         
-
+        onEnterFinish?.Invoke();
         yield return null;
     }
 
-    IEnumerator CloseBoard(){
+    IEnumerator CloseBoard(){   //Debug.Log("co close");
         float dura = 0f;
         m_boardRot = 0f;
         board.isActive = false;

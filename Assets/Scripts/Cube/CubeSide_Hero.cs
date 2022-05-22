@@ -10,6 +10,7 @@ public class CubeSide_Hero : CubeSide
         HeroManager.instance.heroListUI.gameObject.SetActive(true);
         //PartyManager.instance.board.gameObject.SetActive(true);
         //PartyManager.instance.board.Init();
+        onEnterFinish?.Invoke();
     }
 
     public override void Exit()
