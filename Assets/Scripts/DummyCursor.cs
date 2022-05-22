@@ -33,15 +33,14 @@ public class DummyCursor : MonoBehaviour
 
     private void FixedUpdate() {
         colls = Physics.OverlapBox(transform.position, half, Quaternion.identity, LayerMask.GetMask("BoardBlock"));
-        if (colls.Length > 0){
-            //Debug.Log(colls.Length + "length");
+        if (colls.Length > 0){  //Debug.Log(colls.Length + "length");
             block = colls[0].transform.GetComponent<BoardBlock>();
             if (block != null){
-                dummy.SetBlock(block);
+                dummy.OnBlock(block);
             }
         }
         else{
-            dummy.SetBlock(null);
+            dummy.OnBlock(null);
         }
     }
 }

@@ -899,6 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0eb50cf758ac914fbb83b87f86e77b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repeat: 0
   hero: {fileID: 3191463545495333849}
 --- !u!1 &1887225081490617584
 GameObject:
@@ -2069,13 +2070,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4839077747593105023}
   - component: {fileID: 4020090406503507079}
+  - component: {fileID: 3960635633930913622}
   m_Layer: 0
   m_Name: Dummy_Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4839077747593105023
 Transform:
   m_ObjectHideFlags: 0
@@ -2118,7 +2120,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 3191463545495333849}
+  tempBlock: {fileID: 0}
   placedBlock: {fileID: 0}
+  placedFloat: {fileID: 0}
+  hasClicked: 0
+  isOnBlock: 0
+--- !u!65 &3960635633930913622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3272583637476481827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 1.2, z: 0.4}
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &3385380700796245023
 GameObject:
   m_ObjectHideFlags: 0

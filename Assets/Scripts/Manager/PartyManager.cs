@@ -19,7 +19,7 @@ public class PartyManager : MonoBehaviour
     public int maxCount = 2;
     [Header("Board")]
     public Board board;
-
+    
     private void Awake() { _instance = this; maxCount = 2;}
 
     public void EnterDungeon(){
@@ -28,7 +28,7 @@ public class PartyManager : MonoBehaviour
     }
 
     public void ExitDungeon(){
-        // TODO
+        SwapGFX2Dummy();
     }
 
     public void TurnOffBoard()
@@ -43,6 +43,14 @@ public class PartyManager : MonoBehaviour
         {
             hero.dummy.gameObject.SetActive(false);
             hero.heroGFX.gameObject.SetActive(true);
+        }
+    }
+
+    void SwapGFX2Dummy(){
+        foreach(Hero hero in heroParty)
+        {
+            hero.dummy.gameObject.SetActive(true);
+            hero.heroGFX.gameObject.SetActive(false);
         }
     }
 
@@ -69,15 +77,23 @@ public class PartyManager : MonoBehaviour
         }
     }
 
-    public void Join(Hero hero)
+    public bool IsFull() { return heroParty.Count >= maxCount; }
+
+    public bool Join(Hero hero)
     {
-        if (heroParty.Count >= maxCount) return;
+        if (IsFull()) return false;
+
         heroParty.Add(hero);
+        hero.isJoin = true;
+        GameManager.instance.RenewCurParty(heroParty.Count);
+        return true;
     }
 
     public void Leave(Hero hero)
     {
         heroParty.Remove(hero);
+        hero.isJoin = false;
+        GameManager.instance.RenewCurParty(heroParty.Count);
     }
 
     public Hero GetAliveHero()

@@ -14,38 +14,58 @@ public class GameManager : MonoBehaviour
     public DummyCursor cursor;
     
     [Header("Game UI")]
+    public PlayerInfoUI playerInfoUI;
     public GameObject worldCanvas;
 
     BattleInfoText m_battleInfotext;
     
-    [Header("Player Info")]
-    public int LV = 1;
-    public int maxLV = 21;
+    //
+    public int maxLV    { get { return 25; } }
+    public int LV       { get; private set; }
+    public int maxExp   { get; private set; }
     int _curExp;
     public int curExp{
         get { return _curExp; }
         set {
-            _curExp += value;
-            if (_curExp >= maxExp) { LevelUp(); }
+            if (LV == maxLV) return;
+            _curExp = value;
+            if (_curExp >= maxExp) { LevelUp(); } 
         }
     }
-    public int maxExp = 200;
-    public int gold;
+    public int gold     { get; private set; }
 
     public CameraMove cam;
     public CubePlanet cube;
 
     private void Awake() { 
         instance = this; 
-        Application.targetFrameRate = 30;   // 프레임
+        Application.targetFrameRate = 50;   // 프레임
+        LV = 1;
+        maxExp = 150;
     }
 
-    void LevelUp(){
-        LV++;
-        curExp -= maxExp;
-        maxExp += 50;
+    private void Start() { InitUI(); }
+
+    void InitUI(){
+        playerInfoUI.RenewCurParty(PartyManager.instance.heroParty.Count);
+        playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
+        playerInfoUI.RenewExp(curExp, maxExp);
+        playerInfoUI.RenewGold(gold);
+        playerInfoUI.RenewLV(LV);
+    }
+    
+    void LevelUp(){ 
+        LV++;                       
+        curExp -= maxExp;           
+        maxExp += 75;               
+        playerInfoUI.RenewLV(LV);
+        playerInfoUI.RenewExp(curExp, maxExp);
         
-        if (LV % 3 == 1) PartyManager.instance.maxCount++;
+        if (LV % 5 == 0){
+            PartyManager.instance.maxCount++;
+            playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
+        }
+        if (LV == maxLV) curExp = maxExp;
     }
 
     public void ShowBattleInfoText(BattleInfoType infoType, Vector3 position, float value)
@@ -77,4 +97,22 @@ public class GameManager : MonoBehaviour
         dummyPlane.SetActive(false);
         cursor.gameObject.SetActive(false);
     }
+
+    //////////////////////////////
+
+    public void AddGold(int amount){    
+        gold += amount;
+        playerInfoUI.RenewGold(gold);
+    }
+
+    public void AddExp(int amount){ 
+        curExp += amount;   
+        playerInfoUI.RenewExp(curExp, maxExp);
+    }
+
+    public void RenewCurParty(int value){
+        playerInfoUI.RenewCurParty(value);
+    }
+
+
 }

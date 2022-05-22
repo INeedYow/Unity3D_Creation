@@ -18,6 +18,13 @@ public class Dungeon : MonoBehaviour
     public int spawnTransformIndex;
     public Transform beginTf;
 
+    [Header("Rewards--------------------------")]
+    public RewardData rewardData;
+    int m_gold;
+    [SerializeField]
+    int m_exp;
+    
+
     private void Awake() {
         Init();
     }
@@ -36,20 +43,18 @@ public class Dungeon : MonoBehaviour
         Invoke("SpawnWave", 1f);
     }
 
-    public Transform GetNextSpawnTransform()
-    {
-        int curIndex = spawnTransformIndex++;
-        spawnTransformIndex %= spawnTransforms.Length;
-        return spawnTransforms[curIndex];
-    }
-
     public void MonsterDie()
     {   
         curMonsterCount--;
+        m_gold += Random.Range(0, dungeonLevel + 3);
+        m_exp += Random.Range(0, dungeonLevel + 1);
         //Debug.Log("count-- : " + curMonsterCount);
         if (curMonsterCount <= 0)
         {   // 웨이브 클리어
+            WaveEnd();
             Invoke("WaveClear", 1f);
+            m_gold += rewardData.gold_perWave;
+            m_exp += rewardData.exp_perWave;
         }
     }
 
@@ -62,16 +67,36 @@ public class Dungeon : MonoBehaviour
 
         m_curWave++;
 
-        if (m_curWave > maxWave) { ClearDungeon(); }
+        if (m_curWave > maxWave) { 
+            ClearDungeon(); 
+        }
         else{ 
             PartyManager.instance.ResetHeroPos();
             SpawnWave(); 
         }
     }
 
-    void ClearDungeon()
-    {   Debug.Log("Dungeon Clear");
+    void EndDungeon(){     Debug.Log("Dungeon End");
+        // 중간 종료
+        GetReward();
+        //
+        DungeonManager.instance.Exit();
+    }
+
+    void ClearDungeon(){   Debug.Log("Dungeon Clear");
         // TODO 
+        m_gold += rewardData.gold_clear;
+        m_exp += rewardData.exp_clear;
+        GetReward();Debug.Log(m_exp);
+        //
+        DungeonManager.instance.Exit();
+    }
+
+    void GetReward(){
+        GameManager.instance.AddGold(m_gold);   Debug.Log(m_exp);
+        GameManager.instance.AddExp(m_exp);     Debug.Log(m_exp);
+        m_gold = 0;
+        m_exp = 0;
     }
 
     void SpawnWave()
@@ -84,10 +109,9 @@ public class Dungeon : MonoBehaviour
         DungeonManager.instance.dungeonUI.SetCurWave(m_curWave);
     }
 
-    void WaveStart()
-    {
-        DungeonManager.instance.WaveStart();
-    }
+    void WaveStart()    { DungeonManager.instance.WaveStart(); }
+
+    void WaveEnd()      { DungeonManager.instance.WaveEnd(); } 
 
     public Monster GetAliveMonster()
     {
@@ -110,5 +134,12 @@ public class Dungeon : MonoBehaviour
             rand %= curMonsters.Count;
         }
         return null;
+    }
+
+    public Transform GetNextSpawnTransform()
+    {
+        int curIndex = spawnTransformIndex++;
+        spawnTransformIndex %= spawnTransforms.Length;
+        return spawnTransforms[curIndex];
     }
 }

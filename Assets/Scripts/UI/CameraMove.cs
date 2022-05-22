@@ -13,9 +13,11 @@ public class CameraMove : MonoBehaviour
         if (isDefault)
         {
             transform.Translate(80f, 0f, 0f);
+            isDefault = !isDefault;
         }
         else{
             transform.Translate(-80f, 0f, 0f);
+            isDefault = !isDefault;
         }
     }
 }

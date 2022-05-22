@@ -28,7 +28,6 @@ public class FloatingBlock : MonoBehaviour
     }
 
     public void Remove(){
-        dummy?.transform.SetParent(null);
         dummy = null;
         StartCoroutine("Falldown");
     }
@@ -38,6 +37,7 @@ public class FloatingBlock : MonoBehaviour
         while (m_floatHeight > transform.position.y)
         {
             transform.Translate(0f, curFloatSpeed * Time.deltaTime, 0f);
+            yield return null;
 
             if (curFloatSpeed > minFloatSpeed)
             {
@@ -53,6 +53,7 @@ public class FloatingBlock : MonoBehaviour
         while (m_defaultHeight < transform.position.y)
         {
             transform.Translate(0f, -curFloatSpeed * Time.deltaTime, 0f);
+            yield return null;
 
             if (curFloatSpeed < maxFloatSpeed)
             {

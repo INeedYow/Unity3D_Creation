@@ -48,6 +48,7 @@ public class HeroManager : MonoBehaviour
         GameManager.instance.OnDummyDrop();
     }
 
+    // TODO 개편 필요
     public void SelectHero(Hero hero){
         if (PartyManager.instance.board.isActive)
         {

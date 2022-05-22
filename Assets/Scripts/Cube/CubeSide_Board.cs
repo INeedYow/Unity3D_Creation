@@ -57,12 +57,14 @@ public class CubeSide_Board : CubeSide
 
         groundTF.rotation = Quaternion.Euler(0f, 0f, m_boardRot);
         board.isActive = true;
+        PartyManager.instance.ShowDummy();
         
         onEnterFinish?.Invoke();
         yield return null;
     }
 
     IEnumerator CloseBoard(){   //Debug.Log("co close");
+        PartyManager.instance.HideDummy();
         float dura = 0f;
         m_boardRot = 0f;
         board.isActive = false;
