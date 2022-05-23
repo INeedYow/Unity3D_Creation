@@ -29,13 +29,11 @@ public class PartyManager : MonoBehaviour
 
     public void ExitDungeon(){
         SwapGFX2Dummy();
-    }
 
-    public void TurnOffBoard()
-    {
-        HideDummy();
-        board.transform.localPosition = Vector3.zero;
-        board.isActive = false;
+        foreach(Hero hero in heroParty)
+        {
+            hero.curHp = hero.maxHp;
+        }
     }
 
     void SwapDummy2GFX(){

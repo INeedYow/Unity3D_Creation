@@ -1810,8 +1810,7 @@ MonoBehaviour:
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
-  projectile: {fileID: 4371020904711442883, guid: a6149df73104bb440b82e5d8d41fc347,
-    type: 3}
+  projectile: {fileID: 0}
   projectileTF: {fileID: 4806247788938896005}
   skills:
   - {fileID: 0}

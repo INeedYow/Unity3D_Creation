@@ -7,9 +7,11 @@ public class SkillObj_TargetAttack : SkillObject
     IDamagable target;
     public override void Works()
     {
+        if (skill.owner.target == null) return;
+        
         target = skill.owner.target.GetComponent<IDamagable>();
 
-        if (target == null) { Return(); }
+        if (target == null) { FinishWorks(); }
 
         for (int i = 0; i < data.count; i++)
         {
@@ -23,7 +25,7 @@ public class SkillObj_TargetAttack : SkillObject
                 );
             }
             else
-            {
+            {   Debug.Log("??target Att");
                 target.Damaged(
                     data.powerRatio * skill.owner.curDamage,
                     skill.owner.powerRate,
@@ -34,6 +36,6 @@ public class SkillObj_TargetAttack : SkillObject
         }
        
         target = null;
-        Return();
+        FinishWorks();
     }
 }

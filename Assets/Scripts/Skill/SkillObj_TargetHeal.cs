@@ -7,9 +7,10 @@ public class SkillObj_TargetHeal : SkillObject
     IDamagable target;
     public override void Works()
     {
+        if (skill.owner.target == null) return;
         target = skill.owner.target.GetComponent<IDamagable>();
 
-        if (target == null) { Return(); }
+        if (target == null) { FinishWorks(); }
 
         for (int i = 0; i < data.count; i++)
         {
@@ -22,6 +23,6 @@ public class SkillObj_TargetHeal : SkillObject
         }
        
         target = null;
-        Return();
+        FinishWorks();
     }
 }

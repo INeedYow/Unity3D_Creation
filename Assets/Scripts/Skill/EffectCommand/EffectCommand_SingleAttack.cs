@@ -11,15 +11,15 @@ public class EffectCommand_SingleAttack : EffectCommand
     public EffectCommand_SingleAttack(Skill skill) : base(skill) {}
     public override void Works()
     {
-        if (skill.owner.target == null) return;
+        // if (skill.owner.target == null) return;
 
-        m_target = skill.owner.target.GetComponentInChildren<IDamagable>();
-        if (m_target != null)
-        {   //
-            if (skill.data.isMagic)    { m_dmg = skill.owner.magicDamage * skill.data.powerRatio; }
-            else                       { m_dmg = skill.owner.curDamage * skill.data.powerRatio; }
+        // m_target = skill.owner.target.GetComponentInChildren<IDamagable>();
+        // if (m_target != null)
+        // {   //
+        //     if (skill.data.isMagic)    { m_dmg = skill.owner.magicDamage * skill.data.powerRatio; }
+        //     else                       { m_dmg = skill.owner.curDamage * skill.data.powerRatio; }
 
-            m_target.Damaged(m_dmg, skill.owner.powerRate, skill.owner, skill.data.isMagic);
-        }
+        //     m_target.Damaged(m_dmg, skill.owner.powerRate, skill.owner, skill.data.isMagic);
+        // }
     }
 }

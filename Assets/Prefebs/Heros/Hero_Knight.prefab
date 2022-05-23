@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 4771493527925500085}
+  tempBlock: {fileID: 0}
   placedBlock: {fileID: 0}
   placedFloat: {fileID: 0}
   hasClicked: 0
