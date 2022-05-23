@@ -14,12 +14,7 @@ public class SkillObj_TargetHeal : SkillObject
         {
             if (target == null) break;
             
-            target.Damaged(
-                data.powerRatio * skill.owner.magicDamage,
-                skill.owner.powerRate,
-                skill.owner,
-                true
-            );
+            target.Healed(data.powerRatio * skill.owner.magicDamage);
         }
        
         target = null;

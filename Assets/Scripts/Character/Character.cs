@@ -126,7 +126,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (curHp <= 0) Death();
     }
 
-
     public void Healed(float heal)
     {
         curHp += heal;

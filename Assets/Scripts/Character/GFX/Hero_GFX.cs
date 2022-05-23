@@ -27,6 +27,9 @@ public class Hero_GFX : GFX
                 hero.onMacroChange?.Invoke(i);                  
                 if (hero.actionMacros[i].Execute()) break;
             }
+            else{
+                hero.target = null;
+            }
         }
     }
 

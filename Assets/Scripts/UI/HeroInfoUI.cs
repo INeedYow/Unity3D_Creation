@@ -8,6 +8,10 @@ public class HeroInfoUI : MonoBehaviour
     public Image icon;
     public Text nameText;
 
+    private void Start() {
+        HeroManager.instance.onChangeSelectedHero += RenewUI;
+    }
+
     // TODO spec part
     public void RenewUI(Hero hero){
         if (hero == null){
