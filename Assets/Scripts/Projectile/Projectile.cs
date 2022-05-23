@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public EGroup eOwnerGroup;
+    public EGroup eTargetGroup;
     public float speed;
     public bool isMagic;
     public float remainTime;        // 도착 후 잔존시간
 
     Character   m_owner;
     bool        m_isLaunch;
-    float       m_damage;
+    float       m_damage;           // 중간에 오너가 죽어도 데미지 줄 수 있게 받아 놓음
     float       m_powerRate;
     float       m_area;
     Character   m_target;
@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
         Move(); 
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate() { // 타겟과의 거리로 맞았는지 판정
         if (!m_isLaunch) return;
         m_sqrDist = (transform.position - m_lastPos).sqrMagnitude;
         
@@ -71,7 +71,7 @@ public class Projectile : MonoBehaviour
     void AreaHit()
     {
         Collider[] colls;
-        if (eOwnerGroup == EGroup.Ally)
+        if (eTargetGroup == EGroup.Monster)
         {
             colls = Physics.OverlapSphere(transform.position, m_area, LayerMask.GetMask("Monster"));
         }

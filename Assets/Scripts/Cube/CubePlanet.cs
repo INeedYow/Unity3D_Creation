@@ -103,7 +103,7 @@ public class CubePlanet : MonoBehaviour
         m_duration = 0f;
         while (m_duration < 1f)
         {
-            m_duration += Time.deltaTime * 1f;
+            m_duration += Time.deltaTime;
             transform.rotation = Quaternion.Slerp(
                 transform.rotation, Quaternion.Euler(m_rot), m_duration);
 
@@ -115,19 +115,19 @@ public class CubePlanet : MonoBehaviour
         yield return null;
     }
 
-    public void AddFloatingBlock(Hero hero){
+    public void AddFloatingBlock(Hero hero){                        //Debug.Log("AddFloatingBlock()");
         if (floatingBlocks.Length == 0) return;
 
-        int rand = Random.Range(0, floatingBlocks.Length);
+        int rand = Random.Range(0, floatingBlocks.Length);          //Debug.Log("floatingBlocks.Length" + floatingBlocks.Length);
 
-        for (int i = rand; i < floatingBlocks.Length;){
-            if (floatingBlocks[rand].dummy == null){
-                floatingBlocks[rand].SetDummy(hero);
+        for (int i = rand; i < floatingBlocks.Length;){             //Debug.Log("i / rand : " + i + " / " + rand);
+            if (floatingBlocks[rand].dummy == null){                //Debug.Log("dummy : " + floatingBlocks[rand].dummy);
+                floatingBlocks[rand].SetDummy(hero);                //Debug.Log("SetDummy");
                 break;
             }
             else{
-                i++;
-                i %= floatingBlocks.Length;
+                i++;                                                //Debug.Log("i++ : " + i);
+                i %= floatingBlocks.Length;                         //Debug.Log("i %= length : " + i);
             }
         }
     }

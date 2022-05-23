@@ -66,7 +66,7 @@ public class Dummy : MonoBehaviour
         placedBlock = null;
 
         // 부모정보, 포지션 설정   
-        floatingDummy.transform.SetParent(floatingDummy.owner.transform);               // 에러
+        floatingDummy.transform.SetParent(floatingDummy.owner.transform);               
         floatingDummy.transform.position = floatingDummy.placedFloat.dummyTF.position;
 
         transform.SetParent(placedFloat.transform);

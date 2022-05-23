@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4154e8ca75231424dbe9e7b1cd802305, type: 3}
+  m_Name: ItemData_Knight
+  m_EditorClassIdentifier: 
+  itemName: Knight
+  desc: "\uB4E0\uB4E0\uD55C \uD0F1\uCEE4"
+  eClass: 0
+  skilldata_1: {fileID: 11400000, guid: 3b753843a7e412a45b03b2f63b9b7d6e, type: 2}
+  skilldata_2: {fileID: 0}
+  skilldata_3: {fileID: 0}
+  skilldata_4: {fileID: 0}

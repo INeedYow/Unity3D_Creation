@@ -22,7 +22,6 @@ public class DummyCursor : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("DummyPlane")))
         {
-            //blockChecker.transform.position = hit.point;
             transform.position = hit.point;
             if (!dummy.isOnBlock)
             {

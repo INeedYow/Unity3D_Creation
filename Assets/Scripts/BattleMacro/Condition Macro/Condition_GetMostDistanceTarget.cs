@@ -30,7 +30,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     
     void GetTarget()
     {   
-       if (eTargetGroup == EGroup.Ally)
+       if (eTargetGroup == EGroup.Hero)
         {   // 아군
             m_target = PartyManager.instance.GetAliveHero();
             if (m_target == null) return;

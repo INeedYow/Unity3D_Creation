@@ -15,7 +15,7 @@ public class Monster : Character
     }
 
     void InitMonster(){
-        eGroup = EGroup.Enemy;
+        eGroup = EGroup.Monster;
         monsGFX.monster = this;
     }
 

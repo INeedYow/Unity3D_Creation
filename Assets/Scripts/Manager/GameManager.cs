@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
             if (_curExp >= maxExp) { LevelUp(); } 
         }
     }
-    public int gold     { get; private set; }
+    public int gold         { get; private set; }
+    public int skillPoint   { get; private set; }
 
     public CameraMove cam;
     public CubePlanet cube;
@@ -56,8 +57,9 @@ public class GameManager : MonoBehaviour
     
     void LevelUp(){ 
         LV++;                       
-        curExp -= maxExp;           
-        maxExp += 75;               
+        curExp -= maxExp;          
+        maxExp += 75;
+        skillPoint++;   //               
         playerInfoUI.RenewLV(LV);
         playerInfoUI.RenewExp(curExp, maxExp);
         

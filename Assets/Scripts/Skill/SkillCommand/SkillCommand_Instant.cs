@@ -13,7 +13,7 @@ public class SkillCommand_Instant : SkillCommand
 
         isUsing = true;
         skill.owner.anim.SetBool(string.Format("Skill {0}", skill.ID), true);
-        Debug.Log(skill.ID + "번 째 스킬, ["+ skill.data.skillName +"] 사용");
+        
         return true;
     }
 }

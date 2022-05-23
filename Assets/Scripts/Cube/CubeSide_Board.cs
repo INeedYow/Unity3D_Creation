@@ -17,11 +17,12 @@ public class CubeSide_Board : CubeSide
     public override void Enter()
     {
         StartCoroutine("OpenBoard"); 
+        GameManager.instance.playerInfoUI.gameObject.SetActive(true);
     }
 
     public override void Exit()
     {   //Debug.Log("boardside Exit()");
-        if (board.isActive){ Debug.Log("if board.isActive");
+        if (board.isActive){ 
             m_isExit = true;
             StartCoroutine("CloseBoard"); 
         }
@@ -29,7 +30,7 @@ public class CubeSide_Board : CubeSide
             onExitFinish?.Invoke(this); 
         }
 
-        //PartyManager.instance.TurnOffBoard();
+        GameManager.instance.playerInfoUI.gameObject.SetActive(false);
     }
 
     public void TurnOnBoard(){

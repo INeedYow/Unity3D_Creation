@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public enum EMost { Least, Most };
-public enum EGroup { Ally, Enemy };
+public enum EGroup { Hero, Monster };
 public abstract class ConditionMacro : BattleMacro
 {
     protected bool isSatisfy;

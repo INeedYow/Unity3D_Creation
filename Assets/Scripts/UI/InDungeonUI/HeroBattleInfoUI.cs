@@ -8,7 +8,6 @@ public class HeroBattleInfoUI : MonoBehaviour
     public List<HeroBattleInfoUnit> battleHeroInfoUnits;
     public RectTransform rtf;
     public float defaultX;
-    //public Color checkColor = new Color(0, 1f, 1f);
 
 
     private void Awake() {

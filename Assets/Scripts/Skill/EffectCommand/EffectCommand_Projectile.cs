@@ -5,12 +5,13 @@ using UnityEngine;
 public class EffectCommand_Projectile : EffectCommand
 {
     public EProjectile eProj;
+    Projectile proj;
+
     public EffectCommand_Projectile(Skill skill, EProjectile eProjectile) 
         : base(skill)
     { eProj = eProjectile; }
 
     public override void Works(){
-        // 
     }
 
     

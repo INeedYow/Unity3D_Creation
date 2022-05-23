@@ -11,11 +11,13 @@ public class HeroManager : MonoBehaviour
     public List<Hero> heroList = new List<Hero>();
 
     public Hero selectedHero;
+    int heroCost = 1000;
+    int costMultiple = 4;
 
     [Header("UI")]
     public HeroInfoUI heroInfoUI;
     public HeroListUI heroListUI;
-    public HeroSetUI heroSetUI;
+    public HeroSetUI heroSetUI;     // macro, inven 같이 있는 UI
 
     [Header("Hero Prf")]
     public Hero prfKngiht;
@@ -26,17 +28,6 @@ public class HeroManager : MonoBehaviour
     public Skill[] prfArcherSkills;
 
     private void Awake() { instance = this; }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GetNewHero(Hero.EClass.Knight);
-        }
-        else if (Input.GetKeyDown(KeyCode.L))
-        {
-            GetNewHero(Hero.EClass.Archer);
-        }
-    }
 
     public void PickUpDummy(Hero hero){
         selectedHero = hero;
@@ -147,8 +138,19 @@ public class HeroManager : MonoBehaviour
         GameManager.instance.cubePlanet.RemoveFloatingBlock(hero);
     }
 
-    public void ToggleSetUI(){
+    // 매크로, 인벤토리 토글 // 버튼 이벤트 함수
+    public void ToggleSetUI(){ 
         heroSetUI.MenuToggle();
     }
 
+    public int GetHeroCost(){
+        if (heroList.Count < 2) { return 0; }
+        return heroCost * (int)Mathf.Pow(costMultiple, heroList.Count - 2);
+    }
+
+    public void ShowHeroUI(bool isOn){
+        heroListUI.gameObject.SetActive(isOn);
+        heroInfoUI.gameObject.SetActive(isOn);
+        heroSetUI.gameObject.SetActive(isOn);
+    }
 }

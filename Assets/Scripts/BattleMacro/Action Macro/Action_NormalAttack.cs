@@ -9,7 +9,7 @@ public class Action_NormalAttack : ActionMacro
         
         if (owner.target == null)
         {   
-            if (owner.eGroup == EGroup.Ally){
+            if (owner.eGroup == EGroup.Hero){
                 owner.target = DungeonManager.instance.curDungeon.GetRandMonster();
                 if (owner.target == null) return false;
             }

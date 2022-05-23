@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileAttackCommand : AttackCommand
 {
     EProjectile m_eProj;
+    Projectile proj;
     public ProjectileAttackCommand(Character owner, EProjectile eProj) 
         : base(owner) { m_eProj = eProj; }
 
@@ -12,7 +13,7 @@ public class ProjectileAttackCommand : AttackCommand
     {
         if (null == owner.target) return;
 
-        Projectile proj = null;
+        proj = null;
         
         proj = ObjectPool.instance.GetProjectile((int)m_eProj);
 

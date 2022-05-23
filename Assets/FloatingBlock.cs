@@ -32,7 +32,7 @@ public class FloatingBlock : MonoBehaviour
         StartCoroutine("Falldown");
     }
 
-    IEnumerator InitFloating(){
+    IEnumerator InitFloating(){             //Debug.Log("co-float");
         curFloatSpeed = maxFloatSpeed;
         while (m_floatHeight > transform.position.y)
         {
@@ -48,7 +48,7 @@ public class FloatingBlock : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Falldown(){
+    IEnumerator Falldown(){                 //Debug.Log("co-down");
         curFloatSpeed = minFloatSpeed;
         while (m_defaultHeight < transform.position.y)
         {

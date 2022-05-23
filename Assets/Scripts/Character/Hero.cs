@@ -36,7 +36,7 @@ public class Hero : Character
     }
 
     void InitHero(){
-        eGroup = EGroup.Ally;
+        eGroup = EGroup.Hero;
         heroGFX.hero = this;
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);

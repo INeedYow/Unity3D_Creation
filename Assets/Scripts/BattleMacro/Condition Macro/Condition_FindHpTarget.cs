@@ -16,7 +16,7 @@ public class Condition_FindHpTarget : ConditionMacro
 
     bool FindTarget()
     {
-        if (eTargetGroup == EGroup.Ally)
+        if (eTargetGroup == EGroup.Hero)
         {   // 아군
             foreach (Character ch in PartyManager.instance.heroParty)
             {

@@ -27,7 +27,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float maxDamage;
     public float magicDamage;
     [HideInInspector] public float lastAttackTime;
-    [Range(0.2f, 5f)] public float attackDelay;
+    [Range(0.5f, 5f)] public float attackDelay;
     [Range(2f, 20f)] public float attackRange;                      // 사정거리
     [Range(0f, 10f)] public float aoeRange;                         // 범위공격
     [Range(1f, 20f)] public float moveSpeed;                        // 
