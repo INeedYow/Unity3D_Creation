@@ -59,11 +59,11 @@ public class Projectile : MonoBehaviour
             target?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
         }
         
-        if (m_target != null)
-        {   // 오브젝트 풀 적용 중인데 몬스터 삭제하면서 화살도 같이 사라져버려서 일단 주석처리
-            // gameObject.transform.SetParent(m_target.transform);
-        }
-        //Destroy(gameObject, remainTime);
+        //if (m_target != null)
+        //{   // 오브젝트 풀 적용 중인데 몬스터 삭제하면서 화살도 같이 사라져버려서 일단 주석처리
+            //gameObject.transform.SetParent(m_target.transform);
+        //}
+
         CancelInvoke("Return");
         Invoke("Return", remainTime);
     }
@@ -85,8 +85,8 @@ public class Projectile : MonoBehaviour
             damagableTarget?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
         }
 
-        //gameObject.transform.SetParent(m_target.transform);
-        //Destroy(gameObject, remainTime);
+        //gameObject.transform.SetParent(m_target.transform); //
+        
         CancelInvoke("Return");
         Invoke("Return", remainTime);
     }

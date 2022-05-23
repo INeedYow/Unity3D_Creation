@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 1887225081497930854}
   - component: {fileID: 2436992690794004522}
   m_Layer: 0
-  m_Name: Archer Male 01
+  m_Name: GFX_Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1806,17 +1806,12 @@ MonoBehaviour:
   armorRate: 0
   magicArmorRate: 0
   targetTF: {fileID: 7011910697539786449}
+  projectileTF: {fileID: 4806247788938896005}
   targetForDebug: {fileID: 0}
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
-  projectile: {fileID: 0}
-  projectileTF: {fileID: 4806247788938896005}
-  skills:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  skills: []
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
@@ -1837,7 +1832,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 3.5
-  m_Acceleration: 100
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 0
   m_StoppingDistance: 0

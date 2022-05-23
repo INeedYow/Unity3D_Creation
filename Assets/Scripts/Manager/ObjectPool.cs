@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum EProjectile { 
-    Arrow, 
+    ArcherArrow, PoisonArrow, YellowMarble,
 }
 public enum EMonster { 
     RedSlime, BlueSlime, Spore,
+}
+public enum ESkillObj {
+    Single,
 }
 public class ObjectPool : MonoBehaviour
 {
@@ -32,15 +35,24 @@ public class ObjectPool : MonoBehaviour
     [Range(1, 10)] public int[] count_monsters;
     List<Monster>[] poolMonsters;
 
+    [Space(15f)]
+
+    [Header("SkillObject Pools")]
+    public SkillObject[] prfSkillObjs;
+    [Range(1, 100)] public int[] count_skillObjs;
+    List<SkillObject>[] poolSKillObjs; 
+
+
     private void Awake() { instance = this; }
 
     private void Start() { InitPool(); }
 
     void InitPool(){
         // list 초기화
-        poolBattleInfoText = new List<BattleInfoText>();
-        poolProjectiles = new List<Projectile>[prfProjectiles.Length];
-        poolMonsters = new List<Monster>[prfMonsters.Length];
+        poolBattleInfoText      = new List<BattleInfoText>();
+        poolProjectiles         = new List<Projectile>[prfProjectiles.Length];
+        poolMonsters            = new List<Monster>[prfMonsters.Length];
+        poolSKillObjs           = new List<SkillObject>[prfSkillObjs.Length];
         
         for(int i = 0; i < prfProjectiles.Length; i++){
             poolProjectiles[i] = new List<Projectile>();
@@ -48,6 +60,10 @@ public class ObjectPool : MonoBehaviour
 
         for(int i = 0; i < prfMonsters.Length; i++){
             poolMonsters[i] = new List<Monster>();
+        }
+
+        for(int i = 0; i < prfSkillObjs.Length; i++){
+            poolSKillObjs[i] = new List<SkillObject>();
         }
 
         // 생성
@@ -69,6 +85,13 @@ public class ObjectPool : MonoBehaviour
             if (null != prfMonsters[i])
             {
                 for(int j = 0; j < count_monsters[i]; j++) { poolMonsters[i].Add(CreateNewMonster(i)); }
+            }
+        }
+
+        for (int i = 0; i < prfSkillObjs.Length; i++){
+            if (null != prfSkillObjs[i])
+            {
+                for(int j = 0; j < count_skillObjs[i]; j++) { poolSKillObjs[i].Add(CreateNewSkillObject(i)); }
             }
         }
     }
@@ -104,7 +127,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     // Projectiles
-    Projectile CreateNewProjectile(int index, bool isActive = false){
+    Projectile CreateNewProjectile(int index, bool isActive = false){   //Debug.Log("CreateNewProj" + index); Debug.Log(poolProjectiles[0].Count);
         var obj = Instantiate(prfProjectiles[index]);
         obj.gameObject.SetActive(isActive);
         obj.transform.SetParent(transform);
@@ -130,7 +153,7 @@ public class ObjectPool : MonoBehaviour
 
     // Monsters
     Monster CreateNewMonster(int index, bool isActive = false){
-        var obj = Monster.Create((EMonster)index);
+        var obj = Monster.Create((EMonster)index);              // 팩토리패턴
         obj.gameObject.SetActive(isActive);
         obj.transform.SetParent(transform);
         return obj;
@@ -152,6 +175,31 @@ public class ObjectPool : MonoBehaviour
         var newObj = CreateNewMonster(monsterId, true);
         newObj.transform.SetParent(null);
         poolMonsters[monsterId].Add(newObj);
+        
+        return newObj;
+    }
+
+    // SkillObjects
+    SkillObject CreateNewSkillObject(int index, bool isActive = false){
+        var obj = Instantiate(prfSkillObjs[index]);
+        obj.gameObject.SetActive(isActive);
+        obj.transform.SetParent(transform);
+        return obj;
+    }
+
+    public SkillObject GetSkillObject(int objId){
+        foreach (SkillObject obj in poolSKillObjs[objId]){
+            if (!obj.gameObject.activeSelf)
+            {   
+                obj.transform.SetParent(null);
+                obj.gameObject.SetActive(true);
+                return obj;
+            }
+        }
+        
+        var newObj = CreateNewSkillObject(objId, true);
+        newObj.transform.SetParent(null);
+        poolSKillObjs[objId].Add(newObj);
         
         return newObj;
     }

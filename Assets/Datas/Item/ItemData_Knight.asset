@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Knight
   desc: "\uB4E0\uB4E0\uD55C \uD0F1\uCEE4"
   eClass: 0
-  skilldata_1: {fileID: 11400000, guid: 3b753843a7e412a45b03b2f63b9b7d6e, type: 2}
+  skilldata_1: {fileID: 0}
   skilldata_2: {fileID: 0}
   skilldata_3: {fileID: 0}
   skilldata_4: {fileID: 0}

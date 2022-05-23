@@ -56,13 +56,20 @@ public class Monster : Character
         monsGFX.repeat = conditionMacros.Length;
     }
    
-    protected override void ShowDamageText(float damage, bool isMagic = false)
-    {
-        GameManager.instance.ShowBattleInfoText(
-            isMagic ? BattleInfoType.Ally_Magic : BattleInfoType.Ally_Damage, 
-            transform.position + Vector3.up * 5f, 
-            damage
-        );
+    protected override void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false)
+    {   
+        if (isHeal) {
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Monster_heal, transform.position + Vector3.up * 5f, damage );
+        }
+        else if (isMagic){  
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Hero_magic, transform.position + Vector3.up * 5f, damage );
+        }
+        else{
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Hero_damage, transform.position + Vector3.up * 5f, damage );
+        }
     }
 
     public override void Death(){

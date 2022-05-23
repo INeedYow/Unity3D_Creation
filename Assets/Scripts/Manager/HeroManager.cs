@@ -22,10 +22,12 @@ public class HeroManager : MonoBehaviour
     [Header("Hero Prf")]
     public Hero prfKngiht;
     public Hero prfArcher;
+    public Hero prfAngel;
 
     [Header("Hero prfSkill")]
     public Skill[] prfKnightSkills;
     public Skill[] prfArcherSkills;
+    public Skill[] prfAngelSkills;
 
     private void Awake() { instance = this; }
 
@@ -39,32 +41,9 @@ public class HeroManager : MonoBehaviour
         GameManager.instance.OnDummyDrop();
     }
 
-    // TODO 개편 필요
     public void SelectHero(Hero hero){
-        if (PartyManager.instance.board.isActive)
-        {
-            if (null != selectedHero)                   // 이미 선택한 영웅이 있던 경우
-            {   
-                selectedHero.dummy.gameObject.SetActive(false);
-            }
-            else if (hero.dummy.placedBlock != null)    // 해당 영웅이 이미 배치된 경우
-            {   
-                hero.dummy.placedBlock.dummy = null;
-                hero.dummy.placedBlock = null;
-            }
-            
-            selectedHero = hero;
-            onChangeSelectedHero?.Invoke(selectedHero);
-            hero.dummy.gameObject.SetActive(true);
-            heroInfoUI.RenewUI(selectedHero);
-        }
-        else{
-            //if (selectedHero == hero) return;
-            selectedHero = hero;
-            MacroManager.instance.macroUI.RenewUI(hero);
-            heroInfoUI.RenewUI(selectedHero);
-            onChangeSelectedHero?.Invoke(selectedHero);
-        }
+        selectedHero = hero;
+        onChangeSelectedHero?.Invoke(selectedHero);
     }
 
     public void GetNewHero(Hero.EClass eClass){
@@ -119,6 +98,29 @@ public class HeroManager : MonoBehaviour
                 break;
             }
 
+            case Hero.EClass.Angel:
+            {
+                hero = Instantiate(prfAngel);
+
+                for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+                {
+                    hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0], hero.transform);
+                    hero.conditionMacros[i].owner = hero;
+                }
+                for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
+                {
+                    hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0], hero.transform);
+                    hero.actionMacros[i].owner = hero;
+                }
+
+                for (int i = 0; i < prfAngelSkills.Length; i++)
+                {
+                    hero.skills[i] = Instantiate(prfAngelSkills[i], hero.transform);
+                    hero.skills[i].Init(hero, i + 1);
+                }
+                break;
+            }
+
             // 직업 추가
 
         }
@@ -144,8 +146,8 @@ public class HeroManager : MonoBehaviour
     }
 
     public int GetHeroCost(){
-        if (heroList.Count < 2) { return 0; }
-        return heroCost * (int)Mathf.Pow(costMultiple, heroList.Count - 2);
+        if (heroList.Count < 3) { return 0; }
+        return heroCost * (int)Mathf.Pow(costMultiple, heroList.Count - 3);
     }
 
     public void ShowHeroUI(bool isOn){

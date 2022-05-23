@@ -6,11 +6,11 @@ public class Dummy : MonoBehaviour
 {
     public Hero owner;
     
-    public BoardBlock tempBlock;        // 드래그 중에 저장되는 블럭
-    public BoardBlock placedBlock;      // 보드에 세팅된 자기 위치 블럭
-    public FloatingBlock placedFloat;   // 파티에 참가하지 않은 영웅들 있는 블럭
-    public bool hasClicked;
-    public bool isOnBlock;
+    [HideInInspector] public BoardBlock tempBlock;        // 드래그 중에 저장되는 블럭
+    [HideInInspector] public BoardBlock placedBlock;      // 보드에 세팅된 자기 위치 블럭
+    [HideInInspector] public FloatingBlock placedFloat;   // 파티에 참가하지 않은 영웅들 있는 블럭
+    [HideInInspector] public bool hasClicked;
+    [HideInInspector] public bool isOnBlock;
 
     private void OnMouseDown() {
         hasClicked = true;

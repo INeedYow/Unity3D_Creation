@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-// 캐릭터 전투, 비전투 구분하여 관리하는 법.?
+
 public class Hero : Character
 {
-    public enum EClass { Knight, Archer, }
+    public UnityAction<int> onLevelUp;
+
+    public enum EClass { Knight, Archer, Angel, Necromancer, Bard, Templar, Magician,  }
     [Header("GFX")]
     public Hero_GFX heroGFX;
     public Dummy dummy;
@@ -15,7 +18,7 @@ public class Hero : Character
     
     [Header("Level")]
     public int level = 1;
-    public float maxExp;
+    public float maxExp = 100;
     float _curExp;  //TODO
     public float curExp {
         get { return _curExp; } 
@@ -25,7 +28,8 @@ public class Hero : Character
             {
                 level++;
                 _curExp -= maxExp;
-                maxExp += 100f; // 임시로
+                maxExp += 100f; 
+                onLevelUp?.Invoke(level);
             }
         }
     }
@@ -48,17 +52,25 @@ public class Hero : Character
         // Attack Command
         switch(eClass){
             case EClass.Knight: attackCommand = new NormalAttackCommand(this); break;
-            case EClass.Archer: attackCommand = new ProjectileAttackCommand(this, EProjectile.Arrow); break;
+            case EClass.Archer: attackCommand = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
+            case EClass.Angel:  attackCommand = new ProjectileAttackCommand(this, EProjectile.YellowMarble); break;
         }
     }
 
-    protected override void ShowDamageText(float damage, bool isMagic = false)
-    {
-        GameManager.instance.ShowBattleInfoText(
-            isMagic ? BattleInfoType.Enemy_Magic : BattleInfoType.Enemy_Damage, 
-            transform.position + Vector3.up * 5f, 
-            damage
-        );
+    protected override void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false)
+    {   
+        if (isHeal) {
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Hero_heal, transform.position + Vector3.up * 5f, damage );
+        }
+        else if (isMagic){  // 피해 받았을 때 동작하기 때문에 InfoType enemy
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Monster_magic, transform.position + Vector3.up * 5f, damage );
+        }
+        else{
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Monster_damage, transform.position + Vector3.up * 5f, damage );
+        }
     }
 
     public override void Death()

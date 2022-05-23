@@ -15,12 +15,12 @@ public class PartyManager : MonoBehaviour
         }
     }
 
+    public int maxCount = 3;
     public List<Hero> heroParty = new List<Hero>();
-    public int maxCount = 2;
     [Header("Board")]
     public Board board;
     
-    private void Awake() { _instance = this; maxCount = 2;}
+    private void Awake() { _instance = this;}
 
     public void EnterDungeon(){
         SwapDummy2GFX();

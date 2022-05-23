@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleInfoType { Ally_Damage, Ally_Magic, Ally_Heal, Enemy_Damage, Enemy_Magic, Enemy_Heal, Etc, }
+public enum BattleInfoType { Hero_damage, Hero_magic, Hero_heal, Monster_damage, Monster_magic, Monster_heal, Etc, }
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
@@ -82,11 +82,15 @@ public class GameManager : MonoBehaviour
     Color GetColorByInfoType(BattleInfoType infoType){
         switch (infoType)
         {
-            case BattleInfoType.Ally_Damage:    return Color.red;
-            case BattleInfoType.Ally_Heal:      return Color.green;
-            case BattleInfoType.Enemy_Damage:   return Color.magenta;
+            case BattleInfoType.Hero_damage:        return Color.red;
+            case BattleInfoType.Hero_heal:          return Color.green;
+            case BattleInfoType.Hero_magic:         return Color.blue;
+
+            case BattleInfoType.Monster_damage:     return Color.magenta;
+            case BattleInfoType.Monster_heal:       return Color.grey;
+            case BattleInfoType.Monster_magic:      return Color.yellow;
             //
-            default:                            return Color.black;
+            default:                                return Color.black;
         }
     }
 

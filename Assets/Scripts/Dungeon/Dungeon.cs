@@ -93,8 +93,8 @@ public class Dungeon : MonoBehaviour
     }
 
     void GetReward(){
-        GameManager.instance.AddGold(m_gold);   Debug.Log(m_exp);
-        GameManager.instance.AddExp(m_exp);     Debug.Log(m_exp);
+        GameManager.instance.AddGold(m_gold);   //Debug.Log(m_gold);
+        GameManager.instance.AddExp(m_exp);     //Debug.Log(m_exp);
         m_gold = 0;
         m_exp = 0;
     }

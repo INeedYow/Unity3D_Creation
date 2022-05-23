@@ -9,14 +9,15 @@ public class SkillObj_TargetShoot : SkillObject
 
     public override void Works()
     {   
-        m_proj = ObjectPool.instance.GetProjectile((int)eProjectile);   //Debug.Log("proj : " + m_proj);
-        m_proj.transform.position = skill.owner.projectileTF.position;
-        
-        for (int i = 0; i < data.count; i++)        //Debug.Log("data.count : " + data.count);
+        for (int i = 0; i < data.count; i++)        
         {
-            if (data.isMagic)           //Debug.Log("ismagic");
+            m_proj = ObjectPool.instance.GetProjectile((int)eProjectile);  
+            m_proj.transform.position = skill.owner.projectileTF.position;
+
+            if (skill.owner.target == null) break;
+
+            if (data.isMagic)           
             {
-                if (skill.owner.target == null) return;
                 m_proj.Launch(
                     skill.owner.target, 
                     skill.owner.magicDamage * data.powerRatio, 
@@ -24,9 +25,8 @@ public class SkillObj_TargetShoot : SkillObject
                     data.area);
             }
             
-            else                        //Debug.Log("else");
+            else                        
             {
-                if (skill.owner.target == null) return;
                 m_proj.Launch(
                     skill.owner.target,
                     skill.owner.curDamage * data.powerRatio,

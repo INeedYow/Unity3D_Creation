@@ -41,7 +41,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
    
     [Header("Transform")]
-    public Transform targetTF;                  // 발사체 도착 위치(맞을 위치)
+    public Transform targetTF;                          // 투사체 도착 위치(맞을 위치)
+    public Transform projectileTF;                      // 투사체 생성 위치
     
     //[HideInInspector]
     public Character targetForDebug;
@@ -60,17 +61,12 @@ public abstract class Character : MonoBehaviour, IDamagable
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
 
-    [Header("Projectile")]
-    public Projectile projectile;
-    public Transform projectileTF;      // 투사체 생성 위치
-
     [Header("Skill")]
     public Skill[] skills;
 
     [HideInInspector] public AttackCommand attackCommand;
     [HideInInspector] public Animator anim;
-   // [HideInInspector] 
-    public bool isStop;    
+    [HideInInspector] public bool isStop;    
     [HideInInspector] public bool isDead;
     protected int getDamage;
     protected Character attacker;
@@ -130,14 +126,16 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (curHp <= 0) Death();
     }
 
-    protected abstract void ShowDamageText(float damage, bool isMagic = false);
 
     public void Healed(float heal)
     {
         curHp += heal;
         if (curHp > maxHp) curHp = maxHp;
+        onHpChange?.Invoke();
         DungeonManager.instance.onChangeAnyHP?.Invoke();
+        ShowDamageText(heal, true, true);
     }
+    protected abstract void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false);
 
     public abstract void Death();
 
