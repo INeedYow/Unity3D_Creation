@@ -520,14 +520,14 @@ MonoBehaviour:
   eGroup: 1
   curHp: 130
   maxHp: 130
-  minDamage: 1
-  maxDamage: 2
+  minDamage: 2
+  maxDamage: 3
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 1.8
-  attackRange: 3
+  attackRange: 4
   aoeRange: 0
-  moveSpeed: 7
+  moveSpeed: 11
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 1.5

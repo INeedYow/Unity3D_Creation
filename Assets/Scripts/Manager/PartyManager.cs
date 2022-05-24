@@ -20,7 +20,7 @@ public class PartyManager : MonoBehaviour
     [Header("Board")]
     public Board board;
     
-    private void Awake() { _instance = this;}
+    private void Awake() { _instance = this; }
 
     public void EnterDungeon(){
         SwapDummy2GFX();
@@ -33,6 +33,8 @@ public class PartyManager : MonoBehaviour
         foreach(Hero hero in heroParty)
         {
             hero.curHp = hero.maxHp;
+            
+            if (hero.isDead) hero.isDead = false;
         }
     }
 

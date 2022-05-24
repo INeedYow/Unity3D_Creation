@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public PlayerInfoUI playerInfoUI;
     public GameObject worldCanvas;
 
+    [Header("Etc")]
+    public Vector3 focusedScale = new Vector3 (0.5f, 0.5f, 0.5f);
+
     BattleInfoText m_battleInfotext;
     
     //
@@ -43,7 +46,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 50;   // 프레임
         LV = 1;
         maxExp = 150;
-        gold = 90000000;
+        gold = 1000000;
     }
 
     private void Start() { InitUI(); }
@@ -88,8 +91,8 @@ public class GameManager : MonoBehaviour
             case BattleInfoType.Hero_magic:         return Color.blue;
 
             case BattleInfoType.Monster_damage:     return Color.magenta;
-            case BattleInfoType.Monster_heal:       return Color.grey;
-            case BattleInfoType.Monster_magic:      return Color.yellow;
+            case BattleInfoType.Monster_heal:       return Color.yellow;
+            case BattleInfoType.Monster_magic:      return Color.white;
             //
             default:                                return Color.black;
         }

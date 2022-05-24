@@ -21,8 +21,6 @@ public class FloatingBlock : MonoBehaviour
         if (hero == null) return;
         hero.dummy.gameObject.SetActive(true); // temp
         dummy = hero.dummy;
-        dummy.transform.position = dummyTF.position;
-        dummy.transform.SetParent(transform);
         dummy.placedFloat = this;
         StartCoroutine("InitFloating");
     }
@@ -32,7 +30,7 @@ public class FloatingBlock : MonoBehaviour
         StartCoroutine("Falldown");
     }
 
-    IEnumerator InitFloating(){             //Debug.Log("co-float");
+    IEnumerator InitFloating(){             
         curFloatSpeed = maxFloatSpeed;
         while (m_floatHeight > transform.position.y)
         {
@@ -48,7 +46,7 @@ public class FloatingBlock : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Falldown(){                 //Debug.Log("co-down");
+    IEnumerator Falldown(){                 
         curFloatSpeed = minFloatSpeed;
         while (m_defaultHeight < transform.position.y)
         {

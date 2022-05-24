@@ -45,7 +45,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Transform projectileTF;                      // 투사체 생성 위치
     
     //[HideInInspector]
-    public Character targetForDebug;
+    public Character targetForDebug;                    // 임시 디버그용
     Character _target;
     public Character target{
         get { return _target; } 
@@ -97,7 +97,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.enabled = false;
         nav.speed = moveSpeed;
         nav.stoppingDistance = attackRange;
-        nav.acceleration = 20f;
+        nav.acceleration = 50f;
         nav.angularSpeed = 360f;
     }
 

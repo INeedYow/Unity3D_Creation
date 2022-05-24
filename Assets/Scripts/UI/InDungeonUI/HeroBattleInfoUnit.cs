@@ -17,6 +17,12 @@ public class HeroBattleInfoUnit : MonoBehaviour
         icon.sprite = m_owner.icon;
         m_owner.onHpChange += RenewHpBar;
         m_owner.onMacroChange += RenewMacroBox;
+
+        RenewHpBar();
+    }
+
+    private void OnEnable() {
+        ResetMacroBox();
     }
 
     private void OnDisable() {
@@ -37,6 +43,14 @@ public class HeroBattleInfoUnit : MonoBehaviour
             macroCheckBoxes[m_prevIndex].color = Color.white;
             m_prevIndex = index;
             macroCheckBoxes[m_prevIndex].color = new Color(0f, 1f, 1f);
+        }
+    }
+
+    void ResetMacroBox(){
+        macroCheckBoxes[0].color = new Color(0f, 1f, 1f);
+        for (int i = 1 ; i < macroCheckBoxes.Length; i++)
+        {
+            macroCheckBoxes[i].color = Color.white;
         }
     }
 }

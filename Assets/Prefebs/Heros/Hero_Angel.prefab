@@ -91,8 +91,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 6167307482157590927}
   tempBlock: {fileID: 0}
-  placedBlock: {fileID: 0}
-  placedFloat: {fileID: 0}
   hasClicked: 0
   isOnBlock: 0
 --- !u!65 &6200397377475920254
@@ -22283,7 +22281,7 @@ MonoBehaviour:
   attackDelay: 1.4
   attackRange: 8
   aoeRange: 0
-  moveSpeed: 9
+  moveSpeed: 15
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 1.5

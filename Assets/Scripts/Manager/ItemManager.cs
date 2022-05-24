@@ -9,10 +9,7 @@ public class ItemManager : MonoBehaviour
 
 
     private void Awake() { instance = this; }
-    private void Start() {
-        HideInfoUI();
-        Item.s_scale = new Vector3(0.5f, 0.5f, 0.5f);
-    }
+    private void Start() { HideInfoUI(); }
 
 
     public void ShowInfoUI(ItemData data){

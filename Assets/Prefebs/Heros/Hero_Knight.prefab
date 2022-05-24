@@ -1569,7 +1569,7 @@ MonoBehaviour:
   attackDelay: 1
   attackRange: 4
   aoeRange: 0
-  moveSpeed: 10
+  moveSpeed: 16
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 1.5
@@ -1827,8 +1827,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 4771493527925500085}
   tempBlock: {fileID: 0}
-  placedBlock: {fileID: 0}
-  placedFloat: {fileID: 0}
   hasClicked: 0
   isOnBlock: 0
 --- !u!65 &8038379427137922207
