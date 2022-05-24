@@ -7,6 +7,7 @@ public class MacroManager : MonoBehaviour
 {
     public static MacroManager instance { get; private set; }
     public HeroMacroUI macroUI;
+    public Button macroBtn;
 
     [Header("Hero Macro")]
     public List<ConditionMacro> prfConditionMacros;
@@ -33,23 +34,26 @@ public class MacroManager : MonoBehaviour
         Hero hero = HeroManager.instance.selectedHero;
         if (null == hero) return;
         if (isCondition)
-        {   Debug.Log("SetMacro_Con");
+        {   //Debug.Log("SetMacro_Con");
             Destroy(hero.conditionMacros[macroUnitID].gameObject);
             hero.conditionMacros[macroUnitID] = Instantiate(prfConditionMacros[value]);
             hero.conditionMacros[macroUnitID].owner = hero;
         }
-        else{   Debug.Log("SetMacro_Act");
+        else{   //Debug.Log("SetMacro_Act");
             Destroy(hero.actionMacros[macroUnitID].gameObject);
             hero.actionMacros[macroUnitID] = Instantiate(prfActionMacros[value]);
             hero.actionMacros[macroUnitID].owner = hero;
         }
     }
 
-    private void Update() { // TODO
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            HeroManager.instance.heroSetUI.gameObject.SetActive(
-                !HeroManager.instance.heroSetUI.gameObject.activeSelf);
-        }
+    public void ShowMacroUI(){
+        macroUI.gameObject.SetActive(true);
+        macroBtn.interactable = false;
+        InventoryManager.instance.HideInvenUI();
+    }
+
+    public void HideMacroUI(){
+        macroUI.gameObject.SetActive(false);
+        macroBtn.interactable = true;
     }
 }

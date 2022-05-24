@@ -11,13 +11,13 @@ public class HeroSetUI : MonoBehaviour
     public Button invenBtn;
     public Button macroBtn;
 
-    private void OnEnable() {
-        PartyManager.instance.board.isActive = false;
-    }
+    // private void OnEnable() {
+    //     PartyManager.instance.board.isActive = false;
+    // }
 
-    private void OnDisable() {
-        PartyManager.instance.board.isActive = true;
-    }
+    // private void OnDisable() {
+    //     PartyManager.instance.board.isActive = true;
+    // }
 
     public void MenuToggle(){
         invenUI.gameObject.SetActive(!invenUI.isActiveAndEnabled);

@@ -18,7 +18,13 @@ public class Item : MonoBehaviour
     private void OnMouseDown() { 
         if (Time.time < lastClickTime + 1f)
         {   //Debug.Log("DB Click");
-            Buy(); return;
+            if (Buy()) {
+                return;
+            }
+        
+            else{
+
+            }
         }
         lastClickTime = Time.time;
     }

@@ -34,6 +34,11 @@ public class Hero : Character
         }
     }
 
+    [Header("Equipment")]
+    public WeaponItemData       weaponData;
+    public ArmorItemData        armorData;
+    public AccessoryItemData    accessoryData;
+
     new protected void Awake() {
         base.Awake();
         InitHero();
@@ -86,6 +91,8 @@ public class Hero : Character
         target = null;
     }
 
+    // 파티 관련
+
     public void Join(){
         if (isJoin) return;
         PartyManager.instance.Join(this);
@@ -97,5 +104,19 @@ public class Hero : Character
         PartyManager.instance.Leave(this);
         isJoin = false;
         dummy.gameObject.SetActive(false);
+    }
+
+    // 장비 관련
+    
+    public void Equip(WeaponItemData itemData){
+        UnEquipWeapon();
+        weaponData = itemData;
+    }
+
+    public void UnEquipWeapon()
+    {
+        if (weaponData == null) return;
+        InventoryManager.instance.invenUI.AddItem(weaponData);
+        weaponData = null;
     }
 }
