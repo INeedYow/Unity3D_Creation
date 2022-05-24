@@ -27,15 +27,15 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float maxDamage;
     public float magicDamage;
     [HideInInspector] public float lastAttackTime;
-    [Range(0.5f, 5f)] public float attackDelay;
+    [Range(0.1f, 2f)] public float attackDelay;
     [Range(2f, 20f)] public float attackRange;                      // 사정거리
     [Range(0f, 10f)] public float aoeRange;                         // 범위공격
     [Range(1f, 20f)] public float moveSpeed;                        // 
     [Space(10f)]
     [Range(1f, 50f)] public float criticalChance = 10f;
-    [Range(0f, 20f)] public float dodgeChance = 1f;
+    [Range(0f, 30f)] public float dodgeChance = 1f;
     [Space(10f)]
-    [Range(1f, 3f)] public float criticalRate = 1.5f;               // 치명타 배율 (%)
+    [Range(1f, 4f)] public float criticalRate = 1.5f;               // 치명타 배율 (%)
     [Range(0f, 2f)] public float powerRate = 1f;                    // 추가 피해 (%)
     [Range(0f, 1f)] public float armorRate = 0f;                    // 방어율 (%)
     [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
@@ -90,12 +90,15 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     void InitCharacter(){
         // 컴포넌트 초기화
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();      
         nav = GetComponent<NavMeshAgent>();
         // 컴포넌트 설정
+        anim.speed = 2f;
         nav.enabled = false;
         nav.speed = moveSpeed;
         nav.stoppingDistance = attackRange;
+        nav.acceleration = 20f;
+        nav.angularSpeed = 360f;
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
@@ -143,8 +146,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         target = null; 
     }
 
-    public void Revive(float rateHp)
-    {
+    public void Revive(float rateHp) {
         isDead = false;
         curHp = 0.01f * rateHp * maxHp;
     }

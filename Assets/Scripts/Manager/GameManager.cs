@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 50;   // 프레임
         LV = 1;
         maxExp = 150;
+        gold = 90000000;
     }
 
     private void Start() { InitUI(); }

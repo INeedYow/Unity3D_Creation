@@ -9,7 +9,12 @@ public class MonAction_Attack : ActionMacro
         if (owner.target == null)  return false;
         
         if (owner.IsTargetInRange(owner.attackRange))    
-        { owner.AttackInit(); }
+        { 
+            if (!owner.nav.isStopped){ 
+                owner.nav.isStopped = true; 
+            }
+            owner.AttackInit(); 
+        }
         else { MoveToTarget(); }
 
         return true;

@@ -23,9 +23,9 @@ public class CubePlanet : MonoBehaviour
 
     void Init(){
         // 이벤트 함수
-        foreach(CubeSide cube in cubeSides){ 
-            cube.onExitFinish += ExitFinish; 
-            cube.onEnterFinish += EnterFinish;
+        foreach(CubeSide cubeSide in cubeSides){ 
+            cubeSide.onExitFinish += ExitFinish; 
+            cubeSide.onEnterFinish += EnterFinish;
         }
 
         // floating block 배열 초기화
@@ -118,16 +118,16 @@ public class CubePlanet : MonoBehaviour
     public void AddFloatingBlock(Hero hero){                        //Debug.Log("AddFloatingBlock()");
         if (floatingBlocks.Length == 0) return;
 
-        int rand = Random.Range(0, floatingBlocks.Length);          //Debug.Log("floatingBlocks.Length" + floatingBlocks.Length);
+        int randIndex = Random.Range(0, floatingBlocks.Length);     //Debug.Log("floatingBlocks.Length" + floatingBlocks.Length);
 
-        for (int i = rand; i < floatingBlocks.Length;){             //Debug.Log("i / rand : " + i + " / " + rand);
-            if (floatingBlocks[rand].dummy == null){                //Debug.Log("dummy : " + floatingBlocks[rand].dummy);
-                floatingBlocks[rand].SetDummy(hero);                //Debug.Log("SetDummy");
+        for (int i = 0; i < floatingBlocks.Length; i++){            //Debug.Log("i / rand : " + i + " / " + rand);
+            if (floatingBlocks[randIndex].dummy == null){           //Debug.Log("dummy : " + floatingBlocks[rand].dummy);
+                floatingBlocks[randIndex].SetDummy(hero);           //Debug.Log("SetDummy");
                 break;
             }
             else{
-                i++;                                                //Debug.Log("i++ : " + i);
-                i %= floatingBlocks.Length;                         //Debug.Log("i %= length : " + i);
+                randIndex++;                                        //Debug.Log("i++ : " + i);
+                randIndex %= floatingBlocks.Length;                 //Debug.Log("i %= length : " + i);
             }
         }
     }

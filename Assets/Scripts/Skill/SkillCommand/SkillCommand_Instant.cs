@@ -11,6 +11,8 @@ public class SkillCommand_Instant : SkillCommand
         if (isUsing) return true;
         if (Time.time < lastSkillTime + skill.data.cooldown) return false;
 
+        if (!skill.owner.nav.isStopped) { skill.owner.nav.isStopped = true; }
+        
         isUsing = true;
         skill.owner.anim.SetBool(string.Format("Skill {0}", skill.ID), true);
         

@@ -17,6 +17,7 @@ public class SkillCommand_Targeting : SkillCommand
             return true;
         }
         
+        if (!skill.owner.nav.isStopped) { skill.owner.nav.isStopped = true; }
         isUsing = true;
         skill.owner.anim.SetBool(string.Format("Skill {0}", skill.ID), true);
         return true;

@@ -18,7 +18,8 @@ public class Action_NormalAttack : ActionMacro
         
         if (owner.IsTargetInRange(owner.attackRange))
         {   
-            owner.nav.isStopped = true;
+            if (!owner.nav.isStopped)
+            { owner.nav.isStopped = true; }
             owner.AttackInit();
         }
         else{   

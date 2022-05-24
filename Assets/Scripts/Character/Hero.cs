@@ -8,7 +8,7 @@ public class Hero : Character
 {
     public UnityAction<int> onLevelUp;
 
-    public enum EClass { Knight, Archer, Angel, Necromancer, Bard, Templar, Magician,  }
+    public enum EClass { Knight, Archer, Angel, Necromancer, Bard, Templar,  }  // magician / wizard / sorcerer(sorceress)
     [Header("GFX")]
     public Hero_GFX heroGFX;
     public Dummy dummy;

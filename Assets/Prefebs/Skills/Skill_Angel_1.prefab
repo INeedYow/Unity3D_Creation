@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5848136990117522458}
-  - component: {fileID: 7257369347023308145}
+  - component: {fileID: 8747566507622702728}
   m_Layer: 0
   m_Name: SkillObject
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 1808658932826605845}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7257369347023308145
+--- !u!114 &8747566507622702728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1967517694884169824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f34ba91887022074493559c869518e7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 957bc63e6f39f33459417a3466cb5b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f7fb6fff9e903af41a328e24a0071681, type: 2}
@@ -92,4 +92,4 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 5183a557fe28880498dcaf089b4f150c, type: 2}
   owner: {fileID: 0}
   ID: 0
-  skillObj: {fileID: 7257369347023308145}
+  skillObj: {fileID: 8747566507622702728}

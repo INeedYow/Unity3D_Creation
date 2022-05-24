@@ -12,7 +12,7 @@ public class HeroManager : MonoBehaviour
 
     public Hero selectedHero;
     int heroCost = 1000;
-    int costMultiple = 4;
+    int costMultiple = 2;
 
     [Header("UI")]
     public HeroInfoUI heroInfoUI;
