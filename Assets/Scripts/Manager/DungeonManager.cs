@@ -44,10 +44,11 @@ public class DungeonManager : MonoBehaviour
         // UI
         dungeonUI.gameObject.SetActive(true);
         dungeonUI.Init(curDungeon);
-        GameManager.instance.playerInfoUI.gameObject.SetActive(false);
 
         //Temp
-        GameManager.instance.cam.ToggleView();
+        // GameManager.instance.playerInfoUI.gameObject.SetActive(false);
+        // GameManager.instance.cam.ToggleView();
+        GameManager.instance.EnterDungeon(true);
     }
 
     public void Exit()
@@ -57,10 +58,11 @@ public class DungeonManager : MonoBehaviour
         curDungeon = null;
         PartyManager.instance.ExitDungeon();
         dungeonUI.gameObject.SetActive(false);
-        GameManager.instance.playerInfoUI.gameObject.SetActive(true);
 
         //
-        GameManager.instance.cam.ToggleView();
+        // GameManager.instance.playerInfoUI.gameObject.SetActive(true);
+        // GameManager.instance.cam.ToggleView();
+        GameManager.instance.EnterDungeon(false);
     }
 
     public void WaveStart()

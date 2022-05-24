@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     [Header("Cube Planet")]
     public CubePlanet cubePlanet;
-    [Header("Transparent Plane")]
+    [Header("Dummy tools")]
     public GameObject dummyPlane;
     public DummyCursor cursor;
     
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Etc")]
     public Vector3 focusedScale = new Vector3 (0.5f, 0.5f, 0.5f);
-
+    public GameObject transparentButton;        // 입력 막을 투명 버튼
     BattleInfoText m_battleInfotext;
     
     //
@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     public int skillPoint   { get; private set; }
 
     public CameraMove cam;
-    public CubePlanet cube;
 
     private void Awake() { 
         instance = this; 
@@ -122,6 +121,17 @@ public class GameManager : MonoBehaviour
 
     public void RenewCurParty(int value){
         playerInfoUI.RenewCurParty(value);
+    }
+
+    ///////////////////////////////
+
+    public void LockInput(bool isOn) { transparentButton.gameObject.SetActive(isOn); }
+    public void EnterDungeon(bool isEnter){
+        cubePlanet.gameObject.SetActive(!isEnter);
+        playerInfoUI.gameObject.SetActive(!isEnter);
+        
+        //temp
+        cam.ToggleView();
     }
 
 

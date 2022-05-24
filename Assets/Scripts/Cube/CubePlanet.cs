@@ -11,7 +11,6 @@ public class CubePlanet : MonoBehaviour
     [Space(6f)][Header("-------------------------------------------------")]
     public GameObject floatingblocksParent;
     public FloatingBlock[] floatingBlocks;
-    public GameObject transparentPanel;
     public bool isRolling;
 
     float m_duration;
@@ -86,7 +85,7 @@ public class CubePlanet : MonoBehaviour
 
     void LockInput(bool isLock){
         isRolling = isLock;
-        transparentPanel.gameObject.SetActive(isLock);
+        GameManager.instance.LockInput(isLock);
     }
 
     void EnterFinish(){

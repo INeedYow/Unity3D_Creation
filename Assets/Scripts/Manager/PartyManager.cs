@@ -41,7 +41,7 @@ public class PartyManager : MonoBehaviour
     void SwapDummy2GFX(){
         foreach(Hero hero in heroParty)
         {
-            hero.dummy.gameObject.SetActive(false);
+            //hero.dummy.gameObject.SetActive(false);
             hero.heroGFX.gameObject.SetActive(true);
         }
     }
@@ -49,26 +49,26 @@ public class PartyManager : MonoBehaviour
     void SwapGFX2Dummy(){
         foreach(Hero hero in heroParty)
         {
-            hero.dummy.gameObject.SetActive(true);
+            //hero.dummy.gameObject.SetActive(true);
             hero.heroGFX.gameObject.SetActive(false);
         }
     }
 
-    public void ShowDummy(){
-        if (heroParty.Count == 0) return;
-        foreach(Hero hero in heroParty)
-        {
-            hero.dummy.gameObject.SetActive(true);
-        }
-    }
+    // public void ShowDummy(){
+    //     if (heroParty.Count == 0) return;
+    //     foreach(Hero hero in heroParty)
+    //     {
+    //         hero.dummy.gameObject.SetActive(true);
+    //     }
+    // }
 
-    public void HideDummy(){
-        if (heroParty.Count == 0) return;
-        foreach(Hero hero in heroParty)
-        {
-            hero.dummy.gameObject.SetActive(false);
-        }
-    }
+    // public void HideDummy(){
+    //     if (heroParty.Count == 0) return;
+    //     foreach(Hero hero in heroParty)
+    //     {
+    //         hero.dummy.gameObject.SetActive(false);
+    //     }
+    // }
 
     public void ResetHeroPos(){
         foreach (Hero hero in heroParty)
