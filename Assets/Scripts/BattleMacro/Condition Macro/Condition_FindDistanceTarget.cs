@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class Condition_FindDistanceTarget : ConditionMacro
 {
+    [Tooltip("Least : 최소 / Most : 최대")]
     public EMost eMost;
     public EGroup eTargetGroup;
-    [Tooltip("distance")]
+    [Tooltip("distance")] 
     public float value;
     float m_sqrValue;
     float m_sqrDist;
 
-    private void Start() {
-        m_sqrValue = value * value;
-    }
+    private void Start() { m_sqrValue = value * value; }
 
-    private void OnEnable() 
-    {   
+    private void OnEnable() {   
         DungeonManager.instance.onWaveStart += OnBattle; 
-        DungeonManager.instance.onWaveEnd += OffBattle;   }
-    private void OnDisable()    
-    {   
+        DungeonManager.instance.onWaveEnd += OffBattle;   
+    }
+    private void OnDisable() {   
         DungeonManager.instance.onWaveStart -= OnBattle; 
-        DungeonManager.instance.onWaveEnd -= OffBattle;  }
+        DungeonManager.instance.onWaveEnd -= OffBattle;  
+    }
 
     public override bool IsSatisfy()
     {  

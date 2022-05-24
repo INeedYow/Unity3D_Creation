@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Condition_GetMostHpTarget : ConditionMacro
 {
+    [Tooltip("Least : 최소 / Most : 최대")]
     public EMost eMost;
     public EGroup eTargetGroup;
     Character m_target;
     float m_value;
 
-    private void Start() {
-        DungeonManager.instance.onChangeAnyHP += GetTarget;
-    }
+    private void OnEnable()     { DungeonManager.instance.onChangeAnyHP += GetTarget; }
+    private void OnDisable()    { DungeonManager.instance.onChangeAnyHP -= GetTarget; }
 
     public override bool IsSatisfy(){
-        if (null == m_target) GetTarget();
+        if (null == owner.target) GetTarget();
         return true;
     }
 

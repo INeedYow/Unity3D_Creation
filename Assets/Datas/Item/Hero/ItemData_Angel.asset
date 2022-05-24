@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Angel
   desc: "\uB4E0\uB4E0\uD55C \uC9C0\uC6D0\uAC00"
+  icon: {fileID: 0}
   eClass: 2
-  skilldata_1: {fileID: 0}
-  skilldata_2: {fileID: 0}
-  skilldata_3: {fileID: 0}
-  skilldata_4: {fileID: 0}
+  skillDatas:
+  - {fileID: 11400000, guid: 5183a557fe28880498dcaf089b4f150c, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

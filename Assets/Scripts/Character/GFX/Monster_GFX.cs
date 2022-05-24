@@ -23,7 +23,9 @@ public class Monster_GFX : GFX
                 if (monster.actionMacros[i] == null) break;
 
                 if (monster.actionMacros[i].Execute()) break;
+                else { monster.target = null; }
             }
+            else { monster.target = null; }
         }  
     }
 

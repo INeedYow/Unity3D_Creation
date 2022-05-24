@@ -12,6 +12,8 @@ public class Hero_GFX : GFX
         hero.isStop = true; 
     }
 
+    // 조건 매크로 체크해서 아닌 경우 target null 만들어서 다음 조건에서 타겟 찾도록
+    // 액션 매크로 역시 아니여서 다음 매크로로 넘어가는 경우 target null 만들어줘서 다음 조건에서 다시 찾도록
     void Update()
     {
         if (hero.isDead || hero.isStop) return;
@@ -26,10 +28,9 @@ public class Hero_GFX : GFX
                 
                 hero.onMacroChange?.Invoke(i);                  
                 if (hero.actionMacros[i].Execute()) break;
+                else { hero.target = null; }
             }
-            else{
-                hero.target = null;
-            }
+            else { hero.target = null; }
         }
     }
 

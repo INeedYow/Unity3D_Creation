@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillData_Knight_1
   m_EditorClassIdentifier: 
   skillName: "\uB0B4\uB824\uCC0D\uAE30"
-  description: "\uC774\uB9C8\uB97C \uB54B! (TODO)"
+  description: "\uBA38\uB9AC\uB97C \uCF69!"
   icon: {fileID: 0}
   requireLevel: 1
   cooldown: 6

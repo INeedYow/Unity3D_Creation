@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "HeroItemData", menuName = "Data/HeroItem")]
 public class HeroItemData : ItemData
 {
     public Hero.EClass eClass;
-    public SkillData skilldata_1;
-    public SkillData skilldata_2;
-    public SkillData skilldata_3;
-    public SkillData skilldata_4;
+    // public SkillData skilldata_1;
+    // public SkillData skilldata_2;
+    // public SkillData skilldata_3;
+    // public SkillData skilldata_4;
+    public SkillData[] skillDatas = new SkillData[4];
 
     public override bool Buy()
     {
@@ -30,4 +32,20 @@ public class HeroItemData : ItemData
     {
         return HeroManager.instance.GetHeroCost();
     }
+
+    public override bool SetOptionText(int optionNumber, ItemOptionUnit optionUnit)
+    {
+        if (skillDatas[optionNumber] == null)
+        {   // 나중에 스킬 다 넣어주면 없어질 코드..?
+            optionUnit.option.text = "스킬";
+            optionUnit.value.text = "정보 없음";
+            return true;
+        }
+        else{
+            optionUnit.option.text = string.Format("{0}(Lv{1})", skillDatas[optionNumber].skillName, skillDatas[optionNumber].requireLevel );
+            optionUnit.value.text = string.Format("{0}", skillDatas[optionNumber].description );
+            return true;
+        }
+    }
+
 }

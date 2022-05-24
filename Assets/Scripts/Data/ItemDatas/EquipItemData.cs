@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class EquipItemData : ItemData
 {
+    [Header("Require Lv")]
+    public int requireLevel;
+
     [Header("Cost")]
     public int cost;
     public int sellCost;

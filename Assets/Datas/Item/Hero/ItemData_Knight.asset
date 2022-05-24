@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Knight
   desc: "\uB4E0\uB4E0\uD55C \uD0F1\uCEE4"
+  icon: {fileID: 0}
   eClass: 0
-  skilldata_1: {fileID: 0}
-  skilldata_2: {fileID: 0}
-  skilldata_3: {fileID: 0}
-  skilldata_4: {fileID: 0}
+  skillDatas:
+  - {fileID: 11400000, guid: 4bdefc90a44e3d842aa5f142ce8e3730, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

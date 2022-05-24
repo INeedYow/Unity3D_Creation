@@ -2,16 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO macro,, class 및 enum으로 나눌 영역 확실히 정하기
 public class Condition_FindHpTarget : ConditionMacro
 {
+    [Tooltip("Least : 최소 / Most : 최대")]
     public EMost eMost;
     public EGroup eTargetGroup;
-    [Tooltip("value (0f ~ 100f)")]
-    public float value;
+    [Range(0f, 100f)] public float value;
+
+    bool m_hasAnyHpChange;
+
+    private void OnEnable()     { DungeonManager.instance.onChangeAnyHP += AnyHpChange; }
+    private void OnDisable()    { DungeonManager.instance.onChangeAnyHP -= AnyHpChange; }
+
+    void AnyHpChange() { m_hasAnyHpChange = true; }
 
     public override bool IsSatisfy(){
-        return FindTarget();
+        // 처음 들어올 때 target null 돼서 들어오니까 검사, 타겟 죽어서 없는 등의 경우에도 검사
+        if (owner.target == null)   { return FindTarget(); }
+        
+        // 누군가의 체력 변경이 일어나면 다시 검사
+        else if (m_hasAnyHpChange)  { return FindTarget(); }
+        
+        // 그럼에도 null 이면 조건에 부합X
+        if (owner.target == null)   { return false; }
+        else                        { return true; }
     }
 
     bool FindTarget()

@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Archer
-  icon: {fileID: 21300000, guid: bc50d57e504400f4ca5635a41cc3f2ac, type: 3}
+  icon: {fileID: 21300000, guid: d6bf9fd619ff24ce58267141ada9bbaa, type: 3}
   eGroup: 0
   curHp: 200
   maxHp: 200
@@ -1821,6 +1821,9 @@ MonoBehaviour:
   isJoin: 0
   level: 1
   maxExp: 0
+  weaponData: {fileID: 0}
+  armorData: {fileID: 0}
+  accessoryData: {fileID: 0}
 --- !u!195 &6579901502582636224
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Condition_GetMostDistanceTarget : ConditionMacro
 {
+    [Tooltip("Least : 최소 / Most : 최대")]
     public EMost eMost;
     public EGroup eTargetGroup;
     Character m_target;
     float m_value;
     float m_sqrDist;
 
-    private void OnEnable() 
-    {   
+    private void OnEnable() {   // 웨이브 진행 중에만 거리 검사하도록.(isStop과 별개로 Invoke는 돌지 않나?)
         DungeonManager.instance.onWaveStart += OnBattle; 
-        DungeonManager.instance.onWaveEnd += OffBattle;   }
-    private void OnDisable()    
-    {   
+        DungeonManager.instance.onWaveEnd += OffBattle;   
+    }
+    private void OnDisable() {   
         DungeonManager.instance.onWaveStart -= OnBattle; 
-        DungeonManager.instance.onWaveEnd -= OffBattle;  }
+        DungeonManager.instance.onWaveEnd -= OffBattle;  
+    }
 
     public override bool IsSatisfy(){  
         if (null == owner.target) { GetTarget(); }
@@ -29,7 +30,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     public void OffBattle() { CancelInvoke("GetTarget"); }
     
     void GetTarget()
-    {   
+    {   Debug.Log("get dist target()");
        if (eTargetGroup == EGroup.Hero)
         {   // 아군
             m_target = PartyManager.instance.GetAliveHero();

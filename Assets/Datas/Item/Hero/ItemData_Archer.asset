@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Archer
   desc: "\uB4E0\uB4E0\uD55C \uB51C\uB7EC"
+  icon: {fileID: 0}
   eClass: 1
-  skilldata_1: {fileID: 0}
-  skilldata_2: {fileID: 0}
-  skilldata_3: {fileID: 0}
-  skilldata_4: {fileID: 0}
+  skillDatas:
+  - {fileID: 11400000, guid: 9723eb2756475a84ba528be624501597, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
