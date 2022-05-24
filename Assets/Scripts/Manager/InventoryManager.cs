@@ -61,7 +61,4 @@ public class InventoryManager : MonoBehaviour
         weaponDatas.Remove(itemData);
         RenewWeaponInven();
     }
-
-    // TODO 배열에 빈공간 생김
-    // 이미 장착한 경우에도 사라짐
 }

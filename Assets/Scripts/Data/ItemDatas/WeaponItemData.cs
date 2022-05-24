@@ -34,6 +34,13 @@ public class WeaponItemData : EquipItemData
         {
             case 0 : 
             {
+                optionUnit.option.text = "요구 레벨 : ";
+                optionUnit.value.text = requireLevel.ToString(); 
+                return true;
+            }
+
+            case 1 : 
+            {
                 if (minDamage == 0f) return false;
 
                 optionUnit.option.text = "최소 공격력 : ";
@@ -41,7 +48,7 @@ public class WeaponItemData : EquipItemData
                 return true;
             }
 
-            case 1 :
+            case 2 :
             {
                 if (maxDamage == 0f) return false;
 
@@ -50,7 +57,7 @@ public class WeaponItemData : EquipItemData
                 return true;
             }
 
-            case 2 :
+            case 3 :
             {
                 if (magicDamage == 0f) return false;
 

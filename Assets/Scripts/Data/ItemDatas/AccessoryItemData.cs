@@ -31,13 +31,20 @@ public class AccessoryItemData : EquipItemData
         {
             case 0 : 
             {
+                optionUnit.option.text = "요구 레벨 : ";
+                optionUnit.value.text = requireLevel.ToString(); 
+                return true;
+            }
+
+            case 1 : 
+            {
                 if (value == 0f) return false;
                 
                 // 특수능력 수치 혹은 일반 능력치
                 return true;
             }
 
-            case 1 :
+            case 2 :
             {
                 if (prfSpecialAbility == null) return false;
 

@@ -30,7 +30,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     public void OffBattle() { CancelInvoke("GetTarget"); }
     
     void GetTarget()
-    {   Debug.Log("get dist target()");
+    {   //Debug.Log("get dist target()");
        if (eTargetGroup == EGroup.Hero)
         {   // 아군
             m_target = PartyManager.instance.GetAliveHero();

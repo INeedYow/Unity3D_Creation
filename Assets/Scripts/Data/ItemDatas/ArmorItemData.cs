@@ -31,6 +31,13 @@ public class ArmorItemData : EquipItemData
         {
             case 0 : 
             {
+                optionUnit.option.text = "요구 레벨 : ";
+                optionUnit.value.text = requireLevel.ToString(); 
+                return true;
+            }
+
+            case 1 : 
+            {
                 if (armor == 0f) return false;
 
                 optionUnit.option.text = "물리 방어율 : ";
@@ -38,7 +45,7 @@ public class ArmorItemData : EquipItemData
                 return true;
             }
 
-            case 1 :
+            case 2 :
             {
                 if (magicArmor == 0f) return false;
 
@@ -47,7 +54,7 @@ public class ArmorItemData : EquipItemData
                 return true;
             }
 
-            case 2 :
+            case 3 :
             {
                 if (Hp == 0f) return false;
 

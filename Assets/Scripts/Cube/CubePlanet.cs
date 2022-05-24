@@ -21,7 +21,7 @@ public class CubePlanet : MonoBehaviour
     private void Awake() { Init(); }
 
     void Init(){
-        // 이벤트 함수
+        // 이벤트 함수 등록
         foreach(CubeSide cubeSide in cubeSides){ 
             cubeSide.onExitFinish += ExitFinish; 
             cubeSide.onEnterFinish += EnterFinish;
@@ -37,7 +37,7 @@ public class CubePlanet : MonoBehaviour
     }
 
     private void Update() 
-    {
+    {   
         if (isRolling) return;
 
         m_input = Input.GetAxisRaw("Vertical");
@@ -83,7 +83,7 @@ public class CubePlanet : MonoBehaviour
         }
     }
 
-    void LockInput(bool isLock){
+    void LockInput(bool isLock){    
         isRolling = isLock;
         GameManager.instance.LockInput(isLock);
     }

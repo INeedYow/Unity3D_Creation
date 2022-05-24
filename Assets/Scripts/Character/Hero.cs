@@ -112,7 +112,7 @@ public class Hero : Character
     
     public void Equip(WeaponItemData itemData)
     {
-        if (weaponData != null) UnEquipWeapon();
+        if (weaponData != null) { weaponData.UnEquip(); }
         weaponData = itemData;
         minDamage += itemData.minDamage;
         maxDamage += itemData.maxDamage;

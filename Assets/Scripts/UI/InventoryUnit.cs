@@ -27,19 +27,19 @@ public class InventoryUnit : MonoBehaviour
     private void OnMouseEnter() {
         if (curData == null) return;
         Debug.Log("OnMouseEnter");
-        // TODO show info
+        ItemManager.instance.ShowInfoUI(curData);
     }
 
     private void OnMouseExit() {
         if (curData == null) return;
         Debug.Log("OnMouseExit");
-        // TODO show info
+        ItemManager.instance.HideInfoUI();
     }
 
     public void OnClicked()
     {
         if (curData == null) return;
-        if (Time.time < lastClickTime + 1f) {Debug.Log("OnMouseClicked DB");
+        if (Time.time < lastClickTime + 1f) {   //Debug.Log("OnMouseClicked DB");
             
             if (isEquipUnit)
             {   // 장착 해제
