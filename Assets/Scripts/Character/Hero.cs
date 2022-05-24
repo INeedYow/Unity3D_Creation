@@ -93,13 +93,15 @@ public class Hero : Character
 
     // 파티 관련
 
-    public void Join(){
+    public void Join()
+    {
         if (isJoin) return;
         PartyManager.instance.Join(this);
         isJoin = true;
     }
 
-    public void Leave(){
+    public void Leave()
+    {
         if (!isJoin) return;
         PartyManager.instance.Leave(this);
         isJoin = false;
@@ -108,15 +110,21 @@ public class Hero : Character
 
     // 장비 관련
     
-    public void Equip(WeaponItemData itemData){
-        UnEquipWeapon();
+    public void Equip(WeaponItemData itemData)
+    {
+        if (weaponData != null) UnEquipWeapon();
         weaponData = itemData;
+        minDamage += itemData.minDamage;
+        maxDamage += itemData.maxDamage;
+        magicDamage += itemData.magicDamage;
     }
 
     public void UnEquipWeapon()
     {
         if (weaponData == null) return;
-        InventoryManager.instance.invenUI.AddItem(weaponData);
+        minDamage -= weaponData.minDamage;
+        maxDamage -= weaponData.maxDamage;
+        magicDamage -= weaponData.magicDamage;
         weaponData = null;
     }
 }

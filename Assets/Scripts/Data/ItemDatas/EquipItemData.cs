@@ -30,4 +30,5 @@ public abstract class EquipItemData : ItemData
     }
 
     public abstract void Use();
+    public abstract void UnEquip();
 }

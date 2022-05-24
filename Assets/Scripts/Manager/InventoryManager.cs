@@ -21,6 +21,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake() { instance = this; }
 
+    // UI 관련
     public void ShowInvenUI(){
         invenUI.gameObject.SetActive(true);
         invenBtn.interactable = false;
@@ -32,19 +33,35 @@ public class InventoryManager : MonoBehaviour
         invenBtn.interactable = true;
     }
 
+    // UI 갱신
+    public void RenewUI(){
+        RenewWeaponInven();
+    }
+
+    public void RenewWeaponInven(){
+        invenUI.RenewWeaponInven(maxCount, weaponDatas.Count);
+    }
+
+    // Item 장착
+    public void EquipItem(WeaponItemData itemData){
+        RemoveItem(itemData);
+        invenUI.SetWeaponData(itemData);
+    }
+
+    // Item 추가, 삭제
     public void AddItem(WeaponItemData itemData) { 
         invenUI.AddItem(itemData);          // weaponDatas의 count 값을 참조하기 때문에 순서 중요함
         weaponDatas.Add(itemData); 
     }
 
-    public void RenewUI(){
-
+    public void RemoveItem(WeaponItemData itemData)
+    {   //Debug.Log("RemoveItem : " + itemData.itemName);
+        if(!weaponDatas.Contains(itemData)) return;
+       
+        weaponDatas.Remove(itemData);
+        RenewWeaponInven();
     }
 
-    // void RenewWeaponInven(){
-    //     foreach(WeaponItemData weapon in weaponDatas){
-    //         weapon
-    //     }
-    // }
-
+    // TODO 배열에 빈공간 생김
+    // 이미 장착한 경우에도 사라짐
 }

@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour
     public List<InventoryUnit> armorUnits;
     public List<InventoryUnit> accessoryUnits;
 
-    [Header("Current Equips")]
+    [Header("Equip Units")]
     public InventoryUnit weaponEquipUnit; 
     public InventoryUnit armorEquipUnit;
     public InventoryUnit accessoryEquipUnit;
@@ -28,6 +28,7 @@ public class InventoryUI : MonoBehaviour
     // gameObject 비활성화에 동작하는 건 아님
     // HeroManager.Start()에서 처음에 켜고 초기화 해주고 끄게 했음(켜놓고 있어야 하는 게 불편해서)
     public void Init(){
+        // 
         weaponUnits = new List<InventoryUnit>();
         armorUnits = new List<InventoryUnit>();
         accessoryUnits = new List<InventoryUnit>();
@@ -36,7 +37,7 @@ public class InventoryUI : MonoBehaviour
         {   
             weaponUnits.Add(Instantiate(prfUnit, weaponParent));
         }
-        //Debug.Log("InvenUI Init()" + weaponUnits.Count);
+        
         for (int i = 0; i < InventoryManager.instance.maxCount; i++)
         {
             armorUnits.Add(Instantiate(prfUnit, armorParent));
@@ -46,9 +47,50 @@ public class InventoryUI : MonoBehaviour
         {
             accessoryUnits.Add(Instantiate(prfUnit, accessoryParent));
         }
+
+        // 장비칸 구분
+        weaponEquipUnit.isEquipUnit = true;     
+        armorEquipUnit.isEquipUnit = true;
+        accessoryEquipUnit.isEquipUnit = true;
     }
 
+    private void OnEnable() {
+        HeroManager.instance.onChangeSelectedHero += RenewEquipUnits;
+    }
+
+    private void OnDisable() {
+        HeroManager.instance.onChangeSelectedHero -= RenewEquipUnits;
+    }
+
+    public void RenewEquipUnits(Hero hero)
+    {   // 선택 영웅 변경시 장착 칸 정보 갱신
+        weaponEquipUnit.SetData(hero.weaponData);
+        armorEquipUnit.SetData(hero.armorData);
+        accessoryEquipUnit.SetData(hero.accessoryData);
+    }
+
+
+    // 바로 쓰는 게 아니라 Manager통해서만 호출되게 할 수 있나 event?
     public void AddItem(WeaponItemData itemData){
         weaponUnits[InventoryManager.instance.weaponDatas.Count].SetData(itemData);
+    }
+
+
+    public void RenewWeaponInven(int maxCount, int curCount)
+    {   
+        for (int i = 0; i < maxCount; i++)
+        {   
+            if (i < curCount)
+            {   // 아이템이 존재하는 Unit인 경우
+                weaponUnits[i].SetData(InventoryManager.instance.weaponDatas[i]);
+            }
+            else{   
+                weaponUnits[i].SetData(null);
+            }
+        }
+    }
+
+    public void SetWeaponData(WeaponItemData weaponData){
+        weaponEquipUnit.SetData(weaponData);
     }
 }

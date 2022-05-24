@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class InventoryUnit : MonoBehaviour
 {
-    public EquipItemData curData;
+    public bool isEquipUnit;    // 장착 칸, 소유 칸 나눔
+    [HideInInspector] public EquipItemData curData;
     public Image icon;
     float lastClickTime;
 
     public void SetData(EquipItemData data)
     { 
         if (data == null)
-        {
+        {   
             curData = null;
-            icon = null;
+            icon.sprite = null;
         }
         else{
             curData = data; 
@@ -26,20 +27,28 @@ public class InventoryUnit : MonoBehaviour
     private void OnMouseEnter() {
         if (curData == null) return;
         Debug.Log("OnMouseEnter");
-        // TODO info
+        // TODO show info
     }
 
     private void OnMouseExit() {
         if (curData == null) return;
         Debug.Log("OnMouseExit");
-        // TODO info
+        // TODO show info
     }
 
     public void OnClicked()
     {
         if (curData == null) return;
         if (Time.time < lastClickTime + 1f) {Debug.Log("OnMouseClicked DB");
-            curData.Use();
+            
+            if (isEquipUnit)
+            { 
+                curData.UnEquip();
+                SetData(null);
+            }
+            else{ curData.Use(); }
+                
+            lastClickTime = 0f;
         }
         lastClickTime = Time.time ;
     }

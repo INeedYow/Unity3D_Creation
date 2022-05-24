@@ -17,5 +17,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: cf62c64581a1f48dcb9737334276c7b7, type: 3}
   cost: 1000
   sellCost: 2000
-  damage: 1
-  magicDamage: 1
+  minDamage: 100
+  maxDamage: 2000
+  magicDamage: 10

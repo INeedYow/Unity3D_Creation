@@ -19,4 +19,8 @@ public class AccessoryItemData : EquipItemData
     {
         //InventoryManager.instance.AddItem(this);
     }
+
+    public override void UnEquip(){
+        //
+    }
 }

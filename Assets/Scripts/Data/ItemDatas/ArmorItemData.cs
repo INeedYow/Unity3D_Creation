@@ -8,6 +8,7 @@ public class ArmorItemData : EquipItemData
     [Header("Item Spec------------------------")]
     public float armor;
     public float magicArmor;
+    public float Hp;
 
     public override void Use()
     {
@@ -17,5 +18,9 @@ public class ArmorItemData : EquipItemData
     protected override void AddItem()
     {
         //InventoryManager.instance.AddItem(this);
+    }
+
+    public override void UnEquip(){
+        //
     }
 }
