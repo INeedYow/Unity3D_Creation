@@ -107,4 +107,12 @@ public class PartyManager : MonoBehaviour
         }
         return null;
     }
+
+    public void AddExp(int exp)
+    {
+        foreach(Hero hero in heroParty)
+        {
+            hero.curExp += exp;
+        }
+    }
 }

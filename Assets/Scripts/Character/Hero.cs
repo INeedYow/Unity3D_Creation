@@ -18,7 +18,7 @@ public class Hero : Character
     
     [Header("Level")]
     public int level = 1;
-    public float maxExp = 100;
+    [HideInInspector] public float maxExp = 100;
     float _curExp;  //TODO
     public float curExp {
         get { return _curExp; } 
@@ -28,7 +28,8 @@ public class Hero : Character
             {
                 level++;
                 _curExp -= maxExp;
-                maxExp += 100f; 
+                maxExp += 50f; 
+                StatUp();
                 onLevelUp?.Invoke(level);
             }
         }
@@ -60,6 +61,24 @@ public class Hero : Character
             case EClass.Archer: attackCommand = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
             case EClass.Angel:  attackCommand = new ProjectileAttackCommand(this, EProjectile.YellowMarble); break;
         }
+    }
+
+    void StatUp(){
+        switch (eClass)
+        {
+            case EClass.Knight      : 
+            case EClass.Templar     : maxHp += 15;  break;
+            
+            case EClass.Necromancer : maxHp += 13;  break;
+
+            case EClass.Angel       :
+            case EClass.Bard        : maxHp += 11;  break;
+            
+            case EClass.Archer      : maxHp += 9;   break;
+        }
+        minDamage += 1;
+        maxDamage += 1;
+        magicDamage += 1;
     }
 
     protected override void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false)

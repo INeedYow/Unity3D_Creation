@@ -81,6 +81,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         isStop = true;    
         if (nav != null) nav.enabled = false; 
     }
+
     public void Resume() { 
         isStop = false;  
         if (nav != null) nav.enabled = true; 
@@ -104,10 +105,10 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.angularSpeed = 360f;
     }
 
-    public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false, bool isThorns = false)
-    {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리vs마법, 반사공격(재반사 금지)
+    public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
+    {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리vs마법
         if (isMagic)
-        {
+        {   Debug.Log("반사");
             getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate));
             curHp -= getDamage;
 
@@ -122,7 +123,7 @@ public abstract class Character : MonoBehaviour, IDamagable
             if (IsDodge()) { 
                 // TODO 회피효과 출력
                 Debug.Log(name + "가 회피함");
-            } 
+            }
             else{
                 getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate));
                 curHp -= getDamage;
@@ -135,6 +136,7 @@ public abstract class Character : MonoBehaviour, IDamagable
                 //Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
         }
+
         attacker = newAttacker; 
         ShowDamageText(getDamage, isMagic);
         if (curHp <= 0) {
@@ -142,6 +144,7 @@ public abstract class Character : MonoBehaviour, IDamagable
             if (attacker != null) attacker.onKill?.Invoke();
         }
     }
+
 
     public void Healed(float heal)
     {

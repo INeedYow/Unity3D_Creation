@@ -76,18 +76,18 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    void EndDungeon(){     Debug.Log("Dungeon End");
+    void EndDungeon(){     
         // 중간 종료
         GetReward();
         //
         DungeonManager.instance.Exit();
     }
 
-    void ClearDungeon(){   Debug.Log("Dungeon Clear");
+    void ClearDungeon(){   
         // TODO 
         m_gold += rewardData.gold_clear;
         m_exp += rewardData.exp_clear;
-        GetReward();Debug.Log(m_exp);
+        GetReward();
         //
         DungeonManager.instance.Exit();
     }
@@ -95,6 +95,7 @@ public class Dungeon : MonoBehaviour
     void GetReward(){
         GameManager.instance.AddGold(m_gold);   //Debug.Log(m_gold);
         GameManager.instance.AddExp(m_exp);     //Debug.Log(m_exp);
+        PartyManager.instance.AddExp(m_exp);
         m_gold = 0;
         m_exp = 0;
     }

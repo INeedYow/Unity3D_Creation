@@ -6,9 +6,19 @@ public class Ability_Thorns : Ability
 {
     public int thornsDamageMin;
     public int thornsDamageMax;
+    Character m_attacker;
 
+    // TODO 무한 반사 루프 막을 방법
+        // 1. Damaged와 다른 함수로 처리
+        // 2. 공격자를 알고 있으니까 어떻게 하면 될 것 같은데
     public override void OnDamagedGetAttacker(Character attacker){
-        attacker.Damaged(Random.Range(thornsDamageMin, thornsDamageMax + 1), 1f, owner, true, true);
+        if (m_attacker == attacker){        // 기억하고 있는 공격자랑 같으면 탈출
+            m_attacker = null; return;
+        }
+        m_attacker = attacker;              // 반사 전에 공격자 기억
+        attacker.Damaged(Random.Range(thornsDamageMin, thornsDamageMax + 1), 1f, owner, true);
+        
+        m_attacker = null;                  // 반사작업 후 초기화
     }
 
     public override bool SetOptionText1to3(int optionNumber, ItemOptionUnit optionUnit)
@@ -18,7 +28,14 @@ public class Ability_Thorns : Ability
             case 1:
             {
                 optionUnit.option.text = "[ 반사 ] ";
-                optionUnit.value.text = string.Format("피해를 입으면 {0} ~ {1}의 피해를 되돌려 줌", thornsDamageMin, thornsDamageMax);
+                optionUnit.value.text = "착용자가 피해를 받으면";
+                return true;
+            }
+
+            case 2:
+            {
+                optionUnit.option.text = " ";
+                optionUnit.value.text = string.Format("{0} ~ {1}의 마법피해를 되돌려 줌", thornsDamageMin, thornsDamageMax);
                 return true;
             }
             
