@@ -16,14 +16,14 @@ public class ArmorItemData : EquipItemData
         HeroManager.instance.selectedHero.Equip(this);
         InventoryManager.instance.EquipItem(this);
     }
-
-    protected override void AddItem()
-    {
+    
+    public override void UnEquip(){
+        HeroManager.instance.selectedHero.UnEquipArmor();
         InventoryManager.instance.AddItem(this);
     }
 
-    public override void UnEquip(){
-        HeroManager.instance.selectedHero.UnEquipArmor();
+    protected override void AddItem()
+    {
         InventoryManager.instance.AddItem(this);
     }
 
