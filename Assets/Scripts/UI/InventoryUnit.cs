@@ -43,13 +43,15 @@ public class InventoryUnit : MonoBehaviour
             {   // 장착 해제
                 curData.UnEquip();
                 SetData(null);
+                ItemManager.instance.HideInfoUI();
             }
             else if (curData.requireLevel > HeroManager.instance.selectedHero.level) 
             {   // 레벨 제한으로 착용 불가
                 return; 
             }
             else{
-                curData.Use(); 
+                curData.Use();
+                ItemManager.instance.HideInfoUI();
             }
                 
             lastClickTime = 0f;

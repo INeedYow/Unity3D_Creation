@@ -5,7 +5,7 @@ using UnityEngine;
 public class CubeSide_Hero : CubeSide
 {
     public override void Enter()
-    {   //Debug.Log("Board");
+    {   
         HeroManager.instance.ShowHeroUI(true);
         onEnterFinish?.Invoke();
     }

@@ -140,12 +140,14 @@ public class HeroManager : MonoBehaviour
     public void AddHero(Hero hero){
         heroList.Add(hero);
         heroListUI.AddHeroUnit(hero);
+        GameManager.instance.playerInfoUI.RenewCurHero(heroList.Count);
         GameManager.instance.cubePlanet.AddFloatingBlock(hero);
     }
 
     public void RemoveHero(Hero hero){
         heroList.Remove(hero);
         heroListUI.RemoveHeroUnit(hero);
+        GameManager.instance.playerInfoUI.RenewCurHero(heroList.Count);
         GameManager.instance.cubePlanet.RemoveFloatingBlock(hero);
     }
 
