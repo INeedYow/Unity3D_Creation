@@ -10,6 +10,8 @@ public class InventoryManager : MonoBehaviour
     [Header("UI")]
     public InventoryUI invenUI;
     public Button invenBtn;
+    [Header("Empty Unit Sprite")]
+    public Sprite emptyUnitSprite;
 
     [Header("Item Data")]
     public List<WeaponItemData>     weaponDatas;

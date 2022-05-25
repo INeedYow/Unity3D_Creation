@@ -7,6 +7,7 @@ public class InventoryUI : MonoBehaviour
 {
     [Header("Prefab Unit")]
     public InventoryUnit prfUnit;
+
     [Header("Inventory Units")]
     public List<InventoryUnit> weaponUnits;
     public List<InventoryUnit> armorUnits;

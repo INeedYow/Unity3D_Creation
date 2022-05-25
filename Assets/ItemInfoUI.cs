@@ -17,7 +17,7 @@ public class ItemInfoUI : MonoBehaviour
         itemName.text = data.itemName;
         desc.text = data.desc;
         cost.text = data.GetCost().ToString();
-        
+
         SetOptions();
     }
 

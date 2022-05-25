@@ -15,7 +15,7 @@ public class InventoryUnit : MonoBehaviour
         if (data == null)
         {   
             curData = null;
-            icon.sprite = null;
+            icon.sprite = InventoryManager.instance.emptyUnitSprite;
         }
         else{
             curData = data; 
@@ -23,16 +23,14 @@ public class InventoryUnit : MonoBehaviour
         }
     }
 
-
-    private void OnMouseEnter() {
+    // UI 이벤트 함수
+    public void ShowItemInfoUI() {
         if (curData == null) return;
-        Debug.Log("OnMouseEnter");
         ItemManager.instance.ShowInfoUI(curData);
     }
 
-    private void OnMouseExit() {
+    public void HideItemInfoUI() {
         if (curData == null) return;
-        Debug.Log("OnMouseExit");
         ItemManager.instance.HideInfoUI();
     }
 
