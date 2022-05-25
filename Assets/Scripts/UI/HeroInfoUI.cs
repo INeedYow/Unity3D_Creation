@@ -66,7 +66,7 @@ public class HeroInfoUI : MonoBehaviour
             armor.text          = Mathf.RoundToInt(hero.armorRate * 100f).ToString();
             magicArmor.text     = Mathf.RoundToInt(hero.magicArmorRate * 100f).ToString();
             attackSpeed.text    = hero.attackDelay.ToString();
-            range.text          = hero.attackRange.ToString();
+            range.text          = (hero.attackRange - 1).ToString();                    // 본인 크기 1 뺌
             moveSpeed.text      = hero.moveSpeed.ToString();
             critical.text       = hero.criticalChance.ToString();
             criticalDamage.text = Mathf.RoundToInt(hero.criticalRate * 100).ToString();

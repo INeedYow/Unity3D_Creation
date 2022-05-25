@@ -82,7 +82,7 @@ public class Hero : Character
     {
         isDead = true;
         heroGFX.gameObject.SetActive(false);
-        onDeath?.Invoke(this);
+        onDead?.Invoke(this);
     }
 
     public void ResetPos()
@@ -165,7 +165,10 @@ public class Hero : Character
         if (accessoryData != null) { accessoryData.UnEquip(); }
         accessoryData = itemData;
 
-        // TODO 
+        accessoryData.ability.OnEquip();
+        onAttackGetDamage       += accessoryData.ability.OnAttack;
+        onDamagedGetAttacker    += accessoryData.ability.OnDamagedGetAttacker;
+        onKill                  += accessoryData.ability.OnKill;
 
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }
@@ -174,7 +177,10 @@ public class Hero : Character
     {
         if (accessoryData == null) return;
 
-        // TODO
+        onAttackGetDamage       -= accessoryData.ability.OnAttack;
+        onDamagedGetAttacker    -= accessoryData.ability.OnDamagedGetAttacker;
+        onKill                  -= accessoryData.ability.OnKill;
+        accessoryData.ability.OnUnEquip();
 
         accessoryData = null;
         HeroManager.instance.heroInfoUI.RenewUI(this);

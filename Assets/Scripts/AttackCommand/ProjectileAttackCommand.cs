@@ -19,6 +19,6 @@ public class ProjectileAttackCommand : AttackCommand
 
         if (null == proj) return;
         proj.transform.position = owner.projectileTF.position;
-        proj.Launch(owner.target, owner.curDamage, owner.powerRate, owner.aoeRange);
+        proj.Launch(owner.target, owner, owner.curDamage, owner.powerRate, owner.aoeRange);
     }
 }

@@ -22279,7 +22279,7 @@ MonoBehaviour:
   magicDamage: 30
   lastAttackTime: 0
   attackDelay: 1.4
-  attackRange: 8
+  attackRange: 9
   aoeRange: 0
   moveSpeed: 15
   criticalChance: 10
@@ -22304,6 +22304,9 @@ MonoBehaviour:
   isJoin: 0
   level: 1
   maxExp: 100
+  weaponData: {fileID: 0}
+  armorData: {fileID: 0}
+  accessoryData: {fileID: 0}
 --- !u!195 &404839799768936852
 NavMeshAgent:
   m_ObjectHideFlags: 0

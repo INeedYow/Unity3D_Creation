@@ -43,7 +43,6 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void RenewWeaponInven()      { invenUI.RenewWeaponInven(maxCount, weaponDatas.Count); }
-
     public void RenewArmorInven()       { invenUI.RenewArmorInven(maxCount, armorDatas.Count); }
     public void RenewAccessoryInven()   { invenUI.RenewAccessoryInven(maxCount, accessoryDatas.Count); }
 

@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 50;   // 프레임
         LV = 1;
         maxExp = 150;
-        gold = 1000000;
+        gold = 987654;
     }
 
     private void Start() { InitUI(); }
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         m_battleInfotext = ObjectPool.instance.GetInfoText();
         m_battleInfotext.transform.SetParent(worldCanvas.transform);
         m_battleInfotext.transform.position = position;
-        m_battleInfotext.infoText.text = value.ToString();
+        m_battleInfotext.infoText.text = Mathf.RoundToInt(value).ToString();
         m_battleInfotext.myColor = GetColorByInfoType(infoType);
     }
 

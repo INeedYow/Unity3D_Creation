@@ -520,7 +520,7 @@ MonoBehaviour:
   eGroup: 1
   curHp: 130
   maxHp: 130
-  minDamage: 2
+  minDamage: 3
   maxDamage: 3
   magicDamage: 0
   lastAttackTime: 0

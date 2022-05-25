@@ -7,8 +7,11 @@ using UnityEngine.AI;
 public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
-    public UnityAction<Character> onDeath;
+    public UnityAction<Character> onDead;
     public UnityAction<int> onMacroChange;
+    public UnityAction<float> onAttackGetDamage;
+    public UnityAction<Character> onDamagedGetAttacker;
+    public UnityAction onKill;
 
     new public string name;
     public Sprite icon;
@@ -52,7 +55,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         set { 
             _target = value;        targetForDebug = _target;
             if (null != _target)
-            { _target.onDeath += TargetDead; }
+            { _target.onDead += TargetDead; }
         }
     }      
     [HideInInspector]   public NavMeshAgent nav;
@@ -101,14 +104,18 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.angularSpeed = 360f;
     }
 
-    public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
-    {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리마법공격 구분
+    public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false, bool isThorns = false)
+    {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리vs마법, 반사공격(재반사 금지)
         if (isMagic)
         {
             getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate));
             curHp -= getDamage;
+
             onHpChange?.Invoke();
+            onDamagedGetAttacker?.Invoke(newAttacker);
             DungeonManager.instance.onChangeAnyHP?.Invoke();
+            if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);    // 원거리의 경우 죽었을 수 있어서
+
             //Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
         }
         else {
@@ -119,14 +126,21 @@ public abstract class Character : MonoBehaviour, IDamagable
             else{
                 getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate));
                 curHp -= getDamage;
+
                 onHpChange?.Invoke();
+                onDamagedGetAttacker?.Invoke(newAttacker);
                 DungeonManager.instance.onChangeAnyHP?.Invoke();
+                if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);
+
                 //Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
         }
         attacker = newAttacker; 
         ShowDamageText(getDamage, isMagic);
-        if (curHp <= 0) Death();
+        if (curHp <= 0) {
+            Death();
+            if (attacker != null) attacker.onKill?.Invoke();
+        }
     }
 
     public void Healed(float heal)
@@ -142,7 +156,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public abstract void Death();
 
     void TargetDead(Character character) { 
-        character.onDeath -= TargetDead;
+        character.onDead -= TargetDead;
         target = null; 
     }
 

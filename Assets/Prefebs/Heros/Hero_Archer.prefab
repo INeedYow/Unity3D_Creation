@@ -1796,7 +1796,7 @@ MonoBehaviour:
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 0.8
-  attackRange: 10
+  attackRange: 11
   aoeRange: 0
   moveSpeed: 14
   criticalChance: 10

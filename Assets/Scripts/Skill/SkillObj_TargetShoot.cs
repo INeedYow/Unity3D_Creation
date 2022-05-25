@@ -20,6 +20,7 @@ public class SkillObj_TargetShoot : SkillObject
             {
                 m_proj.Launch(
                     skill.owner.target, 
+                    skill.owner,
                     skill.owner.magicDamage * data.powerRatio, 
                     skill.owner.powerRate, 
                     data.area);
@@ -29,6 +30,7 @@ public class SkillObj_TargetShoot : SkillObject
             {
                 m_proj.Launch(
                     skill.owner.target,
+                    skill.owner,
                     skill.owner.curDamage * data.powerRatio,
                     skill.owner.powerRate,
                     data.area);

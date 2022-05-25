@@ -76,6 +76,6 @@ public class Monster : Character
         //
         isDead = true;
         monsGFX.gameObject.SetActive(false);
-        onDeath?.Invoke(this);
+        onDead?.Invoke(this);
     }
 }
