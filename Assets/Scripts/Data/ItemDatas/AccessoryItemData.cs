@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "EquipItemData", menuName = "Data/AccessoryItemData")]
+[CreateAssetMenu(fileName = "EquipItemData", menuName = "ItemData/AccessoryItemData")]
 public class AccessoryItemData : EquipItemData
 {
     [Header("Item Spec------------------------")]
@@ -13,16 +13,23 @@ public class AccessoryItemData : EquipItemData
 
     public override void Use()
     {
-        //HeroManager.instance.selectedHero.Equip(this);
+        HeroManager.instance.selectedHero.Equip(this);
+        InventoryManager.instance.EquipItem(this);
     }
 
     protected override void AddItem()
     {
-        //InventoryManager.instance.AddItem(this);
+        InventoryManager.instance.AddItem(this);
     }
 
     public override void UnEquip(){
-        //
+        HeroManager.instance.selectedHero.UnEquipArmor();
+        InventoryManager.instance.AddItem(this);
+    }
+
+    protected override void RemoveItem()
+    {
+        InventoryManager.instance.RemoveItem(this);
     }
 
     public override bool SetOptionText(int optionNumber, ItemOptionUnit optionUnit)

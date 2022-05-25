@@ -24,14 +24,14 @@ public class Item : MonoBehaviour
                 return;
             }
         
-            else{
+            else{   // todo 구매 못하는 경우 표시
 
             }
         }
         lastClickTime = Time.time;
     }
 
-    // TODO 설명
+    // 
     private void OnMouseEnter() {   //Debug.Log("enter");
         m_tf.localScale += GameManager.instance.focusedScale;
         ItemManager.instance.ShowInfoUI(data);

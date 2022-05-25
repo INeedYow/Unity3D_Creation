@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Etc")]
     public Vector3 focusedScale = new Vector3 (0.5f, 0.5f, 0.5f);
-    public GameObject transparentButton;        // 입력 막을 투명 버튼
     BattleInfoText m_battleInfotext;
     
     //
@@ -124,8 +123,6 @@ public class GameManager : MonoBehaviour
     }
 
     ///////////////////////////////
-
-    public void LockInput(bool isOn) { transparentButton.gameObject.SetActive(isOn); }
     public void EnterDungeon(bool isEnter){
         cubePlanet.gameObject.SetActive(!isEnter);
         playerInfoUI.gameObject.SetActive(!isEnter);

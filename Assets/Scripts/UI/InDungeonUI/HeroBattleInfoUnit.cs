@@ -52,5 +52,6 @@ public class HeroBattleInfoUnit : MonoBehaviour
         {
             macroCheckBoxes[i].color = Color.white;
         }
+        m_prevIndex = 0;
     }
 }

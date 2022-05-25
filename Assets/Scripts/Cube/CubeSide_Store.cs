@@ -6,7 +6,6 @@ public class CubeSide_Store : CubeSide
 {
     public override void Enter()
     {
-        //Debug.Log("Store");
         onEnterFinish?.Invoke();
         GameManager.instance.playerInfoUI.gameObject.SetActive(true);
     }

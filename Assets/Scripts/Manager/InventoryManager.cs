@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
 
     [Header("UI")]
     public InventoryUI invenUI;
-    public Button invenBtn;
+    public Button invenBtn;         // macro, inven 토글 버튼
     [Header("Empty Unit Sprite")]
     public Sprite emptyUnitSprite;
 
@@ -38,16 +38,29 @@ public class InventoryManager : MonoBehaviour
     // UI 갱신
     public void RenewUI(){
         RenewWeaponInven();
+        RenewArmorInven();
+        RenewAccessoryInven();
     }
 
-    public void RenewWeaponInven(){
-        invenUI.RenewWeaponInven(maxCount, weaponDatas.Count);
-    }
+    public void RenewWeaponInven()      { invenUI.RenewWeaponInven(maxCount, weaponDatas.Count); }
+
+    public void RenewArmorInven()       { invenUI.RenewArmorInven(maxCount, armorDatas.Count); }
+    public void RenewAccessoryInven()   { invenUI.RenewAccessoryInven(maxCount, accessoryDatas.Count); }
 
     // Item 장착
     public void EquipItem(WeaponItemData itemData){
         RemoveItem(itemData);
         invenUI.SetWeaponData(itemData);
+    }
+
+    public void EquipItem(ArmorItemData itemData){
+        RemoveItem(itemData);
+        invenUI.SetArmorData(itemData);
+    }
+
+    public void EquipItem(AccessoryItemData itemData){
+        RemoveItem(itemData);
+        invenUI.SetAccessoryData(itemData);
     }
 
     // Item 추가, 삭제
@@ -56,11 +69,37 @@ public class InventoryManager : MonoBehaviour
         weaponDatas.Add(itemData); 
     }
 
+    public void AddItem(ArmorItemData itemData) { 
+        invenUI.AddItem(itemData);          
+        armorDatas.Add(itemData); 
+    }
+
+    public void AddItem(AccessoryItemData itemData) { 
+        invenUI.AddItem(itemData);          
+        accessoryDatas.Add(itemData); 
+    }
+
     public void RemoveItem(WeaponItemData itemData)
     {   //Debug.Log("RemoveItem : " + itemData.itemName);
         if(!weaponDatas.Contains(itemData)) return;
        
         weaponDatas.Remove(itemData);
         RenewWeaponInven();
+    }
+
+    public void RemoveItem(ArmorItemData itemData)
+    {   
+        if(!armorDatas.Contains(itemData)) return;
+       
+        armorDatas.Remove(itemData);
+        RenewArmorInven();
+    }
+
+    public void RemoveItem(AccessoryItemData itemData)
+    {   
+        if(!accessoryDatas.Contains(itemData)) return;
+       
+        accessoryDatas.Remove(itemData);
+        RenewAccessoryInven();
     }
 }

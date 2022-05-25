@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "EquipItemData", menuName = "Data/WeaponItemData")]
+[CreateAssetMenu(fileName = "EquipItemData", menuName = "ItemData/WeaponItemData")]
 public class WeaponItemData : EquipItemData
 {
     [Header("Item Spec------------------------")]
@@ -26,6 +26,11 @@ public class WeaponItemData : EquipItemData
     {   //Debug.Log("UnEquip()");
         HeroManager.instance.selectedHero.UnEquipWeapon();
         InventoryManager.instance.AddItem(this);
+    }
+
+    protected override void RemoveItem()
+    {
+        InventoryManager.instance.RemoveItem(this);
     }
 
     public override bool SetOptionText(int optionNumber, ItemOptionUnit optionUnit)

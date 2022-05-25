@@ -76,6 +76,14 @@ public class InventoryUI : MonoBehaviour
         weaponUnits[InventoryManager.instance.weaponDatas.Count].SetData(itemData);
     }
 
+    public void AddItem(ArmorItemData itemData){
+        armorUnits[InventoryManager.instance.armorDatas.Count].SetData(itemData);
+    }
+
+    public void AddItem(AccessoryItemData itemData){
+        accessoryUnits[InventoryManager.instance.accessoryDatas.Count].SetData(itemData);
+    }
+
 
     public void RenewWeaponInven(int maxCount, int curCount)
     {   
@@ -91,7 +99,43 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void RenewArmorInven(int maxCount, int curCount)
+    {   
+        for (int i = 0; i < maxCount; i++)
+        {   
+            if (i < curCount)
+            {   // 아이템이 존재하는 Unit인 경우
+                armorUnits[i].SetData(InventoryManager.instance.armorDatas[i]);
+            }
+            else{   
+                armorUnits[i].SetData(null);
+            }
+        }
+    }
+
+    public void RenewAccessoryInven(int maxCount, int curCount)
+    {   
+        for (int i = 0; i < maxCount; i++)
+        {   
+            if (i < curCount)
+            {   // 아이템이 존재하는 Unit인 경우
+                accessoryUnits[i].SetData(InventoryManager.instance.accessoryDatas[i]);
+            }
+            else{   
+                accessoryUnits[i].SetData(null);
+            }
+        }
+    }
+
     public void SetWeaponData(WeaponItemData weaponData){
         weaponEquipUnit.SetData(weaponData);
+    }
+
+    public void SetArmorData(ArmorItemData armorData){
+        armorEquipUnit.SetData(armorData);
+    }
+
+    public void SetAccessoryData(AccessoryItemData accessoryData){
+        accessoryEquipUnit.SetData(accessoryData);
     }
 }

@@ -48,6 +48,7 @@ public class Dummy : MonoBehaviour
     }
 
     private void OnMouseDown() {
+
         hasClicked = true;
         HeroManager.instance.PickUpDummy(owner);
     }
@@ -91,7 +92,7 @@ public class Dummy : MonoBehaviour
         } 
     }
 
-    public void SwapBoard_Floating(Dummy floatingDummy){
+    public void SwapBoard_Floating(Dummy floatingDummy){ // 변수에서 처리
         // 보드블럭 정보교환
         placedFloat = floatingDummy.placedFloat;
         //floatingDummy.placedFloat = null;

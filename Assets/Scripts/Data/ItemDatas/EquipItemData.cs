@@ -23,9 +23,11 @@ public abstract class EquipItemData : ItemData
     public override bool Sell()
     {
         GameManager.instance.AddGold(sellCost);
-        // TODO : inven item 제거
+        RemoveItem();
         return true;
     }
+
+    protected abstract void RemoveItem();
 
     public override int GetCost()
     {

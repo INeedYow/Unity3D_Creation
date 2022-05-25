@@ -85,7 +85,7 @@ public class CubePlanet : MonoBehaviour
 
     void LockInput(bool isLock){    
         isRolling = isLock;
-        GameManager.instance.LockInput(isLock);
+        // TODO 마우스 입력 막기
     }
 
     void EnterFinish(){

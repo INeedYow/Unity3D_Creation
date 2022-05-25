@@ -114,19 +114,69 @@ public class Hero : Character
     {
         if (weaponData != null) { weaponData.UnEquip(); }
         weaponData = itemData;
+
         minDamage += itemData.minDamage;
         maxDamage += itemData.maxDamage;
         magicDamage += itemData.magicDamage;
+
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }
 
     public void UnEquipWeapon()
     {
         if (weaponData == null) return;
+
         minDamage -= weaponData.minDamage;
         maxDamage -= weaponData.maxDamage;
         magicDamage -= weaponData.magicDamage;
+
         weaponData = null;
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void Equip(ArmorItemData itemData)
+    {
+        if (armorData != null) { armorData.UnEquip(); }
+        armorData = itemData;
+
+        armorRate += itemData.armor;
+        magicArmorRate += itemData.magicArmor;
+        maxHp += itemData.Hp;
+        curHp = maxHp;
+
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void UnEquipArmor()
+    {
+        if (armorData == null) return;
+
+        armorRate -= armorData.armor;
+        magicArmorRate -= armorData.magicArmor;
+        maxHp -= armorData.Hp;
+        curHp = maxHp;
+
+        armorData = null;
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void Equip(AccessoryItemData itemData)
+    {
+        if (accessoryData != null) { accessoryData.UnEquip(); }
+        accessoryData = itemData;
+
+        // TODO 
+
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void UnEquipAccessory()
+    {
+        if (accessoryData == null) return;
+
+        // TODO
+
+        accessoryData = null;
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }
 }

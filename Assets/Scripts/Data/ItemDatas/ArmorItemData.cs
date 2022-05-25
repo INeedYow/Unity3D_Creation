@@ -3,26 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "EquipItemData", menuName = "Data/ArmorItemData")]
+[CreateAssetMenu(fileName = "EquipItemData", menuName = "ItemData/ArmorItemData")]
 public class ArmorItemData : EquipItemData
 {
     [Header("Item Spec------------------------")]
-    public float armor;
-    public float magicArmor;
+    [Range(0f, 1f)] public float armor;
+    [Range(0f, 1f)] public float magicArmor;
     public float Hp;
 
     public override void Use()
     {
-        //HeroManager.instance.selectedHero.Equip(this);
+        HeroManager.instance.selectedHero.Equip(this);
+        InventoryManager.instance.EquipItem(this);
     }
 
     protected override void AddItem()
     {
-        //InventoryManager.instance.AddItem(this);
+        InventoryManager.instance.AddItem(this);
     }
 
     public override void UnEquip(){
-        //
+        HeroManager.instance.selectedHero.UnEquipArmor();
+        InventoryManager.instance.AddItem(this);
+    }
+
+    protected override void RemoveItem()
+    {
+        InventoryManager.instance.RemoveItem(this);
     }
 
     public override bool SetOptionText(int optionNumber, ItemOptionUnit optionUnit)
@@ -41,7 +48,7 @@ public class ArmorItemData : EquipItemData
                 if (armor == 0f) return false;
 
                 optionUnit.option.text = "물리 방어율 : ";
-                optionUnit.value.text = armor.ToString(); 
+                optionUnit.value.text = Mathf.RoundToInt(armor * 100f).ToString(); 
                 return true;
             }
 
@@ -50,7 +57,7 @@ public class ArmorItemData : EquipItemData
                 if (magicArmor == 0f) return false;
 
                 optionUnit.option.text = "마법 방어율 : ";
-                optionUnit.value.text = magicArmor.ToString(); 
+                optionUnit.value.text = Mathf.RoundToInt(magicArmor * 100f).ToString(); 
                 return true;
             }
 

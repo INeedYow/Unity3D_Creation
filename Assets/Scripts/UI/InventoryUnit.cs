@@ -37,6 +37,7 @@ public class InventoryUnit : MonoBehaviour
     public void OnClicked()
     {
         if (curData == null) return;
+        if (HeroManager.instance.selectedHero == null) return;
         if (Time.time < lastClickTime + 1f) {   //Debug.Log("OnMouseClicked DB");
             
             if (isEquipUnit)
