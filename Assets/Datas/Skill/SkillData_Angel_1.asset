@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: "\uD68C\uBCF5"
   description: "\uB300\uC0C1\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5"
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 41f765b960395416192f6fba79ab2dfe, type: 3}
   requireLevel: 1
   cooldown: 6
   skillRange: 10

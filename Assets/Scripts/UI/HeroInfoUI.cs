@@ -5,22 +5,81 @@ using UnityEngine.UI;
 
 public class HeroInfoUI : MonoBehaviour
 {
+    [Header("Up")]
     public Image icon;
     public Text nameText;
 
-    private void Start() {
+    [Header("Stat")]
+    public Text lv;
+    public Text hp;
+    public Text damage;
+    public Text magic;
+    public Text armor;
+    public Text magicArmor;
+    public Text attackSpeed;
+    public Text range;
+    public Text moveSpeed;
+    public Text critical;
+    public Text criticalDamage;
+    public Text dodge;
+
+    [Header("Skill")]
+    public Image[] skill = new Image[4];
+
+    private void Start() {  // TODO 장비 변경시에도 갱신
         HeroManager.instance.onChangeSelectedHero += RenewUI;
     }
 
     // TODO spec part
     public void RenewUI(Hero hero){
         if (hero == null){
-            icon.sprite = null;
-            nameText.text = null;
+            icon.sprite         = null;
+            nameText.text       = null;
+
+            lv.text             = null;
+            hp.text             = null;
+            damage.text         = null;
+            magic.text          = null;
+            armor.text          = null;
+            magicArmor.text     = null;
+            attackSpeed.text    = null;
+            range.text          = null;
+            moveSpeed.text      = null;
+            critical.text       = null;
+            criticalDamage.text = null;
+            dodge.text          = null;
+
+            for(int i = 0; i < 4; i++)
+            {
+                skill[i].sprite = null;
+            }
+
         }
         else{
-            icon.sprite = hero.icon;
-            nameText.text = hero.name;
+            icon.sprite         = hero.icon;
+            nameText.text       = hero.name;
+
+            lv.text             = hero.level.ToString();
+            hp.text             = hero.maxHp.ToString();
+            damage.text         = string.Format("{0} ~ {1}", hero.minDamage, hero.maxDamage);
+            magic.text          = hero.magicDamage.ToString();
+            armor.text          = Mathf.RoundToInt(hero.armorRate * 100f).ToString();
+            magicArmor.text     = Mathf.RoundToInt(hero.magicArmorRate * 100f).ToString();
+            attackSpeed.text    = hero.attackDelay.ToString();
+            range.text          = hero.attackRange.ToString();
+            moveSpeed.text      = hero.moveSpeed.ToString();
+            critical.text       = hero.criticalChance.ToString();
+            criticalDamage.text = Mathf.RoundToInt(hero.criticalRate * 100).ToString();
+            dodge.text          = hero.dodgeChance.ToString();
+
+            for(int i = 0; i < 4; i++)
+            {
+                if (hero.skills[i] == null) continue;
+                if (hero.skills[i].data == null) continue;
+                if (hero.skills[i].data.icon == null) continue;
+                skill[i].sprite = hero.skills[i].data.icon;
+            }
+            
         }
     }
 }

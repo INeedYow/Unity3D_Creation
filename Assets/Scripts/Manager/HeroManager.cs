@@ -52,6 +52,7 @@ public class HeroManager : MonoBehaviour
     public void SelectHero(Hero hero){
         selectedHero = hero;
         onChangeSelectedHero?.Invoke(selectedHero);
+        heroInfoUI.RenewUI(hero);
     }
 
     public void GetNewHero(Hero.EClass eClass){
@@ -147,11 +148,6 @@ public class HeroManager : MonoBehaviour
         heroListUI.RemoveHeroUnit(hero);
         GameManager.instance.cubePlanet.RemoveFloatingBlock(hero);
     }
-
-    // // 매크로, 인벤토리 토글 // 버튼 이벤트 함수
-    // public void ToggleSetUI(){ 
-    //     heroSetUI.MenuToggle();
-    // }
 
     public int GetHeroCost(){
         if (heroList.Count < 3) { return 0; }

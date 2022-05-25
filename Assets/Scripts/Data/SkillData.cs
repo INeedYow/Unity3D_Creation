@@ -8,7 +8,7 @@ public class SkillData : ScriptableObject
 {
     public string skillName;
     public string description;
-    public Image icon;
+    public Sprite icon;
     [Space(10f)]
     [Tooltip("습득 레벨")]   public int requireLevel;
     [Range(1f, 30f)]        public float cooldown;

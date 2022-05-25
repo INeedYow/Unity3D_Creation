@@ -117,6 +117,7 @@ public class Hero : Character
         minDamage += itemData.minDamage;
         maxDamage += itemData.maxDamage;
         magicDamage += itemData.magicDamage;
+        HeroManager.instance.heroInfoUI.RenewUI(this);
     }
 
     public void UnEquipWeapon()
@@ -126,5 +127,6 @@ public class Hero : Character
         maxDamage -= weaponData.maxDamage;
         magicDamage -= weaponData.magicDamage;
         weaponData = null;
+        HeroManager.instance.heroInfoUI.RenewUI(this);
     }
 }
