@@ -1562,8 +1562,8 @@ MonoBehaviour:
   eGroup: 0
   curHp: 300
   maxHp: 300
-  minDamage: 12
-  maxDamage: 20
+  minDamage: 10
+  maxDamage: 18
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 1

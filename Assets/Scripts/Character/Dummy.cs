@@ -31,8 +31,8 @@ public class Dummy : MonoBehaviour
         }
     }
     [HideInInspector] public BoardBlock tempBlock;          // 드래그 중에 저장되는 블럭
-    [HideInInspector] public bool hasClicked;
     [HideInInspector] public bool isOnBlock;
+    float m_lastClickTime;
     Transform m_tf;
 
     private void Start() {
@@ -49,12 +49,21 @@ public class Dummy : MonoBehaviour
 
     private void OnMouseDown() {
 
-        hasClicked = true;
+        // if (Time.time < m_lastClickTime + 1f && placedBlock != null)    // DB click && 배치된 상태
+        // {   
+        //     if (HeroManager.instance.IsFull()) return;
+        //     GameManager.instance.cubePlanet.AddFloatingBlock(owner);    // 돌고 돌아 null 처리까지 다 해줌
+        //     PartyManager.instance.Leave(owner);
+
+        //     m_lastClickTime = 0f;
+        //     return;
+        // }
+        // m_lastClickTime = Time.time;
+        
         HeroManager.instance.PickUpDummy(owner);
     }
 
     private void OnMouseUp() {  
-        hasClicked = false;
         HeroManager.instance.PutDownDummy();
 
         // 이미 보드에 있던 경우

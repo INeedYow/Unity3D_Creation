@@ -54,22 +54,6 @@ public class PartyManager : MonoBehaviour
         }
     }
 
-    // public void ShowDummy(){
-    //     if (heroParty.Count == 0) return;
-    //     foreach(Hero hero in heroParty)
-    //     {
-    //         hero.dummy.gameObject.SetActive(true);
-    //     }
-    // }
-
-    // public void HideDummy(){
-    //     if (heroParty.Count == 0) return;
-    //     foreach(Hero hero in heroParty)
-    //     {
-    //         hero.dummy.gameObject.SetActive(false);
-    //     }
-    // }
-
     public void ResetHeroPos(){
         foreach (Hero hero in heroParty)
         {
@@ -90,8 +74,8 @@ public class PartyManager : MonoBehaviour
     }
 
     public void Leave(Hero hero)
-    {
-        heroParty.Remove(hero);
+    {   Debug.Log("Leave()" + hero.name);
+        heroParty.Remove(hero); Debug.Log(heroParty.Contains(hero) ? "contain" : "nope");
         hero.isJoin = false;
         GameManager.instance.RenewCurParty(heroParty.Count);
     }

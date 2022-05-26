@@ -22275,7 +22275,7 @@ MonoBehaviour:
   curHp: 200
   maxHp: 200
   minDamage: 11
-  maxDamage: 20
+  maxDamage: 17
   magicDamage: 30
   lastAttackTime: 0
   attackDelay: 1.4
