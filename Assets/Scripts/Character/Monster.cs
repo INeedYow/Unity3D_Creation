@@ -21,21 +21,18 @@ public class Monster : Character
 
     public static Monster Create(EMonster eMonster){
         Monster monster = null;
+        monster = Instantiate(ObjectPool.instance.prfMonsters[(int)eMonster]);
         switch (eMonster)
         {
-            case EMonster.RedSlime:
-            {
-                monster = Instantiate(ObjectPool.instance.prfMonsters[(int)eMonster]);
-                // Attack Command
-                monster.attackCommand = new NormalAttackCommand(monster);
-                break;
-            }
+            case EMonster.RedSlime: 
+            case EMonster.BlueSlime: monster.attackCommand = new NormalAttackCommand(monster); break;
 
-            case EMonster.BlueSlime:
-            {
-                monster = Instantiate(ObjectPool.instance.prfMonsters[(int)eMonster]);
-                // Attack Command
-                monster.attackCommand = new NormalAttackCommand(monster);
+
+            case EMonster.Spore:     monster.attackCommand = new NormalAttackCommand(monster);
+            {   // 초기화 필요
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfSporeSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
                 break;
             }
         }
@@ -44,7 +41,7 @@ public class Monster : Character
         return monster;
     }
 
-    public void SetMacro(){
+    public void SetMacro(){ // 몬스터 하위로 넣어준 매크로로 초기화
         conditionMacros = macrosParent.GetComponentsInChildren<ConditionMacro>();
         foreach (ConditionMacro macro in conditionMacros)
         { macro.owner = this; }

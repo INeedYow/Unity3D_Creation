@@ -8,17 +8,37 @@ public class CameraManager : MonoBehaviour
     public static CameraManager instance { get; private set; }
 
     public Camera mainCam;
-    public Transform defaultTf;     
-    public Transform setTf;         
-    public Transform DungeonTf;
 
-    private void Awake() { 
-        instance = this; 
-        SetCam(defaultTf);
+    private void Awake() {
+        if (mainCam == null) mainCam = Camera.main;
+    }
+    
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.P)){
+            SetCamSKillView();
+        }
     }
 
-    public void SetCam(Transform tf){
-        mainCam.transform.position = tf.position;
-        mainCam.transform.rotation = tf.rotation;
+    public void SetCamSKillView(){
+        StartCoroutine("MoveFar");
+    }
+
+    IEnumerator MoveFar()
+    {   
+        float moveDist = 0f;
+        float moveSpeed = 800f;
+
+        while (moveDist < 200f)
+        {   
+            mainCam.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.Self);
+            moveDist += moveSpeed * Time.deltaTime;
+
+            if (moveDist > 160f)
+            {
+                moveSpeed = Mathf.Lerp(moveSpeed, 40f, Time.deltaTime * 20f);
+            }
+
+            yield return null;
+        }
     }
 }

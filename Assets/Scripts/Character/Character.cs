@@ -107,8 +107,10 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
     {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리vs마법
+        if (isDead) return; // 범위 공격에서 GetComponent<Character>해서 예외처리하는 것보다 이게 좋아보여서
+
         if (isMagic)
-        {   Debug.Log("반사");
+        {   
             getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate));
             curHp -= getDamage;
 

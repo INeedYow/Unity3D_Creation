@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
         }
     }
     public int gold         { get; private set; }
-    public int skillPoint   { get; private set; }
 
     public CameraMove cam;
 
@@ -60,8 +59,7 @@ public class GameManager : MonoBehaviour
     void LevelUp(){ 
         LV++;                       
         curExp -= maxExp;          
-        maxExp += 75;
-        skillPoint++;   //               
+        maxExp += 75;           
         playerInfoUI.RenewLV(LV);
         playerInfoUI.RenewExp(curExp, maxExp);
         

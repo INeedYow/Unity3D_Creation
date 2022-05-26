@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillObj_TargetAttack : SkillObject
 {
     IDamagable target;
+
     public override void Works()
     {
         if (skill.owner.target == null) return;
