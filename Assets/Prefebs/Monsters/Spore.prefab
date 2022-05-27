@@ -925,8 +925,8 @@ MonoBehaviour:
   eGroup: 0
   curHp: 250
   maxHp: 250
-  minDamage: 0
-  maxDamage: 0
+  minDamage: 2
+  maxDamage: 3
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 0.8
@@ -939,7 +939,8 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0
   magicArmorRate: 0
-  buffs: []
+  buffDamage: 1
+  buffArmor: 0
   targetTF: {fileID: 2632091679261891676}
   HpBarTF: {fileID: 6405710229451659556}
   projectileTF: {fileID: 1901804239235766634}

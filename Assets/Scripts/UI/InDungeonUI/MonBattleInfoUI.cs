@@ -10,8 +10,9 @@ public class MonBattleInfoUI : MonoBehaviour
     public MonBattleInfoUnit[] macroInfoUnits;
     public MonBattleInfoUnit[] skillInfoUnits;
 
-    public void RenewUI(Monster monster)
-    {
+    void OnEnable() { DungeonManager.instance.onWaveEnd += Hide; }
+
+    public void RenewUI(Monster monster){
         mon = monster;
         SetText();
     } 
@@ -35,7 +36,7 @@ public class MonBattleInfoUI : MonoBehaviour
         }
 
         for (int i = 0; i < skillInfoUnits.Length; i++)
-        {
+        {   // 스킬
             if (i < mon.skills.Length)
             {
                 skillInfoUnits[i].gameObject.SetActive(true);
