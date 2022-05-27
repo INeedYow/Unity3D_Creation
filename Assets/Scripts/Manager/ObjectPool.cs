@@ -51,6 +51,13 @@ public class ObjectPool : MonoBehaviour
     List <HpBar> poolHeroHp;
     List <HpBar> poolMonHp;
 
+    [Space(15f)]
+
+    [Header("Buff Pools")]
+    public Buff[] prfBuffs;
+    [Range(1, 30)] public int[] count_buff;
+    List<Buff>[] poolBuffs; 
+
     private void Awake() { instance = this; }
 
     private void Start() { InitPool(); }
@@ -63,6 +70,7 @@ public class ObjectPool : MonoBehaviour
         poolSKillObjs           = new List<SkillObject>[prfSkillObjs.Length];
         poolHeroHp              = new List<HpBar>();
         poolMonHp               = new List<HpBar>();
+        poolBuffs               = new List<Buff>[prfBuffs.Length];
 
         
         for(int i = 0; i < prfProjectiles.Length; i++){
@@ -75,6 +83,10 @@ public class ObjectPool : MonoBehaviour
 
         for(int i = 0; i < prfSkillObjs.Length; i++){
             poolSKillObjs[i] = new List<SkillObject>();
+        }
+
+        for(int i = 0; i < prfBuffs.Length; i++){
+            poolBuffs[i] = new List<Buff>();
         }
 
         // 생성
@@ -118,6 +130,13 @@ public class ObjectPool : MonoBehaviour
             { 
                 poolMonHp.Add(CreateNewHpBar(false)); 
             } 
+        }
+
+        for (int i = 0; i < prfBuffs.Length; i++){
+            if (null != prfBuffs[i])
+            {
+                for(int j = 0; j < count_buff[i]; j++) { poolBuffs[i].Add(CreateNewBuff(i)); }
+            }
         }
     }
 
@@ -284,5 +303,30 @@ public class ObjectPool : MonoBehaviour
             poolMonHp.Add(newObj);
             return newObj;
         }
+    }
+
+    // Buff
+    Buff CreateNewBuff(int index, bool isActive = false){   //Debug.Log("CreateNewProj" + index); Debug.Log(poolProjectiles[0].Count);
+        var obj = Instantiate(prfBuffs[index]);
+        obj.gameObject.SetActive(isActive);
+        obj.transform.SetParent(transform);
+        return obj;
+    }
+
+    public Buff GetBuff(int buffId){
+        foreach (Buff buff in poolBuffs[buffId]){
+            if (!buff.gameObject.activeSelf)
+            {   
+                buff.transform.SetParent(null);
+                buff.gameObject.SetActive(true);
+                return buff;
+            }
+        }
+        
+        var newObj = CreateNewBuff(buffId, true);
+        newObj.transform.SetParent(null);
+        poolBuffs[buffId].Add(newObj);
+        
+        return newObj;
     }
 }

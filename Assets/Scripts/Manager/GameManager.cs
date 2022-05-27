@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake() { 
         instance = this; 
-        Application.targetFrameRate = 50;   // 프레임
+        Application.targetFrameRate = 60;   // 프레임
         LV = 1;
         maxExp = 150;
         gold = 987654;

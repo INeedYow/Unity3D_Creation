@@ -4,10 +4,16 @@ using UnityEngine;
 
 public abstract class Buff : MonoBehaviour
 {
+    public EBuff eBuff;
     public float dura;
-    public float value;
-    protected bool isOn;
+    public float ratio;
+    protected Character target;
 
-    public abstract void Add(float dura, float value);
-    public abstract void Sub();
+    public abstract void Add(Character target, float duration, float buffRatio);
+    public abstract void Finish();
+    public void Remove()
+    {
+        CancelInvoke("Finish");
+        Finish();
+    }
 }

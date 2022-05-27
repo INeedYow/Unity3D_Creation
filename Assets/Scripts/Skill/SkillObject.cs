@@ -10,6 +10,7 @@ public abstract class SkillObject : MonoBehaviour
     private void Awake() { gameObject.SetActive(false); }
     private void OnEnable() { Works(); }
 
+
     public abstract void Works();
     protected void FinishWorks() { gameObject.SetActive(false); }
 }

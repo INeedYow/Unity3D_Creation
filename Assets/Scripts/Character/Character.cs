@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.AI;
 
 public enum EBuff {
-    Damage, Magic, Armor, MagicArmor, AttSpeed,             
+    Armor, Damage, //Magic, MagicArmor, AttSpeed,             
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -27,11 +27,9 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float curDamage{ 
         get{ 
             if (IsCritical()) {
-                //return Random.Range(minDamage, maxDamage) * criticalRate * buffs[(int)EBuff.Damage].value;
-                return Random.Range(minDamage, maxDamage) * criticalRate;
+                return Random.Range(minDamage, maxDamage) * criticalRate * buffDamage;
             }
-            return Random.Range(minDamage, maxDamage);
-            //return Random.Range(minDamage, maxDamage) * buffs[(int)EBuff.Damage].value;
+            return Random.Range(minDamage, maxDamage) * buffDamage;
         }
     }
     public float minDamage;
@@ -52,11 +50,14 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
    
     // buffs
-    public Buff[] buffs;                                // 공, 마공, 방, 마방, 공속
+    public LinkedList<Buff> buffs;                                
+    public float buffDamage = 1f;
+    public float buffArmor = 0f;
+    
     
     [Header("Transform")]
     public Transform targetTF;                          // 투사체 도착 위치(맞을 위치)
-    public Transform HpBarTF;
+    public Transform HpBarTF;                           // 체력바 위치
     public Transform projectileTF;                      // 투사체 생성 위치
     
     //[HideInInspector]
@@ -116,11 +117,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.acceleration = 50f;
         nav.angularSpeed = 360f;
         // 버프 배열 초기화 
-        // buffs = new Buff[(int)EBuff.Size];
-        // for (int i = 0; i < buffs.Length; i++)
-        // {
-        //     buffs[i] = Instantiate(GameManager.instance.prfBUffs[i], transform);
-        // }
+        buffs = new LinkedList<Buff>();
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
@@ -129,7 +126,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
         if (isMagic)
         {   //- buffs[(int)EBuff.MagicArmor].value
-            getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate ));
+            getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate  - buffArmor));
             curHp -= getDamage;
 
             onHpChange?.Invoke();
@@ -145,7 +142,7 @@ public abstract class Character : MonoBehaviour, IDamagable
                 Debug.Log(name + "가 회피함");
             }
             else{   //- buffs[(int)EBuff.Armor].value
-                getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate ));
+                getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate - buffArmor));
                 curHp -= getDamage;
 
                 onHpChange?.Invoke();

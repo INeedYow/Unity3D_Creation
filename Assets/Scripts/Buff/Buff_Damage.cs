@@ -4,28 +4,23 @@ using UnityEngine;
 
 public class Buff_Damage : Buff
 {
-    private void Awake() { value = 1f; }
-    public override void Add(float dura, float value)
+    private void Awake() { eBuff = EBuff.Damage; }
+    public override void Add(Character target, float duration, float buffRatio)
     {
-        if (isOn) { // 동일한 버프가 있던 경우 해제하고 적용
-            CancelInvoke("Sub");
-            Sub();
-        }
-
-        this.value = value;
-        this.dura = dura;
-        isOn = true;
+        this.target = target;
+        target.buffs.AddLast(this);
+        ratio = buffRatio;
+        target.buffDamage += ratio;
         
         DungeonManager.instance.onChangeAnyPower?.Invoke();
 
-        Invoke("Sub", dura);
+        Invoke("Finish", duration);
     }
 
-    public override void Sub()
+    public override void Finish()
     {
-        if (!isOn) return;
-        value = 1f;
-        dura = 0f;
-        isOn = false;
+        target.buffDamage -= ratio;
+        DungeonManager.instance.onChangeAnyPower?.Invoke();
+        ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

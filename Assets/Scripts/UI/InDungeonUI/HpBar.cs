@@ -7,27 +7,13 @@ public class HpBar : MonoBehaviour
 {
     public Character owner;
     public Image hpBar;
-    bool m_isHero;
-
-    // private void OnDisable() {
-    //     owner.onHpChange -= RenewHpBar;
-    //     owner.onDead -= Return;
-    //     owner = null;
-    //     transform.SetParent(null);
-    //     ObjectPool.instance.ReturnObj(this.gameObject);
-    // }
-    // private void FixedUpdate() {
-    //     transform.position = owner.transform.position + Vector3.up * 6f;
-    // }
-    // private void OnEnable() {
-    //     DungeonManager.instance.onDungeonExit += Return;
-    // }
 
     public void SetOwner(Character ch)
     {
         owner = ch;
         owner.onHpChange += RenewHpBar;
-        //owner.onDead += Return;
+        owner.onDead += Return;
+        RenewHpBar();
     }
 
     private void FixedUpdate() {
