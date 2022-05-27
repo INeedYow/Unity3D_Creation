@@ -20,7 +20,7 @@ public class HpBar : MonoBehaviour
         transform.position = owner.HpBarTF.position;
     }
 
-    public void Return(Character ch)
+    public void Return()
     {
         owner.onHpChange -= RenewHpBar;
         owner.onDead -= Return;

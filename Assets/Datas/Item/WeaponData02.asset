@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: "\uBB34\uAE30 2"
   desc: "\u314E"
   icon: {fileID: -5501144400843069653, guid: 37c228f9541674b4cb42da85a6783ec5, type: 3}
-  requireLevel: 3
+  requireLevel: 2
   cost: 1200
   sellCost: 600
   minDamage: 6

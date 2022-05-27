@@ -13,7 +13,8 @@ public enum EBuff {
 public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
-    public UnityAction<Character> onDead;
+    public UnityAction onDead;
+    public UnityAction<Character> onDeadGetThis;
     public UnityAction<int> onMacroChange;
     public UnityAction<float> onAttackGetDamage;
     public UnityAction<Character> onDamagedGetAttacker;
@@ -52,9 +53,22 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
    
     // buffs
-    public LinkedList<Buff> buffs;                                
+    public LinkedList<Buff> buffs;              
     public float buffDamage = 1f;
     public float buffArmor = 0f;
+
+
+    float _buffStun = 0f;
+    public float buffStun {
+        get { return _buffStun; }
+        set { 
+            _buffStun = value; 
+            if (_buffStun > 0f)
+            anim.SetBool("IsStuned", true); 
+            else
+            anim.SetBool("IsStuned", false);
+        }
+    }
     
     
     [Header("Transform")]
@@ -70,7 +84,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         set { 
             _target = value;        targetForDebug = _target;
             if (null != _target)
-            { _target.onDead += TargetDead; }
+            { _target.onDeadGetThis += TargetDead; }
         }
     }      
     [HideInInspector]   public NavMeshAgent nav;
@@ -129,6 +143,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (isMagic)
         {   
             getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate  - buffArmor));
+            if (getDamage < 1) getDamage = 1;
             curHp -= getDamage;
 
             onHpChange?.Invoke();
@@ -136,21 +151,31 @@ public abstract class Character : MonoBehaviour, IDamagable
             DungeonManager.instance.onChangeAnyHP?.Invoke();
             if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);    // 원거리의 경우 죽었을 수 있어서
 
+            Effect eff = ObjectPool.instance.GetEffect((int)EEffect.Blood);
+            eff.transform.position = targetTF.position;
+            eff.SetDuration(1f);
+
             //Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
         }
         else {
             if (IsDodge()) { 
                 // TODO 회피효과 출력
                 Debug.Log(name + "가 회피함");
+                GameManager.instance.ShowDodgeText(transform.position + Vector3.up * 5f);
             }
             else{
                 getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate - buffArmor));
+                if (getDamage < 1) getDamage = 1;
                 curHp -= getDamage;
 
                 onHpChange?.Invoke();
                 onDamagedGetAttacker?.Invoke(newAttacker);
                 DungeonManager.instance.onChangeAnyHP?.Invoke();
                 if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);
+                
+                Effect eff = ObjectPool.instance.GetEffect((int)EEffect.Blood);
+                eff.transform.position = targetTF.position;
+                eff.SetDuration(1f);
 
                 //Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
@@ -178,7 +203,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public abstract void Death();
 
     void TargetDead(Character character) { 
-        character.onDead -= TargetDead;
+        character.onDeadGetThis -= TargetDead;
         target = null; 
     }
 

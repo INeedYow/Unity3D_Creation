@@ -78,8 +78,17 @@ public class GameManager : MonoBehaviour
         m_battleInfotext = ObjectPool.instance.GetInfoText();
         m_battleInfotext.transform.SetParent(worldCanvas.transform);
         m_battleInfotext.transform.position = position;
-        m_battleInfotext.infoText.text = Mathf.RoundToInt(value).ToString();
+        m_battleInfotext.infoText.text = Mathf.RoundToInt(value).ToString(); 
         m_battleInfotext.myColor = GetColorByInfoType(infoType);
+    }
+    
+    public void ShowDodgeText(Vector3 position)
+    {
+        m_battleInfotext = ObjectPool.instance.GetInfoText();
+        m_battleInfotext.transform.SetParent(worldCanvas.transform);
+        m_battleInfotext.transform.position = position;
+        m_battleInfotext.infoText.text = "dodge";
+        m_battleInfotext.myColor = GetColorByInfoType(BattleInfoType.Etc);
     }
 
     Color GetColorByInfoType(BattleInfoType infoType){
@@ -91,7 +100,7 @@ public class GameManager : MonoBehaviour
 
             case BattleInfoType.Monster_damage:     return Color.magenta;
             case BattleInfoType.Monster_heal:       return Color.yellow;
-            case BattleInfoType.Monster_magic:      return Color.white;
+            case BattleInfoType.Monster_magic:      return Color.cyan;
             //
             default:                                return Color.black;
         }

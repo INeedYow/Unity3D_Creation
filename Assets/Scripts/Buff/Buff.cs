@@ -6,7 +6,9 @@ public abstract class Buff : MonoBehaviour
 {
     public EBuff eBuff;
     public float ratio;
+    public EEffect eEffect;
     protected Character target;
+    protected Effect effect;
 
     public abstract void Add(Character target, float duration, float buffRatio);
     public abstract void Finish();

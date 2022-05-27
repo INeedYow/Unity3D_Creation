@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: SkillObjectData_Angel_2
   m_EditorClassIdentifier: 
   isMagic: 1
-  powerRatio: 0.1
+  powerRatio: 0
   area: 0
-  count: 1
+  count: 0
+  eBuff: 0
   duration: 5
   buffRatio: 1

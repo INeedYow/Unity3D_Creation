@@ -93,7 +93,7 @@ public class DungeonManager : MonoBehaviour
         monster.transform.position = curDungeon.GetNextSpawnTransform().position;
         curDungeon.curMonsters.Add(monster);
         curDungeon.curMonsterCount++; //Debug.Log("count++ : " + curDungeon.curMonsterCount);
-        monster.onDead += OnMonsterDie;
+        monster.onDeadGetThis += OnMonsterDie;
 
         bar = ObjectPool.instance.GetHpBar(false);
         bar.SetOwner(monster);
@@ -105,7 +105,7 @@ public class DungeonManager : MonoBehaviour
     public void OnMonsterDie(Character character)
     {   
         curDungeon.MonsterDie();
-        character.onDead -= OnMonsterDie;
+        character.onDeadGetThis -= OnMonsterDie;
 
         dungeonUI.SetCount(curDungeon.curMonsterCount);
     }

@@ -13,6 +13,12 @@ public enum ESkillObj {
     Single,
 }
 
+public enum EEffect {
+    None = -1,
+    Stun, Blood,
+    Size,
+}
+
 public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool instance { get; private set; }
@@ -58,6 +64,17 @@ public class ObjectPool : MonoBehaviour
     [Range(1, 30)] public int[] count_buff;
     List<Buff>[] poolBuffs; 
 
+    [Space(15f)]
+
+    [Header("Effect Pools")]
+    public Effect[] prfEffects;
+    [Range(1, 30)] public int[] count_effect;
+    List<Effect>[] poolEffects; 
+
+
+
+
+
     private void Awake() { instance = this; }
 
     private void Start() { InitPool(); }
@@ -71,23 +88,18 @@ public class ObjectPool : MonoBehaviour
         poolHeroHp              = new List<HpBar>();
         poolMonHp               = new List<HpBar>();
         poolBuffs               = new List<Buff>[prfBuffs.Length];
+        poolEffects             = new List<Effect>[prfEffects.Length];
 
         
-        for(int i = 0; i < prfProjectiles.Length; i++){
-            poolProjectiles[i] = new List<Projectile>();
-        }
+        for(int i = 0; i < prfProjectiles.Length; i++)  { poolProjectiles[i] = new List<Projectile>(); }
 
-        for(int i = 0; i < prfMonsters.Length; i++){
-            poolMonsters[i] = new List<Monster>();
-        }
+        for(int i = 0; i < prfMonsters.Length; i++)     { poolMonsters[i] = new List<Monster>(); }
 
-        for(int i = 0; i < prfSkillObjs.Length; i++){
-            poolSKillObjs[i] = new List<SkillObject>();
-        }
+        for(int i = 0; i < prfSkillObjs.Length; i++)    { poolSKillObjs[i] = new List<SkillObject>(); }
 
-        for(int i = 0; i < prfBuffs.Length; i++){
-            poolBuffs[i] = new List<Buff>();
-        }
+        for(int i = 0; i < prfBuffs.Length; i++)        { poolBuffs[i] = new List<Buff>(); }
+
+        for(int i = 0; i < prfEffects.Length; i++)      { poolEffects[i] = new List<Effect>(); }
 
         // 생성
         if (null != prfBattleInfoText){ 
@@ -138,12 +150,19 @@ public class ObjectPool : MonoBehaviour
                 for(int j = 0; j < count_buff[i]; j++) { poolBuffs[i].Add(CreateNewBuff(i)); }
             }
         }
+
+        for (int i = 0; i < prfEffects.Length; i++){
+            if (null != prfEffects[i])
+            {
+                for(int j = 0; j < count_effect[i]; j++) { poolEffects[i].Add(CreateNewEffect(i)); }
+            }
+        }
     }
 
     public void ReturnObj(GameObject obj){
         //Debug.Log("Pool.ReturnObj()");
         obj.SetActive(false);
-        obj.transform.SetParent(transform);
+        obj.transform.SetParent(transform); 
     }
     
     // BattleInfoText
@@ -329,6 +348,34 @@ public class ObjectPool : MonoBehaviour
         var newObj = CreateNewBuff(buffId, true);
         newObj.transform.SetParent(null);
         poolBuffs[buffId].Add(newObj);
+        
+        return newObj;
+    }
+
+    // Effect
+    Effect CreateNewEffect(int index, bool isActive = false){   //Debug.Log("CreateNewProj" + index); Debug.Log(poolProjectiles[0].Count);
+        var obj = Instantiate(prfEffects[index]);
+        obj.gameObject.SetActive(isActive);
+        obj.transform.SetParent(transform);
+        return obj;
+    }
+
+    public Effect GetEffect(int effectId)
+    {    
+        if (effectId <= (int)EEffect.None || effectId >= (int)EEffect.Size) return null;
+        
+        foreach (Effect eff in poolEffects[effectId]){
+            if (!eff.gameObject.activeSelf)
+            {   
+                eff.transform.SetParent(null);
+                eff.gameObject.SetActive(true);
+                return eff;
+            }
+        }
+        
+        var newObj = CreateNewEffect(effectId, true);
+        newObj.transform.SetParent(null);
+        poolEffects[effectId].Add(newObj);
         
         return newObj;
     }

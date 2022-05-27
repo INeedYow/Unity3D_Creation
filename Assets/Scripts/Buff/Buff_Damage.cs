@@ -7,18 +7,21 @@ public class Buff_Damage : Buff
     private void Awake() { eBuff = EBuff.Damage; }
     public override void Add(Character target, float duration, float buffRatio)
     {
+        if (target == null) return ;
+        
         this.target = target;
         target.buffs.AddLast(this);
         ratio = buffRatio;
+
+        //
         target.buffDamage += ratio;
-        
         DungeonManager.instance.onChangeAnyPower?.Invoke();
 
         Invoke("Finish", duration);
     }
 
     public override void Finish()
-    {
+    {   //
         target.buffDamage -= ratio;
         DungeonManager.instance.onChangeAnyPower?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);

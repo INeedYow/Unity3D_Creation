@@ -19,7 +19,7 @@ public class Hero : Character
     [Header("Level")]
     public int level = 1;
     [HideInInspector] public float maxExp = 100;
-    float _curExp;  //TODO
+    float _curExp;  
     public float curExp {
         get { return _curExp; } 
         set { 
@@ -101,7 +101,8 @@ public class Hero : Character
     {
         isDead = true;
         heroGFX.gameObject.SetActive(false);
-        onDead?.Invoke(this);
+        onDeadGetThis?.Invoke(this);
+        onDead?.Invoke();
     }
 
     public void ResetPos()

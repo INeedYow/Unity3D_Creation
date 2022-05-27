@@ -7,6 +7,13 @@ public class MonBattleInfoUI : MonoBehaviour
 {
     public Monster mon;
     public Text monName;
+    [Header("Stat")]
+    public Text hp;
+    public Text range;
+    public Text damage;
+    public Text magic;
+    public Text armor;
+    public Text magicArmor;
     public MonBattleInfoUnit[] macroInfoUnits;
     public MonBattleInfoUnit[] skillInfoUnits;
 
@@ -20,6 +27,12 @@ public class MonBattleInfoUI : MonoBehaviour
     void SetText()
     {
         monName.text = mon.name;
+        hp.text = mon.maxHp.ToString();
+        range.text          = (mon.attackRange - 1).ToString();  
+        damage.text         = string.Format("{0} ~ {1}", mon.minDamage, mon.maxDamage);
+        magic.text          = mon.magicDamage.ToString();
+        armor.text          = Mathf.RoundToInt(mon.armorRate * 100f).ToString();
+        magicArmor.text     = Mathf.RoundToInt(mon.magicArmorRate * 100f).ToString();
 
         for (int i = 0; i < macroInfoUnits.Length; i++)
         {

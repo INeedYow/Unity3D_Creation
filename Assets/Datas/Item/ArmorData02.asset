@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: "\uBC29\uC5B4\uAD6C 2"
   desc: "\u3141\u3134\u3147\u3139"
   icon: {fileID: -381192550593802702, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
-  requireLevel: 3
+  requireLevel: 2
   cost: 1200
   sellCost: 600
   armor: 0.05
