@@ -5,7 +5,9 @@ using UnityEngine.Events;
 using UnityEngine.AI;
 
 public enum EBuff {
-    Armor, Damage, //Magic, MagicArmor, AttSpeed,             
+    None = -1,
+    Armor, Damage, //Magic, MagicArmor, AttSpeed,
+    Stun,         
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -125,7 +127,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (isDead) return; // 범위 공격에서 GetComponent<Character>해서 예외처리하는 것보다 이게 좋아보여서
 
         if (isMagic)
-        {   //- buffs[(int)EBuff.MagicArmor].value
+        {   
             getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate  - buffArmor));
             curHp -= getDamage;
 
@@ -141,7 +143,7 @@ public abstract class Character : MonoBehaviour, IDamagable
                 // TODO 회피효과 출력
                 Debug.Log(name + "가 회피함");
             }
-            else{   //- buffs[(int)EBuff.Armor].value
+            else{
                 getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate - buffArmor));
                 curHp -= getDamage;
 

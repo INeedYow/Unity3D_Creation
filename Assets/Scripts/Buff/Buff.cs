@@ -1,11 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Buff : MonoBehaviour
 {
     public EBuff eBuff;
-    public float dura;
     public float ratio;
     protected Character target;
 

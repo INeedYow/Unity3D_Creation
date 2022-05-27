@@ -37,7 +37,5 @@ public class SkillObj_TargetShoot : SkillObject
             }
         
         }
-
-        FinishWorks();
     }
 }

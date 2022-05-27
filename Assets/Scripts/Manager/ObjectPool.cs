@@ -313,7 +313,10 @@ public class ObjectPool : MonoBehaviour
         return obj;
     }
 
-    public Buff GetBuff(int buffId){    //Debug.Log("buffId : " + buffId);
+    public Buff GetBuff(int buffId)
+    {    //Debug.Log("buffId : " + buffId);
+        if (buffId <= (int)EBuff.None || buffId >= (int)EBuff.Size) return null;
+        
         foreach (Buff buff in poolBuffs[buffId]){
             if (!buff.gameObject.activeSelf)
             {   

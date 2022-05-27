@@ -16,8 +16,6 @@ public class SkillObj_TargetHeal : SkillObject
             
             target.Healed(data.powerRatio * skill.owner.magicDamage);
         }
-       
         target = null;
-        FinishWorks();
     }
 }

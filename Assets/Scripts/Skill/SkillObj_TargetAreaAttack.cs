@@ -90,7 +90,5 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 }
             }
         }
-
-        FinishWorks();
     }
 }

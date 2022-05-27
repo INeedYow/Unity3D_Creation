@@ -35,8 +35,6 @@ public class SkillObj_TargetAttack : SkillObject
                 );
             }
         }
-       
         target = null;
-        FinishWorks();
     }
 }
