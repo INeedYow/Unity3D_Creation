@@ -28,6 +28,8 @@ public class InventoryManager : MonoBehaviour
         invenUI.gameObject.SetActive(true);
         invenBtn.interactable = false;
         MacroManager.instance.HideMacroUI();
+
+        invenUI.RenewEquipUnits(HeroManager.instance.selectedHero);
     }
 
     public void HideInvenUI(){

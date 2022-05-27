@@ -22,6 +22,7 @@ public class DungeonManager : MonoBehaviour
 
     [Space(10f)] [Header("Dungeon UI")]
     public DungeonUI dungeonUI;
+    public MonBattleInfoUI monInfoUI;
 
     [Space(10f)] [Header("Monster prfSkill")]
     public Skill prfSporeSkill;
@@ -100,4 +101,12 @@ public class DungeonManager : MonoBehaviour
         //dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
         dungeonUI.SetCount(curDungeon.curMonsterCount);
     }
+
+    public void ShowMonInfoUI(Monster monster) {    
+        monInfoUI.gameObject.SetActive(true);
+        monInfoUI.RenewUI(monster);
+    }
+
+    //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); }
+
 }

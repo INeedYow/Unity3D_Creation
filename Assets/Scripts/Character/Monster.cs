@@ -75,4 +75,6 @@ public class Monster : Character
         monsGFX.gameObject.SetActive(false);
         onDead?.Invoke(this);
     }
+
+    private void OnMouseDown() { DungeonManager.instance.ShowMonInfoUI(this); }
 }

@@ -27,9 +27,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float curDamage{ 
         get{ 
             if (IsCritical()) {
-                return Random.Range(minDamage, maxDamage) * criticalRate * buffs[(int)EBuff.Damage].value;
+                // return Random.Range(minDamage, maxDamage) * criticalRate * buffs[(int)EBuff.Damage].value;
+                return Random.Range(minDamage, maxDamage) * criticalRate;
             }
-            return Random.Range(minDamage, maxDamage) * buffs[(int)EBuff.Damage].value;
+            return Random.Range(minDamage, maxDamage);
+            // return Random.Range(minDamage, maxDamage) * buffs[(int)EBuff.Damage].value;
         }
     }
     public float minDamage;
@@ -112,10 +114,9 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.stoppingDistance = attackRange;
         nav.acceleration = 50f;
         nav.angularSpeed = 360f;
-        // 버프 초기화
-        buffs = new Buff[(int)EBuff.Size];
-        buffs[0] = new Buff_Damage();
-        // TODO
+        // 버프 초기화 
+        // buffs = new Buff[(int)EBuff.Size];
+        // buffs[0] = new Buff_Damage();
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)

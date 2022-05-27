@@ -36,12 +36,12 @@ public class MacroManager : MonoBehaviour
         if (isCondition)
         {   //Debug.Log("SetMacro_Con");
             Destroy(hero.conditionMacros[macroUnitID].gameObject);
-            hero.conditionMacros[macroUnitID] = Instantiate(prfConditionMacros[value]);
+            hero.conditionMacros[macroUnitID] = Instantiate(prfConditionMacros[value], hero.transform);
             hero.conditionMacros[macroUnitID].owner = hero;
         }
         else{   //Debug.Log("SetMacro_Act");
             Destroy(hero.actionMacros[macroUnitID].gameObject);
-            hero.actionMacros[macroUnitID] = Instantiate(prfActionMacros[value]);
+            hero.actionMacros[macroUnitID] = Instantiate(prfActionMacros[value], hero.transform);
             hero.actionMacros[macroUnitID].owner = hero;
         }
     }
@@ -50,6 +50,8 @@ public class MacroManager : MonoBehaviour
         macroUI.gameObject.SetActive(true);
         macroBtn.interactable = false;
         InventoryManager.instance.HideInvenUI();
+
+        macroUI.RenewUI(HeroManager.instance.selectedHero);
     }
 
     public void HideMacroUI(){

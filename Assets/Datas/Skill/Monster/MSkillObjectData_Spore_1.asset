@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MSkillObjectData_Spore_1
   m_EditorClassIdentifier: 
   isMagic: 0
-  powerRatio: 3
+  powerRatio: 2
   area: 3
   count: 1
   duration: 0

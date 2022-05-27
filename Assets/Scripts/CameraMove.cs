@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    // public Transform defaultTf;
-    // public Transform dungeonTf;
+    public Transform defaultTf;
+    public Transform dungeonTf;
     bool isDefault = true;
 
     public void ToggleView()
     {
         if (isDefault)
         {
-            transform.Translate(200f, 0f, 0f);
+            transform.position = dungeonTf.position;
+            transform.rotation = dungeonTf.rotation;
             isDefault = !isDefault;
         }
         else{
-            transform.Translate(-200f, 0f, 0f);
+            transform.position = defaultTf.position;
+            transform.rotation = defaultTf.rotation;
             isDefault = !isDefault;
         }
     }
