@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
+public enum EBuff {
+    Damage, Magic, Armor, MagicArmor, AttSpeed,             
+    Size,
+}
 public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
@@ -22,8 +26,10 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float maxHp;
     public float curDamage{ 
         get{ 
-            if (IsCritical()) return Random.Range(minDamage, maxDamage) * criticalRate;
-            return Random.Range(minDamage, maxDamage);
+            if (IsCritical()) {
+                return Random.Range(minDamage, maxDamage) * criticalRate * buffs[(int)EBuff.Damage].value;
+            }
+            return Random.Range(minDamage, maxDamage) * buffs[(int)EBuff.Damage].value;
         }
     }
     public float minDamage;
@@ -43,6 +49,9 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Range(0f, 1f)] public float armorRate = 0f;                    // 방어율 (%)
     [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
    
+    // buffs
+    public Buff[] buffs;                                // 공, 마공, 방, 마방, 공속
+    
     [Header("Transform")]
     public Transform targetTF;                          // 투사체 도착 위치(맞을 위치)
     public Transform projectileTF;                      // 투사체 생성 위치
@@ -103,6 +112,10 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.stoppingDistance = attackRange;
         nav.acceleration = 50f;
         nav.angularSpeed = 360f;
+        // 버프 초기화
+        buffs = new Buff[(int)EBuff.Size];
+        buffs[0] = new Buff_Damage();
+        // TODO
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)

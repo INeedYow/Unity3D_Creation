@@ -26,12 +26,6 @@ public class DungeonManager : MonoBehaviour
     [Space(10f)] [Header("Monster prfSkill")]
     public Skill prfSporeSkill;
 
-    // for (int i = 0; i < prfKnightSkills.Length; i++)
-    //             {
-    //                 hero.skills[i] = Instantiate(prfKnightSkills[i], hero.transform);
-    //                 hero.skills[i].Init(hero, i + 1);
-    //             }
-
     private void Awake() {
         instance = this;
         Init();
@@ -54,9 +48,6 @@ public class DungeonManager : MonoBehaviour
         dungeonUI.gameObject.SetActive(true);
         dungeonUI.Init(curDungeon);
 
-        //Temp
-        // GameManager.instance.playerInfoUI.gameObject.SetActive(false);
-        // GameManager.instance.cam.ToggleView();
         GameManager.instance.EnterDungeon(true);
     }
 
@@ -66,11 +57,9 @@ public class DungeonManager : MonoBehaviour
         curDungeon.gameObject.SetActive(false);
         curDungeon = null;
         PartyManager.instance.ExitDungeon();
+
         dungeonUI.gameObject.SetActive(false);
 
-        //
-        // GameManager.instance.playerInfoUI.gameObject.SetActive(true);
-        // GameManager.instance.cam.ToggleView();
         GameManager.instance.EnterDungeon(false);
     }
 
