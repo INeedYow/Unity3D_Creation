@@ -27,11 +27,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float curDamage{ 
         get{ 
             if (IsCritical()) {
-                // return Random.Range(minDamage, maxDamage) * criticalRate * buffs[(int)EBuff.Damage].value;
+                //return Random.Range(minDamage, maxDamage) * criticalRate * buffs[(int)EBuff.Damage].value;
                 return Random.Range(minDamage, maxDamage) * criticalRate;
             }
             return Random.Range(minDamage, maxDamage);
-            // return Random.Range(minDamage, maxDamage) * buffs[(int)EBuff.Damage].value;
+            //return Random.Range(minDamage, maxDamage) * buffs[(int)EBuff.Damage].value;
         }
     }
     public float minDamage;
@@ -56,6 +56,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     
     [Header("Transform")]
     public Transform targetTF;                          // 투사체 도착 위치(맞을 위치)
+    public Transform HpBarTF;
     public Transform projectileTF;                      // 투사체 생성 위치
     
     //[HideInInspector]
@@ -114,9 +115,12 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.stoppingDistance = attackRange;
         nav.acceleration = 50f;
         nav.angularSpeed = 360f;
-        // 버프 초기화 
+        // 버프 배열 초기화 
         // buffs = new Buff[(int)EBuff.Size];
-        // buffs[0] = new Buff_Damage();
+        // for (int i = 0; i < buffs.Length; i++)
+        // {
+        //     buffs[i] = Instantiate(GameManager.instance.prfBUffs[i], transform);
+        // }
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
@@ -124,8 +128,8 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (isDead) return; // 범위 공격에서 GetComponent<Character>해서 예외처리하는 것보다 이게 좋아보여서
 
         if (isMagic)
-        {   
-            getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate));
+        {   //- buffs[(int)EBuff.MagicArmor].value
+            getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate ));
             curHp -= getDamage;
 
             onHpChange?.Invoke();
@@ -140,8 +144,8 @@ public abstract class Character : MonoBehaviour, IDamagable
                 // TODO 회피효과 출력
                 Debug.Log(name + "가 회피함");
             }
-            else{
-                getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate));
+            else{   //- buffs[(int)EBuff.Armor].value
+                getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate ));
                 curHp -= getDamage;
 
                 onHpChange?.Invoke();

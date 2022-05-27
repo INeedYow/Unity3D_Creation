@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public PlayerInfoUI playerInfoUI;
     public GameObject worldCanvas;
 
+    [Header("prfBuffs")]
+    public Buff[] prfBUffs = new Buff[(int)EBuff.Size];   // 공, 마공, 방, 마방, 공속
+
     [Header("Etc")]
     public Vector3 focusedScale = new Vector3 (0.5f, 0.5f, 0.5f);
     BattleInfoText m_battleInfotext;

@@ -43,6 +43,13 @@ public class ObjectPool : MonoBehaviour
     [Range(1, 100)] public int[] count_skillObjs;
     List<SkillObject>[] poolSKillObjs; 
 
+    [Header("Hp bar")]
+    public HpBar prfHeroHpBar;
+    [Range(1, 8)] public int count_heroHp;
+    public HpBar prfMonHpBar;
+    [Range(1, 15)] public int count_monHp;
+    List <HpBar> poolHeroHp;
+    List <HpBar> poolMonHp;
 
     private void Awake() { instance = this; }
 
@@ -54,6 +61,9 @@ public class ObjectPool : MonoBehaviour
         poolProjectiles         = new List<Projectile>[prfProjectiles.Length];
         poolMonsters            = new List<Monster>[prfMonsters.Length];
         poolSKillObjs           = new List<SkillObject>[prfSkillObjs.Length];
+        poolHeroHp              = new List<HpBar>();
+        poolMonHp               = new List<HpBar>();
+
         
         for(int i = 0; i < prfProjectiles.Length; i++){
             poolProjectiles[i] = new List<Projectile>();
@@ -94,6 +104,20 @@ public class ObjectPool : MonoBehaviour
             {
                 for(int j = 0; j < count_skillObjs[i]; j++) { poolSKillObjs[i].Add(CreateNewSkillObject(i)); }
             }
+        }
+
+        if (null != prfHeroHpBar){ 
+            for(int i = 0; i < count_heroHp; i++)
+            { 
+                poolHeroHp.Add(CreateNewHpBar(true)); 
+            } 
+        }
+
+        if (null != prfMonHpBar){ 
+            for(int i = 0; i < count_monHp; i++)
+            { 
+                poolMonHp.Add(CreateNewHpBar(false)); 
+            } 
         }
     }
 
@@ -205,5 +229,60 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
-    
+    // Hp bars
+    HpBar CreateNewHpBar(bool isHero, bool isActive = false)
+    {
+        if (isHero)
+        {
+            var obj = Instantiate(prfHeroHpBar);
+            obj.gameObject.SetActive(isActive);
+            obj.transform.SetParent(transform);
+            return obj;
+        }
+       
+        else
+        {
+            var obj = Instantiate(prfMonHpBar);
+            obj.gameObject.SetActive(isActive);
+            obj.transform.SetParent(transform);
+            return obj;
+        }
+    }
+
+    public HpBar GetHpBar(bool isHero){
+        if (isHero)
+        {
+            foreach (HpBar bar in poolHeroHp)
+            {
+                if (!bar.gameObject.activeSelf)
+                {   // Hp bar는 월드캔버스를 부모로 반환
+                    bar.transform.SetParent(GameManager.instance.worldCanvas.transform);
+                    bar.gameObject.SetActive(true);
+                    return bar;
+                }
+            }
+
+            var newObj = CreateNewHpBar(isHero, true);
+            newObj.transform.SetParent(GameManager.instance.worldCanvas.transform);
+            poolHeroHp.Add(newObj);
+            return newObj;
+        }
+        else
+        {
+            foreach (HpBar bar in poolMonHp)
+            {
+                if (!bar.gameObject.activeSelf)
+                {   
+                    bar.transform.SetParent(GameManager.instance.worldCanvas.transform);
+                    bar.gameObject.SetActive(true);
+                    return bar;
+                }
+            }
+
+            var newObj = CreateNewHpBar(isHero, true);
+            newObj.transform.SetParent(GameManager.instance.worldCanvas.transform);
+            poolMonHp.Add(newObj);
+            return newObj;
+        }
+    }
 }

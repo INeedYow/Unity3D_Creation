@@ -20,11 +20,15 @@ public class PartyManager : MonoBehaviour
     [Header("Board")]
     public Board board;
     
+
+    HpBar bar;
+
     private void Awake() { _instance = this; }
 
     public void EnterDungeon(){
         SwapDummy2GFX();
         ResetHeroPos();
+        SetOnHpBar();
     }
 
     public void ExitDungeon(){
@@ -97,6 +101,15 @@ public class PartyManager : MonoBehaviour
         foreach(Hero hero in heroParty)
         {
             hero.curExp += exp;
+        }
+    }
+
+    void SetOnHpBar()
+    {   // 끄는 건 던전 종료 시 이벤트 받아서 hpbar가 자체적으로
+        foreach(Hero hero in heroParty)
+        {
+            bar = ObjectPool.instance.GetHpBar(true);
+            bar.SetOwner(hero);
         }
     }
 }

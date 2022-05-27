@@ -15,6 +15,7 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnyMoveSpeed;
     public UnityAction onWaveStart;
     public UnityAction onWaveEnd;
+    public UnityAction onDungeonExit;
 
     public static DungeonManager instance { get; private set; }
     public List<Dungeon> listDungeon = new List<Dungeon>();
@@ -26,6 +27,9 @@ public class DungeonManager : MonoBehaviour
 
     [Space(10f)] [Header("Monster prfSkill")]
     public Skill prfSporeSkill;
+
+
+    HpBar bar;
 
     private void Awake() {
         instance = this;
@@ -55,6 +59,8 @@ public class DungeonManager : MonoBehaviour
     public void Exit()
     {
         // TODO
+        onDungeonExit?.Invoke();
+        
         curDungeon.gameObject.SetActive(false);
         curDungeon = null;
         PartyManager.instance.ExitDungeon();
@@ -89,7 +95,10 @@ public class DungeonManager : MonoBehaviour
         curDungeon.curMonsterCount++; //Debug.Log("count++ : " + curDungeon.curMonsterCount);
         monster.onDead += OnMonsterDie;
 
-        //dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
+        bar = ObjectPool.instance.GetHpBar(false);
+        bar.SetOwner(monster);
+
+
         dungeonUI.SetCount(curDungeon.curMonsterCount);
     }
 
@@ -98,7 +107,6 @@ public class DungeonManager : MonoBehaviour
         curDungeon.MonsterDie();
         character.onDead -= OnMonsterDie;
 
-        //dungeonInfoUI.SetCount(curDungeon.curMonsterCount);
         dungeonUI.SetCount(curDungeon.curMonsterCount);
     }
 
@@ -107,6 +115,6 @@ public class DungeonManager : MonoBehaviour
         monInfoUI.RenewUI(monster);
     }
 
-    //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); }
+    //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); } // 현재 클릭하면 사라지게 해뒀음
 
 }

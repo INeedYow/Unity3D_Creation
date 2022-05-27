@@ -468,6 +468,36 @@ Transform:
   m_Father: {fileID: 766140198159662494}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3130665925066630400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 614659201945477236}
+  m_Layer: 0
+  m_Name: Hpbar TF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &614659201945477236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3130665925066630400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5625915739511746795}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5625915739511746793
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +530,7 @@ Transform:
   m_Children:
   - {fileID: 774576237881992142}
   - {fileID: 8754851228247374062}
+  - {fileID: 614659201945477236}
   - {fileID: 7268867739743051662}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -537,6 +568,7 @@ MonoBehaviour:
   magicArmorRate: 0
   buffs: []
   targetTF: {fileID: 8754851228247374062}
+  HpBarTF: {fileID: 614659201945477236}
   projectileTF: {fileID: 0}
   targetForDebug: {fileID: 0}
   nav: {fileID: 0}
@@ -645,7 +677,7 @@ Transform:
   - {fileID: 3456425569782687327}
   - {fileID: 2375546666503447445}
   m_Father: {fileID: 5625915739511746795}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &686320987227746480
 PrefabInstance:
