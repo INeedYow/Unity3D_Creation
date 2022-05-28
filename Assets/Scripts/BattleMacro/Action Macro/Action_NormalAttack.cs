@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Action_NormalAttack : ActionMacro
 {
-    public override bool Execute(){
+    public override bool Execute(){ //Debug.Log("normal att");
         
-        if (owner.target == null)
-        {   
-            if (owner.eGroup == EGroup.Hero){
-                owner.target = DungeonManager.instance.curDungeon.GetRandMonster();
-                if (owner.target == null) return false;
-            }
-            else { return false; }
-        }
+        if (owner.target == null) return false;
+        // {   
+        //     if (owner.eGroup == EGroup.Hero){
+        //         owner.target = DungeonManager.instance.curDungeon.GetRandMonster();
+        //         if (owner.target == null) return false;
+        //     }
+        //     else { return false; }
+        // }
         
         if (owner.IsTargetInRange(owner.attackRange))
         {   

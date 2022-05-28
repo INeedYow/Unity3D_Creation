@@ -98,8 +98,10 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     [HideInInspector] public AttackCommand attackCommand;
     [HideInInspector] public Animator anim;
-    [HideInInspector] public bool isStop;    
-    [HideInInspector] public bool isDead;
+    //[HideInInspector] 
+    public bool isStop;    
+    //[HideInInspector] 
+    public bool isDead;
     protected int getDamage;
     protected Character attacker;
 
@@ -220,10 +222,10 @@ public abstract class Character : MonoBehaviour, IDamagable
         { nav.isStopped = false; }
     }
 
-    public void AttackInit(){           // ActionMacro_NormalAttack 에서 호출
+    public void AttackInit(){          
         if (Time.time < lastAttackTime + attackDelay) return;
         lastAttackTime = Time.time;
-        anim.SetTrigger("Attack");      // 애니메이션에서 Event함수로 GFX의 Attack() 호출하게 됨
+        anim.SetTrigger("Attack");      
     }
 
     public bool IsTargetInRange(float range)

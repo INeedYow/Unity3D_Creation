@@ -15,7 +15,7 @@ public enum ESkillObj {
 
 public enum EEffect {
     None = -1,
-    Stun, Blood,
+    Stun, Blood, Buff_ArmorInit, Buff_ArmorDura,
     Size,
 }
 

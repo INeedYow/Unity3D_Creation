@@ -51,7 +51,8 @@ public class SkillObj_TargetAreaAttack : SkillObject
             foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
             {
                 if (mon.isDead) continue;
-                
+                if (skill.owner.target == null) break;
+
                 m_sqrDist = (skill.owner.target.transform.position - mon.transform.position).sqrMagnitude;
 
                 // if (m_sqrArea < m_sqrDist) continue;
@@ -66,6 +67,8 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 else{
                     m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
                 }
+                Buff buff = ObjectPool.instance.GetBuff((int)data.eBuff);
+                buff?.Add(mon, data.duration, data.buffRatio);
             }
         }
         else
@@ -88,6 +91,8 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 else{
                     m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
                 }
+                Buff buff = ObjectPool.instance.GetBuff((int)data.eBuff);
+                buff?.Add(hero, data.duration, data.buffRatio);
             }
         }
     }

@@ -17,12 +17,21 @@ public class Buff_Armor : Buff
         target.buffArmor += ratio;
         DungeonManager.instance.onChangeAnyArmor?.Invoke();
 
+        // Effect effect = ObjectPool.instance.GetEffect((int)EEffect.Buff_ArmorInit);
+        // effect.transform.position = target.targetTF.position;
+        // effect.SetDuration(1f);
+
+        effect = ObjectPool.instance.GetEffect((int)EEffect.Buff_ArmorInit);
+        effect.transform.position = target.targetTF.position;
+        effect.SetDuration(1f);
+
         Invoke("Finish", duration);
     }
 
     public override void Finish()
     {   //
         target.buffArmor -= ratio;
+        effect.Return();
         DungeonManager.instance.onChangeAnyArmor?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }

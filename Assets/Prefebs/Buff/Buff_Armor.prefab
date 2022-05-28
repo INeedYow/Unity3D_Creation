@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eBuff: 0
-  dura: 0
   ratio: 0
+  eEffect: 2

@@ -7,7 +7,10 @@ public class Ability_Drain : Ability
     [Range(0.1f, 1f)] public float drainRatio;
     
     public override void OnAttack(float damage){
-        owner.Healed(damage * drainRatio);
+        owner.
+        Healed(
+            damage * 
+            drainRatio);
     }
 
     public override bool SetOptionText1to3(int optionNumber, ItemOptionUnit optionUnit)
