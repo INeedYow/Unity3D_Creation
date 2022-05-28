@@ -35,6 +35,9 @@ public class SkillObj_TargetAttack : SkillObject
                 );
             }
         }
+        if (skill.owner.target != null) 
+            AddBuff(skill.owner.target);
+            
         target = null;
     }
 }

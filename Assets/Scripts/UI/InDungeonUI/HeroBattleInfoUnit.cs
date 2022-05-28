@@ -16,7 +16,7 @@ public class HeroBattleInfoUnit : MonoBehaviour
         m_owner = owner;
         icon.sprite = m_owner.icon;
         m_owner.onHpChange += RenewHpBar;
-        m_owner.onMacroChange += RenewMacroBox;
+        m_owner.onMacroChangeGetIndex += RenewMacroBox;
 
         RenewHpBar();
     }
@@ -29,7 +29,7 @@ public class HeroBattleInfoUnit : MonoBehaviour
         if (m_owner != null)
         {
             m_owner.onHpChange -= RenewHpBar;
-            m_owner.onMacroChange -= RenewMacroBox;
+            m_owner.onMacroChangeGetIndex -= RenewMacroBox;
         }
     }
 

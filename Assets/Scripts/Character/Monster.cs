@@ -77,5 +77,20 @@ public class Monster : Character
         onDead?.Invoke();
     }
 
+    public void Reset()
+    {
+        ResetBuffs();
+    }
+    void ResetBuffs()
+    {
+        foreach (Buff buff in buffs)
+        {
+            buff.Remove();
+        }
+        buffStun = 0f;
+        buffArmor = 0f;
+        buffDamage = 1f;
+    }
+
     private void OnMouseDown() { DungeonManager.instance.ShowMonInfoUI(this); }
 }

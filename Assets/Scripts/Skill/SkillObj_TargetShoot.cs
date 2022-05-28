@@ -37,5 +37,8 @@ public class SkillObj_TargetShoot : SkillObject
             }
         
         }
+       
+        if (skill.owner.target != null) 
+            AddBuff(skill.owner.target);
     }
 }

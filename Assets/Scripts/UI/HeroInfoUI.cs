@@ -26,7 +26,7 @@ public class HeroInfoUI : MonoBehaviour
     [Header("Skill")]
     public Image[] skill = new Image[4];
 
-    private void Start() {  // TODO 장비 변경시에도 갱신
+    private void Start() {  
         HeroManager.instance.onChangeSelectedHero += RenewUI;
     }
 

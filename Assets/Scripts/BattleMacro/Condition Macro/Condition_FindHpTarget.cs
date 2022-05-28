@@ -13,19 +13,19 @@ public class Condition_FindHpTarget : ConditionMacro
 
     private void OnEnable()     { DungeonManager.instance.onChangeAnyHP += AnyHpChange; }
     private void OnDisable()    { DungeonManager.instance.onChangeAnyHP -= AnyHpChange; }
-
+    
     void AnyHpChange() { m_hasAnyHpChange = true; }
 
     public override bool IsSatisfy(){
-        // 처음 들어올 때 target null 돼서 들어오니까 검사, 타겟 죽어서 없는 등의 경우에도 검사
+        //처음 들어올 때 target null 돼서 들어오니까 검사, 타겟 죽어서 없는 등의 경우에도 검사
         Debug.Log("IsSatisfy() owner.target " + owner.target);
         if (owner.target == null)   { return FindTarget(); }
         
-        // 누군가의 체력 변경이 일어나면 다시 검사
+        //누군가의 체력 변경이 일어나면 다시 검사
         else if (m_hasAnyHpChange)  { return FindTarget(); }
         Debug.Log("Find" + owner.target);
         
-        // 그럼에도 null 이면 조건에 부합X
+        //그럼에도 null 이면 조건에 부합X
         if (owner.target == null)   { return false; }
         else                        { return true; }
     }
@@ -42,14 +42,14 @@ public class Condition_FindHpTarget : ConditionMacro
                 {   // value 이상
                     if (ch.curHp / ch.maxHp * 100f >= value)
                     {
-                        owner.target = ch;  Debug.Log("Find" + owner.target);
+                        owner.target = ch;  
                         return true;
                     }
                 }
                 else{   // value 이하
                     if (ch.curHp / ch.maxHp * 100f <= value)
                     {
-                        owner.target = ch;  Debug.Log("Find" + owner.target);
+                        owner.target = ch;  
                         return true;
                     }
                 }
@@ -63,20 +63,20 @@ public class Condition_FindHpTarget : ConditionMacro
                 {   // value 이상
                     if (ch.curHp / ch.maxHp * 100f >= value)
                     {
-                        owner.target = ch;  Debug.Log("Find" + owner.target);
+                        owner.target = ch;  
                         return true;
                     }
                 }
                 else{   // value 이하
                     if (ch.curHp / ch.maxHp * 100f <= value)
                     {
-                        owner.target = ch;  Debug.Log("Find" + owner.target);
+                        owner.target = ch;  
                         return true;
                     }
                 }
             }
         }
-        Debug.Log("Find false" + owner.target);
+        
         return false;
     }
 }

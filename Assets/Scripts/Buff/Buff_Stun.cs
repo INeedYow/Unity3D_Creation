@@ -15,6 +15,7 @@ public class Buff_Stun : Buff
         //
         ratio = duration;
         target.buffStun += duration;
+
         effect = ObjectPool.instance.GetEffect((int)eEffect);
         effect.transform.SetParent(target.transform);
         effect.transform.position = target.HpBarTF.position;
@@ -27,7 +28,8 @@ public class Buff_Stun : Buff
     {   //
         if (target != null)
         {
-            target.buffStun -= ratio;
+            target.buffStun -= ratio; 
+            target.buffs.Remove(this);
         }
         effect.Return();
         ObjectPool.instance.ReturnObj(this.gameObject);

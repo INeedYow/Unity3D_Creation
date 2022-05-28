@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public UnityAction onHpChange;
     public UnityAction onDead;
     public UnityAction<Character> onDeadGetThis;
-    public UnityAction<int> onMacroChange;
+    public UnityAction<int> onMacroChangeGetIndex;
     public UnityAction<float> onAttackGetDamage;
     public UnityAction<Character> onDamagedGetAttacker;
     public UnityAction onKill;
@@ -57,16 +57,20 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float buffDamage = 1f;
     public float buffArmor = 0f;
 
-
     float _buffStun = 0f;
     public float buffStun {
         get { return _buffStun; }
         set { 
             _buffStun = value; 
-            if (_buffStun > 0f)
-            anim.SetBool("IsStuned", true); 
+            if (_buffStun > 0.1f)
+            {
+                anim.SetBool("IsStuned", true); 
+            }
             else
-            anim.SetBool("IsStuned", false);
+            {
+                _buffStun = 0f;
+                anim.SetBool("IsStuned", false);
+            }
         }
     }
     
@@ -82,6 +86,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Character target{
         get { return _target; } 
         set { 
+            //if (_target != value && eGroup == EGroup.Hero) Debug.Log(string.Format("_T, value : {0}, {1}" , _target, value));
             _target = value;        targetForDebug = _target;
             if (null != _target)
             { _target.onDeadGetThis += TargetDead; }
@@ -92,6 +97,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Header("Macro")]
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
+
+    public int prevMacro = -1;
 
     [Header("Skill")]
     public Skill[] skills;
@@ -161,8 +168,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         }
         else {
             if (IsDodge()) { 
-                // TODO 회피효과 출력
-                Debug.Log(name + "가 회피함");
                 GameManager.instance.ShowDodgeText(transform.position + Vector3.up * 5f);
             }
             else{

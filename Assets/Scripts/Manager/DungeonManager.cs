@@ -10,9 +10,7 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnyArmor;
     public UnityAction onChangeAnyMagicPower;
     public UnityAction onChangeAnyMagicArmor;
-    public UnityAction onChangeAnyAttackRange;
     public UnityAction onChangeAnyAttackSpeed;
-    public UnityAction onChangeAnyMoveSpeed;
     public UnityAction onWaveStart;
     public UnityAction onWaveEnd;
     public UnityAction onDungeonExit;
@@ -92,12 +90,14 @@ public class DungeonManager : MonoBehaviour
     {
         monster.transform.position = curDungeon.GetNextSpawnTransform().position;
         curDungeon.curMonsters.Add(monster);
-        curDungeon.curMonsterCount++; //Debug.Log("count++ : " + curDungeon.curMonsterCount);
+        curDungeon.curMonsterCount++;
         monster.onDeadGetThis += OnMonsterDie;
 
+        monster.Reset();
         bar = ObjectPool.instance.GetHpBar(false);
         bar.SetOwner(monster);
 
+        Debug.Log("buffs.count" + monster.buffs.Count);
 
         dungeonUI.SetCount(curDungeon.curMonsterCount);
     }
@@ -116,5 +116,4 @@ public class DungeonManager : MonoBehaviour
     }
 
     //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); } // 현재 클릭하면 사라지게 해뒀음
-
 }

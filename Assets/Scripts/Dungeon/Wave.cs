@@ -16,12 +16,7 @@ public class Wave : MonoBehaviour
         {
             for (int i = 0; i < counts[j]; i++)
             {
-                // monster = ObjectPool.instance.GetMonster((int)eMonsters[j]);
-                // DungeonManager.instance.AddMonster(monster);
-
-                DungeonManager.instance.AddMonster(
-                    ObjectPool.instance.GetMonster((int)eMonsters[j])
-                );
+                DungeonManager.instance.AddMonster(ObjectPool.instance.GetMonster((int)eMonsters[j]));
             }
         }
     }

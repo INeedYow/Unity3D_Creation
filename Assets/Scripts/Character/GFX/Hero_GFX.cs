@@ -22,31 +22,16 @@ public class Hero_GFX : GFX
         {
             if (hero.conditionMacros[i] == null) continue;
 
+            
             if (hero.conditionMacros[i].IsSatisfy())
             {   
-                //if (hero.eClass == Hero.EClass.Angel)
-               //     Debug.Log(string.Format("if C {0}, Target : {1}", i, hero.target));
-
                 if (hero.actionMacros[i] == null) continue;
                 
-                hero.onMacroChange?.Invoke(i);                  
-                if (hero.actionMacros[i].Execute()) 
-                {
-                    //if (hero.eClass == Hero.EClass.Angel)
-                    //    Debug.Log(string.Format("if A {0}, Target : {1}", i, hero.target));
-                    break;
-                }
-                else { 
-                    hero.target = null; 
-                    //if (hero.eClass == Hero.EClass.Angel)
-                    //    Debug.Log(string.Format("else A {0}, Target : {1}", i, hero.target));
-                }
+                hero.onMacroChangeGetIndex?.Invoke(i);                  
+                if (hero.actionMacros[i].Execute()) { break; }
+                else { hero.target = null; }
             }
-            else { 
-                hero.target = null; 
-                //if (hero.eClass == Hero.EClass.Angel)
-                //    Debug.Log(string.Format("else C {0}, Target : {1}", i, hero.target));
-            }
+            else { hero.target = null; }
         }
     }
 
@@ -71,15 +56,15 @@ public class Hero_GFX : GFX
     void OnAttack() { hero.attackCommand.Attack(); }
 
     void OnEffectSkill(int number){ 
-        if (hero.eClass == Hero.EClass.Angel)
-            Debug.Log(string.Format("OnSkillEffect // Target : {0}", hero.target));
+        //if (hero.eClass == Hero.EClass.Angel)
+            //Debug.Log(string.Format("OnSkillEffect // Target : {0}", hero.target));
 
         hero.skills[number - 1].EffectSkill();
     }
 
     void OnFinishSkill(int number){  
-        if (hero.eClass == Hero.EClass.Angel)
-            Debug.Log(string.Format("OnSkillFinish // Target : {0}", hero.target));
+        //if (hero.eClass == Hero.EClass.Angel)
+            //Debug.Log(string.Format("OnSkillFinish // Target : {0}", hero.target));
 
         hero.skills[number - 1].FinishSKill();
         hero.anim.SetBool(string.Format("Skill {0}", number), false);

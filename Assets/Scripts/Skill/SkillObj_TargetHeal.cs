@@ -16,6 +16,10 @@ public class SkillObj_TargetHeal : SkillObject
             
             target.Healed(data.powerRatio * skill.owner.magicDamage);
         }
+
+       if (skill.owner.target != null) 
+            AddBuff(skill.owner.target);
+            
         target = null;
     }
 }

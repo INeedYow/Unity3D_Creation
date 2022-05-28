@@ -12,22 +12,25 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     float m_sqrDist;
 
     private void OnEnable() {   // 웨이브 진행 중에만 거리 검사하도록.(isStop과 별개로 Invoke는 돌지 않나?)
-        DungeonManager.instance.onWaveStart += OnBattle; 
-        DungeonManager.instance.onWaveEnd += OffBattle;   
+        //DungeonManager.instance.onWaveStart += OnBattle; 
+        //DungeonManager.instance.onWaveEnd += OffBattle;  
     }
     private void OnDisable() {   
-        DungeonManager.instance.onWaveStart -= OnBattle; 
-        DungeonManager.instance.onWaveEnd -= OffBattle;  
+        //DungeonManager.instance.onWaveStart -= OnBattle; 
+        //DungeonManager.instance.onWaveEnd -= OffBattle;  
     }
 
     public override bool IsSatisfy(){  
-        if (null == owner.target) { GetTarget(); }
+        //if (null == owner.target) 
+        //{
+        GetTarget(); 
+        //}
         
         return true;
     }
 
-    public void OnBattle() { InvokeRepeating("GetTarget", 0f, 0.2f); }
-    public void OffBattle() { CancelInvoke("GetTarget"); }
+    //public void OnBattle() { InvokeRepeating("GetTarget", 0f, 0.2f); }
+    //public void OffBattle() { CancelInvoke("GetTarget"); }
     
     void GetTarget()
     {   //Debug.Log("get dist target()");

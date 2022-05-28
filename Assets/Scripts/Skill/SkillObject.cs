@@ -11,18 +11,18 @@ public abstract class SkillObject : MonoBehaviour
     private void Awake() { gameObject.SetActive(false); }
     private void OnEnable() { SkillWorks(); }
 
-    void SkillWorks() { // 범위 공격에 광역 스턴이 이렇게 하면 안 됨
+    void SkillWorks() { 
         Works();
-        AddBuff();
+        //AddBuff();        // 이렇게 하면 범위 공격에 광역 스턴이 안 됨
         FinishWorks();
     }
 
     public abstract void Works();
 
-    void AddBuff()
+    protected void AddBuff(Character target)
     {   // buff None 이거나 잘못된 값이면 null 받아옴
         buff = ObjectPool.instance.GetBuff((int)data.eBuff);
-        buff?.Add(skill.owner.target, data.duration, data.buffRatio);
+        buff?.Add(target, data.duration, data.buffRatio);
     }
 
     protected void FinishWorks() { gameObject.SetActive(false); }

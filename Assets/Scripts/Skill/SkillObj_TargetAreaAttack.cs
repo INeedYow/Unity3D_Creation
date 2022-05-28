@@ -10,13 +10,12 @@ public class SkillObj_TargetAreaAttack : SkillObject
     // Collider[] colls; 
 
     float m_sqrDist;
-    //float m_sqrArea;
 
     //private void Start() { m_sqrArea = data.area * data.area;  Debug.Log("data.area : " + data.area + " / m_sqr : " + m_sqrArea); }
 
     public override void Works()
     {
-        // before
+        // before // Overlap 게임 컨셉상 다른 공격들 모두 충돌로 처리하지 않고, 버프 추가하려면 charater로 쓰는 게 좋아보임 (IDamagable에 버프를 넣어도 되긴 할듯)
         // if (skill.owner.target == null) return;
 
         // if (eTargetGroup == EGroup.Monster)
@@ -55,7 +54,6 @@ public class SkillObj_TargetAreaAttack : SkillObject
 
                 m_sqrDist = (skill.owner.target.transform.position - mon.transform.position).sqrMagnitude;
 
-                // if (m_sqrArea < m_sqrDist) continue;
                 if (data.area * data.area < m_sqrDist) continue;
 
                 m_target = mon.GetComponent<IDamagable>();
@@ -67,8 +65,8 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 else{
                     m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
                 }
-                Buff buff = ObjectPool.instance.GetBuff((int)data.eBuff);
-                buff?.Add(mon, data.duration, data.buffRatio);
+
+                AddBuff(mon);
             }
         }
         else
@@ -79,7 +77,6 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 
                 m_sqrDist = (skill.owner.target.transform.position - hero.transform.position).sqrMagnitude;
 
-                // if (m_sqrArea < m_sqrDist) continue;
                 if (data.area * data.area < m_sqrDist) continue;
 
                 m_target = hero.GetComponent<IDamagable>();
@@ -91,8 +88,8 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 else{
                     m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
                 }
-                Buff buff = ObjectPool.instance.GetBuff((int)data.eBuff);
-                buff?.Add(hero, data.duration, data.buffRatio);
+
+                AddBuff(hero);
             }
         }
     }

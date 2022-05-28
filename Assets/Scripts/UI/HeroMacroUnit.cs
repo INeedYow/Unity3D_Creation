@@ -14,7 +14,7 @@ public class HeroMacroUnit : MonoBehaviour
         dropdown.AddOptions(listOptionData);
     }
 
-    public void ChangeMacro(){ Debug.Log("ID[" + ID + "] Macro Change " + " / " + "isConditionMacro? : " + isConditionMacro);
+    public void ChangeMacro(){ //Debug.Log("ID[" + ID + "] Macro Change " + " / " + "isConditionMacro? : " + isConditionMacro);
         MacroManager.instance.SetMacro(isConditionMacro, ID, dropdown.value);
     }
 

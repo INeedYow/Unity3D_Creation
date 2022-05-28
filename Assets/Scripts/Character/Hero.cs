@@ -69,12 +69,12 @@ public class Hero : Character
             case EClass.Knight      : 
             case EClass.Templar     : maxHp += 15;  break;
             
-            case EClass.Necromancer : maxHp += 13;  break;
-
             case EClass.Angel       :
-            case EClass.Bard        : maxHp += 11;  break;
-            
-            case EClass.Archer      : maxHp += 9;   break;
+            case EClass.Bard        : maxHp += 12;  break;
+
+            case EClass.Archer      : 
+            case EClass.Necromancer : maxHp += 9;  break;
+
         }
         minDamage += 1;
         maxDamage += 1;
