@@ -73,7 +73,7 @@ public class PartyManager : MonoBehaviour
 
         heroParty.Add(hero);
         hero.isJoin = true;
-        GameManager.instance.RenewCurParty(heroParty.Count);
+        PlayerManager.instance.RenewCurParty(heroParty.Count);
         return true;
     }
 
@@ -81,7 +81,7 @@ public class PartyManager : MonoBehaviour
     {   //Debug.Log("Leave()" + hero.name);
         heroParty.Remove(hero); //Debug.Log(heroParty.Contains(hero) ? "contain" : "nope");
         hero.isJoin = false;
-        GameManager.instance.RenewCurParty(heroParty.Count);
+        PlayerManager.instance.RenewCurParty(heroParty.Count);
     }
 
     public Hero GetAliveHero()

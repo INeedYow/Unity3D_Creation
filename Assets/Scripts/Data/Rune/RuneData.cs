@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbilityData : ScriptableObject
+public abstract class RuneData : ScriptableObject
 {
-    [Range(1, 3)] public int maxLV;
-
-    public abstract void Apply(int level);
-    public abstract void Release(int level);
+    public abstract bool IsMax(int point);
+    public abstract void Apply(int point);
+    public abstract void Release(int point);
 }

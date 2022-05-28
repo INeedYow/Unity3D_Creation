@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject dummyPlane;
     public DummyCursor cursor;
     
-    [Header("Game UI")]
-    public PlayerInfoUI playerInfoUI;
+    
+    //public PlayerInfoUI playerInfoUI;
     public GameObject worldCanvas;
     public GameObject heroLeaveBox;
 
@@ -26,19 +26,20 @@ public class GameManager : MonoBehaviour
     BattleInfoText m_battleInfotext;
     
     //
-    public int maxLV    { get { return 25; } }
-    public int LV       { get; private set; }
-    public int maxExp   { get; private set; }
-    int _curExp;
-    public int curExp{
-        get { return _curExp; }
-        set {
-            if (LV == maxLV) return;
-            _curExp = value;
-            if (_curExp >= maxExp) { LevelUp(); } 
-        }
-    }
-    public int gold         { get; private set; }
+
+    // public int maxLV    { get { return 25; } }
+    // public int LV       { get; private set; }
+    // public int maxExp   { get; private set; }
+    // int _curExp;
+    // public int curExp{
+    //     get { return _curExp; }
+    //     set {
+    //         if (LV == maxLV) return;
+    //         _curExp = value;
+    //         if (_curExp >= maxExp) { LevelUp(); } 
+    //     }
+    // }
+    // public int gold         { get; private set; }
 
     public CameraMove cam;
     public bool isMouseOnLeaveArea;
@@ -46,34 +47,27 @@ public class GameManager : MonoBehaviour
     private void Awake() { 
         instance = this; 
         Application.targetFrameRate = 60;   // 프레임
-        LV = 1;
-        maxExp = 150;
-        gold = 500000;                 
-    }
-
-    private void Start() { InitUI(); }
-
-    void InitUI(){
-        playerInfoUI.RenewCurParty(PartyManager.instance.heroParty.Count);
-        playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
-        playerInfoUI.RenewExp(curExp, maxExp);
-        playerInfoUI.RenewGold(gold);
-        playerInfoUI.RenewLV(LV);
     }
     
-    void LevelUp(){ 
-        LV++;                       
-        curExp -= maxExp;          
-        maxExp += 75;           
-        playerInfoUI.RenewLV(LV);
-        playerInfoUI.RenewExp(curExp, maxExp);
+    //private void Start() { InitUI(); }
+
+    // void InitUI(){
         
-        if (LV % 5 == 0){
-            PartyManager.instance.maxCount++;
-            playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
-        }
-        if (LV == maxLV) curExp = maxExp;
-    }
+    // }
+    
+    // void LevelUp(){ 
+    //     LV++;                       
+    //     curExp -= maxExp;          
+    //     maxExp += 75;           
+    //     playerInfoUI.RenewLV(LV);
+    //     playerInfoUI.RenewExp(curExp, maxExp);
+        
+    //     if (LV % 5 == 0){
+    //         PartyManager.instance.maxCount++;
+    //         playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
+    //     }
+    //     if (LV == maxLV) curExp = maxExp;
+    // }
 
     public void ShowBattleInfoText(BattleInfoType infoType, Vector3 position, float value)
     {
@@ -132,24 +126,24 @@ public class GameManager : MonoBehaviour
 
     //////////////////////////////
 
-    public void AddGold(int amount){    
-        gold += amount;
-        playerInfoUI.RenewGold(gold);
-    }
+    // public void AddGold(int amount){    
+    //     gold += amount;
+    //     playerInfoUI.RenewGold(gold);
+    // }
 
-    public void AddExp(int amount){ 
-        curExp += amount;   
-        playerInfoUI.RenewExp(curExp, maxExp);
-    }
+    // public void AddExp(int amount){ 
+    //     curExp += amount;   
+    //     playerInfoUI.RenewExp(curExp, maxExp);
+    // }
 
-    public void RenewCurParty(int value){
-        playerInfoUI.RenewCurParty(value);
-    }
+    // public void RenewCurParty(int value){
+    //     playerInfoUI.RenewCurParty(value);
+    // }
 
     ///////////////////////////////
     public void EnterDungeon(bool isEnter){
         cubePlanet.gameObject.SetActive(!isEnter);
-        playerInfoUI.gameObject.SetActive(!isEnter);
+        PlayerManager.instance.playerInfoUI.gameObject.SetActive(!isEnter);
         
         //temp
         cam.ToggleView();

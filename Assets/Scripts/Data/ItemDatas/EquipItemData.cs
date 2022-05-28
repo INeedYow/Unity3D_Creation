@@ -12,17 +12,17 @@ public abstract class EquipItemData : ItemData
 
     public override bool Buy()
     {
-        if (cost > GameManager.instance.gold) return false;
+        if (cost > PlayerManager.instance.gold) return false;
         AddItem();
 
-        GameManager.instance.AddGold(-cost); 
+        PlayerManager.instance.AddGold(-cost); 
         return true;
     }
     protected abstract void AddItem();
     
     public override bool Sell()
     {
-        GameManager.instance.AddGold(sellCost);
+        PlayerManager.instance.AddGold(sellCost);
         RemoveItem();
         return true;
     }

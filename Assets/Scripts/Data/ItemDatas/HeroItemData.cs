@@ -15,8 +15,8 @@ public class HeroItemData : ItemData
 
     public override bool Buy()
     {
-        if (HeroManager.instance.GetHeroCost() > GameManager.instance.gold) return false;
-        GameManager.instance.AddGold(-HeroManager.instance.GetHeroCost());  // 골드부터 빼야지 인원 수 가격 제대로 책정됨
+        if (HeroManager.instance.GetHeroCost() > PlayerManager.instance.gold) return false;
+        PlayerManager.instance.AddGold(-HeroManager.instance.GetHeroCost());  // 골드부터 빼야지 인원 수 가격 제대로 책정됨
         HeroManager.instance.GetNewHero(eClass);
         ItemManager.instance.itemInfoUI.RenewUI(this);
         return true;

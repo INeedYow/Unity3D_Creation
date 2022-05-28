@@ -3,50 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EStat {
-    Damage, Magic, Armor, MagicArmor,
+    Damage, Magic, Armor, MagicArmor, 
 }
-
-public class StatAbilityData : AbilityData
+public class StatRuneData : RuneData
 {
     public EStat eStat;
-    public float[] statValues;
+    public int[] values;
 
-    public override void Apply(int level)
+
+    public override bool IsMax(int point)
+    {
+        return point == values.Length;
+    }
+    
+    public override void Apply(int point)
     {
         foreach (Hero hero in PartyManager.instance.heroParty)
         {
-            switch (eStat)
+            switch(eStat)
             {
-                case EStat.Damage: 
+                case EStat.Damage:
                 {
-                    hero.minDamage += statValues[level - 1];
-                    hero.maxDamage += statValues[level - 1];
+                    hero.minDamage += values[point - 1];
+                    hero.maxDamage += values[point - 1];
                     break;
                 }
-
-                case EStat.Magic        : hero.magicDamage += statValues[level - 1];    break;
-                case EStat.Armor        : hero.armorRate += statValues[level - 1];      break;
-                case EStat.MagicArmor   : hero.magicArmorRate += statValues[level - 1]; break;
+                //
             }
         }
     }
 
-    public override void Release(int level)
+    public override void Release(int point)
     {
-        foreach (Hero hero in PartyManager.instance.heroParty)
+         foreach (Hero hero in PartyManager.instance.heroParty)
         {
-            switch (eStat)
+            switch(eStat)
             {
-                case EStat.Damage: 
+                case EStat.Damage:
                 {
-                    hero.minDamage -= statValues[level - 1];
-                    hero.maxDamage -= statValues[level - 1];
+                    hero.minDamage -= values[point - 1];
+                    hero.maxDamage -= values[point - 1];
                     break;
                 }
-
-                case EStat.Magic        : hero.magicDamage -= statValues[level - 1];    break;
-                case EStat.Armor        : hero.armorRate -= statValues[level - 1];      break;
-                case EStat.MagicArmor   : hero.magicArmorRate -= statValues[level - 1]; break;
+                //
             }
         }
     }

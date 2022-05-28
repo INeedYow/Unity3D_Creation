@@ -17,7 +17,7 @@ public class CubeSide_Board : CubeSide
     public override void Enter()
     {
         StartCoroutine("OpenBoard"); 
-        GameManager.instance.playerInfoUI.gameObject.SetActive(true);
+        PlayerManager.instance.playerInfoUI.gameObject.SetActive(true);
     }
 
     public override void Exit()
@@ -30,7 +30,7 @@ public class CubeSide_Board : CubeSide
             onExitFinish?.Invoke(this); 
         }
 
-        GameManager.instance.playerInfoUI.gameObject.SetActive(false);
+        PlayerManager.instance.playerInfoUI.gameObject.SetActive(false);
     }
 
     public void TurnOnBoard(){
