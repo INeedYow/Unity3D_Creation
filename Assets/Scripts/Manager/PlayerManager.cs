@@ -10,8 +10,8 @@ public class PlayerManager : MonoBehaviour
     [Header("UI")]
     public PlayerInfoUI playerInfoUI;
 
-    //[Header("Player Skill")]
-    //public List<PlayerSkill> skills;
+    [Header("Rune Tree")]
+    public RuneTree runeTree;
 
     //
     public int maxLV    { get { return 25; } }

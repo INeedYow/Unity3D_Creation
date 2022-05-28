@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class RuneTree : MonoBehaviour
 {
-    public static RuneTree instance { get; private set;}
-    
     public Rune firstRune;
 
-
-    private void Awake() {
-        instance = this;
+    private void OnEnable() {
+        Init();
     }
-
+    public void Init()
+    { 
+        firstRune.OpenRuneSlot();
+    }
     public void Apply()
     {
         firstRune.Apply();
@@ -23,3 +23,5 @@ public class RuneTree : MonoBehaviour
         firstRune.Release();
     }
 }
+
+// TODO 던전 진입 시 Tree.Apply(); / 나갈 때 Tree.Release();

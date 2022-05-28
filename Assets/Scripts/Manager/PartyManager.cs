@@ -16,7 +16,7 @@ public class PartyManager : MonoBehaviour
     }
 
     public int maxCount = 3;
-    public List<Hero> heroParty = new List<Hero>();
+    public List<Hero> heroParty;
     [Header("Board")]
     public Board board;
     

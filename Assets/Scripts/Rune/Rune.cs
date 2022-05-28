@@ -13,9 +13,9 @@ public class Rune : MonoBehaviour
 
     public void AddPoint()
     {
-        point++;
+        point++;    Debug.Log("Rune " + point + " / " + data.GetMax());
         if (IsMax())
-        {
+        {   Debug.Log("Rune MaxPoint");
             OpenNextRune();
         }
     }
@@ -36,7 +36,7 @@ public class Rune : MonoBehaviour
     }
 
     public void OpenRuneSlot()
-    {
+    {   Debug.Log("1");
         isOpen = true;
         point = 0;
         slot.gameObject.SetActive(true);
