@@ -57,6 +57,7 @@ public class InventoryUI : MonoBehaviour
 
     private void OnEnable() {
         HeroManager.instance.onChangeSelectedHero += RenewEquipUnits;
+        RenewEquipUnits(HeroManager.instance.selectedHero);
     }
 
     private void OnDisable() {
@@ -65,9 +66,18 @@ public class InventoryUI : MonoBehaviour
 
     public void RenewEquipUnits(Hero hero)
     {   // 선택 영웅 변경시 장착 칸 정보 갱신
-        weaponEquipUnit.SetData(hero.weaponData);
-        armorEquipUnit.SetData(hero.armorData);
-        accessoryEquipUnit.SetData(hero.accessoryData);
+        if (hero == null)
+        {
+            weaponEquipUnit.SetData(null);
+            armorEquipUnit.SetData(null);
+            accessoryEquipUnit.SetData(null);
+        }
+        else{
+            weaponEquipUnit.SetData(hero.weaponData);
+            armorEquipUnit.SetData(hero.armorData);
+            accessoryEquipUnit.SetData(hero.accessoryData);
+        }
+        
     }
 
 

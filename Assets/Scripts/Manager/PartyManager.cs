@@ -78,8 +78,8 @@ public class PartyManager : MonoBehaviour
     }
 
     public void Leave(Hero hero)
-    {   Debug.Log("Leave()" + hero.name);
-        heroParty.Remove(hero); Debug.Log(heroParty.Contains(hero) ? "contain" : "nope");
+    {   //Debug.Log("Leave()" + hero.name);
+        heroParty.Remove(hero); //Debug.Log(heroParty.Contains(hero) ? "contain" : "nope");
         hero.isJoin = false;
         GameManager.instance.RenewCurParty(heroParty.Count);
     }

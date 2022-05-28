@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [Header("Game UI")]
     public PlayerInfoUI playerInfoUI;
     public GameObject worldCanvas;
+    public GameObject heroLeaveBox;
 
     [Header("prfBuffs")]
     public Buff[] prfBUffs = new Buff[(int)EBuff.Size];   // 공, 마공, 방, 마방, 공속
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     public int gold         { get; private set; }
 
     public CameraMove cam;
+    public bool isMouseOnLeaveArea;
 
     private void Awake() { 
         instance = this; 
@@ -109,11 +111,23 @@ public class GameManager : MonoBehaviour
     public void OnDummyDrag(){
         dummyPlane.SetActive(true);
         cursor.gameObject.SetActive(true);
+        heroLeaveBox.gameObject.SetActive(true);
     }
 
     public void OnDummyDrop(){
         dummyPlane.SetActive(false);
         cursor.gameObject.SetActive(false);
+        heroLeaveBox.gameObject.SetActive(false);
+        isMouseOnLeaveArea = false;
+    }
+
+    public void MouseOnLeaveArea(){
+        if (HeroManager.instance.IsFull()) return;
+        isMouseOnLeaveArea = true;
+    }
+
+    public void MouseOffLeaveArea(){
+        isMouseOnLeaveArea = false;
     }
 
     //////////////////////////////

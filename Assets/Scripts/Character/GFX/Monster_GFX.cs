@@ -18,7 +18,7 @@ public class Monster_GFX : GFX
         for (int i = 0; i < repeat; i++){
             if (monster.conditionMacros[i] == null) break;
 
-            if (monster.conditionMacros[i].IsSatisfy())
+            if (monster.conditionMacros[i].IsSatisfy(false))
             {
                 if (monster.actionMacros[i] == null) break;
 

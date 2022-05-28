@@ -30,7 +30,10 @@ public class HeroInfoUI : MonoBehaviour
         HeroManager.instance.onChangeSelectedHero += RenewUI;
     }
 
-    // TODO spec part
+    private void OnEnable() {
+        RenewUI(HeroManager.instance.selectedHero);
+    }
+
     public void RenewUI(Hero hero){
         if (hero == null){
             icon.sprite         = null;

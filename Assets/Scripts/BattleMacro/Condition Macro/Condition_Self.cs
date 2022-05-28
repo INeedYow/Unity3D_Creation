@@ -20,7 +20,7 @@ public class Condition_Self : ConditionMacro
         owner.onHpChange -= UpdateHp;
     }
 
-    public override bool IsSatisfy(){
+    public override bool IsSatisfy(bool hasChange){
         if (eInfo == EInfo.None)
         {
             owner.target = owner;

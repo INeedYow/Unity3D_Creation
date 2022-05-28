@@ -15,7 +15,7 @@ public class HeroMacroUI : MonoBehaviour
 
     private void OnEnable() {
         HeroManager.instance.onChangeSelectedHero += RenewUI;
-        RenewUI(HeroManager.instance.selectedHero);
+        RenewUI(HeroManager.instance.selectedHero); 
     }
 
     private void OnDisable() {
@@ -58,7 +58,7 @@ public class HeroMacroUI : MonoBehaviour
         }
     }
 
-    public void RenewUI(Hero hero){ Debug.Log("RenewUI");
+    public void RenewUI(Hero hero){ //Debug.Log("RenewUI");
         if (null == hero){ 
             foreach (HeroMacroUnit unit in conditonMacroUnits)  { unit.dropdown.interactable = false; }
             foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.dropdown.interactable = false; }

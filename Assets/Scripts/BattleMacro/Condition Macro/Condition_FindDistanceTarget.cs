@@ -23,9 +23,11 @@ public class Condition_FindDistanceTarget : ConditionMacro
         DungeonManager.instance.onWaveEnd -= OffBattle;  
     }
 
-    public override bool IsSatisfy()
+    public override bool IsSatisfy(bool hasChange)
     {  
-        if (null == owner.target) { FindTarget(); }
+        //if (null == owner.target) { FindTarget(); }
+        
+        if (hasChange)FindTarget(); //t수정
         
         return isSatisfy;
     }

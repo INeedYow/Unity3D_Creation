@@ -16,14 +16,16 @@ public class Condition_FindHpTarget : ConditionMacro
     
     void AnyHpChange() { m_hasAnyHpChange = true; }
 
-    public override bool IsSatisfy(){
+    public override bool IsSatisfy(bool hasChange){
         //처음 들어올 때 target null 돼서 들어오니까 검사, 타겟 죽어서 없는 등의 경우에도 검사
-        Debug.Log("IsSatisfy() owner.target " + owner.target);
-        if (owner.target == null)   { return FindTarget(); }
-        
+        //Debug.Log("IsSatisfy() owner.target " + owner.target);
+        //if (owner.target == null)   { return FindTarget(); }
+
+        //매크로 변경 시 검사
+        if (hasChange) return FindTarget();
         //누군가의 체력 변경이 일어나면 다시 검사
         else if (m_hasAnyHpChange)  { return FindTarget(); }
-        Debug.Log("Find" + owner.target);
+        //Debug.Log("Find" + owner.target);
         
         //그럼에도 null 이면 조건에 부합X
         if (owner.target == null)   { return false; }

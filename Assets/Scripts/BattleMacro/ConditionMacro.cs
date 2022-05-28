@@ -8,5 +8,5 @@ public enum EGroup { Hero, Monster };
 public abstract class ConditionMacro : BattleMacro
 {
     protected bool isSatisfy;
-    public abstract bool IsSatisfy();
+    public abstract bool IsSatisfy(bool hasChange);
 }

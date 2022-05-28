@@ -15,6 +15,8 @@ public class Dummy : MonoBehaviour
                 transform.SetParent(_placedBlock.transform); 
                 transform.position = _placedBlock.dummyTf.position;
                 placedFloat = null;
+
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             }
         }
     }
@@ -27,6 +29,8 @@ public class Dummy : MonoBehaviour
                 transform.SetParent(_placedFloat.transform); 
                 transform.position = _placedFloat.dummyTF.position;
                 placedBlock = null;
+
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
         }
     }
@@ -41,6 +45,7 @@ public class Dummy : MonoBehaviour
 
     private void OnMouseEnter() {   //Debug.Log("enter");
         m_tf.localScale += GameManager.instance.focusedScale;
+        HeroManager.instance.ShowDummyInfo(this);
     }
 
     private void OnMouseExit() {    //Debug.Log("exit");
@@ -63,8 +68,23 @@ public class Dummy : MonoBehaviour
         HeroManager.instance.PickUpDummy(owner);
     }
 
-    private void OnMouseUp() {  
+    private void OnMouseUp()
+    {  
+        if (GameManager.instance.isMouseOnLeaveArea)
+        {   
+            if (placedBlock != null)
+            {   // 파티에서 영웅 해제
+                placedBlock.dummy = null;
+                placedBlock = null;
+                PartyManager.instance.Leave(owner);
+                HeroManager.instance.PutDownDummy();
+                GameManager.instance.cubePlanet.AddFloatingBlock(owner);
+                return;
+            }
+        }
+
         HeroManager.instance.PutDownDummy();
+
 
         // 이미 보드에 있던 경우
         if (owner.isJoin)
@@ -101,21 +121,11 @@ public class Dummy : MonoBehaviour
         } 
     }
 
-    public void SwapBoard_Floating(Dummy floatingDummy){ // 변수에서 처리
-        // 보드블럭 정보교환
+    public void SwapBoard_Floating(Dummy floatingDummy){ 
+        BoardBlock tempBlock = placedBlock;
+
         placedFloat = floatingDummy.placedFloat;
-        //floatingDummy.placedFloat = null;
-
-        // 플로팅블럭 정보교환
-        floatingDummy.placedBlock = placedBlock;
-        //placedBlock = null;
-
-        // 부모정보, 포지션 설정   
-        //floatingDummy.transform.SetParent(floatingDummy.owner.transform);               
-        //floatingDummy.transform.position = floatingDummy.placedFloat.dummyTF.position;
-
-        //transform.SetParent(placedFloat.transform);
-        //transform.position = placedFloat.dummyTF.position;
+        floatingDummy.placedBlock = tempBlock;
     }
 
     public void Float2Board(BoardBlock block){

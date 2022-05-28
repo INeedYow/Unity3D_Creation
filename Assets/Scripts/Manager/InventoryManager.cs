@@ -8,8 +8,9 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance { get; private set; }
 
     [Header("UI")]
+    public GameObject heroSetUI;        // 인벤토리UI가 먼저 보일 거라서 같이 쓰지만 전체는 여기서 갖도록
     public InventoryUI invenUI;
-    public Button invenBtn;         // macro, inven 토글 버튼
+    public Button invenBtn;             // macro, inven 토글 버튼
     [Header("Empty Unit Sprite")]
     public Sprite emptyUnitSprite;
 
@@ -23,6 +24,12 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake() { instance = this; }
 
+    private void Start() {  // 인벤토리 Unit들 초기화
+        heroSetUI.gameObject.SetActive(true);
+        invenUI.Init();
+        heroSetUI.gameObject.SetActive(false);
+    }
+
     // UI 관련
     public void ShowInvenUI(){
         invenUI.gameObject.SetActive(true);
@@ -35,6 +42,16 @@ public class InventoryManager : MonoBehaviour
     public void HideInvenUI(){
         invenUI.gameObject.SetActive(false);
         invenBtn.interactable = true;
+    }
+
+    public void ShowHeroSetUI()
+    {
+        heroSetUI.gameObject.SetActive(true);
+    }
+
+    public void HideHeroSetUI()
+    {
+        heroSetUI.gameObject.SetActive(false);
     }
 
     // UI 갱신

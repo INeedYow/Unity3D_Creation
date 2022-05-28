@@ -13,8 +13,9 @@ public class Condition_GetMostHpTarget : ConditionMacro
     private void OnEnable()     { DungeonManager.instance.onChangeAnyHP += GetTarget; }
     private void OnDisable()    { DungeonManager.instance.onChangeAnyHP -= GetTarget; }
 
-    public override bool IsSatisfy(){
-        if (null == owner.target) GetTarget();
+    public override bool IsSatisfy(bool hasChange){
+        //if (null == owner.target) GetTarget();
+        if (hasChange) GetTarget();
         return true;
     }
 

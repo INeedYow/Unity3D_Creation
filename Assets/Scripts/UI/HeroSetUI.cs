@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class HeroSetUI : MonoBehaviour
 {
-    public HeroInvenUI invenUI;
-    public HeroMacroUI macroUI;
+    // public HeroInvenUI invenUI;
+    // public HeroMacroUI macroUI;
 
-    public Button invenBtn;
-    public Button macroBtn;
+    // public Button invenBtn;
+    // public Button macroBtn;
 
     // private void OnEnable() {
     //     PartyManager.instance.board.isActive = false;
@@ -19,10 +19,10 @@ public class HeroSetUI : MonoBehaviour
     //     PartyManager.instance.board.isActive = true;
     // }
 
-    public void MenuToggle(){
-        invenUI.gameObject.SetActive(!invenUI.isActiveAndEnabled);
-        macroUI.gameObject.SetActive(!macroUI.isActiveAndEnabled);
-        invenBtn.interactable = !invenBtn.IsInteractable();
-        macroBtn.interactable = !macroBtn.IsInteractable();
-    }
+    // public void MenuToggle(){
+    //     invenUI.gameObject.SetActive(!invenUI.isActiveAndEnabled);
+    //     macroUI.gameObject.SetActive(!macroUI.isActiveAndEnabled);
+    //     invenBtn.interactable = !invenBtn.IsInteractable();
+    //     macroBtn.interactable = !macroBtn.IsInteractable();
+    // }
 }

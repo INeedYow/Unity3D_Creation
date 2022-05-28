@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hero_GFX : GFX
 {
     public Hero hero;
+    bool hasChange;
 
     private void Start() { repeat = MacroManager.instance.maxMacroCount; }
     new protected void OnEnable() { 
@@ -22,16 +23,21 @@ public class Hero_GFX : GFX
         {
             if (hero.conditionMacros[i] == null) continue;
 
-            
-            if (hero.conditionMacros[i].IsSatisfy())
+            if (hero.prevMacro != i) {  // 이전 매크로 저장, 비교
+                hasChange = true;
+                hero.onMacroChangeGetIndex?.Invoke(i);  
+                hero.prevMacro = i;
+            }
+            else{ hasChange = false; }
+
+            if (hero.conditionMacros[i].IsSatisfy(hasChange))
             {   
                 if (hero.actionMacros[i] == null) continue;
                 
-                hero.onMacroChangeGetIndex?.Invoke(i);                  
                 if (hero.actionMacros[i].Execute()) { break; }
-                else { hero.target = null; }
+                //else { hero.target = null; }
             }
-            else { hero.target = null; }
+            //else { hero.target = null; }
         }
     }
 

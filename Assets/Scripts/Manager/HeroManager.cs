@@ -19,6 +19,7 @@ public class HeroManager : MonoBehaviour
     public HeroInfoUI heroInfoUI;
     public HeroListUI heroListUI;
     public GameObject heroSetUI;     // macro, inven 같이 있는 UI(active켜주기만 하면 됨)
+    public DummyInfoUnit dummyInfoUnit;
 
     [Header("Hero Prf")]
     public Hero prfKngiht;
@@ -34,11 +35,11 @@ public class HeroManager : MonoBehaviour
         instance = this; 
     }
 
-    private void Start() {
-        heroSetUI.gameObject.SetActive(true);
-        InventoryManager.instance.invenUI.Init();
-        heroSetUI.gameObject.SetActive(false);
-    }
+    // private void Start() {
+    //     heroSetUI.gameObject.SetActive(true);
+    //     InventoryManager.instance.invenUI.Init();
+    //     heroSetUI.gameObject.SetActive(false);
+    // }
 
     public void PickUpDummy(Hero hero){
         selectedHero = hero;
@@ -56,6 +57,14 @@ public class HeroManager : MonoBehaviour
         heroInfoUI.RenewUI(hero);
     }
 
+    public void ShowDummyInfo(Dummy dummy)
+    {
+        dummyInfoUnit.gameObject.SetActive(true);
+        dummyInfoUnit.transform.position = dummy.transform.position + Vector3.right * 3f;
+        dummyInfoUnit.SetOwner(dummy.owner);
+    }
+    public void HideDummyInfo() { dummyInfoUnit.gameObject.SetActive(false); }
+
     public void GetNewHero(Hero.EClass eClass){
         Hero hero = null;
         switch(eClass)
@@ -63,17 +72,6 @@ public class HeroManager : MonoBehaviour
             case Hero.EClass.Knight:
             {
                 hero = Instantiate(prfKngiht);
-                // 매크로 생성(은 공통이라 밑에서)
-                // for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-                // {   
-                //     hero.conditionMacros[i] = Instantiate(MacroManager.instance.prfConditionMacros[0], hero.transform);
-                //     hero.conditionMacros[i].owner = hero;=
-                // }
-                // for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
-                // {
-                //     hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0], hero.transform);
-                //     hero.actionMacros[i].owner = hero;=
-                // }
                 // 스킬 생성
                 for (int i = 0; i < prfKnightSkills.Length; i++)
                 {
@@ -149,7 +147,14 @@ public class HeroManager : MonoBehaviour
     public void ShowHeroUI(bool isOn){
         heroListUI.gameObject.SetActive(isOn);
         heroInfoUI.gameObject.SetActive(isOn);
-        heroSetUI.gameObject.SetActive(isOn);
+        //heroSetUI.gameObject.SetActive(isOn);
+        if (isOn)
+        {
+            InventoryManager.instance.ShowHeroSetUI();
+        }
+        else{
+            InventoryManager.instance.HideHeroSetUI();
+        }
     }
 
     public bool IsFull()

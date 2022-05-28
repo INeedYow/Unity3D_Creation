@@ -20,7 +20,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
         //DungeonManager.instance.onWaveEnd -= OffBattle;  
     }
 
-    public override bool IsSatisfy(){  
+    public override bool IsSatisfy(bool hasChange){  
         //if (null == owner.target) 
         //{
         GetTarget(); 

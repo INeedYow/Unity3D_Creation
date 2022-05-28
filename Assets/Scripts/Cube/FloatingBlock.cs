@@ -22,6 +22,7 @@ public class FloatingBlock : MonoBehaviour
         hero.dummy.gameObject.SetActive(true); // temp
         dummy = hero.dummy;
         dummy.placedFloat = this;
+        StopCoroutine("Falldown");
         StartCoroutine("InitFloating");
     }
 

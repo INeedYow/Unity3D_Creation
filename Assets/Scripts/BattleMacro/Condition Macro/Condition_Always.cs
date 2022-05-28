@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Condition_Always : ConditionMacro
 {
-    public override bool IsSatisfy() { return true; }
+    public override bool IsSatisfy(bool hasChange) { return true; }
 }

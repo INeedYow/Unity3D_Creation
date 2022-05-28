@@ -8,7 +8,7 @@ public class MonCondition_NearestHero : ConditionMacro
     float m_sqrDist;
     Hero m_target;
 
-    public override bool IsSatisfy()
+    public override bool IsSatisfy(bool hasChange)
     {   // 타겟이 없을 때 찾기
         if (owner.target == null) owner.target = FindHero();
         return true;

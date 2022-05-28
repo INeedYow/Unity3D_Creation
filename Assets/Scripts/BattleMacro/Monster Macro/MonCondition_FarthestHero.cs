@@ -8,7 +8,7 @@ public class MonCondition_FarthestHero : ConditionMacro
     float m_sqrDist;
     Hero m_target;
 
-    public override bool IsSatisfy()
+    public override bool IsSatisfy(bool hasChange)
     {   
         if (owner.target == null) owner.target = FindHero();
         return true;
