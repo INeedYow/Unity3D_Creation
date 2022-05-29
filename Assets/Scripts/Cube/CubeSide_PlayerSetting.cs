@@ -23,8 +23,6 @@ public class CubeSide_PlayerSetting : CubeSide
     }
 
 
-
-
     public void EnterFinish()
     {
         onEnterFinish?.Invoke();
@@ -37,8 +35,8 @@ public class CubeSide_PlayerSetting : CubeSide
     public void ExitFinish()
     {
         onExitFinish?.Invoke(this);
-        PlayerManager.instance.EnterRuneTree(true);
+        PlayerManager.instance.EnterRuneTree(false);
+        GameManager.instance.EnterTree(true);
         CameraManager.instance.onMoveFinish -= ExitFinish;
-        GameManager.instance.EnterTree(false);
     }
 }

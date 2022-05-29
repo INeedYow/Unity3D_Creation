@@ -63,6 +63,7 @@ public class PlayerManager : MonoBehaviour
         LV++;                       
         curExp -= maxExp;          
         maxExp += 75;           
+        runePoint++;
         playerInfoUI.RenewLV(LV);
         playerInfoUI.RenewExp(curExp, maxExp);
         

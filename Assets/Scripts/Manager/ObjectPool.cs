@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum EProjectile { 
-    ArcherArrow, PoisonArrow, YellowMarble,
+    ArcherArrow, SlowArrow, YellowMarble, CurseArrow, 
 }
 public enum EMonster { 
     RedSlime, BlueSlime, Spore,

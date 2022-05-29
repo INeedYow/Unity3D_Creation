@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public enum EBuff {
     None = -1,
-    Armor, Damage, //Magic, MagicArmor, AttSpeed,
-    Stun,         
+    Armor, Damage, Speed,//Magic, MagicArmor, AttSpeed,
+    Stun,          
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -57,6 +57,14 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float buffDamage = 1f;
     public float buffArmor = 0f;
 
+    float _buffSpeed = 1f;
+    public float buffSpeed {
+        get { return _buffSpeed; }
+        set {
+            _buffSpeed = value;
+            nav.speed = moveSpeed * _buffSpeed;
+        }
+    }
     float _buffStun = 0f;
     public float buffStun {
         get { return _buffStun; }

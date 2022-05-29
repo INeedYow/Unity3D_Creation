@@ -13,6 +13,6 @@ public class SkillObjectData : ScriptableObject
     [Header("Buff / Nerf")]
     public EBuff eBuff;
     [Range(0f, 20f)]        public float duration;
-    [Range(0.1f, 1f)]       public float buffRatio;
+    [Range(-1f, 1f)]       public float buffRatio;
     
 }

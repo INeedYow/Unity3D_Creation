@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Buff : MonoBehaviour
 {
     public EBuff eBuff;
+    [HideInInspector]
     public float ratio;
     public EEffect eEffect;
     protected Character target;

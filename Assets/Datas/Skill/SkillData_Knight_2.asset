@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: SkillData_Knight_2
   m_EditorClassIdentifier: 
-  skillName: "\uC774\uB984 \uCD94\uCC9C \uC880"
-  description: "\uC8FC\uBCC0 \uAD11\uC5ED \uC2A4\uD134"
+  skillName: "\uC9EC\uD478"
+  description: "\uC8FC\uBCC0 \uAD11\uC5ED \uAE30\uC808"
   icon: {fileID: 21300000, guid: e8935d233693f4b48806cece1e461421, type: 3}
   requireLevel: 1
-  cooldown: 6
+  cooldown: 9
   skillRange: 4

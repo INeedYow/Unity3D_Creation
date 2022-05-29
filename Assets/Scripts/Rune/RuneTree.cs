@@ -31,6 +31,9 @@ public class RuneTree : MonoBehaviour
     {
         firstStem.gameObject.SetActive(true);
         firstStem.OpenStem();
+
+        Vector3[] pos = new Vector3[2]{transform.position, firstStem.transform.position};
+        line.SetPositions(pos);
     }
 
     public void Apply(){

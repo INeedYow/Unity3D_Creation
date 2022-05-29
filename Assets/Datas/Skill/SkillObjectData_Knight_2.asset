@@ -16,6 +16,6 @@ MonoBehaviour:
   powerRatio: 0
   area: 5
   count: 1
-  eBuff: 2
-  duration: 5
+  eBuff: 3
+  duration: 3
   buffRatio: 0

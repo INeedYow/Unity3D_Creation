@@ -10,8 +10,8 @@ public class HeroInfoUnit : MonoBehaviour
     Text m_myText;
 
     private void Awake() { 
-        m_myText = GetComponentInChildren<Text>(); 
-        m_myStr = m_myText.text;
+        m_myText = GetComponentInChildren<Text>(); Debug.Log(m_myText.text);
+        m_myStr = m_myText.text;    
     }
 
     public void ShowString()

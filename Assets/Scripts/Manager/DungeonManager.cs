@@ -10,6 +10,7 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnyArmor;
     public UnityAction onChangeAnyMagicPower;
     public UnityAction onChangeAnyMagicArmor;
+    public UnityAction onChangeAnySpeed;
     public UnityAction onChangeAnyAttackSpeed;
     public UnityAction onWaveStart;
     public UnityAction onWaveEnd;

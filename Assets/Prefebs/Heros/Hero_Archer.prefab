@@ -1807,7 +1807,8 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0
   magicArmorRate: 0
-  buffs: []
+  buffDamage: 1
+  buffArmor: 0
   targetTF: {fileID: 7011910697539786449}
   HpBarTF: {fileID: 938162364103702889}
   projectileTF: {fileID: 4806247788938896005}
@@ -1815,6 +1816,7 @@ MonoBehaviour:
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
+  prevMacro: -1
   skills: []
   anim: {fileID: 0}
   isStop: 0
