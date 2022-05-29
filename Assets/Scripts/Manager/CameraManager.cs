@@ -37,14 +37,20 @@ public class CameraManager : MonoBehaviour
     IEnumerator EnterRuneTree()
     { 
         float speed = 0f;
+        float accel = 0.1f;
 
         while (speed < 1f)
-        {
+        {   //Debug.Log(speed);
             mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, runeTreeTF.position, speed);
             mainCam.transform.rotation = Quaternion.Lerp(mainCam.transform.rotation, runeTreeTF.rotation, speed);
-            speed += Time.deltaTime * 0.2f;
+            speed += Time.deltaTime * accel;
+
+            accel += Time.deltaTime;
             yield return null;
         }
+
+        mainCam.transform.position = runeTreeTF.position;
+        mainCam.transform.rotation = runeTreeTF.rotation;
         onMoveFinish?.Invoke();
         yield return null;
     }

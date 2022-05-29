@@ -27,6 +27,7 @@ public class RuneStem_Skill : RuneStem
             if (runes[i] == rune) continue;
 
             tree.usePoints -= runes[i].point;
+            PlayerManager.instance.runePoint += runes[i].point;
             runes[i].point = 0;
         }
     }

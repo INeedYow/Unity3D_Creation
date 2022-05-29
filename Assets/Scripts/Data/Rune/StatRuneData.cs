@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EStat {
-    Damage, Magic, Armor, MagicArmor, 
+    Damage, Magic, Armor, MagicArmor, Hp,
 }
 
 [CreateAssetMenu(fileName = "StatRuneData" , menuName = "RuneData/StatRuneData")]
@@ -30,6 +30,12 @@ public class StatRuneData : RuneData
                 case EStat.Armor: hero.armorRate += values[point - 1]; break;
                 case EStat.Magic: hero.magicDamage += values[point - 1]; break;
                 case EStat.MagicArmor: hero.magicArmorRate += values[point - 1]; break;
+                case EStat.Hp: 
+                {
+                    hero.maxHp += values[point - 1]; 
+                    hero.curHp = hero.maxHp;
+                    break;
+                }
                 //
             }
         }
@@ -50,6 +56,12 @@ public class StatRuneData : RuneData
                 case EStat.Armor: hero.armorRate -= values[point - 1]; break;
                 case EStat.Magic: hero.magicDamage -= values[point - 1]; break;
                 case EStat.MagicArmor: hero.magicArmorRate -= values[point - 1]; break;
+                case EStat.Hp: 
+                {
+                    hero.maxHp -= values[point - 1]; 
+                    hero.curHp = hero.maxHp;
+                    break;
+                }
                 //
             }
         }
@@ -57,7 +69,8 @@ public class StatRuneData : RuneData
 
     public override int GetCurValue(int point)
     {
-       return values[point - 1];
+        if (point == 0) return 0;
+        return values[point - 1];
     }
     public override int GetNextValue(int point)
     {

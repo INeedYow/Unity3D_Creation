@@ -98,9 +98,16 @@ public class PlayerManager : MonoBehaviour
         runeInfoUI.gameObject.SetActive(false);
     }
 
-    public void AddRunePoint()
+    public void UseRunePoint()
     {
         runePoint--;
+        runeInfoUI.RenewUI();
+        runePointUI.RenewUI(runePoint);
+    }
+
+    public void ReturnRunePoint()
+    {
+        runePoint++;
         runeInfoUI.RenewUI();
         runePointUI.RenewUI(runePoint);
     }
@@ -108,7 +115,7 @@ public class PlayerManager : MonoBehaviour
     public void EnterRuneTree(bool isEnter)
     {
         runeTree.gameObject.SetActive(isEnter);
-        runeInfoUI.gameObject.SetActive(isEnter);
         runePointUI.gameObject.SetActive(isEnter);
+        runeInfoUI.gameObject.SetActive(false);
     }
 }

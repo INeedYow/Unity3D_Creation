@@ -13,12 +13,13 @@ public class RuneInfoUI : MonoBehaviour
     public Text curPoint;
     public Text maxPoint;
 
-    int m_nextvalue;
+    int m_value;
 
     public void SetRune(Rune newRune)
     {
         rune = newRune;
         SetInfo();
+        RenewUI();
     }
 
     void SetInfo()
@@ -31,10 +32,11 @@ public class RuneInfoUI : MonoBehaviour
     {
         curPoint.text = rune.point.ToString();
         curValue.text = rune.data.GetCurValue(rune.point).ToString();
+        
+    
+        m_value = rune.data.GetNextValue(rune.point);
 
-        m_nextvalue = rune.data.GetNextValue(rune.point);
-
-        if (m_nextvalue == 0){
+        if (m_value == 0){
             nextValue.text = "Max";
         }
         else {

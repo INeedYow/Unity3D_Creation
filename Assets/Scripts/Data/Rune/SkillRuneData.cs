@@ -7,7 +7,9 @@ public class SkillRuneData : RuneData
 {
     //public ESkillObj eSkillObj;
     public Skill skill;
-    [Range(1,4)] public int ID;         // 몇 번째 스킬인지
+    
+    [Tooltip("몇 번째 스킬 칸에 들어갈 스킬인지")]
+    [Range(1,4)] public int ID;  
 
     public override int GetMax()
     {

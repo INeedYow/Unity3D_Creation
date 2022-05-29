@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CubeSide_PlayerSetting : CubeSide
 {
+    //public GameObject plane;
+    //public RuneCursor cursor;
+
     public override void Enter()
     {   //Debug.Log("Enter");
         CameraManager.instance.SetRuneTreeView();
@@ -12,6 +15,8 @@ public class CubeSide_PlayerSetting : CubeSide
 
     public override void Exit()
     {   //Debug.Log("Exit");
+        //plane.gameObject.SetActive(false);
+        //cursor.gameObject.SetActive(false);
         CameraManager.instance.SetPlanetView();
         CameraManager.instance.onMoveFinish += ExitFinish;
     }
@@ -23,6 +28,8 @@ public class CubeSide_PlayerSetting : CubeSide
     {
         onEnterFinish?.Invoke();
         PlayerManager.instance.EnterRuneTree(true);
+        //plane.gameObject.SetActive(true);
+        //cursor.gameObject.SetActive(true);
         CameraManager.instance.onMoveFinish -= EnterFinish;
     }
 

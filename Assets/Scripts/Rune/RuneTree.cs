@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class RuneTree : MonoBehaviour
 {
-    public UnityAction onDecreaseUsePoint;
+    public UnityAction onChangeUsePoint;
     public RuneStem firstStem;
     public Canvas canvas;
 
@@ -14,9 +14,13 @@ public class RuneTree : MonoBehaviour
         get { return _usePoints; }
         set {
             _usePoints = value;
-            onDecreaseUsePoint?.Invoke();
+            onChangeUsePoint?.Invoke();
         }
     }
+
+    // public void Init(){
+    //     firstStem.Init
+    // }
 
     private void OnEnable() {
         Open();
@@ -24,12 +28,23 @@ public class RuneTree : MonoBehaviour
     
     void Open()
     {
+        firstStem.gameObject.SetActive(true);
         firstStem.OpenStem();
     }
 
-    public void Apply()
-    {
+    public void Apply(){
         firstStem.Apply();
+    }
+
+    public void Release(){
+        firstStem.Release();
+    }
+
+    public void Reset()
+    {
+        firstStem.Reset();
+        usePoints = 0;
+        Open();
     }
 }
 

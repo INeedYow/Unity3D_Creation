@@ -46,6 +46,7 @@ public class DungeonManager : MonoBehaviour
         curDungeon = listDungeon[index];
         curDungeon.gameObject.SetActive(true);
         PartyManager.instance.EnterDungeon();
+        PlayerManager.instance.runeTree.Apply();
 
         // UI
         dungeonUI.gameObject.SetActive(true);
@@ -62,6 +63,7 @@ public class DungeonManager : MonoBehaviour
         curDungeon.gameObject.SetActive(false);
         curDungeon = null;
         PartyManager.instance.ExitDungeon();
+        PlayerManager.instance.runeTree.Release();
 
         dungeonUI.gameObject.SetActive(false);
 

@@ -18,11 +18,10 @@ public class Rune : MonoBehaviour
 
         point++; //Debug.Log(point + " / " + data.GetMax());
         stem.AddPoint(this);
-        PlayerManager.instance.AddRunePoint();
+        PlayerManager.instance.UseRunePoint();
     }
 
     private void OnMouseEnter() {
-        //Debug.Log(data.description);
         PlayerManager.instance.ShowRuneInfoUI(this);
     }
 
@@ -42,5 +41,13 @@ public class Rune : MonoBehaviour
         if (point == 0) return;
         
         data.Release(point);
+    }
+
+    public void Reset()
+    {
+        if (point == 0) return;
+
+        PlayerManager.instance.runePoint += point;
+        point = 0;
     }
 }
