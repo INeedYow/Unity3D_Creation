@@ -4,67 +4,43 @@ using UnityEngine;
 
 public class Rune : MonoBehaviour
 {
-    public RuneData data;           
-    public int point;               // 투자한 rune point
-    public RuneSlot slot;           
-    public Rune[] nextRunes;
-    
-    public bool isOpen { get; private set; }
+    public RuneData data;
+    public RuneStem stem;
+    public int point;
 
-    public void AddPoint()
-    {
-        point++;    Debug.Log("Rune " + point + " / " + data.GetMax());
-        if (IsMax())
-        {   Debug.Log("Rune MaxPoint");
-            OpenNextRune();
-        }
+    private void Start() {
+        if (stem == null) stem = GetComponentInParent<RuneStem>();
     }
 
-    public bool IsMax() { return data.IsMax(point); }
+    private void OnMouseDown() {
+        if (!stem.isOpen) return;
+        if (data.IsMax(point)) return;
 
-    void OpenNextRune()
-    {
-        if (nextRunes.Length == 0) return;
-
-        for(int i = 0; i < nextRunes.Length; i++)
-        {
-            if (!nextRunes[i].isOpen) 
-            {
-                nextRunes[i].OpenRuneSlot();
-            }
-        }
+        point++; //Debug.Log(point + " / " + data.GetMax());
+        stem.AddPoint(this);
+        PlayerManager.instance.AddRunePoint();
     }
 
-    public void OpenRuneSlot()
-    {   Debug.Log("1");
-        isOpen = true;
-        point = 0;
-        slot.gameObject.SetActive(true);
+    private void OnMouseEnter() {
+        //Debug.Log(data.description);
+        PlayerManager.instance.ShowRuneInfoUI(this);
+    }
+
+    private void OnMouseExit() {
+        PlayerManager.instance.HideRuneInfoUI();
     }
 
     public void Apply()
     {
+        if (point == 0) return;
+
         data.Apply(point);
-        
-        for(int i = 0; i < nextRunes.Length; i++)
-        {
-            if (nextRunes[i].isOpen)
-            {
-                nextRunes[i].Apply();
-            }
-        }
     }
 
     public void Release()
     {
-        data.Release(point);
+        if (point == 0) return;
         
-        for(int i = 0; i < nextRunes.Length; i++)
-        {
-            if (nextRunes[i].isOpen)
-            {
-                nextRunes[i].Release();
-            }
-        }
+        data.Release(point);
     }
 }

@@ -12,12 +12,12 @@ public class SkillRuneData : RuneData
     public override int GetMax()
     {
         //TODO
-        return 0;
+        return 99;
     }
     public override bool IsMax(int point)
     {
         // TODO
-        return true;
+        return false;
     }
     public override void Apply(int point)
     {
@@ -29,5 +29,14 @@ public class SkillRuneData : RuneData
     public override void Release(int point)
     {
         // 딱히 해줄 건 없는 듯?
+    }
+
+    public override int GetCurValue(int point)
+    {
+        return 1;
+    }
+    public override int GetNextValue(int point)
+    {
+        return 1;
     }
 }

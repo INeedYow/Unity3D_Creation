@@ -40,8 +40,6 @@ public class GameManager : MonoBehaviour
     //     }
     // }
     // public int gold         { get; private set; }
-
-    public CameraMove cam;
     public bool isMouseOnLeaveArea;
 
     private void Awake() { 
@@ -145,8 +143,10 @@ public class GameManager : MonoBehaviour
         cubePlanet.gameObject.SetActive(!isEnter);
         PlayerManager.instance.playerInfoUI.gameObject.SetActive(!isEnter);
         
-        //temp
-        cam.ToggleView();
+        if (isEnter)
+            CameraManager.instance.SetDungeonView();
+        else
+            CameraManager.instance.SetPlanetView();
     }
 
 

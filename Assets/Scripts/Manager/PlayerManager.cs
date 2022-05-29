@@ -9,9 +9,19 @@ public class PlayerManager : MonoBehaviour
 
     [Header("UI")]
     public PlayerInfoUI playerInfoUI;
+    public RunePointUI runePointUI;
+    public RuneInfoUI runeInfoUI;
 
     [Header("Rune Tree")]
     public RuneTree runeTree;
+    int _runePoint = 25;
+    public int runePoint { 
+        get { return _runePoint; }
+        set { 
+            _runePoint = value;
+            runePointUI.RenewUI(_runePoint);
+        }
+    }
 
     //
     public int maxLV    { get { return 25; } }
@@ -75,5 +85,30 @@ public class PlayerManager : MonoBehaviour
 
     public void RenewCurParty(int value){
         playerInfoUI.RenewCurParty(value);
+    }
+
+    public void ShowRuneInfoUI(Rune rune)
+    {
+        runeInfoUI.gameObject.SetActive(true);
+        runeInfoUI.SetRune(rune);
+    }
+
+    public void HideRuneInfoUI()
+    {
+        runeInfoUI.gameObject.SetActive(false);
+    }
+
+    public void AddRunePoint()
+    {
+        runePoint--;
+        runeInfoUI.RenewUI();
+        runePointUI.RenewUI(runePoint);
+    }
+
+    public void EnterRuneTree(bool isEnter)
+    {
+        runeTree.gameObject.SetActive(isEnter);
+        runeInfoUI.gameObject.SetActive(isEnter);
+        runePointUI.gameObject.SetActive(isEnter);
     }
 }

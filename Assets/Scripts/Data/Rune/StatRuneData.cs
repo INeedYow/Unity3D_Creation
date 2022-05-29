@@ -54,4 +54,15 @@ public class StatRuneData : RuneData
             }
         }
     }
+
+    public override int GetCurValue(int point)
+    {
+       return values[point - 1];
+    }
+    public override int GetNextValue(int point)
+    {
+        if (point == values.Length) return 0;
+        return values[point];
+
+    }
 }

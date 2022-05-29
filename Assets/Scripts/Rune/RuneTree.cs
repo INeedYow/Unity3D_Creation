@@ -1,26 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RuneTree : MonoBehaviour
 {
-    public Rune firstRune;
+    public UnityAction onDecreaseUsePoint;
+    public RuneStem firstStem;
+    public Canvas canvas;
+
+    int _usePoints;
+    public int usePoints{
+        get { return _usePoints; }
+        set {
+            _usePoints = value;
+            onDecreaseUsePoint?.Invoke();
+        }
+    }
 
     private void OnEnable() {
-        Init();
+        Open();
     }
-    public void Init()
-    { 
-        firstRune.OpenRuneSlot();
-    }
-    public void Apply()
+    
+    void Open()
     {
-        firstRune.Apply();
+        firstStem.OpenStem();
     }
 
-    public void Release()
+    public void Apply()
     {
-        firstRune.Release();
+        firstStem.Apply();
     }
 }
 
