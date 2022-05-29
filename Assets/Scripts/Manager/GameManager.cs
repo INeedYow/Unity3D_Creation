@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
     public DummyCursor cursor;
     
     
-    //public PlayerInfoUI playerInfoUI;
     public GameObject worldCanvas;
     public GameObject heroLeaveBox;
+    public GameObject monsterPlanet;
+    public GameObject storeObjects;
+    public GameObject floatingBlocks;
 
     [Header("prfBuffs")]
     public Buff[] prfBUffs = new Buff[(int)EBuff.Size];   // 공, 마공, 방, 마방, 공속
@@ -122,23 +124,6 @@ public class GameManager : MonoBehaviour
         isMouseOnLeaveArea = false;
     }
 
-    //////////////////////////////
-
-    // public void AddGold(int amount){    
-    //     gold += amount;
-    //     playerInfoUI.RenewGold(gold);
-    // }
-
-    // public void AddExp(int amount){ 
-    //     curExp += amount;   
-    //     playerInfoUI.RenewExp(curExp, maxExp);
-    // }
-
-    // public void RenewCurParty(int value){
-    //     playerInfoUI.RenewCurParty(value);
-    // }
-
-    ///////////////////////////////
     public void EnterDungeon(bool isEnter){
         cubePlanet.gameObject.SetActive(!isEnter);
         PlayerManager.instance.playerInfoUI.gameObject.SetActive(!isEnter);
@@ -149,5 +134,11 @@ public class GameManager : MonoBehaviour
             CameraManager.instance.SetPlanetView();
     }
 
+    public void EnterTree(bool isEnter)
+    {
+        storeObjects.SetActive(isEnter);
+        monsterPlanet.SetActive(isEnter);
+        floatingBlocks.SetActive(isEnter);
+    }
 
 }

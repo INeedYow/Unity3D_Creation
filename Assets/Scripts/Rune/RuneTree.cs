@@ -7,6 +7,7 @@ public class RuneTree : MonoBehaviour
 {
     public UnityAction onChangeUsePoint;
     public RuneStem firstStem;
+    public LineRenderer line;
     public Canvas canvas;
 
     int _usePoints;
@@ -46,6 +47,7 @@ public class RuneTree : MonoBehaviour
         usePoints = 0;
         Open();
     }
+
+
 }
 
-// TODO 던전 진입 시 Tree.Apply(); / 나갈 때 Tree.Release();

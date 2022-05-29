@@ -9,6 +9,7 @@ public class CubeSide_PlayerSetting : CubeSide
 
     public override void Enter()
     {   //Debug.Log("Enter");
+        GameManager.instance.EnterTree(false);
         CameraManager.instance.SetRuneTreeView();
         CameraManager.instance.onMoveFinish += EnterFinish;
     }
@@ -36,7 +37,8 @@ public class CubeSide_PlayerSetting : CubeSide
     public void ExitFinish()
     {
         onExitFinish?.Invoke(this);
-        PlayerManager.instance.EnterRuneTree(false);
+        PlayerManager.instance.EnterRuneTree(true);
         CameraManager.instance.onMoveFinish -= ExitFinish;
+        GameManager.instance.EnterTree(false);
     }
 }
