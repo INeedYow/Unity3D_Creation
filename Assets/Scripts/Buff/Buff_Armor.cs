@@ -14,6 +14,7 @@ public class Buff_Armor : Buff
         ratio = buffRatio;
 
         //
+        dura = duration;
         target.buffArmor += ratio;
         DungeonManager.instance.onChangeAnyArmor?.Invoke();
 
@@ -25,14 +26,31 @@ public class Buff_Armor : Buff
         effect.transform.position = target.targetTF.position;
         effect.SetDuration(1f);
 
-        Invoke("Finish", duration);
+        //Invoke("Finish", duration);
+        StartCoroutine("Timer");
     }
 
     public override void Finish()
     {   //
-        target.buffArmor -= ratio;
+        if (target != null)
+        {
+            target.buffArmor -= ratio;
+            target.buffs.Remove(this);
+        }
+        
         effect.Return();
         DungeonManager.instance.onChangeAnyArmor?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
+    
+    IEnumerator Timer()
+    {
+        while (dura > 0f)
+        {
+            dura -= Time.deltaTime;
+            yield return null;
+        }
+        Finish();
+    }
+
 }

@@ -55,7 +55,14 @@ public abstract class Character : MonoBehaviour, IDamagable
     // buffs
     public LinkedList<Buff> buffs;              
     public float buffDamage = 1f;
-    public float buffArmor = 0f;
+    //public float buffArmor = 0f;
+    float _buffArmor = 0f;
+    public float buffArmor { 
+        get { return _buffArmor; }
+        set {
+            _buffArmor = value; Debug.Log("buffArmor : " + _buffArmor + " / isDead : " + isDead);
+        }
+    }
 
     float _buffSpeed = 1f;
     public float buffSpeed {
@@ -226,6 +233,21 @@ public abstract class Character : MonoBehaviour, IDamagable
     public void Revive(float rateHp) {
         isDead = false;
         curHp = 0.01f * rateHp * maxHp;
+    }
+
+    public void ResetBuffs()
+    {
+        if (buffs.Count == 0) return;
+        
+        foreach (Buff buff in buffs)
+        {
+            buff.Remove();
+        }
+        buffs.Clear();
+
+        buffStun = 0f;
+        buffArmor = 0f;
+        buffDamage = 1f;
     }
 
     // public void Move(Vector3 destPos)

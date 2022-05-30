@@ -107,7 +107,7 @@ public class DungeonManager : MonoBehaviour
         curDungeon.curMonsterCount++;
         monster.onDeadGetThis += OnMonsterDie;
 
-        monster.Reset();
+        //monster.Reset();
         bar = ObjectPool.instance.GetHpBar(false);
         bar.SetOwner(monster);
 

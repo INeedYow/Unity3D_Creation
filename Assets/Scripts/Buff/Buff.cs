@@ -10,12 +10,15 @@ public abstract class Buff : MonoBehaviour
     public EEffect eEffect;
     protected Character target;
     protected Effect effect;
+    protected float dura;
 
     public abstract void Add(Character target, float duration, float buffRatio);
     public abstract void Finish();
     public void Remove()
     {
-        CancelInvoke("Finish");
+        // CancelInvoke("Finish");
+        // Finish();
+        StopCoroutine("Timer");
         Finish();
     }
 }

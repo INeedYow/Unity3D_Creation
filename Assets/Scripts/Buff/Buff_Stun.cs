@@ -13,7 +13,7 @@ public class Buff_Stun : Buff
         target.buffs.AddLast(this);
         
         //
-        ratio = duration;
+        dura = duration;
         target.buffStun += duration;
 
         effect = ObjectPool.instance.GetEffect((int)eEffect);
@@ -21,11 +21,12 @@ public class Buff_Stun : Buff
         effect.transform.position = target.HpBarTF.position;
         target.onDead += Finish;
 
-        Invoke("Finish", duration);
+        //Invoke("Finish", duration);
+        StartCoroutine("Timer");
     }
 
     public override void Finish()
-    {   Debug.Log("finish");
+    {   //Debug.Log("finish");
         if (target != null)
         {
             target.buffStun -= ratio; 
@@ -33,5 +34,15 @@ public class Buff_Stun : Buff
         }
         effect.Return();
         ObjectPool.instance.ReturnObj(this.gameObject);
+    }
+
+    IEnumerator Timer()
+    {
+        while (dura > 0f)
+        {
+            dura -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Finish();
     }
 }

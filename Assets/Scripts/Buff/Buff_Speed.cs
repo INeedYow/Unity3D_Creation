@@ -15,6 +15,7 @@ public class Buff_Speed : Buff
         ratio = buffRatio;
 
         //
+        dura = duration;
         target.buffSpeed += ratio;
         DungeonManager.instance.onChangeAnySpeed?.Invoke();
 
@@ -26,14 +27,29 @@ public class Buff_Speed : Buff
         // effect.transform.position = target.targetTF.position;
         // effect.SetDuration(1f);
 
-        Invoke("Finish", duration);
+        //Invoke("Finish", duration);
+        StartCoroutine("Timer");
     }
 
     public override void Finish()
     {   //
-        target.buffSpeed -= ratio;
+        if (target != null){
+            target.buffSpeed -= ratio;
+            target.buffs.Remove(this);
+        }
+        
         //effect.Return();
         DungeonManager.instance.onChangeAnySpeed?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
+    }
+
+    IEnumerator Timer()
+    {
+        while (dura > 0f)
+        {
+            dura -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        Finish();
     }
 }

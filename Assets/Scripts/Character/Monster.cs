@@ -72,27 +72,17 @@ public class Monster : Character
     public override void Death(){
         //
         isDead = true;
-        monsGFX.gameObject.SetActive(false);
+        ResetBuffs();
         onDeadGetThis?.Invoke(this);
         onDead?.Invoke();
+        monsGFX.gameObject.SetActive(false);
     }
 
-    public void Reset()
-    {
-        ResetBuffs();
-    }
-    void ResetBuffs()
-    {
-        if (buffs.Count == 0) return;
-        
-        foreach (Buff buff in buffs)
-        {
-            buff.Remove();
-        }
-        buffStun = 0f;
-        buffArmor = 0f;
-        buffDamage = 1f;
-    }
+    // public void Reset()
+    // {
+    //     ResetBuffs();
+    // }
+    
 
     private void OnMouseDown() { DungeonManager.instance.ShowMonInfoUI(this); }
 }
