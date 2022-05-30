@@ -38,7 +38,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
         {   // 아군
             foreach (Character ch in PartyManager.instance.heroParty)
             {
-                if (ch.isDead) continue;
+                if (ch.isDead || ch.isStop) continue;
                 if (eMost == EMost.Least)
                 {   // value 이상
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
@@ -59,7 +59,7 @@ public class Condition_FindDistanceTarget : ConditionMacro
         else{   // 적군
             foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
             {   
-                if (ch.isDead) continue;
+                if (ch.isDead || ch.isStop) continue;
                 if (eMost == EMost.Least)
                 {   // value 이상
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;

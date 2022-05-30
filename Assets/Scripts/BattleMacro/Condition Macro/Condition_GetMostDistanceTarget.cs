@@ -39,7 +39,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                 m_value = Mathf.Infinity;
                 foreach (Character ch in PartyManager.instance.heroParty)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
                     if (m_value > m_sqrDist)
                     {
@@ -52,7 +52,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                 m_value = 0f;
                 foreach (Character ch in PartyManager.instance.heroParty)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
                     if (m_value  < m_sqrDist)
                     {
@@ -71,7 +71,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                 m_value = Mathf.Infinity;
                 foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
                     if (m_value > m_sqrDist)
                     {
@@ -84,7 +84,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                 m_value = 0f;
                 foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
                     if (m_value < m_sqrDist)
                     {

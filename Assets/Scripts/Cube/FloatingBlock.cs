@@ -47,10 +47,10 @@ public class FloatingBlock : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Falldown(){                 
+    IEnumerator Falldown(){                
         curFloatSpeed = minFloatSpeed;
         while (m_defaultHeight < transform.position.y)
-        {
+        {   Debug.Log("Falldown") ;
             transform.Translate(0f, -curFloatSpeed * Time.deltaTime, 0f);
             yield return null;
 

@@ -27,9 +27,9 @@ public class StatRuneData : RuneData
                     hero.maxDamage += values[point - 1];
                     break;
                 }
-                case EStat.Armor: hero.armorRate += values[point - 1]; break;
+                case EStat.Armor: hero.armorRate += values[point - 1] * 0.01f; break;
                 case EStat.Magic: hero.magicDamage += values[point - 1]; break;
-                case EStat.MagicArmor: hero.magicArmorRate += values[point - 1]; break;
+                case EStat.MagicArmor: hero.magicArmorRate += values[point - 1] * 0.01f; break;
                 case EStat.Hp: 
                 {
                     hero.maxHp += values[point - 1]; 
@@ -53,9 +53,9 @@ public class StatRuneData : RuneData
                     hero.maxDamage -= values[point - 1];
                     break;
                 }
-                case EStat.Armor: hero.armorRate -= values[point - 1]; break;
+                case EStat.Armor: hero.armorRate -= values[point - 1] * 0.01f; break;
                 case EStat.Magic: hero.magicDamage -= values[point - 1]; break;
-                case EStat.MagicArmor: hero.magicArmorRate -= values[point - 1]; break;
+                case EStat.MagicArmor: hero.magicArmorRate -= values[point - 1] * 0.01f; break;
                 case EStat.Hp: 
                 {
                     hero.maxHp -= values[point - 1]; 

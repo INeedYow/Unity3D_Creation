@@ -71,26 +71,61 @@ public class Projectile : MonoBehaviour
 
     void AreaHit()
     {
-        Collider[] colls;
         if (eTargetGroup == EGroup.Monster)
         {
-            colls = Physics.OverlapSphere(transform.position, m_area, LayerMask.GetMask("Monster"));
+            foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
+            {
+                if (mon.isDead || mon.isStop) continue;
+                if (m_target == null) break;
+
+                m_sqrDist = (m_target.transform.position - mon.transform.position).sqrMagnitude;
+
+                if (m_area * m_area < m_sqrDist) continue;
+
+                IDamagable tempTarget = mon.GetComponent<IDamagable>();
+                
+                m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
+            }
         }
-        else{
-            colls = Physics.OverlapSphere(transform.position, m_area, LayerMask.GetMask("Hero"));
+        else
+        {
+            foreach (Hero hero in PartyManager.instance.heroParty)
+            {
+                if (hero.isDead || hero.isStop) continue;
+                if (m_target == null) break;
+
+                m_sqrDist = (m_target.transform.position - hero.transform.position).sqrMagnitude;
+
+                if (m_area * m_area < m_sqrDist) continue;
+
+                IDamagable tempTarget = hero.GetComponent<IDamagable>();
+                
+                m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
+            }
         }
 
-        foreach (Collider coll in colls)
-        {
-            IDamagable damagableTarget = coll.gameObject.GetComponent<IDamagable>();
-            damagableTarget?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
-        }
+
+        // Collider[] colls;
+        // if (eTargetGroup == EGroup.Monster)
+        // {
+        //     colls = Physics.OverlapSphere(transform.position, m_area, LayerMask.GetMask("Monster"));
+        // }
+        // else{
+        //     colls = Physics.OverlapSphere(transform.position, m_area, LayerMask.GetMask("Hero"));
+        // }
+
+        // foreach (Collider coll in colls)
+        // {
+        //     IDamagable damagableTarget = coll.gameObject.GetComponent<IDamagable>();
+        //     damagableTarget?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
+        // }
 
         //gameObject.transform.SetParent(m_target.transform); //
         
         CancelInvoke("Return");
         Invoke("Return", remainTime);
-    }
+        }
+    
 
     void LookTarget()
     {

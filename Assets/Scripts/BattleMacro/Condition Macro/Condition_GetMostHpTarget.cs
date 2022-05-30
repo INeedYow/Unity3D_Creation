@@ -35,7 +35,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
                 m_value = 1f;
                 foreach (Character ch in PartyManager.instance.heroParty)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     if (m_value > ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;
@@ -47,7 +47,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
                 m_value = 0f;
                 foreach (Character ch in PartyManager.instance.heroParty)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     if (m_value < ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;
@@ -65,7 +65,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
                 m_value = 1f;
                 foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     if (m_value > ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;
@@ -77,7 +77,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
                 m_value = 0f;
                 foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
                 {
-                    if (ch.isDead) continue;
+                    if (ch.isDead || ch.isStop) continue;
                     if (m_value < ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;

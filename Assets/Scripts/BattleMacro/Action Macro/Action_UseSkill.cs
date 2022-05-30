@@ -18,5 +18,6 @@ public class Action_UseSkill : ActionMacro
         //if (owner.skills[skillNumber - 1] == null) return false;  // IsReady()에서 걸러짐
 
         owner.skills[skillNumber - 1].Use(target);
+        LookTarget(target.transform);
     }
 }

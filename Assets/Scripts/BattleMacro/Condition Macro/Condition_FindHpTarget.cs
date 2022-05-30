@@ -32,7 +32,7 @@ public class Condition_FindHpTarget : ConditionMacro
         {   // 아군
             foreach (Character ch in PartyManager.instance.heroParty)
             {
-                if (ch.isDead) continue;
+                if (ch.isDead || ch.isStop) continue;
                 if (eMost == EMost.Least)
                 {   // value 이상
                     if (ch.curHp / ch.maxHp * 100f >= value)
@@ -53,7 +53,7 @@ public class Condition_FindHpTarget : ConditionMacro
         else{
             foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
             {
-                if (ch.isDead) continue;
+                if (ch.isDead || ch.isStop) continue;
                 if (eMost == EMost.Least)
                 {   // value 이상
                     if (ch.curHp / ch.maxHp * 100f >= value)

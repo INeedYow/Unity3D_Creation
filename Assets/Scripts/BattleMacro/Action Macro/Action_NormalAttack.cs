@@ -19,6 +19,7 @@ public class Action_NormalAttack : ActionMacro
         {   
             if (!owner.nav.isStopped)
             { owner.nav.isStopped = true; }
+            LookTarget(target.transform);
             owner.AttackInit(target);
         }
         else{   

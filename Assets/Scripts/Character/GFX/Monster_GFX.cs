@@ -16,8 +16,26 @@ public class Monster_GFX : GFX
     }
       
     private void Update() 
-    {   // 몬스터는 내가 매크로 설정해줄거라 null이면 break;했음
+    {   
         if (monster.isStop || monster.isDead) return;  
+
+        for (int i = 0; i < repeat; i++)
+        {   
+            if (monster.actionMacros[i] == null) continue;
+            
+            if (monster.actionMacros[i].IsReady())
+            {   
+                if (monster.conditionMacros[i] == null) continue;
+                
+                if (monster.conditionMacros[i].IsSatisfy())
+                {  
+                    monster.onMacroChangeGetIndex?.Invoke(i);
+                    monster.actionMacros[i].Execute(monster.conditionMacros[i].GetTarget());
+                    break;
+                }
+                
+            }
+        }
 
         // for (int i = 0; i < repeat; i++){
         //     if (monster.conditionMacros[i] == null) break;

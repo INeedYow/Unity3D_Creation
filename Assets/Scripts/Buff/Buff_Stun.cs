@@ -25,7 +25,7 @@ public class Buff_Stun : Buff
     }
 
     public override void Finish()
-    {   //
+    {   Debug.Log("finish");
         if (target != null)
         {
             target.buffStun -= ratio; 
