@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EStat {
-    Damage, Magic, Armor, MagicArmor, Hp,
+    Damage, Magic, Armor, MagicArmor, Hp, 
+    Cri_Chance, Cri_Power, Dodge,
+    Range, MoveSpeed, 
 }
 
 [CreateAssetMenu(fileName = "StatRuneData" , menuName = "RuneData/StatRuneData")]
@@ -36,7 +38,13 @@ public class StatRuneData : RuneData
                     hero.curHp = hero.maxHp;
                     break;
                 }
-                //
+
+                case EStat.Cri_Chance: hero.criticalChance += values[point - 1]; break;
+                case EStat.Cri_Power: hero.criticalRate += values[point - 1] * 0.01f; break;
+                case EStat.Dodge: hero.criticalChance += values[point - 1]; break;
+
+                case EStat.Range: hero.attackRange += values[point - 1]; break;
+                case EStat.MoveSpeed: hero.moveSpeed += values[point - 1]; break;
             }
         }
     }
@@ -62,7 +70,13 @@ public class StatRuneData : RuneData
                     hero.curHp = hero.maxHp;
                     break;
                 }
-                //
+
+                case EStat.Cri_Chance: hero.criticalChance -= values[point - 1]; break;
+                case EStat.Cri_Power: hero.criticalRate -= values[point - 1] * 0.01f; break;
+                case EStat.Dodge: hero.criticalChance -= values[point - 1]; break;
+
+                case EStat.Range: hero.attackRange -= values[point - 1]; break;
+                case EStat.MoveSpeed: hero.moveSpeed -= values[point - 1]; break;
             }
         }
     }

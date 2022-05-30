@@ -1,39 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class RuneTree : MonoBehaviour
 {
-    public UnityAction onChangeUsePoint;
     public RuneStem firstStem;
-    public LineRenderer line;
-    public Canvas canvas;
+    public Text leftPoint;
+    [Header("UI")]
+    public RuneInfoUI infoUI;
 
-    int _usePoints;
-    public int usePoints{
-        get { return _usePoints; }
-        set {
-            _usePoints = value;
-            onChangeUsePoint?.Invoke();
+    int _point = 24;
+    public int point{
+        get { return _point; }
+        set { 
+            _point = value;
+            leftPoint.text = _point.ToString();
         }
     }
 
-    // public void Init(){
-    //     firstStem.Init
-    // }
-
-    private void OnEnable() {
+    private void Start() {
         Open();
+        leftPoint.text = _point.ToString();
     }
-    
+
     void Open()
     {
-        firstStem.gameObject.SetActive(true);
-        firstStem.OpenStem();
-
-        Vector3[] pos = new Vector3[2]{transform.position, firstStem.transform.position};
-        line.SetPositions(pos);
+        firstStem.Open();
     }
 
     public void Apply(){
@@ -47,10 +40,18 @@ public class RuneTree : MonoBehaviour
     public void Reset()
     {
         firstStem.Reset();
-        usePoints = 0;
         Open();
     }
 
+    public void ShowRuneInfoUI(Rune rune)
+    {
+        infoUI.gameObject.SetActive(true);
+        infoUI.SetRune(rune);
+    }
 
+    public void HideRuneInfoUI()
+    {
+        infoUI.gameObject.SetActive(false);
+    }
 }
 

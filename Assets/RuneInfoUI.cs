@@ -10,8 +10,6 @@ public class RuneInfoUI : MonoBehaviour
     public Text desc;
     public Text curValue;
     public Text nextValue;
-    public Text curPoint;
-    public Text maxPoint;
 
     int m_value;
 
@@ -25,12 +23,10 @@ public class RuneInfoUI : MonoBehaviour
     void SetInfo()
     {
         desc.text = rune.data.description;
-        maxPoint.text = rune.data.GetMax().ToString();
     }
 
     public void RenewUI()
     {
-        curPoint.text = rune.point.ToString();
         curValue.text = rune.data.GetCurValue(rune.point).ToString();
         
     

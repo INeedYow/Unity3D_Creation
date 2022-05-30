@@ -136,9 +136,9 @@ public class GameManager : MonoBehaviour
 
     public void EnterTree(bool isEnter)
     {
-        storeObjects.SetActive(isEnter);
-        monsterPlanet.SetActive(isEnter);
-        floatingBlocks.SetActive(isEnter);
+        //storeObjects.SetActive(isEnter);
+        //monsterPlanet.SetActive(isEnter);
+        floatingBlocks.SetActive(!isEnter);
     }
 
 }

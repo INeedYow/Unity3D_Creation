@@ -9,19 +9,13 @@ public class PlayerManager : MonoBehaviour
 
     [Header("UI")]
     public PlayerInfoUI playerInfoUI;
-    public RunePointUI runePointUI;
-    public RuneInfoUI runeInfoUI;
+    // public RunePointUI runePointUI;
+    // public RuneInfoUI runeInfoUI;
+    public GameObject statUI;
+    public GameObject skillUI;
 
     [Header("Rune Tree")]
     public RuneTree runeTree;
-    int _runePoint = 25;
-    public int runePoint { 
-        get { return _runePoint; }
-        set { 
-            _runePoint = value;
-            runePointUI.RenewUI(_runePoint);
-        }
-    }
 
     //
     public int maxLV    { get { return 25; } }
@@ -57,13 +51,17 @@ public class PlayerManager : MonoBehaviour
         playerInfoUI.RenewExp(curExp, maxExp);
         playerInfoUI.RenewGold(gold);
         playerInfoUI.RenewLV(LV);
+
+        statUI.gameObject.SetActive(false);
+        skillUI.gameObject.SetActive(false);
     }
 
     void LevelUp(){ 
         LV++;                       
         curExp -= maxExp;          
         maxExp += 75;           
-        runePoint++;
+        runeTree.point++;
+
         playerInfoUI.RenewLV(LV);
         playerInfoUI.RenewExp(curExp, maxExp);
         
@@ -88,35 +86,35 @@ public class PlayerManager : MonoBehaviour
         playerInfoUI.RenewCurParty(value);
     }
 
-    public void ShowRuneInfoUI(Rune rune)
-    {
-        runeInfoUI.gameObject.SetActive(true);
-        runeInfoUI.SetRune(rune);
-    }
+    // public void ShowRuneInfoUI(Rune rune)
+    // {
+    //     runeInfoUI.gameObject.SetActive(true);
+    //     runeInfoUI.SetRune(rune);
+    // }
 
-    public void HideRuneInfoUI()
-    {
-        runeInfoUI.gameObject.SetActive(false);
-    }
+    // public void HideRuneInfoUI()
+    // {
+    //     runeInfoUI.gameObject.SetActive(false);
+    // }
 
-    public void UseRunePoint()
-    {
-        runePoint--;
-        runeInfoUI.RenewUI();
-        runePointUI.RenewUI(runePoint);
-    }
+    // public void UseRunePoint()
+    // {
+    //     runePoint--;
+    //     runeInfoUI.RenewUI();
+    //     runePointUI.RenewUI(runePoint);
+    // }
 
-    public void ReturnRunePoint()
-    {
-        runePoint++;
-        runeInfoUI.RenewUI();
-        runePointUI.RenewUI(runePoint);
-    }
+    // public void ReturnRunePoint()
+    // {
+    //     runePoint++;
+    //     runeInfoUI.RenewUI();
+    //     runePointUI.RenewUI(runePoint);
+    // }
 
     public void EnterRuneTree(bool isEnter)
     {
-        runeTree.gameObject.SetActive(isEnter);
-        runePointUI.gameObject.SetActive(isEnter);
-        runeInfoUI.gameObject.SetActive(false);
+        skillUI.gameObject.SetActive(isEnter);
+        statUI.gameObject.SetActive(isEnter);
+        runeTree.infoUI.gameObject.SetActive(false);
     }
 }

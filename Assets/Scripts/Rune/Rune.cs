@@ -1,43 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Rune : MonoBehaviour
 {
     public RuneData data;
     public RuneStem stem;
-    int _point;
-    public int point{
-        get { return _point; }
-        set {
-            _point = value;
-            if (value >= 1) StartCoroutine("Rotate");
-            else {
-                StopCoroutine("Rotate");
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            }
-        }
-    }
+    public Button button;
+    public int point;
 
+    public Text cur;
+    public Text max;
+
+    private void Awake() {
+        button.interactable = false;
+    }
+    
     private void Start() {
         if (stem == null) stem = GetComponentInParent<RuneStem>();
+        max.text = data.GetMax().ToString();
+        cur.text = "0";
     }
 
-    private void OnMouseDown() {
-        if (!stem.isOpen) return;
+    public void AddPoint()
+    {
         if (data.IsMax(point)) return;
 
-        point++; //Debug.Log(point + " / " + data.GetMax());
-        stem.AddPoint(this);
-        PlayerManager.instance.UseRunePoint();
-    }
+        point++;
+        stem.AddPoint();
 
-    private void OnMouseEnter() {
-        PlayerManager.instance.ShowRuneInfoUI(this);
-    }
-
-    private void OnMouseExit() {
-        PlayerManager.instance.HideRuneInfoUI();
+        cur.text = point.ToString();
     }
 
     public void Apply()
@@ -58,21 +51,19 @@ public class Rune : MonoBehaviour
     {
         if (point == 0) return;
 
-        PlayerManager.instance.runePoint += point;
+        stem.tree.point += point;
         point = 0;
+
+        cur.text = point.ToString();
+    }
+    
+    public void ShowRuneInfoUI()
+    {
+        stem.tree.ShowRuneInfoUI(this);
     }
 
-
-    IEnumerator Rotate()
+    public void HideRuneInfoUI()
     {
-        float rot = 0f;
-
-        while (true)
-        {
-            transform.rotation = Quaternion.Euler(rot, 2 * rot, 3 * rot);
-            rot += Time.deltaTime * 10;
-            rot %= 360;
-            yield return null;
-        }
+        stem.tree.HideRuneInfoUI();
     }
 }

@@ -8,19 +8,19 @@ public class RunePointUI : MonoBehaviour
     public Image exp;
     public Text point;
 
-    private void OnEnable() {
-        SetLV();
-    } 
+    // private void OnEnable() {
+    //     SetLV();
+    // } 
 
-    void SetLV()
-    {
-        lv.text = PlayerManager.instance.LV.ToString();
-        exp.fillAmount = PlayerManager.instance.curExp / PlayerManager.instance.maxExp;
-        point.text = PlayerManager.instance.runePoint.ToString();
-    }
+    // void SetLV()
+    // {
+    //     lv.text = PlayerManager.instance.LV.ToString();
+    //     exp.fillAmount = PlayerManager.instance.curExp / PlayerManager.instance.maxExp;
+    //     point.text = PlayerManager.instance.runePoint.ToString();
+    // }
 
-    public void RenewUI(int newPoint)
-    {   
-        point.text = newPoint.ToString();
-    }
+    // public void RenewUI(int newPoint)
+    // {   
+    //     point.text = newPoint.ToString();
+    // }
 }

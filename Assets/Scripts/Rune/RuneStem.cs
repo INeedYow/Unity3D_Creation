@@ -7,7 +7,8 @@ public class RuneStem : MonoBehaviour
     public RuneTree tree;
     [HideInInspector] public Rune[] runes;
     public RuneStem nextStem;
-    public int reqPoint;
+    public int maxPoint;
+    [HideInInspector] public int usePoints;
     public bool isOpen { get; private set; }
 
     private void Awake() { 
@@ -20,61 +21,40 @@ public class RuneStem : MonoBehaviour
         }
     }
 
-    private void OnEnable() {
-        tree.onChangeUsePoint += CheckPoint;
+    public void AddPoint()
+    {
+        usePoints++;
+        tree.point--;
+        tree.infoUI.RenewUI();
+
+        if (usePoints >= maxPoint)
+        {
+            if (nextStem == null) return;
+
+            if (nextStem.isOpen) return;
+
+            nextStem.Open();
+            Max();
+        }
     }
 
-    private void OnDisable() {
-        tree.onChangeUsePoint -= CheckPoint;
-    }
-
-    public void OpenStem()
-    {   
-        if (isOpen) return;
-
+    public void Open()
+    {
+        for (int i = 0; i < runes.Length; i++)
+        {
+            runes[i].button.interactable = true;
+        }
         isOpen = true;
-        //tree.onChangeUsePoint += CheckPoint;
-        
-        for (int i = 0; i < runes.Length; i++)
-        {   
-            runes[i].gameObject.SetActive(true);
-        }
     }
 
-    void CheckPoint()
+    public void Max()
     {
-        if (tree.usePoints < reqPoint)
-        {
-            CloseStem();
-        }
-    }
-
-    void CloseStem()
-    {   //Debug.Log("Close");
-        if (!isOpen) return;
-
-        isOpen = false;
-        //tree.onChangeUsePoint -= CheckPoint;
-
         for (int i = 0; i < runes.Length; i++)
         {
-            runes[i].gameObject.SetActive(false);
-        }
-        gameObject.SetActive(false);
-    }
-
-    public virtual void AddPoint(Rune rune)
-    {
-        tree.usePoints++;
-
-        if (nextStem == null) return;
-
-        if (tree.usePoints >= nextStem.reqPoint)
-        {
-            nextStem.gameObject.SetActive(true);
-            nextStem.OpenStem();
+            runes[i].button.interactable = false;
         }
     }
+
 
     public void Apply()
     {
@@ -110,12 +90,13 @@ public class RuneStem : MonoBehaviour
 
     public void Reset()
     {
-        if (!isOpen) return;
-
         for (int i = 0; i < runes.Length; i++)
         {
             runes[i].Reset();
+            runes[i].button.interactable = false;
         }
+        usePoints = 0;
+        isOpen = false;
 
         if (nextStem != null)
         {
@@ -124,6 +105,5 @@ public class RuneStem : MonoBehaviour
                 nextStem.Reset();
             }
         }
-        gameObject.SetActive(false);
     }
 }

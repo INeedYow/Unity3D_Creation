@@ -113,7 +113,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
 
-    public int prevMacro = -1;
+    //public int prevMacro = -1;
 
     [Header("Skill")]
     public Skill[] skills;
@@ -239,10 +239,10 @@ public abstract class Character : MonoBehaviour, IDamagable
     {
         if (buffs.Count == 0) return;
         
-        foreach (Buff buff in buffs)
-        {
-            buff.Remove();
-        }
+        // foreach (Buff buff in buffs)
+        // {
+        //     buff.Remove();
+        // }
         buffs.Clear();
 
         buffStun = 0f;
