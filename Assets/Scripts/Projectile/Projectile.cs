@@ -54,7 +54,7 @@ public class Projectile : MonoBehaviour
     }
 
     void Hit(){
-        if (null != m_target)
+        if (null != m_target && !m_target.isStop)
         {   //Debug.Log("proj's owner : " + m_owner);
             IDamagable target = m_target.GetComponent<IDamagable>();
             target?.Damaged(m_damage, m_powerRate, m_owner, isMagic);

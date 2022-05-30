@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CubeSide_PlayerSetting : CubeSide
 {
-    //public GameObject plane;
-    //public RuneCursor cursor;
-
     public override void Enter()
     {   //Debug.Log("Enter");
         GameManager.instance.EnterTree(false);

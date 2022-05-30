@@ -24,6 +24,7 @@ public class DungeonManager : MonoBehaviour
     public DungeonUI dungeonUI;
     public MonBattleInfoUI monInfoUI;
     public ResultUI resultUI;
+    public GameObject runePlane;
 
     [Space(10f)] [Header("Monster prfSkill")]
     public Skill prfSporeSkill;
