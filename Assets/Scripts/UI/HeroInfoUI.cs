@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HeroInfoUI : MonoBehaviour
 {
-    [Header("Up")]
+    [Header("Info")]
     public Image icon;
     public Text nameText;
 
@@ -26,6 +26,10 @@ public class HeroInfoUI : MonoBehaviour
     [Header("Skill")]
     public Image[] skill = new Image[4];
 
+    [Header("Empty")]
+    public Sprite emptyIcon;
+    public Sprite emptySkill;
+
     private void Start() {  
         HeroManager.instance.onChangeSelectedHero += RenewUI;
     }
@@ -36,8 +40,8 @@ public class HeroInfoUI : MonoBehaviour
 
     public void RenewUI(Hero hero){
         if (hero == null){
-            icon.sprite         = null;
-            nameText.text       = null;
+            icon.sprite         = emptyIcon;
+            nameText.text       = " ";
 
             lv.text             = null;
             hp.text             = null;
@@ -54,7 +58,7 @@ public class HeroInfoUI : MonoBehaviour
 
             for(int i = 0; i < 4; i++)
             {
-                skill[i].sprite = null;
+                skill[i].sprite = emptySkill;
             }
 
         }

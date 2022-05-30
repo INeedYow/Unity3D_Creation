@@ -83,6 +83,8 @@ public class Monster : Character
     }
     void ResetBuffs()
     {
+        if (buffs.Count == 0) return;
+        
         foreach (Buff buff in buffs)
         {
             buff.Remove();

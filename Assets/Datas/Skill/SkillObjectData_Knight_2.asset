@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillObjectData_Knight_2
   m_EditorClassIdentifier: 
   isMagic: 0
-  powerRatio: 0
+  powerRatio: 1.2
   area: 5
   count: 1
   eBuff: 3

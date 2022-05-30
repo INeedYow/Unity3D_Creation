@@ -6,7 +6,7 @@ public class Dungeon : MonoBehaviour
 {
     public string DGName;
     public int dungeonLevel;
-    int m_curWave;
+    public int curWave;
     public int maxWave;
 
     public List<Wave> waves;            
@@ -39,7 +39,7 @@ public class Dungeon : MonoBehaviour
     }
 
     void OnEnable() {
-        m_curWave = 1;
+        curWave = 1;
         Invoke("SpawnWave", 1f);
     }
 
@@ -65,9 +65,9 @@ public class Dungeon : MonoBehaviour
         }
         curMonsters.Clear();
 
-        m_curWave++;
+        curWave++;
 
-        if (m_curWave > maxWave) { 
+        if (curWave > maxWave) { 
             ClearDungeon(); 
         }
         else{ 
@@ -80,7 +80,7 @@ public class Dungeon : MonoBehaviour
         // 중간 종료
         GetReward();
         //
-        DungeonManager.instance.Exit();
+        DungeonManager.instance.BattleEnd();
     }
 
     void ClearDungeon(){   
@@ -89,7 +89,7 @@ public class Dungeon : MonoBehaviour
         m_exp += rewardData.exp_clear;
         GetReward();
         //
-        DungeonManager.instance.Exit();
+        DungeonManager.instance.BattleEnd();
     }
 
     void GetReward(){
@@ -101,13 +101,13 @@ public class Dungeon : MonoBehaviour
     }
 
     void SpawnWave()
-    {   Debug.Log(m_curWave + " 웨이브 시작");
+    {   
         spawnTransformIndex = 0;
-        waves[m_curWave - 1].SpawnWave();
+        waves[curWave - 1].SpawnWave();
         Invoke("WaveStart", 1f);
         
         //DungeonManager.instance.dungeonInfoUI.SetCurWave(m_curWave);
-        DungeonManager.instance.dungeonUI.SetCurWave(m_curWave);
+        DungeonManager.instance.dungeonUI.SetCurWave(curWave);
     }
 
     void WaveStart()    { DungeonManager.instance.WaveStart(); }
@@ -119,20 +119,6 @@ public class Dungeon : MonoBehaviour
         foreach (Monster aliveMons in curMonsters)
         {
             if (aliveMons.isDead == false) return aliveMons;
-        }
-        return null;
-    }
-
-    public Monster GetRandMonster()
-    {
-        if (curMonsterCount == 0) return null;
-        
-        int rand = Random.Range(0, curMonsters.Count);
-
-        for (int i = 0; i < curMonsters.Count; i++){
-            if (!curMonsters[rand].isDead) return curMonsters[rand];
-            rand++;
-            rand %= curMonsters.Count;
         }
         return null;
     }

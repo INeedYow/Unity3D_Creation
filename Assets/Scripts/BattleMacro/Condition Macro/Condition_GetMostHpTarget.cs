@@ -9,13 +9,19 @@ public class Condition_GetMostHpTarget : ConditionMacro
     public EGroup eTargetGroup;
     Character m_target;
     float m_value;
+    bool m_hasAnyHpChange;
 
-    private void OnEnable()     { DungeonManager.instance.onChangeAnyHP += GetTarget; }
-    private void OnDisable()    { DungeonManager.instance.onChangeAnyHP -= GetTarget; }
+    private void OnEnable()     { DungeonManager.instance.onChangeAnyHP += AnyHpChange; }
+    private void OnDisable()    { DungeonManager.instance.onChangeAnyHP -= AnyHpChange; }
+    
+    void AnyHpChange() { m_hasAnyHpChange = true; }
 
     public override bool IsSatisfy(bool hasChange){
         //if (null == owner.target) GetTarget();
         if (hasChange) GetTarget();
+        
+        else if (m_hasAnyHpChange) GetTarget();
+
         return true;
     }
 

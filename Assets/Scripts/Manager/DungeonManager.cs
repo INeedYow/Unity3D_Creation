@@ -23,6 +23,7 @@ public class DungeonManager : MonoBehaviour
     [Space(10f)] [Header("Dungeon UI")]
     public DungeonUI dungeonUI;
     public MonBattleInfoUI monInfoUI;
+    public ResultUI resultUI;
 
     [Space(10f)] [Header("Monster prfSkill")]
     public Skill prfSporeSkill;
@@ -56,9 +57,18 @@ public class DungeonManager : MonoBehaviour
         GameManager.instance.EnterDungeon(true);
     }
 
-    public void Exit()
+    public void BattleEnd()
     {
-        // TODO
+        ShowResult();
+    }
+
+    void ShowResult()
+    {
+        resultUI.gameObject.SetActive(true);
+    }
+
+    public void Exit()  // 버튼 이벤트
+    {
         onDungeonExit?.Invoke();
         
         curDungeon.gameObject.SetActive(false);
@@ -66,6 +76,7 @@ public class DungeonManager : MonoBehaviour
         PartyManager.instance.ExitDungeon();
         PlayerManager.instance.runeTree.Release();
 
+        resultUI.gameObject.SetActive(false);
         dungeonUI.gameObject.SetActive(false);
 
         GameManager.instance.EnterDungeon(false);
