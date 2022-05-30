@@ -50,9 +50,9 @@ public class SkillObj_TargetAreaAttack : SkillObject
             foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
             {
                 if (mon.isDead) continue;
-                if (skill.owner.target == null) break;
+                if (skill.target == null) break;
 
-                m_sqrDist = (skill.owner.target.transform.position - mon.transform.position).sqrMagnitude;
+                m_sqrDist = (skill.target.transform.position - mon.transform.position).sqrMagnitude;
 
                 if (data.area * data.area < m_sqrDist) continue;
 
@@ -75,7 +75,7 @@ public class SkillObj_TargetAreaAttack : SkillObject
             {
                 if (hero.isDead) continue;
                 
-                m_sqrDist = (skill.owner.target.transform.position - hero.transform.position).sqrMagnitude;
+                m_sqrDist = (skill.target.transform.position - hero.transform.position).sqrMagnitude;
 
                 if (data.area * data.area < m_sqrDist) continue;
 

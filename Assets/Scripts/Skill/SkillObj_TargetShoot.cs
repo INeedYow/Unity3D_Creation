@@ -14,12 +14,12 @@ public class SkillObj_TargetShoot : SkillObject
             m_proj = ObjectPool.instance.GetProjectile((int)eProjectile);  
             m_proj.transform.position = skill.owner.projectileTF.position;
 
-            if (skill.owner.target == null) break;
+            if (skill.target == null) break;
 
             if (data.isMagic)           
             {
                 m_proj.Launch(
-                    skill.owner.target, 
+                    skill.target, 
                     skill.owner,
                     skill.owner.magicDamage * data.powerRatio, 
                     skill.owner.powerRate, 
@@ -29,7 +29,7 @@ public class SkillObj_TargetShoot : SkillObject
             else                        
             {
                 m_proj.Launch(
-                    skill.owner.target,
+                    skill.target,
                     skill.owner,
                     skill.owner.curDamage * data.powerRatio,
                     skill.owner.powerRate,
@@ -38,7 +38,6 @@ public class SkillObj_TargetShoot : SkillObject
         
         }
        
-        if (skill.owner.target != null) 
-            AddBuff(skill.owner.target);
+        if (skill.target != null) AddBuff(skill.target);
     }
 }

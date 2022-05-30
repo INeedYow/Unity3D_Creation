@@ -8,7 +8,7 @@ public abstract class SkillCommand
     public float lastSkillTime;
     public bool isUsing;
 
-    public abstract bool Use();
+    public abstract void Use();
 
     public SkillCommand(Skill skill) { this.skill = skill; }
 }

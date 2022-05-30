@@ -7,7 +7,6 @@ public class Condition_GetMostHpTarget : ConditionMacro
     [Tooltip("Least : 최소 / Most : 최대")]
     public EMost eMost;
     public EGroup eTargetGroup;
-    Character m_target;
     float m_value;
     bool m_hasAnyHpChange;
 
@@ -16,21 +15,20 @@ public class Condition_GetMostHpTarget : ConditionMacro
     
     void AnyHpChange() { m_hasAnyHpChange = true; }
 
-    public override bool IsSatisfy(bool hasChange){
-        //if (null == owner.target) GetTarget();
-        if (hasChange) GetTarget();
-        
-        else if (m_hasAnyHpChange) GetTarget();
-
+    public override bool IsSatisfy( )
+    {   // 체력 변경 or 타겟 null 이면 재검색
+        if (m_hasAnyHpChange || target == null) FindTarget();
         return true;
     }
 
-    void GetTarget()   // 처음 null일때, 누군가의 HP가 변했을 때 타겟 재설정 (좁은 곳에서 계속 싸우는 방식이라 HP는 거의 실시간으로 하는 거랑 다름 없는듯)
+    void FindTarget()   // 처음 null일때, 누군가의 HP가 변했을 때 타겟 재설정 (좁은 곳에서 계속 싸우는 방식이라 HP는 거의 실시간으로 하는 거랑 다름 없는듯)
     {
+        m_hasAnyHpChange = false;
+        
         if (eTargetGroup == EGroup.Hero)
         {   // 아군
-            m_target = PartyManager.instance.GetAliveHero();
-            if (m_target == null) return;
+            target = PartyManager.instance.GetAliveHero();
+            if (target == null) return;
 
             if (eMost == EMost.Least)
             {   // 최소
@@ -41,7 +39,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
                     if (m_value > ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
@@ -53,14 +51,14 @@ public class Condition_GetMostHpTarget : ConditionMacro
                     if (m_value < ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
         }
         else{   // 적군
-            m_target = DungeonManager.instance.curDungeon.GetAliveMonster();
-            if (m_target == null) return;
+            target = DungeonManager.instance.curDungeon.GetAliveMonster();
+            if (target == null) return;
 
             if (eMost == EMost.Least)
             {   // 최소
@@ -71,7 +69,7 @@ public class Condition_GetMostHpTarget : ConditionMacro
                     if (m_value > ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
@@ -83,11 +81,10 @@ public class Condition_GetMostHpTarget : ConditionMacro
                     if (m_value < ch.curHp / ch.maxHp)
                     {
                         m_value = ch.curHp / ch.maxHp;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
         }
-        owner.target = m_target;
     }
 }

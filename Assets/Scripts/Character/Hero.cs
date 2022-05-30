@@ -73,7 +73,7 @@ public class Hero : Character
             case EClass.Bard        : maxHp += 12;  break;
 
             case EClass.Archer      : 
-            case EClass.Necromancer : maxHp += 9;  break;
+            case EClass.Necromancer : maxHp += 10;  break;
 
         }
         minDamage += 1;
@@ -108,7 +108,6 @@ public class Hero : Character
     public void ResetPos()
     {   
         transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; 
-        target = null;
     }
 
     // 파티 관련

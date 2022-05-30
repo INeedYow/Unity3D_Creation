@@ -6,27 +6,31 @@ public class Monster_GFX : GFX
 {
     public Monster monster;
 
-    new protected void OnEnable() { 
-        base.OnEnable();
-        monster.isStop = true; 
+    // new protected void OnEnable() { 
+    //     base.OnEnable();
+    //     monster.isStop = true; 
+    // }
+
+    private void OnEnable() {
+        monster.isStop = true;
     }
       
     private void Update() 
     {   // 몬스터는 내가 매크로 설정해줄거라 null이면 break;했음
         if (monster.isStop || monster.isDead) return;  
 
-        for (int i = 0; i < repeat; i++){
-            if (monster.conditionMacros[i] == null) break;
+        // for (int i = 0; i < repeat; i++){
+        //     if (monster.conditionMacros[i] == null) break;
 
-            if (monster.conditionMacros[i].IsSatisfy(false))
-            {
-                if (monster.actionMacros[i] == null) break;
+        //     if (monster.conditionMacros[i].IsSatisfy(false))
+        //     {
+        //         if (monster.actionMacros[i] == null) break;
 
-                if (monster.actionMacros[i].Execute()) break;
-                else { monster.target = null; }
-            }
-            else { monster.target = null; }
-        }  
+        //         if (monster.actionMacros[i].Execute()) break;
+        //         else { monster.target = null; }
+        //     }
+        //     else { monster.target = null; }
+        // }  
     }
 
     // public void SetMacroSize(int size){ 
@@ -44,13 +48,13 @@ public class Monster_GFX : GFX
         monster.anim.SetFloat("MoveSpeed", monster.nav.velocity.sqrMagnitude);
     }
 
-    protected override void LookTarget()
-    {
-        if (monster.target != null && monster.target != monster)
-        {
-            monster.transform.LookAt(monster.target.transform);
-        }
-    }
+    // protected override void LookTarget()
+    // {
+    //     if (monster.target != null && monster.target != monster)
+    //     {
+    //         monster.transform.LookAt(monster.target.transform);
+    //     }
+    // }
 
      //// Animation Event 함수 ////
     void OnAttack() { monster.attackCommand.Attack(); }

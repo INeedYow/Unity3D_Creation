@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class ActionMacro : BattleMacro
 {
-    public abstract bool Execute();
+    public abstract bool IsReady();
+    public abstract void Execute(Character target);
 }

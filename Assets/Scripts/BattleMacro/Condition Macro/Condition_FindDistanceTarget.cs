@@ -23,13 +23,10 @@ public class Condition_FindDistanceTarget : ConditionMacro
         DungeonManager.instance.onWaveEnd -= OffBattle;  
     }
 
-    public override bool IsSatisfy(bool hasChange)
+    public override bool IsSatisfy()
     {  
-        //if (null == owner.target) { FindTarget(); }
-        
-        if (hasChange)FindTarget(); //t수정
-        
-        return isSatisfy;
+        if (target != null) return true;
+        return false;
     }
 
     public void OnBattle() { InvokeRepeating("FindTarget", 0f, 0.2f); }
@@ -47,16 +44,14 @@ public class Condition_FindDistanceTarget : ConditionMacro
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
                     if (m_sqrValue <= m_sqrDist)
                     {
-                        owner.target = ch;
-                        isSatisfy = true;
+                        target = ch;
                     }
                 }
                 else{   // value 이하
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
                     if (m_sqrValue >= m_sqrDist)
                     {
-                        owner.target = ch;
-                        isSatisfy = true;
+                        target = ch;
                     }
                 }
             }
@@ -71,20 +66,17 @@ public class Condition_FindDistanceTarget : ConditionMacro
                     //Debug.Log("sqrDist : " + m_sqrDist + " / sqrValue : " + m_sqrValue);
                     if (m_sqrValue <= m_sqrDist)
                     {
-                        owner.target = ch;
-                        isSatisfy = true;
+                        target = ch;
                     }
                 }
                 else{   // value 이하
                     m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
                     if (m_sqrValue >= m_sqrDist)
                     {
-                        owner.target = ch;
-                        isSatisfy = true;
+                        target = ch;
                     }
                 }
             }
         }
-        isSatisfy = false;
     }
 }

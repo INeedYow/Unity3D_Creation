@@ -8,37 +8,60 @@ public class Hero_GFX : GFX
     bool hasChange;
 
     private void Start() { repeat = MacroManager.instance.maxMacroCount; }
-    new protected void OnEnable() { 
-        base.OnEnable();
-        hero.isStop = true; 
+    // new protected void OnEnable() { 
+    //     base.OnEnable();
+    //     hero.isStop = true; 
+    // }
+
+    private void OnEnable() {
+        hero.isStop = true;
     }
 
-    // 조건 매크로 체크해서 아닌 경우 target null 만들어서 다음 조건에서 타겟 찾도록
-    // 액션 매크로 역시 아니여서 다음 매크로로 넘어가는 경우 target null 만들어줘서 다음 조건에서 다시 찾도록
+    
     void Update()
     {
         if (hero.isDead || hero.isStop) return;
 
         for (int i = 0; i < repeat; i++)
-        {
-            if (hero.conditionMacros[i] == null) continue;
-
-            if (hero.prevMacro != i) {  // 이전 매크로 저장, 비교
-                hasChange = true;
-                hero.onMacroChangeGetIndex?.Invoke(i);  
-                hero.prevMacro = i;
-            }
-            else{ hasChange = false; }
-
-            if (hero.conditionMacros[i].IsSatisfy(hasChange))
-            {   
-                if (hero.actionMacros[i] == null) continue;
+        {   //Debug.Log(i);
+            if (hero.actionMacros[i] == null) continue;
+            //Debug.Log("AM isReady()");
+            if (hero.actionMacros[i].IsReady())
+            {   //Debug.Log("AM isReady() true");
+                if (hero.conditionMacros[i] == null) continue;
+                //Debug.Log("AM isSatisfy()");
+                if (hero.conditionMacros[i].IsSatisfy())
+                {   //Debug.Log("AM isSatisfy() true");
+                    hero.onMacroChangeGetIndex?.Invoke(i);
+                    hero.actionMacros[i].Execute(hero.conditionMacros[i].GetTarget());
+                    break;
+                }
                 
-                if (hero.actionMacros[i].Execute()) { break; }
-                //else { hero.target = null; }
             }
-            //else { hero.target = null; }
         }
+
+
+        // 타겟이 action 매크로 진행 중간에 바뀌는 현상 발생
+        // for (int i = 0; i < repeat; i++)
+        // {
+        //     if (hero.conditionMacros[i] == null) continue;
+
+        //     if (hero.prevMacro != i) {  // 이전 매크로 저장, 비교
+        //         hasChange = true;
+        //         hero.onMacroChangeGetIndex?.Invoke(i);  
+        //         hero.prevMacro = i;
+        //     }
+        //     else{ hasChange = false; }
+
+        //     if (hero.conditionMacros[i].IsSatisfy(hasChange))
+        //     {   
+        //         if (hero.actionMacros[i] == null) continue;
+                
+        //         if (hero.actionMacros[i].Execute()) { break; }
+        //         //else { hero.target = null; }
+        //     }
+        //     //else { hero.target = null; }
+        // }
     }
 
     private void FixedUpdate() {
@@ -50,13 +73,13 @@ public class Hero_GFX : GFX
         hero.anim.SetFloat("MoveSpeed", hero.nav.velocity.sqrMagnitude);
     }
 
-    protected override void LookTarget()
-    {
-        if (hero.target != null && hero.target != hero)
-        {
-            hero.transform.LookAt(hero.target.transform);
-        }
-    }
+    // protected override void LookTarget()
+    // {
+    //     if (hero.target != null && hero.target != hero)
+    //     {
+    //         hero.transform.LookAt(hero.target.transform);
+    //     }
+    // }
 
     //// Animation Event 함수들 ////
     void OnAttack() { hero.attackCommand.Attack(); }

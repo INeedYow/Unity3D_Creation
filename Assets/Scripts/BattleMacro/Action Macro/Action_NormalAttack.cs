@@ -5,26 +5,25 @@ using UnityEngine;
 
 public class Action_NormalAttack : ActionMacro
 {
-    public override bool Execute(){ //Debug.Log("normal att");
+
+    public override bool IsReady()
+    {
+        return true;
+    }
+    
+    public override void Execute(Character target){ //Debug.Log("normal att");
         
-        if (owner.target == null) return false;
-        // {   
-        //     if (owner.eGroup == EGroup.Hero){
-        //         owner.target = DungeonManager.instance.curDungeon.GetRandMonster();
-        //         if (owner.target == null) return false;
-        //     }
-        //     else { return false; }
-        // }
+        if (target == null) return;
         
-        if (owner.IsTargetInRange(owner.attackRange))
+        if (owner.IsTargetInRange(target, owner.attackRange))
         {   
             if (!owner.nav.isStopped)
             { owner.nav.isStopped = true; }
-            owner.AttackInit();
+            owner.AttackInit(target);
         }
         else{   
-            owner.Move(owner.target.transform.position);
+            owner.MoveToTarget(target);
         }
-        return true;
+
     }
 }

@@ -83,7 +83,7 @@ public class Dungeon : MonoBehaviour
         DungeonManager.instance.BattleEnd();
     }
 
-    void ClearDungeon(){   
+    void ClearDungeon(){   Debug.Log("clear DG");
         // TODO 
         m_gold += rewardData.gold_clear;
         m_exp += rewardData.exp_clear;

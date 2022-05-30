@@ -111,8 +111,6 @@ public class DungeonManager : MonoBehaviour
         bar = ObjectPool.instance.GetHpBar(false);
         bar.SetOwner(monster);
 
-        Debug.Log("buffs.count" + monster.buffs.Count);
-
         dungeonUI.SetCount(curDungeon.curMonsterCount);
     }
 

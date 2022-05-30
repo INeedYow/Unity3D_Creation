@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class SkillObj_TargetAttack : SkillObject
 {
-    IDamagable target;
+    IDamagable m_target;
 
     public override void Works()
     {
-        if (skill.owner.target == null) return;
+        if (skill.target == null) return;
         
-        target = skill.owner.target.GetComponent<IDamagable>();
+        m_target = skill.target.GetComponent<IDamagable>();
 
         for (int i = 0; i < data.count; i++)
         {
-            if (target == null) { FinishWorks(); }
+            if (m_target == null) { FinishWorks(); }
 
             if (data.isMagic)
             {
-                target.Damaged(
+                m_target.Damaged(
                     data.powerRatio * skill.owner.magicDamage,
                     skill.owner.powerRate,
                     skill.owner,
@@ -27,7 +27,7 @@ public class SkillObj_TargetAttack : SkillObject
             }
             else
             {   
-                target.Damaged(
+                m_target.Damaged(
                     data.powerRatio * skill.owner.curDamage,
                     skill.owner.powerRate,
                     skill.owner,
@@ -35,9 +35,9 @@ public class SkillObj_TargetAttack : SkillObject
                 );
             }
         }
-        if (skill.owner.target != null) 
-            AddBuff(skill.owner.target);
+        
+        if (skill.target != null) AddBuff(skill.target);
             
-        target = null;
+        m_target = null;
     }
 }

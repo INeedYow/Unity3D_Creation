@@ -6,20 +6,23 @@ public class SkillCommand_Targeting : SkillCommand
 {
     public SkillCommand_Targeting(Skill skill) : base(skill){}
    
-    public override bool Use()
+    public override void Use()
     {
-        if (isUsing) return true;
+        if (isUsing) return;
 
-        if (Time.time < lastSkillTime + skill.data.cooldown || skill.owner.target == null) return false;
+        if (skill.target == null) return;
 
-        if (!skill.owner.IsTargetInRange(skill.data.skillRange)) { 
-            skill.owner.MoveToTarget();
-            return true;
+        if (!skill.owner.IsTargetInRange(skill.target, skill.data.skillRange)) 
+        { 
+            skill.owner.MoveToTarget(skill.target);
+        }
+        else
+        {
+            if (!skill.owner.nav.isStopped) { skill.owner.nav.isStopped = true; }
+
+            isUsing = true;
+            skill.owner.anim.SetBool(string.Format("Skill {0}", skill.ID), true);
         }
         
-        if (!skill.owner.nav.isStopped) { skill.owner.nav.isStopped = true; }
-        isUsing = true;
-        skill.owner.anim.SetBool(string.Format("Skill {0}", skill.ID), true);
-        return true;
     }
 }

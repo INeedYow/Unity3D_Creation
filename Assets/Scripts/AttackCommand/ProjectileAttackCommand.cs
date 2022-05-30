@@ -11,8 +11,7 @@ public class ProjectileAttackCommand : AttackCommand
 
     public override void Attack()
     {   
-        //Debug.Log(string.Format("proj att()"));
-        if (null == owner.target) return;
+        if (null == target) return;
 
         proj = null;
         
@@ -20,7 +19,7 @@ public class ProjectileAttackCommand : AttackCommand
 
         if (null == proj) return;
         proj.transform.position = owner.projectileTF.position;
-        proj.Launch(owner.target, owner, owner.curDamage, owner.powerRate, owner.aoeRange);
+        proj.Launch(target, owner, owner.curDamage, owner.powerRate, owner.aoeRange);
         //Debug.Log(string.Format("proj target : {0}" ,owner.target));
     }
 }

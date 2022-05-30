@@ -9,6 +9,7 @@ public class Condition_Self : ConditionMacro
     public EInfo eInfo;
     public EType eType;
     [Tooltip("HpRate")] [Range(0f, 100f)] public float value;
+    bool m_isSatisfy;
     
     private void Start() {
         if (eInfo == EInfo.HP){
@@ -20,21 +21,21 @@ public class Condition_Self : ConditionMacro
         owner.onHpChange -= UpdateHp;
     }
 
-    public override bool IsSatisfy(bool hasChange){
+    public override bool IsSatisfy(){
+        target = owner;
         if (eInfo == EInfo.None)
         {
-            owner.target = owner;
             return true;
         }
         else{
-           return isSatisfy;
+           return m_isSatisfy;
         }
     }
 
     void UpdateHp(){
         switch (eType){
-        case EType.Lower:   isSatisfy = owner.curHp / owner.maxHp * 100f <= value; break;
-        case EType.Higher:    isSatisfy = owner.curHp / owner.maxHp * 100f >= value; break;
+        case EType.Lower:       m_isSatisfy = owner.curHp / owner.maxHp * 100f <= value; break;
+        case EType.Higher:      m_isSatisfy = owner.curHp / owner.maxHp * 100f >= value; break;
         }
     }
 }

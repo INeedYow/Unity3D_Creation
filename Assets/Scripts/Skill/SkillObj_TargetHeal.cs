@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class SkillObj_TargetHeal : SkillObject
 {
-    IDamagable target;
+    IDamagable m_target;
     public override void Works()
     {
-        if (skill.owner.target != null)
-        { target = skill.owner.target.GetComponent<IDamagable>(); }
+        if (skill.target != null)
+        { m_target = skill.target.GetComponent<IDamagable>(); }
 
         for (int i = 0; i < data.count; i++)
         {
-            if (target == null) break;
+            if (m_target == null) break;
             
-            target.Healed(data.powerRatio * skill.owner.magicDamage);
+            m_target.Healed(data.powerRatio * skill.owner.magicDamage);
         }
 
-        if (skill.owner.target != null) 
-            AddBuff(skill.owner.target);
+        if (skill.target != null) 
+            AddBuff(skill.target);
             
-        target = null;
+        m_target = null;
     }
 }

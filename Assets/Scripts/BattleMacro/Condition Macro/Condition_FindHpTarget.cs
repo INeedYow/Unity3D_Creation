@@ -10,31 +10,24 @@ public class Condition_FindHpTarget : ConditionMacro
     [Range(0f, 100f)] public float value;
 
     bool m_hasAnyHpChange;
+    bool m_isSatisfy;
 
     private void OnEnable()     { DungeonManager.instance.onChangeAnyHP += AnyHpChange; }
     private void OnDisable()    { DungeonManager.instance.onChangeAnyHP -= AnyHpChange; }
     
     void AnyHpChange() { m_hasAnyHpChange = true; }
 
-    public override bool IsSatisfy(bool hasChange){
-        //처음 들어올 때 target null 돼서 들어오니까 검사, 타겟 죽어서 없는 등의 경우에도 검사
-        //Debug.Log("IsSatisfy() owner.target " + owner.target);
-        //if (owner.target == null)   { return FindTarget(); }
-
-        //매크로 변경 시 검사
-        if (hasChange) return FindTarget();
-        //누군가의 체력 변경이 일어나면 다시 검사
-        else if (m_hasAnyHpChange)  { return FindTarget(); }
-        //Debug.Log("Find" + owner.target);
-        
-        //그럼에도 null 이면 조건에 부합X
-        if (owner.target == null)   { return false; }
-        else                        { return true; }
+    public override bool IsSatisfy()
+    {   //누군가의 체력 변경이 일어나면 다시 검사
+        if (m_hasAnyHpChange)  { m_isSatisfy = FindTarget(); }
+    
+        return m_isSatisfy;
     }
 
     bool FindTarget()
     {
         m_hasAnyHpChange = false;
+        
         if (eTargetGroup == EGroup.Hero)
         {   // 아군
             foreach (Character ch in PartyManager.instance.heroParty)
@@ -44,14 +37,14 @@ public class Condition_FindHpTarget : ConditionMacro
                 {   // value 이상
                     if (ch.curHp / ch.maxHp * 100f >= value)
                     {
-                        owner.target = ch;  
+                        target = ch;  
                         return true;
                     }
                 }
                 else{   // value 이하
                     if (ch.curHp / ch.maxHp * 100f <= value)
                     {
-                        owner.target = ch;  
+                        target = ch;  
                         return true;
                     }
                 }
@@ -65,20 +58,19 @@ public class Condition_FindHpTarget : ConditionMacro
                 {   // value 이상
                     if (ch.curHp / ch.maxHp * 100f >= value)
                     {
-                        owner.target = ch;  
+                        target = ch;  
                         return true;
                     }
                 }
                 else{   // value 이하
                     if (ch.curHp / ch.maxHp * 100f <= value)
                     {
-                        owner.target = ch;  
+                        target = ch;  
                         return true;
                     }
                 }
             }
         }
-        
         return false;
     }
 }

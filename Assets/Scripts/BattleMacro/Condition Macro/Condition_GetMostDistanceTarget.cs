@@ -7,37 +7,32 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     [Tooltip("Least : 최소 / Most : 최대")]
     public EMost eMost;
     public EGroup eTargetGroup;
-    Character m_target;
     float m_value;
     float m_sqrDist;
 
     private void OnEnable() {   // 웨이브 진행 중에만 거리 검사하도록.(isStop과 별개로 Invoke는 돌지 않나?)
-        //DungeonManager.instance.onWaveStart += OnBattle; 
-        //DungeonManager.instance.onWaveEnd += OffBattle;  
+        DungeonManager.instance.onWaveStart += OnBattle; 
+        DungeonManager.instance.onWaveEnd += OffBattle;  
     }
     private void OnDisable() {   
-        //DungeonManager.instance.onWaveStart -= OnBattle; 
-        //DungeonManager.instance.onWaveEnd -= OffBattle;  
+        DungeonManager.instance.onWaveStart -= OnBattle; 
+        DungeonManager.instance.onWaveEnd -= OffBattle;  
     }
 
-    public override bool IsSatisfy(bool hasChange){  
-        //if (null == owner.target) 
-        //{
-        GetTarget(); 
-        //}
-        
+    public override bool IsSatisfy(){  
+        if (target == null) FindTarget();
         return true;
     }
 
-    //public void OnBattle() { InvokeRepeating("GetTarget", 0f, 0.2f); }
-    //public void OffBattle() { CancelInvoke("GetTarget"); }
+    public void OnBattle() { InvokeRepeating("FindTarget", 0f, 0.2f); }
+    public void OffBattle() { CancelInvoke("FindTarget"); }
     
-    void GetTarget()
+    void FindTarget()
     {   //Debug.Log("get dist target()");
        if (eTargetGroup == EGroup.Hero)
         {   // 아군
-            m_target = PartyManager.instance.GetAliveHero();
-            if (m_target == null) return;
+            target = PartyManager.instance.GetAliveHero();
+            if (target == null) return;
             
             if (eMost == EMost.Least)
             {   // 최소
@@ -49,7 +44,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                     if (m_value > m_sqrDist)
                     {
                         m_value = m_sqrDist;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
@@ -62,14 +57,14 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                     if (m_value  < m_sqrDist)
                     {
                         m_value = m_sqrDist;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
         }
         else{   // 적군
-           m_target = DungeonManager.instance.curDungeon.GetAliveMonster();
-            if (m_target == null) return;
+           target = DungeonManager.instance.curDungeon.GetAliveMonster();
+            if (target == null) return;
             
             if (eMost == EMost.Least)
             {   // 최소
@@ -81,7 +76,7 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                     if (m_value > m_sqrDist)
                     {
                         m_value = m_sqrDist;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
@@ -94,11 +89,10 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
                     if (m_value < m_sqrDist)
                     {
                         m_value = m_sqrDist;
-                        m_target = ch;
+                        target = ch;
                     }
                 }
             }
         }
-        owner.target = m_target;
     }
 }

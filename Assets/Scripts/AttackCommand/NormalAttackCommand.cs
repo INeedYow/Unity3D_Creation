@@ -9,8 +9,9 @@ public class NormalAttackCommand : AttackCommand
 
     public override void Attack()
     {
-        if (null == owner.target) return;
-        IDamagable target = owner.target.GetComponent<IDamagable>();
+        if (null == target) return;
+
+        IDamagable tempTarget = target.GetComponent<IDamagable>();
         target?.Damaged(owner.curDamage, owner.powerRate, owner);
     }
 }

@@ -89,17 +89,17 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Transform projectileTF;                      // 투사체 생성 위치
     
     //[HideInInspector]
-    public Character targetForDebug;                    // 임시 디버그용
-    Character _target;
-    public Character target{
-        get { return _target; } 
-        set { 
-            //if (_target != value && eGroup == EGroup.Hero) Debug.Log(string.Format("_T, value : {0}, {1}" , _target, value));
-            _target = value;        targetForDebug = _target;
-            if (null != _target)
-            { _target.onDeadGetThis += TargetDead; }
-        }
-    }      
+    //public Character targetForDebug;                    // 임시 디버그용
+    //Character _target;
+    // public Character target{
+    //     get { return _target; } 
+    //     set { 
+    //         //if (_target != value && eGroup == EGroup.Hero) Debug.Log(string.Format("_T, value : {0}, {1}" , _target, value));
+    //         _target = value;        targetForDebug = _target;
+    //         if (null != _target)
+    //         { _target.onDeadGetThis += TargetDead; }
+    //     }
+    // }      
     [HideInInspector]   public NavMeshAgent nav;
 
     [Header("Macro")]
@@ -119,6 +119,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public bool isDead;
     protected int getDamage;
     protected Character attacker;
+    float m_lastMoveOrderTime;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -217,44 +218,64 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     public abstract void Death();
 
-    void TargetDead(Character character) { 
-        character.onDeadGetThis -= TargetDead;
-        target = null; 
-    }
+    // void TargetDead(Character character) { 
+    //     character.onDeadGetThis -= TargetDead;
+    //     target = null; 
+    // }
 
     public void Revive(float rateHp) {
         isDead = false;
         curHp = 0.01f * rateHp * maxHp;
     }
 
-    public void Move(Vector3 destPos)
-    {   
-        if(nav.velocity == Vector3.zero) 
-        { nav.SetDestination(destPos); }
-        if (nav.isStopped) 
-        { nav.isStopped = false; }
-    }
+    // public void Move(Vector3 destPos)
+    // {   
+    //     if(nav.velocity == Vector3.zero) 
+    //     { nav.SetDestination(destPos); }
+    //     if (nav.isStopped) 
+    //     { nav.isStopped = false; }
+    // }
 
-    public void AttackInit(){          
+    public void AttackInit(Character target){          
         if (Time.time < lastAttackTime + attackDelay) return;
         lastAttackTime = Time.time;
+        attackCommand.SetTarget(target);
         anim.SetTrigger("Attack");      
+
     }
 
-    public bool IsTargetInRange(float range)
-    {   //Debug.Log("isTargetInRange()");
-        if (target == null) return false;
-        //Debug.Log(string.Format("target pos : {0} // my pos : {1} // rng : {2}", target.transform.position, transform.position, range));
-        return (target.transform.position - transform.position).sqrMagnitude <= range * range;
-    }
-
-    public void MoveToTarget(){
+    public void MoveToTarget(Character target)
+    {
         if (target == null) return;
-        if (nav.velocity == Vector3.zero)
-        { nav.SetDestination(target.transform.position); }
-        if (nav.isStopped) 
-        { nav.isStopped = false; }
+        
+        if (Time.time < m_lastMoveOrderTime + 0.2f) return;
+
+        nav.SetDestination(target.transform.position);
+        if (nav.isStopped) nav.isStopped = false;
     }
+
+    public bool IsTargetInRange(Character target, float range)
+    {
+        if (target == null) return false;
+
+        return (target.transform.position - transform.position).sqrMagnitude <= range * range;
+
+    }
+
+    // public bool IsTargetInRange(float range)
+    // {   //Debug.Log("isTargetInRange()");
+    //     if (target == null) return false;
+    //     //Debug.Log(string.Format("target pos : {0} // my pos : {1} // rng : {2}", target.transform.position, transform.position, range));
+    //     return (target.transform.position - transform.position).sqrMagnitude <= range * range;
+    // }
+
+    // public void MoveToTarget(){
+    //     if (target == null) return;
+    //     if (nav.velocity == Vector3.zero)
+    //     { nav.SetDestination(target.transform.position); }
+    //     if (nav.isStopped) 
+    //     { nav.isStopped = false; }
+    // }
 
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, attackRange);
