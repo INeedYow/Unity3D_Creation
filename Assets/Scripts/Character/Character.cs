@@ -72,14 +72,29 @@ public abstract class Character : MonoBehaviour, IDamagable
             _buffStun = value; 
             if (_buffStun > 0.1f)
             {
-                anim.SetBool("IsStuned", true); 
+                anim.SetBool("IsStuned", true);
+                
+                if (m_stunEff == null)
+                {
+                    m_stunEff = ObjectPool.instance.GetEffect((int)EEffect.Stun);
+                    m_stunEff.transform.SetParent(transform);
+                    m_stunEff.transform.position = HpBarTF.position;
+                }
             }
             else{
                 _buffStun = 0f;
                 anim.SetBool("IsStuned", false);
+
+                if (m_stunEff != null)
+                {
+                    m_stunEff.Return();
+                    m_stunEff = null;
+                }
+               
             }
         }
     }
+    Effect m_stunEff;
 
     float _buffFrozen = 0f;
     public float buffFrozen {
@@ -131,8 +146,8 @@ public abstract class Character : MonoBehaviour, IDamagable
     public bool isStop;    
     //[HideInInspector] 
     public bool isDead;
+    public Character attacker;
     protected int getDamage;
-    protected Character attacker;
     float m_lastMoveOrderTime;
     // Vector3 defaultScale;
 
@@ -258,11 +273,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     }
 
     public void MoveToTarget(Character target)
-    {
+    {   if (eGroup == EGroup.Monster) Debug.Log("?");
         if (target == null) return;
-        
+        if (eGroup == EGroup.Monster) Debug.Log("??");
         if (Time.time < m_lastMoveOrderTime + 0.2f) return;
-
+        if (eGroup == EGroup.Monster) Debug.Log("???");
         nav.SetDestination(target.transform.position);
         m_lastMoveOrderTime = Time.time;
         if (nav.isStopped) nav.isStopped = false;

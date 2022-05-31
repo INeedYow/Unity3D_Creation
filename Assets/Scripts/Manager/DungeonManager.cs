@@ -30,6 +30,7 @@ public class DungeonManager : MonoBehaviour
     [Space(10f)] [Header("Monster prfSkill")]
     public Skill prfSporeSkill;
     public Skill prfPollenSkill;
+    public Skill prfPlantSkill;
 
 
     HpBar bar;

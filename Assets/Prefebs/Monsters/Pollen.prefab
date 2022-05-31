@@ -55,7 +55,7 @@ MonoBehaviour:
   eGroup: 0
   curHp: 110
   maxHp: 110
-  minDamage: 2
+  minDamage: 3
   maxDamage: 3
   magicDamage: 12
   lastAttackTime: 0
@@ -81,6 +81,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
+  attacker: {fileID: 0}
   monsGFX: {fileID: 737870179668048130}
   macrosParent: {fileID: 2655124685966103536}
 --- !u!195 &591605913937238156
@@ -348,7 +349,7 @@ GameObject:
   - component: {fileID: 7757524215508020092}
   - component: {fileID: 737870179668048130}
   m_Layer: 0
-  m_Name: Pollen
+  m_Name: Pollen_GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -25,10 +25,10 @@ public class Monster : Character
         switch (eMonster)
         {
             case EMonster.RedSlime: 
-            case EMonster.BlueSlime: monster.attackCommand = new NormalAttackCommand(monster); break;
+            case EMonster.BlueSlime:        monster.attackCommand = new NormalAttackCommand(monster); break;
 
 
-            case EMonster.Spore:     monster.attackCommand = new NormalAttackCommand(monster);
+            case EMonster.Spore:            monster.attackCommand = new NormalAttackCommand(monster);
             {   // 초기화 필요
                 monster.skills = new Skill[1];
                 monster.skills[0] = Instantiate(DungeonManager.instance.prfSporeSkill, monster.transform);
@@ -36,13 +36,31 @@ public class Monster : Character
                 break;
             }
 
-            case EMonster.Pollen:    monster.attackCommand = new NormalAttackCommand(monster);
+            case EMonster.Pollen:           monster.attackCommand = new NormalAttackCommand(monster);
             {
                 monster.skills = new Skill[1];
                 monster.skills[0] = Instantiate(DungeonManager.instance.prfPollenSkill, monster.transform);
                 monster.skills[0].Init(monster, 1);
                 break;
             }
+
+            case EMonster.Plant:            monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfPlantSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
+                break;
+            }
+
+            case EMonster.OddPlant:        monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfPlantSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
+                break;
+            }
+
+
         }
         // Macro
         monster.SetMacro();

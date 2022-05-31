@@ -16,7 +16,7 @@ public class Buff_Frozen : Buff
         //
         ratio = buffRatio;
         dura = duration;
-        target.buffFrozen -= ratio;
+        target.buffFrozen += ratio;
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -34,7 +34,7 @@ public class Buff_Frozen : Buff
     {   //Debug.Log("finish");
         if (target != null)
         {   
-            target.buffFrozen += ratio; 
+            target.buffFrozen -= ratio; 
             target.buffs.Remove(this);
         }
 

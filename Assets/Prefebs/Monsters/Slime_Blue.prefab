@@ -552,11 +552,11 @@ MonoBehaviour:
   eGroup: 1
   curHp: 130
   maxHp: 130
-  minDamage: 3
+  minDamage: 2
   maxDamage: 3
   magicDamage: 0
   lastAttackTime: 0
-  attackDelay: 1.8
+  attackDelay: 2
   attackRange: 4
   aoeRange: 0
   moveSpeed: 11
@@ -578,6 +578,7 @@ MonoBehaviour:
   anim: {fileID: 864249744641415556}
   isStop: 0
   isDead: 0
+  attacker: {fileID: 0}
   monsGFX: {fileID: 6019308926277162015}
   macrosParent: {fileID: 7581125136836016520}
 --- !u!195 &2895821404007822466

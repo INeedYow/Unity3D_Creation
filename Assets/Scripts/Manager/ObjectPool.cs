@@ -7,7 +7,7 @@ public enum EProjectile {
     ArcherArrow, SlowArrow, YellowMarble, CurseArrow, 
 }
 public enum EMonster { 
-    RedSlime, BlueSlime, Spore, Pollen, 
+    RedSlime, BlueSlime, Spore, Pollen, Plant, OddPlant,
 }
 public enum ESkillObj {
     Single,
