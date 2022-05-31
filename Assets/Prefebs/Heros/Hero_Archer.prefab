@@ -1812,11 +1812,9 @@ MonoBehaviour:
   targetTF: {fileID: 7011910697539786449}
   HpBarTF: {fileID: 938162364103702889}
   projectileTF: {fileID: 4806247788938896005}
-  targetForDebug: {fileID: 0}
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
-  prevMacro: -1
   skills: []
   anim: {fileID: 0}
   isStop: 0
@@ -1839,7 +1837,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2192653559810952866}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 20
   avoidancePriority: 50

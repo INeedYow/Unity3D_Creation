@@ -35,6 +35,14 @@ public class Monster : Character
                 monster.skills[0].Init(monster, 1);
                 break;
             }
+
+            case EMonster.Pollen:    monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfPollenSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
+                break;
+            }
         }
         // Macro
         monster.SetMacro();
@@ -72,7 +80,6 @@ public class Monster : Character
     public override void Death(){
         //
         isDead = true;
-        ResetBuffs();
         onDeadGetThis?.Invoke(this);
         onDead?.Invoke();
         monsGFX.gameObject.SetActive(false);

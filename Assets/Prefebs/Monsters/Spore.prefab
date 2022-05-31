@@ -932,7 +932,7 @@ MonoBehaviour:
   attackDelay: 0.8
   attackRange: 5
   aoeRange: 0
-  moveSpeed: 8
+  moveSpeed: 9
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 1.5
@@ -944,7 +944,6 @@ MonoBehaviour:
   targetTF: {fileID: 2632091679261891676}
   HpBarTF: {fileID: 6405710229451659556}
   projectileTF: {fileID: 1901804239235766634}
-  targetForDebug: {fileID: 0}
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
@@ -972,10 +971,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  m_ObstacleAvoidanceType: 1
 --- !u!65 &3089399605762287566
 BoxCollider:
   m_ObjectHideFlags: 0

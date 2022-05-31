@@ -100,7 +100,6 @@ public class Hero : Character
     public override void Death()
     {
         isDead = true;
-        ResetBuffs();
         onDeadGetThis?.Invoke(this);
         onDead?.Invoke();
         heroGFX.gameObject.SetActive(false);

@@ -16,41 +16,45 @@ public class Buff_Armor : Buff
         //
         dura = duration;
         target.buffArmor += ratio;
+
         DungeonManager.instance.onChangeAnyArmor?.Invoke();
+        target.onDead += Remove;
 
-        // Effect effect = ObjectPool.instance.GetEffect((int)EEffect.Buff_ArmorInit);
-        // effect.transform.position = target.targetTF.position;
-        // effect.SetDuration(1f);
-
-        effect = ObjectPool.instance.GetEffect((int)EEffect.Buff_ArmorInit);
-        effect.transform.position = target.targetTF.position;
-        effect.SetDuration(1f);
-
-        //Invoke("Finish", duration);
         StartCoroutine("Timer");
     }
 
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(dura);
+
+        Finish();
+    }
+
     public override void Finish()
-    {   //
+    {   
         if (target != null)
-        {
-            target.buffArmor -= ratio;
+        {   
+            target.buffArmor -= ratio; 
             target.buffs.Remove(this);
         }
         
-        effect.Return();
         DungeonManager.instance.onChangeAnyArmor?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
     
-    IEnumerator Timer()
+    public override void Remove()
     {
-        while (dura > 0f)
-        {
-            dura -= Time.deltaTime;
-            yield return null;
+        StopCoroutine("Timer");
+
+        if (target != null)
+        {   
+            target.buffArmor -= ratio;
+            target.buffs.Remove(this);
+            target = null;
         }
-        Finish();
+        
+        DungeonManager.instance.onChangeAnyArmor?.Invoke();
+        ObjectPool.instance.ReturnObj(this.gameObject);
     }
 
 }

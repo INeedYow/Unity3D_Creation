@@ -16,16 +16,35 @@ public abstract class RuneSkillCursor : MonoBehaviour
 
     private void Update() 
     {
+        CursorPosition();
+        CheckInput();
+    }
+
+    void CursorPosition()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {  
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("RunePlane")))
+            {   
+                // rune = hit.transform.GetComponent<Rune>();
+                // rune?.OnLeftClicked();
+            }
+        }
+    }
+
+    void CheckInput()
+    {
         if (Input.GetMouseButtonDown(0))
         {  
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             // TODO LayerMask
-            if (Physics.Raycast(ray, out hit, 300f, LayerMask.GetMask("RunePlane")))
+            if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("RunePlane")))
             {   
                 Execute();
             }
         }
-
         else if (Input.GetMouseButtonDown(1))
         {   
             // 취소

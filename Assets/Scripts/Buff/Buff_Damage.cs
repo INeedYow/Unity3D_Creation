@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,15 +14,45 @@ public class Buff_Damage : Buff
         ratio = buffRatio;
 
         //
+        dura = duration;
         target.buffDamage += ratio;
-        DungeonManager.instance.onChangeAnyPower?.Invoke();
 
-        Invoke("Finish", duration);
+        DungeonManager.instance.onChangeAnyPower?.Invoke();
+        target.onDead += Remove;
+
+        StartCoroutine("Timer");
     }
 
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(dura);
+
+        Finish();
+    }
+    
     public override void Finish()
-    {   //
-        target.buffDamage -= ratio;
+    {   
+        if (target != null)
+        {   
+            target.buffDamage -= ratio; 
+            target.buffs.Remove(this);
+        }
+        
+        DungeonManager.instance.onChangeAnyPower?.Invoke();
+        ObjectPool.instance.ReturnObj(this.gameObject);
+    }
+
+    public override void Remove()
+    {
+        StopCoroutine("Timer");
+
+        if (target != null)
+        {   
+            target.buffDamage -= ratio;
+            target.buffs.Remove(this);
+            target = null;
+        }
+        
         DungeonManager.instance.onChangeAnyPower?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }

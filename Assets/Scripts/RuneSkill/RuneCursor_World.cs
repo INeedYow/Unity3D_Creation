@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuneCursor_World : RuneCursor
+public class RuneCursor_World : RuneSkillCursor
 {
     [Header("Skill Object")]
     public SkillObject skillObj;
@@ -16,30 +16,8 @@ public class RuneCursor_World : RuneCursor
         this.value = value;
     }
 
-    private void Update() 
+    protected override void Execute()
     {
-        //CursorPosition();
-        CheckInput();
-    }
-
-    void CursorPosition()
-    {
-        //transform.position = ;
-    }
-
-    void CheckInput()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {   // 좌클릭
-            skillObj.gameObject.SetActive(true);
-        }
-
-        else
-        {   // 우클릭
-            
-        }
-         
-
-        
+        skillObj.gameObject.SetActive(true);
     }
 }

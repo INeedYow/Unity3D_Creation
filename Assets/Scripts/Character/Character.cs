@@ -55,14 +55,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     // buffs
     public LinkedList<Buff> buffs;              
     public float buffDamage = 1f;
-    //public float buffArmor = 0f;
-    float _buffArmor = 0f;
-    public float buffArmor { 
-        get { return _buffArmor; }
-        set {
-            _buffArmor = value; Debug.Log("buffArmor : " + _buffArmor + " / isDead : " + isDead);
-        }
-    }
+    public float buffArmor = 0f;
 
     float _buffSpeed = 1f;
     public float buffSpeed {
@@ -81,10 +74,24 @@ public abstract class Character : MonoBehaviour, IDamagable
             {
                 anim.SetBool("IsStuned", true); 
             }
-            else
-            {
+            else{
                 _buffStun = 0f;
                 anim.SetBool("IsStuned", false);
+            }
+        }
+    }
+
+    float _buffFrozen = 0f;
+    public float buffFrozen {
+        get { return _buffFrozen; }
+        set {
+            _buffFrozen = value;
+            if (_buffFrozen > 0.1f)
+            {
+                anim.speed = Mathf.Clamp(2f * (1f - _buffFrozen), 0f, 2f);
+            }
+            else{
+                anim.speed = 2f;
             }
         }
     }
@@ -179,9 +186,9 @@ public abstract class Character : MonoBehaviour, IDamagable
             DungeonManager.instance.onChangeAnyHP?.Invoke();
             if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);    // 원거리의 경우 죽었을 수 있어서
 
-            Effect eff = ObjectPool.instance.GetEffect((int)EEffect.Blood);
-            eff.transform.position = targetTF.position;
-            eff.SetDuration(1f);
+            Effect blood = ObjectPool.instance.GetEffect((int)EEffect.Blood);
+            blood.transform.position = targetTF.position;
+            blood.SetDuration(1f);
 
             //Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
         }
@@ -199,15 +206,19 @@ public abstract class Character : MonoBehaviour, IDamagable
                 DungeonManager.instance.onChangeAnyHP?.Invoke();
                 if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);
                 
-                Effect eff = ObjectPool.instance.GetEffect((int)EEffect.Blood);
-                eff.transform.position = targetTF.position;
-                eff.SetDuration(1f);
+                Effect blood = ObjectPool.instance.GetEffect((int)EEffect.Blood);
+                blood.transform.position = targetTF.position;
+                blood.SetDuration(1f);
 
                 //Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
         }
 
-        attacker = newAttacker; 
+        if (newAttacker != null)
+        {
+            attacker = newAttacker; 
+        }
+        
         ShowDamageText(getDamage, isMagic);
         if (curHp <= 0) {
             Death();
@@ -238,27 +249,12 @@ public abstract class Character : MonoBehaviour, IDamagable
         curHp = 0.01f * rateHp * maxHp;
     }
 
-    public void ResetBuffs()
-    {
-        if (buffs.Count == 0) return;
-        
-        // foreach (Buff buff in buffs)
-        // {
-        //     buff.Remove();
-        // }
-        buffs.Clear();
-
-        buffStun = 0f;
-        buffArmor = 0f;
-        buffDamage = 1f;
-    }
-
-    public void AttackInit(Character target){          
+    public void AttackInit(Character target)
+    {          
         if (Time.time < lastAttackTime + attackDelay) return;
         lastAttackTime = Time.time;
         attackCommand.SetTarget(target);
         anim.SetTrigger("Attack");      
-
     }
 
     public void MoveToTarget(Character target)
@@ -268,6 +264,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (Time.time < m_lastMoveOrderTime + 0.2f) return;
 
         nav.SetDestination(target.transform.position);
+        m_lastMoveOrderTime = Time.time;
         if (nav.isStopped) nav.isStopped = false;
     }
 

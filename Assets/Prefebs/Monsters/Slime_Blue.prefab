@@ -566,11 +566,11 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0
   magicArmorRate: 0
-  buffs: []
+  buffDamage: 1
+  buffArmor: 0
   targetTF: {fileID: 8754851228247374062}
   HpBarTF: {fileID: 614659201945477236}
   projectileTF: {fileID: 0}
-  targetForDebug: {fileID: 0}
   nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
@@ -589,7 +589,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5625915739511746793}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 100
   avoidancePriority: 50

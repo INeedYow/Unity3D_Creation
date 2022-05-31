@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,23 +17,24 @@ public class Buff_Speed : Buff
         //
         dura = duration;
         target.buffSpeed += ratio;
+
         DungeonManager.instance.onChangeAnySpeed?.Invoke();
+        target.onDead += Remove;
 
-        // Effect effect = ObjectPool.instance.GetEffect((int)EEffect.Buff_ArmorInit);
-        // effect.transform.position = target.targetTF.position;
-        // effect.SetDuration(1f);
-
-        // effect = ObjectPool.instance.GetEffect((int)EEffect.Buff_ArmorInit);
-        // effect.transform.position = target.targetTF.position;
-        // effect.SetDuration(1f);
-
-        //Invoke("Finish", duration);
         StartCoroutine("Timer");
+    }
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(dura);
+
+        Finish();
     }
 
     public override void Finish()
     {   //
-        if (target != null){
+        if (target != null)
+        {
             target.buffSpeed -= ratio;
             target.buffs.Remove(this);
         }
@@ -43,13 +44,18 @@ public class Buff_Speed : Buff
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 
-    IEnumerator Timer()
+    public override void Remove()
     {
-        while (dura > 0f)
-        {
-            dura -= 0.1f;
-            yield return new WaitForSeconds(0.1f);
+        StopCoroutine("Timer");
+
+        if (target != null)
+        {   
+            target.buffSpeed -= ratio;
+            target.buffs.Remove(this);
+            target = null;
         }
-        Finish();
+        
+        DungeonManager.instance.onChangeAnySpeed?.Invoke();
+        ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

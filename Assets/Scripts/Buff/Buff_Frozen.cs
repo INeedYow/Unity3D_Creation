@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,36 +14,44 @@ public class Buff_Frozen : Buff
         target.buffs.AddLast(this);
         
         //
+        ratio = buffRatio;
         dura = duration;
-        target.anim.speed = 0f;
+        target.buffFrozen -= ratio;
+        target.onDead += Remove;
 
-        effect = ObjectPool.instance.GetEffect((int)eEffect);
-        effect.transform.SetParent(target.transform);
-        effect.transform.position = target.HpBarTF.position;
-        target.onDead += Finish;
-
-        //Invoke("Finish", duration);
         StartCoroutine("Timer");
     }
+    
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(dura);
+
+        Finish();
+    }
+
 
     public override void Finish()
     {   //Debug.Log("finish");
         if (target != null)
-        {
-            target.buffStun -= ratio; 
+        {   
+            target.buffFrozen += ratio; 
             target.buffs.Remove(this);
         }
-        effect.Return();
+
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 
-    IEnumerator Timer()
+    public override void Remove()
     {
-        while (dura > 0f)
-        {
-            dura -= 0.1f;
-            yield return new WaitForSeconds(0.1f);
+        StopCoroutine("Timer");
+
+        if (target != null)
+        {   
+            target.buffFrozen -= ratio;
+            target.buffs.Remove(this);
+            target = null;
         }
-        Finish();
+        
+        ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

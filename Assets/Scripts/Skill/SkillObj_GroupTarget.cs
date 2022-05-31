@@ -14,7 +14,18 @@ public class SkillObj_GroupTarget : SkillObject
             {
                 if (ch.isDead || ch.isStop) continue;
 
-                ch.Damaged(data.);
+                ch.Damaged(10, 1f, null, true);
+                AddBuff(ch);
+            }
+        }
+
+        else
+        {
+            foreach (Character ch in PartyManager.instance.heroParty)
+            {
+                if (ch.isDead || ch.isStop) continue;
+
+                ch.Damaged(10, 1f, null, true);
                 AddBuff(ch);
             }
         }

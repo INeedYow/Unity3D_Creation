@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,35 +14,41 @@ public class Buff_Stun : Buff
         
         //
         dura = duration;
-        target.buffStun += duration;
+        target.buffStun += dura;
 
-        effect = ObjectPool.instance.GetEffect((int)eEffect);
-        effect.transform.SetParent(target.transform);
-        effect.transform.position = target.HpBarTF.position;
-        target.onDead += Finish;
-
-        //Invoke("Finish", duration);
         StartCoroutine("Timer");
     }
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(dura);
+
+        Finish();
+    }
+
 
     public override void Finish()
     {   //Debug.Log("finish");
         if (target != null)
         {
-            target.buffStun -= ratio; 
+            target.buffStun -= dura; 
             target.buffs.Remove(this);
         }
-        effect.Return();
+
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 
-    IEnumerator Timer()
+    public override void Remove()
     {
-        while (dura > 0f)
-        {
-            dura -= 0.1f;
-            yield return new WaitForSeconds(0.1f);
+        StopCoroutine("Timer");
+
+        if (target != null)
+        {   
+            target.buffStun -= dura;
+            target.buffs.Remove(this);
+            target = null;
         }
-        Finish();
+        
+        ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }
