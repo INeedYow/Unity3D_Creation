@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuneCursor_SingleTarget : RuneCursor
+public class RuneCursor_World : RuneCursor
 {
     [Header("Skill Object")]
     public SkillObject skillObj;
 
-    [HideInInspector] public EGroup eTargetGroup;
+    //[HideInInspector] public EGroup eTargetGroup; // skillObj에 있음
     [HideInInspector] public float value;
 
     [SerializeField] // 디버그용
-    Character m_target;
-
-    public void SetCursor(EGroup eTargetGroup, float value)
+    public void SetCursor(float value)
     {
-        this.eTargetGroup = eTargetGroup;
         this.value = value;
     }
 
@@ -34,8 +31,6 @@ public class RuneCursor_SingleTarget : RuneCursor
     {
         if (Input.GetMouseButtonDown(0))
         {   // 좌클릭
-            if (m_target == null) return;
-
             skillObj.gameObject.SetActive(true);
         }
 
@@ -46,12 +41,5 @@ public class RuneCursor_SingleTarget : RuneCursor
          
 
         
-    }
-
-    private void OnTriggerEnter(Collider other) 
-    {   // TODO 타겟 포커싱 효과 주기
-        if (eTargetGroup == EGroup.Monster)
-        {
-        }
     }
 }

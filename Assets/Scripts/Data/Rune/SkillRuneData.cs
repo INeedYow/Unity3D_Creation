@@ -25,7 +25,9 @@ public class SkillRuneData : RuneData
     {
         // TODO 던전 RuneSkill UI 갱신, 플레이어 스킬 추가
                 
-        //PlayerManager.instance.RuneSkillUI.AddSkill(this);
+        // PlayerManager.instance.runeSkillUI.SetSkillUnit(
+        //     ID - 1,?
+        // );
     }
 
     public override void Release(int point)

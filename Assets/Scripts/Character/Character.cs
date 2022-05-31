@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public enum EBuff {
     None = -1,
     Armor, Damage, Speed,//Magic, MagicArmor, AttSpeed,
-    Stun,          
+    Stun, Frozen,
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -127,6 +127,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     protected int getDamage;
     protected Character attacker;
     float m_lastMoveOrderTime;
+    // Vector3 defaultScale;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -159,6 +160,8 @@ public abstract class Character : MonoBehaviour, IDamagable
         nav.angularSpeed = 360f;
         // 버프 배열 초기화 
         buffs = new LinkedList<Buff>();
+        
+        //defaultScale = GetComponent<Transform>().localScale;
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
@@ -250,14 +253,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         buffDamage = 1f;
     }
 
-    // public void Move(Vector3 destPos)
-    // {   
-    //     if(nav.velocity == Vector3.zero) 
-    //     { nav.SetDestination(destPos); }
-    //     if (nav.isStopped) 
-    //     { nav.isStopped = false; }
-    // }
-
     public void AttackInit(Character target){          
         if (Time.time < lastAttackTime + attackDelay) return;
         lastAttackTime = Time.time;
@@ -284,22 +279,18 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     }
 
-    // public bool IsTargetInRange(float range)
-    // {   //Debug.Log("isTargetInRange()");
-    //     if (target == null) return false;
-    //     //Debug.Log(string.Format("target pos : {0} // my pos : {1} // rng : {2}", target.transform.position, transform.position, range));
-    //     return (target.transform.position - transform.position).sqrMagnitude <= range * range;
-    // }
-
-    // public void MoveToTarget(){
-    //     if (target == null) return;
-    //     if (nav.velocity == Vector3.zero)
-    //     { nav.SetDestination(target.transform.position); }
-    //     if (nav.isStopped) 
-    //     { nav.isStopped = false; }
-    // }
-
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
+    //     private void OnMouseEnter() {
+    //     Debug.Log("OnMouseEnter" + name);
+    //     transform.localScale = new Vector3(3f, 3f, 3f);
+
+    // } 
+
+    // private void OnMouseExit() {
+    //     Debug.Log("OnMouseExit" + name);
+    //     transform.localScale = new Vector3(2f, 2f, 2f);
+    // }  
 }
