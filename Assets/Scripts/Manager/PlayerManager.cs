@@ -11,12 +11,13 @@ public class PlayerManager : MonoBehaviour
 
     [Header("UI")]
     public PlayerInfoUI playerInfoUI;
+    public RuneSkillUI runeSkillUI;     // 던전에서 사용할 UI
 
-    public GameObject statUI;
-    public GameObject skillUI;
 
     [Header("Rune Tree")]
     public RuneTree runeTree;
+    public GameObject skillUI;
+    public GameObject statUI;
 
     //
     public int maxLV    { get { return 25; } }
@@ -60,15 +61,16 @@ public class PlayerManager : MonoBehaviour
     void LevelUp(){ 
         LV++;                       
         curExp -= maxExp;          
-        maxExp += 75;           
+        maxExp += 0;           
         runeTree.point++;
 
         playerInfoUI.RenewLV(LV);
         playerInfoUI.RenewExp(curExp, maxExp);
+        runeTree.level.text = LV.ToString();
 
         onLevelUp?.Invoke(LV);
         
-        if (LV % 5 == 0){
+        if (LV % 5 == 1){
             PartyManager.instance.maxCount++;
             playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
         }

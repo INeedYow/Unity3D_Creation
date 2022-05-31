@@ -12,6 +12,7 @@ public class RuneTree : MonoBehaviour
 
     [Header("Skill")]
     public RuneSlot[] skillSlots = new RuneSlot[4];
+    public Text level;
 
     [Header("UI")]
     public RuneInfoUI infoUI;
@@ -28,8 +29,9 @@ public class RuneTree : MonoBehaviour
     private void Start() {
         Open();
         leftPoint.text = _point.ToString();
+        level.text = "1";
     }
-    
+
     void Open() { firstStem.Open(); }
 
     public void Apply()

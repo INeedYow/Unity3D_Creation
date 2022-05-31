@@ -4,12 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 public class RuneSkillUnit : MonoBehaviour
 {
-    //public RuneSkillData data;
+    public RuneSkill skill;
+
     public Image skillIcon;
     public Image cooldown;
+
+    public KeyCode keyCode;
 
     // public void RenewUI(RuneSkillData data)
     // {
 
     // }
+
+    private void Update() {
+        if (Input.GetKeyDown(keyCode))
+        {
+            skill.Use();
+        }
+    }
 }

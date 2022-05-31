@@ -52,11 +52,11 @@ public class RuneSlot : MonoBehaviour
 
         if (m_select == 1)
         {
-            skillData1.Apply(1);
+            //skillData1.Apply(1);
         }
         else if (m_select == 2)
         {
-            skillData2.Apply(1);
+            //skillData2.Apply(1);
         }
     }
 

@@ -5,22 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillRuneData" , menuName = "RuneData/SkillRuneData")]
 public class SkillRuneData : RuneData
 {
-    //public ESkillObj eSkillObj;
-    public Skill skill;
+    public RuneCursor cursor;
 
     
     [Tooltip("몇 번째 스킬 칸에 들어갈 스킬인지")]
     [Range(1,4)] public int ID;  
 
     public override int GetMax()
-    {
+    {   // 원래랑 기획이 달라져서 스킬은 쿨타임, 데미지나 지속시간 같은 밸류값 보여주면 될 것 같음
         //TODO
         return 99;
     }
     public override bool IsMax(int point)
     {
         // TODO
-        return false;
+        return true;
     }
     public override void Apply(int point)
     {

@@ -50,7 +50,7 @@ public class FloatingBlock : MonoBehaviour
     IEnumerator Falldown(){                
         curFloatSpeed = minFloatSpeed;
         while (m_defaultHeight < transform.position.y)
-        {   Debug.Log("Falldown") ;
+        {   
             transform.Translate(0f, -curFloatSpeed * Time.deltaTime, 0f);
             yield return null;
 
