@@ -39,7 +39,7 @@ public class RuneStem : MonoBehaviour
     }
 
     public void Open()
-    {
+    {   
         for (int i = 0; i < runes.Length; i++)
         {
             runes[i].button.interactable = true;
@@ -95,6 +95,7 @@ public class RuneStem : MonoBehaviour
             runes[i].Reset();
             runes[i].button.interactable = false;
         }
+
         usePoints = 0;
         isOpen = false;
 

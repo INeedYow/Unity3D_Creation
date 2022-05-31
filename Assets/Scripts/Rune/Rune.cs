@@ -12,10 +12,6 @@ public class Rune : MonoBehaviour
 
     public Text cur;
     public Text max;
-
-    private void Awake() {
-        button.interactable = false;
-    }
     
     private void Start() {
         if (stem == null) stem = GetComponentInParent<RuneStem>();
@@ -25,6 +21,7 @@ public class Rune : MonoBehaviour
 
     public void AddPoint()
     {
+        if (PlayerManager.instance.runeTree.point <= 0) return;
         if (data.IsMax(point)) return;
 
         point++;

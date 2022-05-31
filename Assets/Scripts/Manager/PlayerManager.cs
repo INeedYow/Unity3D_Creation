@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
+    public UnityAction<int> onLevelUp;
     public static PlayerManager instance { get; private set;}
 
 
     [Header("UI")]
     public PlayerInfoUI playerInfoUI;
-    // public RunePointUI runePointUI;
-    // public RuneInfoUI runeInfoUI;
+
     public GameObject statUI;
     public GameObject skillUI;
 
@@ -64,6 +65,8 @@ public class PlayerManager : MonoBehaviour
 
         playerInfoUI.RenewLV(LV);
         playerInfoUI.RenewExp(curExp, maxExp);
+
+        onLevelUp?.Invoke(LV);
         
         if (LV % 5 == 0){
             PartyManager.instance.maxCount++;
@@ -116,5 +119,36 @@ public class PlayerManager : MonoBehaviour
         skillUI.gameObject.SetActive(isEnter);
         statUI.gameObject.SetActive(isEnter);
         runeTree.infoUI.gameObject.SetActive(false);
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            AddExp(200);
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (DungeonManager.instance.curDungeon != null)
+            {
+                foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
+                {
+                    if (mon.isDead) continue;
+
+                    mon.anim.speed = 0f;
+                }
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (DungeonManager.instance.curDungeon != null)
+            {
+                foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
+                {
+                    if (mon.isDead) continue;
+
+                    mon.anim.speed = 2f;
+                }
+            }
+        }
     }
 }

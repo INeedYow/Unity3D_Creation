@@ -48,26 +48,7 @@ public class GameManager : MonoBehaviour
         instance = this; 
         Application.targetFrameRate = 60;   // 프레임
     }
-    
-    //private void Start() { InitUI(); }
 
-    // void InitUI(){
-        
-    // }
-    
-    // void LevelUp(){ 
-    //     LV++;                       
-    //     curExp -= maxExp;          
-    //     maxExp += 75;           
-    //     playerInfoUI.RenewLV(LV);
-    //     playerInfoUI.RenewExp(curExp, maxExp);
-        
-    //     if (LV % 5 == 0){
-    //         PartyManager.instance.maxCount++;
-    //         playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
-    //     }
-    //     if (LV == maxLV) curExp = maxExp;
-    // }
 
     public void ShowBattleInfoText(BattleInfoType infoType, Vector3 position, float value)
     {
