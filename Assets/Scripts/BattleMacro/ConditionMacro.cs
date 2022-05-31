@@ -7,7 +7,6 @@ public enum EMost { Least, Most };
 public enum EGroup { Hero, Monster };
 public abstract class ConditionMacro : BattleMacro
 {
-    //protected bool isSatisfy;
     Character _target;
     protected Character target{
         get { return _target; }

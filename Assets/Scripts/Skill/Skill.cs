@@ -14,11 +14,13 @@ public class Skill : MonoBehaviour
     public SkillObject skillObj;
 
     private void Awake() { SetCommand(); }
+
     void SetCommand(){ 
         if (data.skillRange > 0f)   { skillcommand = new SkillCommand_Targeting(this); }
         else                        { skillcommand = new SkillCommand_Instant(this); }
     }
     public bool IsReady() { return Time.time >= skillcommand.lastSkillTime + data.cooldown; }
+
     public void Use(Character target) { 
         this.target = target;
         skillcommand.Use();
@@ -27,6 +29,7 @@ public class Skill : MonoBehaviour
     public void Init(Character character, int id) { 
         owner = character; 
         ID = id; 
+        owner.onDead += FinishSKill;
     }
  
     public void FinishSKill(){                         

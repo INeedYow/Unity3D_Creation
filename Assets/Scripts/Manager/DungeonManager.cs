@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class DungeonManager : MonoBehaviour
 {   //
+    public UnityAction onSomeoneDead;
     public UnityAction onChangeAnyHP;
     public UnityAction onChangeAnyPower;
     public UnityAction onChangeAnyArmor;
@@ -130,4 +131,16 @@ public class DungeonManager : MonoBehaviour
     }
 
     //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); } // 현재 클릭하면 사라지게 해뒀음
+
+    public Monster GetAliveMonster()
+    {
+        foreach (Monster aliveMon in curDungeon.curMonsters)
+        {
+            if (!aliveMon.isDead && !aliveMon.isStop)
+            {
+                return aliveMon;
+            }
+        }
+        return null;
+    }
 }

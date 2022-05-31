@@ -88,7 +88,7 @@ public class PartyManager : MonoBehaviour
     {
         foreach (Hero aliveHero in heroParty)
         {
-            if (aliveHero.isDead == false)
+            if (!aliveHero.isDead && !aliveHero.isStop)
             {
                 return aliveHero;
             }

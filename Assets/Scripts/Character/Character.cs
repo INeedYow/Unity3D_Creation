@@ -194,7 +194,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         }
         else {
             if (IsDodge()) { 
-                GameManager.instance.ShowDodgeText(transform.position + Vector3.up * 5f);
+                GameManager.instance.ShowDodgeText(targetTF.position + Vector3.up * 3f);
             }
             else{
                 getDamage = Mathf.RoundToInt(damage * damageRate * (1f - armorRate - buffArmor));

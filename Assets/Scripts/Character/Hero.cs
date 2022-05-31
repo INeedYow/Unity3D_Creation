@@ -85,15 +85,15 @@ public class Hero : Character
     {   
         if (isHeal) {
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Hero_heal, transform.position + Vector3.up * 5f, damage );
+                BattleInfoType.Hero_heal, targetTF.position + Vector3.up * 3f, damage );
         }
         else if (isMagic){  // 피해 받았을 때 동작하기 때문에 InfoType enemy
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Monster_magic, transform.position + Vector3.up * 5f, damage );
+                BattleInfoType.Monster_magic, targetTF.position + Vector3.up * 3f, damage );
         }
         else{
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Monster_damage, transform.position + Vector3.up * 5f, damage );
+                BattleInfoType.Monster_damage, targetTF.position + Vector3.up * 3f, damage );
         }
     }
 
@@ -102,6 +102,7 @@ public class Hero : Character
         isDead = true;
         onDeadGetThis?.Invoke(this);
         onDead?.Invoke();
+        DungeonManager.instance.onSomeoneDead?.Invoke();
         heroGFX.gameObject.SetActive(false);
     }
 

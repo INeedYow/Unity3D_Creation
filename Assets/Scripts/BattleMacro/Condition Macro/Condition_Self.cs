@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EType { Lower, Higher, Equal, };      //  %
 public class Condition_Self : ConditionMacro
 {   
     public enum EInfo { None, HP };         // None : 항상 자기자신, HP : 자신의 체력
-    public enum EType { Lower, Higher };      //  %
     public EInfo eInfo;
     public EType eType;
     [Tooltip("HpRate")] [Range(0f, 100f)] public float value;
@@ -36,6 +36,7 @@ public class Condition_Self : ConditionMacro
         switch (eType){
         case EType.Lower:       m_isSatisfy = owner.curHp / owner.maxHp * 100f <= value; break;
         case EType.Higher:      m_isSatisfy = owner.curHp / owner.maxHp * 100f >= value; break;
+        case EType.Equal:       m_isSatisfy = Mathf.Approximately(owner.curHp / owner.maxHp * 100f, value); break;
         }
     }
 }

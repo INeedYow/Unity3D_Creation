@@ -13,7 +13,13 @@ public class Action_NormalAttack : ActionMacro
     
     public override void Execute(Character target){ //Debug.Log("normal att");
         
-        if (target == null) return;
+        if (target == null)
+        {
+            if (owner.eGroup == EGroup.Hero) { target = DungeonManager.instance.GetAliveMonster(); }
+            else { target = PartyManager.instance.GetAliveHero(); }
+            
+            if (target == null) return;
+        }
         
         if (owner.IsTargetInRange(target, owner.attackRange))
         {   

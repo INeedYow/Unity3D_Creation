@@ -65,15 +65,15 @@ public class Monster : Character
     {   
         if (isHeal) {
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Monster_heal, transform.position + Vector3.up * 5f, damage );
+                BattleInfoType.Monster_heal, targetTF.position + Vector3.up * 3f, damage );
         }
         else if (isMagic){  
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Hero_magic, transform.position + Vector3.up * 5f, damage );
+                BattleInfoType.Hero_magic, targetTF.position + Vector3.up * 3f, damage );
         }
         else{
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Hero_damage, transform.position + Vector3.up * 5f, damage );
+                BattleInfoType.Hero_damage, targetTF.position + Vector3.up * 3f, damage );
         }
     }
 
@@ -82,6 +82,7 @@ public class Monster : Character
         isDead = true;
         onDeadGetThis?.Invoke(this);
         onDead?.Invoke();
+        DungeonManager.instance.onSomeoneDead?.Invoke();
         monsGFX.gameObject.SetActive(false);
     }
 
