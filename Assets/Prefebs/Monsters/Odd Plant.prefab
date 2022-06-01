@@ -117,8 +117,8 @@ MonoBehaviour:
   name: OddPlant
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 230
-  maxHp: 230
+  curHp: 195
+  maxHp: 195
   minDamage: 3
   maxDamage: 4
   magicDamage: 0

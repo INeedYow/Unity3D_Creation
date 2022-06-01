@@ -48,7 +48,7 @@ public class RuneTree : MonoBehaviour
         firstStem.Release();
         
         for (int i = 0; i < skillSlots.Length; i++)
-        {   // 필요한가?
+        {   
             skillSlots[i].Release();
         }
     }

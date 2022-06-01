@@ -11,6 +11,10 @@ public class RuneSlot : MonoBehaviour
     public GameObject selectedLine1;
     public SkillRuneData skillData2;
     public GameObject selectedLine2;
+
+    public RuneSkillCursor skillCursor1;
+    public RuneSkillCursor skillCursor2;
+
     bool m_isOpen = false;
     int m_select = 0;       // 0 : 선택 안 함 , 1 : 위 , 2 : 아래
 
@@ -20,7 +24,7 @@ public class RuneSlot : MonoBehaviour
     }
 
     void IsLevelEnough(int lv)
-    {
+    {   Debug.Log("Lv : " + lv + " / reqLv : " + requireLv);
         if (lv >= requireLv)
         {
             m_isOpen = true;
@@ -29,9 +33,9 @@ public class RuneSlot : MonoBehaviour
     }
 
     public void Selected(int selectNumber)
-    {
-        if (!m_isOpen) return;
-
+    {   
+        if (!m_isOpen) return;      Debug.Log("selected : " + selectNumber);
+        
         m_select = selectNumber;
         
         if (m_select == 1)
@@ -47,22 +51,33 @@ public class RuneSlot : MonoBehaviour
     }
 
     public void Apply()
-    {
+    {   
         if (!m_isOpen) return;
-
+        
         if (m_select == 1)
         {
-            //skillData1.Apply(1);
+            skillData1?.Apply(1);
+            PlayerManager.instance.runeSkillUI.SetCursor(skillData1.ID, skillCursor1);
         }
         else if (m_select == 2)
         {
-            //skillData2.Apply(1);
+            skillData2?.Apply(1);
+            PlayerManager.instance.runeSkillUI.SetCursor(skillData2.ID, skillCursor2);
         }
     }
 
     public void Release()
     {
-        // 
+        if (!m_isOpen) return;
+
+        if (m_select == 1)
+        {
+            skillData1?.Release(1);
+        }
+        else if (m_select == 2)
+        {
+            skillData2?.Release(1);
+        }
     }
 
 }

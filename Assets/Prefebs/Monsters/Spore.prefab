@@ -923,8 +923,8 @@ MonoBehaviour:
   name: Spore
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 180
-  maxHp: 180
+  curHp: 150
+  maxHp: 150
   minDamage: 3
   maxDamage: 3
   magicDamage: 0

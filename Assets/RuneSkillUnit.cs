@@ -4,19 +4,50 @@ using UnityEngine;
 using UnityEngine.UI;
 public class RuneSkillUnit : MonoBehaviour
 {
-    [Header("Cooldown")]
     public int maxCooldown;
     public int curCooldown;
+    public RuneSkillCursor cursor;
     
     [Header("UI")]
     public Image skillIconImg;
     public Image cooldownImg;
 
-    public RuneSkillCursor cursor;
+    [Header("KeyCode")]
     public KeyCode keyCode;
 
     private void Start() {
         DungeonManager.instance.onWaveEnd += EndWave;
+    }
+
+    public void SetInfo(SkillRuneData data)
+    {   
+        if (data == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        curCooldown = 0;
+        maxCooldown = data.cooldown;
+
+        cooldownImg.sprite = data.icon;
+        RenewCooldown();
+    }
+
+    public void SetCursor(RuneSkillCursor skillCursor)
+    {
+        if (cursor != skillCursor)
+        {
+            if (cursor != null)
+            {   // 이전 등록된 거 있으면 제거
+                cursor.onWorks -= SetCooldown;
+            }
+            cursor = skillCursor;
+            cursor.onWorks += SetCooldown;
+        }
+
+        cursor.skillObj.gameObject.SetActive(false);
+        cursor.gameObject.SetActive(false);
     }
 
     void EndWave() { 
@@ -28,20 +59,25 @@ public class RuneSkillUnit : MonoBehaviour
     }
 
     void RenewCooldown()
-    { cooldownImg.fillAmount = (float)curCooldown / (float)maxCooldown; }
+    { cooldownImg.fillAmount = 1 - (float)curCooldown / (float)maxCooldown; }
+
+    void SetCooldown()
+    {
+        curCooldown = maxCooldown;
+        RenewCooldown();
+    }
 
 
-    private void Update() {
+    private void Update() 
+    {  
         if (Input.GetKeyDown(keyCode))
-        {
+        {   
             if (curCooldown > 0)
             {   // 쿨타임
-                
+                Debug.Log("cursor cooldown : " + curCooldown);
             }
-            else{
+            else{   Debug.Log("cursor active");
                 cursor.gameObject.SetActive(true);
-                curCooldown = maxCooldown;
-                //RenewCooldown(); // 취소한 경우는 X 이벤트로 받거나 호출
             }
         }
     }

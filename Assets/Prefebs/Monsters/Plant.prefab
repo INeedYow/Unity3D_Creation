@@ -1865,8 +1865,8 @@ MonoBehaviour:
   name: Plant
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 140
-  maxHp: 140
+  curHp: 100
+  maxHp: 100
   minDamage: 2
   maxDamage: 3
   magicDamage: 0

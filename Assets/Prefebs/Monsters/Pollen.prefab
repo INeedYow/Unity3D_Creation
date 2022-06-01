@@ -53,8 +53,8 @@ MonoBehaviour:
   name: Pollen
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 110
-  maxHp: 110
+  curHp: 90
+  maxHp: 90
   minDamage: 3
   maxDamage: 3
   magicDamage: 12

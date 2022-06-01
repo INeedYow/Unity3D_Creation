@@ -16,5 +16,5 @@ MonoBehaviour:
   description: "\uBE60\uC29D"
   icon: {fileID: 0}
   requireLevel: 0
-  cooldown: 6
-  skillRange: 9
+  cooldown: 4
+  skillRange: 11

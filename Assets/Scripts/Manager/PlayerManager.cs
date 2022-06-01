@@ -126,7 +126,10 @@ public class PlayerManager : MonoBehaviour
     private void Update() {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            AddExp(200);
+            //for (int i = 0; i < 20; i++)
+            //{
+                AddExp(maxExp);
+           // }
         }
         else if (Input.GetKeyDown(KeyCode.P))
         {

@@ -1,16 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RuneSkillUI : MonoBehaviour
 {
     public RuneSkillUnit[] skillUnits = new RuneSkillUnit[4];
 
+    //public Image cursorImage;
 
 
-
-    public void SetSkillUnit(int number, bool isOn)
+    public void SetSkillUnit(int IdNumber, bool isOn)
     {
-        skillUnits[number].gameObject.SetActive(isOn);
+        if (skillUnits[IdNumber - 1].gameObject.activeSelf == isOn) return;
+
+        skillUnits[IdNumber - 1].gameObject.SetActive(isOn);
+    }
+
+    public void SetInfo(int IdNumber, SkillRuneData skillRuneData)
+    {   //Debug.Log(IdNumber - 1);
+        SetSkillUnit(IdNumber, true);
+        skillUnits[IdNumber - 1].SetInfo(skillRuneData);
+    }
+
+    public void SetCursor(int IdNumber, RuneSkillCursor skillCursor)
+    {
+        SetSkillUnit(IdNumber, true);
+        skillUnits[IdNumber - 1].SetCursor(skillCursor);
     }
 }
+ 

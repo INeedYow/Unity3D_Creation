@@ -33,6 +33,9 @@ public class DungeonManager : MonoBehaviour
     public Skill prfPlantSkill;
     public Skill[] prfChewerSkills = new Skill[2];
 
+    [Space(4f)] [Header("ETC")]
+    public Transform worldEffectTF;
+
 
     HpBar bar;
 
@@ -53,10 +56,11 @@ public class DungeonManager : MonoBehaviour
         curDungeon = listDungeon[index];
         curDungeon.gameObject.SetActive(true);
         PartyManager.instance.EnterDungeon();
-        PlayerManager.instance.runeTree.Apply();
 
         // UI
         dungeonUI.gameObject.SetActive(true);
+        PlayerManager.instance.runeTree.Apply();        // dungeonUI 보다 늦게 적용해야지 UI Active 돼서 적용 됨
+
         dungeonUI.Init(curDungeon);
 
         GameManager.instance.EnterDungeon(true);

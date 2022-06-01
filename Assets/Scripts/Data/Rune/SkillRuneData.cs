@@ -5,16 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillRuneData" , menuName = "RuneData/SkillRuneData")]
 public class SkillRuneData : RuneData
 {
-    public RuneCursor cursor;
+    public Sprite icon;
+    [Range(1, 100)]public int cooldown;
 
     
     [Tooltip("몇 번째 스킬 칸에 들어갈 스킬인지")]
     [Range(1,4)] public int ID;  
 
     public override int GetMax()
-    {   // 원래랑 기획이 달라져서 스킬은 쿨타임, 데미지나 지속시간 같은 밸류값 보여주면 될 것 같음
-        //TODO
-        return 99;
+    {   // 포인트 투자 개념이 아니라 스킬 선택 하는 식으로 해서 함수이름이나 의도가 안 맞아짐
+        return cooldown;
     }
     public override bool IsMax(int point)
     {
@@ -22,17 +22,13 @@ public class SkillRuneData : RuneData
         return true;
     }
     public override void Apply(int point)
-    {
-        // TODO 던전 RuneSkill UI 갱신, 플레이어 스킬 추가
-                
-        // PlayerManager.instance.runeSkillUI.SetSkillUnit(
-        //     ID - 1,?
-        // );
+    {  
+        PlayerManager.instance.runeSkillUI.SetInfo(ID, this);
     }
 
     public override void Release(int point)
     {
-        // 딱히 해줄 건 없는 듯?
+        PlayerManager.instance.runeSkillUI.SetSkillUnit(ID, false);
     }
 
     public override int GetCurValue(int point)

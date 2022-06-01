@@ -5,16 +5,26 @@ using UnityEngine;
 public class Effect : MonoBehaviour
 {
     public ParticleSystem particle;
+    [Range(0f, 10f)]public float duration;
 
     private void Awake() {
         if (particle == null) particle = GetComponentInParent<ParticleSystem>();
     }
 
-    private void OnEnable() { particle.Play(); }
+    private void OnEnable() 
+    { 
+        particle.Play(); 
+
+        if (duration != 0f)
+        {
+            SetDuration(duration);
+        }
+    }
+
     public void SetDuration(float duration) { Invoke("Return", duration); }
 
     public void Return()
-    {   // 지속시간 동안 반복하는 이펙트랑 한 번 재생하고 사라지면 되는 이펙트 어떻게 구분해서 사용
+    {   
         particle.Stop();
         ObjectPool.instance.ReturnObj(gameObject);
     }

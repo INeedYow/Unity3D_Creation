@@ -101,9 +101,9 @@ public abstract class Character : MonoBehaviour, IDamagable
         get { return _buffFrozen; }
         set {
             _buffFrozen = value;
-            if (_buffFrozen > 0.1f)
+            if (_buffFrozen < -0.01f)
             {
-                anim.speed = Mathf.Clamp(2f * (1f - _buffFrozen), 0f, 2f);
+                anim.speed = Mathf.Clamp(2f * (1f + _buffFrozen), 0f, 2f);
             }
             else{
                 anim.speed = 2f;
@@ -188,7 +188,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
     {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리vs마법
-        if (isDead) return; // 범위 공격에서 GetComponent<Character>해서 예외처리하는 것보다 이게 좋아보여서
+        if (isDead || isStop) return; // 범위 공격에서 GetComponent<Character>해서 예외처리하는 것보다 이게 좋아보임
 
         if (isMagic)
         {   
@@ -203,7 +203,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
             Effect blood = ObjectPool.instance.GetEffect((int)EEffect.Blood);
             blood.transform.position = targetTF.position;
-            blood.SetDuration(1f);
+            //blood.SetDuration(1f);
 
             //Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
         }
@@ -223,33 +223,47 @@ public abstract class Character : MonoBehaviour, IDamagable
                 
                 Effect blood = ObjectPool.instance.GetEffect((int)EEffect.Blood);
                 blood.transform.position = targetTF.position;
-                blood.SetDuration(1f);
+                //blood.SetDuration(1f);
 
                 //Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
         }
 
-        if (newAttacker != null)
-        {
-            attacker = newAttacker; 
-        }
+        if (newAttacker != null) { attacker = newAttacker; }
         
         ShowDamageText(getDamage, isMagic);
-        if (curHp <= 0) {
+
+        if (curHp <= 0) 
+        {
             Death();
             if (attacker != null) attacker.onKill?.Invoke();
         }
     }
 
+    public void Damaged(float damage)
+    {
+        if (isDead || isStop) return;
+
+        curHp -= damage;
+        onHpChange?.Invoke();
+        DungeonManager.instance.onChangeAnyHP?.Invoke();
+
+        ShowDamageText(damage);
+
+        if (curHp <= 0) { Death(); }
+    }
 
     public void Healed(float heal)
     {
+        if (isDead || isStop) return;
+
         curHp += heal;
         if (curHp > maxHp) curHp = maxHp;
         onHpChange?.Invoke();
         DungeonManager.instance.onChangeAnyHP?.Invoke();
         ShowDamageText(heal, true, true);
     }
+
     protected abstract void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false);
 
     public abstract void Death();

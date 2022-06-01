@@ -29,7 +29,7 @@ public class Skill : MonoBehaviour
     public void Init(Character character, int id) { 
         owner = character; 
         ID = id; 
-        owner.onDead += FinishSKill;
+        owner.onDead += FinishSKill;        // 안 해주면 스킬 도중에 죽고 재활용할 때 고장남
     }
  
     public void FinishSKill(){                         

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c701f02225f0f4bbb1f75185280617, type: 3}
   m_Name: MSkillObjectData_Chewer_2
   m_EditorClassIdentifier: 
-  isMagic: 0
-  powerRatio: 2
+  isMagic: 1
+  powerRatio: 1.5
   area: 0
   count: 1
   eBuff: -1
