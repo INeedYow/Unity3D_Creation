@@ -7,7 +7,7 @@ public class Skill : MonoBehaviour
     public SkillData data;
 
     [HideInInspector] public Character  owner;
-    [HideInInspector] public int ID;                    // 몇 번째 스킬인지
+    [HideInInspector] public int ID;                    // 몇 번째 스킬인지(1~4)
     public SkillCommand     skillcommand;               // 스킬 사용 입력받았을 때 명령(즉시 사용, 타겟에게 이동 후 사용 등)
     public Character target;
 

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum EProjectile { 
-    ArcherArrow, SlowArrow, YellowMarble, CurseArrow, 
+    ArcherArrow, SlowArrow, YellowMarble, CurseArrow, ChewerSkill,
 }
 public enum EMonster { 
-    RedSlime, BlueSlime, Spore, Pollen, Plant, OddPlant,
+    RedSlime, BlueSlime, Spore, Pollen, Plant, OddPlant, PlantChewer, 
 }
 public enum ESkillObj {
     Single,

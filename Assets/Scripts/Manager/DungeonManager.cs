@@ -31,6 +31,7 @@ public class DungeonManager : MonoBehaviour
     public Skill prfSporeSkill;
     public Skill prfPollenSkill;
     public Skill prfPlantSkill;
+    public Skill[] prfChewerSkills = new Skill[2];
 
 
     HpBar bar;

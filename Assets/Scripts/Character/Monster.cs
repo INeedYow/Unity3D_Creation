@@ -25,14 +25,15 @@ public class Monster : Character
         switch (eMonster)
         {
             case EMonster.RedSlime: 
-            case EMonster.BlueSlime:        monster.attackCommand = new NormalAttackCommand(monster); break;
+            case EMonster.BlueSlime:
+            case EMonster.Plant:            monster.attackCommand = new NormalAttackCommand(monster); break;
 
 
             case EMonster.Spore:            monster.attackCommand = new NormalAttackCommand(monster);
-            {   // 초기화 필요
+            {   
                 monster.skills = new Skill[1];
                 monster.skills[0] = Instantiate(DungeonManager.instance.prfSporeSkill, monster.transform);
-                monster.skills[0].Init(monster, 1);
+                monster.skills[0].Init(monster, 1);     // Init(스킬 owner , 몇 번째 스킬(1 ~ 4))
                 break;
             }
 
@@ -40,14 +41,6 @@ public class Monster : Character
             {
                 monster.skills = new Skill[1];
                 monster.skills[0] = Instantiate(DungeonManager.instance.prfPollenSkill, monster.transform);
-                monster.skills[0].Init(monster, 1);
-                break;
-            }
-
-            case EMonster.Plant:            monster.attackCommand = new NormalAttackCommand(monster);
-            {
-                monster.skills = new Skill[1];
-                monster.skills[0] = Instantiate(DungeonManager.instance.prfPlantSkill, monster.transform);
                 monster.skills[0].Init(monster, 1);
                 break;
             }
@@ -60,8 +53,22 @@ public class Monster : Character
                 break;
             }
 
+            case EMonster.PlantChewer:     monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[2];
+
+                for (int i = 0; i < DungeonManager.instance.prfChewerSkills.Length; i++)
+                {
+                    monster.skills[i] = Instantiate(DungeonManager.instance.prfChewerSkills[i], monster.transform);
+                    monster.skills[i].Init(monster, i + 1);
+                }
+                break;
+            }
+
 
         }
+
+
         // Macro
         monster.SetMacro();
         return monster;

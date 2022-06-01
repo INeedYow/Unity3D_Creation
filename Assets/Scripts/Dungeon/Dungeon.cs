@@ -9,6 +9,8 @@ public class Dungeon : MonoBehaviour
     public int curWave;
     public int maxWave;
 
+    [Header("Wave")]
+    public Transform waveParent;
     public List<Wave> waves;            
     public List<Monster> curMonsters;       // isDead ture, false 모두 갖고 있음
     public int curMonsterCount;             // isDead false인 몬스터의 수
@@ -30,11 +32,19 @@ public class Dungeon : MonoBehaviour
     }
 
     void Init(){
+        // 스폰 지역 초기화
         spawnTransforms = new Transform[spawnAreaParent.childCount];
         for (int i = 0; i < spawnTransforms.Length; i++)
         {
             spawnTransforms[i] = spawnAreaParent.GetChild(i);
         }
+
+        // Waves 자식으로 넣어준 wave로 웨이브 배열 초기화
+        for (int i = 0; i < waveParent.childCount; i++)
+        {
+            waves.Add(waveParent.GetChild(i).GetComponent<Wave>());
+        }
+
         maxWave = waves.Count;
     }
 

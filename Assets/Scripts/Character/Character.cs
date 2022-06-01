@@ -273,11 +273,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     }
 
     public void MoveToTarget(Character target)
-    {   if (eGroup == EGroup.Monster) Debug.Log("?");
+    {   
         if (target == null) return;
-        if (eGroup == EGroup.Monster) Debug.Log("??");
+        
         if (Time.time < m_lastMoveOrderTime + 0.2f) return;
-        if (eGroup == EGroup.Monster) Debug.Log("???");
+        
         nav.SetDestination(target.transform.position);
         m_lastMoveOrderTime = Time.time;
         if (nav.isStopped) nav.isStopped = false;

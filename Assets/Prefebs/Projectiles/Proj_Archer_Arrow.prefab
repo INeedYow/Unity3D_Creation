@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eTargetGroup: 1
-  speed: 20
+  speed: 24
   isMagic: 0
-  remainTime: 0.75
+  remainTime: 0.5
 --- !u!96 &2935928314665768627
 TrailRenderer:
   serializedVersion: 2
