@@ -36,6 +36,7 @@ public class DungeonManager : MonoBehaviour
     [Space(10f)] [Header("Rewards")]
     [SerializeField] int m_exp;
     [SerializeField] int m_gold;
+    [SerializeField] List<EquipItemData> m_item;
 
     [Space(4f)] [Header("ETC")]
     public Transform worldEffectTF;
@@ -82,6 +83,12 @@ public class DungeonManager : MonoBehaviour
         m_exp += exp;
     }
 
+    public void AddReward(EquipItemData itemData)
+    {
+        m_item.Add(itemData);
+    }
+
+
     void GiveReward()
     {
         resultUI.beforeExp = PlayerManager.instance.curExp;
@@ -89,8 +96,26 @@ public class DungeonManager : MonoBehaviour
         PlayerManager.instance.AddGold(m_gold);
         PlayerManager.instance.AddExp(m_exp);
         PartyManager.instance.AddExp(m_exp);
+        
+        for (int i = 0; i < m_item.Count; i++)
+        {
+            if (m_item[i] is WeaponItemData)
+            {
+                InventoryManager.instance.AddItem(m_item[i] as WeaponItemData);
+            }
+            else if (m_item[i] is ArmorItemData)
+            {
+                InventoryManager.instance.AddItem(m_item[i] as ArmorItemData);
+            }
+            else
+            {
+                InventoryManager.instance.AddItem(m_item[i] as AccessoryItemData);
+            }
+        }
+        
         m_gold = 0;
         m_exp = 0;
+        m_item.Clear();
     }
 
     void ShowResult()

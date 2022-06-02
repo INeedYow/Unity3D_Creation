@@ -56,6 +56,19 @@ public class Dungeon : MonoBehaviour
     void AddWaveReward()
     {
         DungeonManager.instance.AddReward(rewardData.GetWaveGold(), rewardData.GetWaveExp());
+        
+        if (curWave == maxWave)
+        {   Debug.Log("Add Accessory Reward");
+            DungeonManager.instance.AddReward(ItemManager.instance.GetRandAccessory());
+        }
+        else if (curWave % 5 == 0)
+        {
+            if (Random.Range(0, 10) < 9)
+            {   Debug.Log("Add Equip Reward");
+                DungeonManager.instance.AddReward(ItemManager.instance.GetRandEquipItem());
+            }
+            else{ Debug.Log("이게 꽝이 나오네"); }
+        }
     }
 
     void AddClearReward()
@@ -70,8 +83,8 @@ public class Dungeon : MonoBehaviour
         if (curMonsterCount <= 0)
         {   // 웨이브 클리어
             WaveEnd();
-            Invoke("WaveClear", 1f);
             AddWaveReward();
+            Invoke("WaveClear", 1f);
         }
     }
 

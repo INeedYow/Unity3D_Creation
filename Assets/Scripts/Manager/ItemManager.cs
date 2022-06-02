@@ -28,16 +28,12 @@ public class ItemManager : MonoBehaviour
 
     public EquipItemData GetRandEquipItem()
     {
-        int rand = Random.Range(0, items_equip.Count);
-
-        return items_equip[rand];
+        return items_equip[Random.Range(0, items_equip.Count)];
     }
 
     public EquipItemData GetRandAccessory()
     {
-        int rand = Random.Range(0, items_acce.Count);
-
-        return items_acce[rand];
+        return items_acce[Random.Range(0, items_acce.Count)];
     }
 
 }
