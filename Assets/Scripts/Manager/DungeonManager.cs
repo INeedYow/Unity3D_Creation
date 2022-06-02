@@ -73,8 +73,7 @@ public class DungeonManager : MonoBehaviour
 
     public void BattleEnd()
     {
-        GiveReward();
-        ShowResult();
+        ShowResultWave();
     }
 
     public void AddReward(int gold, int exp)
@@ -88,40 +87,78 @@ public class DungeonManager : MonoBehaviour
         m_item.Add(itemData);
     }
 
-
-    void GiveReward()
-    {
-        resultUI.beforeExp = PlayerManager.instance.curExp;
-        
-        PlayerManager.instance.AddGold(m_gold);
-        PlayerManager.instance.AddExp(m_exp);
-        PartyManager.instance.AddExp(m_exp);
-        
-        for (int i = 0; i < m_item.Count; i++)
-        {
-            if (m_item[i] is WeaponItemData)
-            {
-                InventoryManager.instance.AddItem(m_item[i] as WeaponItemData);
-            }
-            else if (m_item[i] is ArmorItemData)
-            {
-                InventoryManager.instance.AddItem(m_item[i] as ArmorItemData);
-            }
-            else
-            {
-                InventoryManager.instance.AddItem(m_item[i] as AccessoryItemData);
-            }
-        }
-        
-        m_gold = 0;
-        m_exp = 0;
-        m_item.Clear();
-    }
-
-    void ShowResult()
+    void ShowResultWave()
     {
         resultUI.gameObject.SetActive(true);
+        resultUI.waveBar.onFinishFill += ShowResultExp;
+        resultUI.waveBar.SetWaveBar(curDungeon.curWave - 1, curDungeon.maxWave);
     }
+
+    void ShowResultExp()
+    {   // hero 도 추가
+        resultUI.waveBar.onFinishFill -= ShowResultExp;
+        resultUI.playerExpBar.gameObject.SetActive(true);
+        resultUI.heroExpTray.gameObject.SetActive(true);
+        
+        StartCoroutine("GiveExp");
+    }
+
+    IEnumerator GiveExp()
+    {
+        float dura = 0f;
+        float gainExp;
+
+        while (dura < 1f)
+        {
+            gainExp = Time.deltaTime * m_exp;
+            PlayerManager.instance.AddExp((int)gainExp);
+            PartyManager.instance.AddExp((int)gainExp);
+            dura += Time.deltaTime;
+            yield return null;
+        }
+
+        ShowResultItem();
+    }
+
+    void ShowResultItem()
+    {
+        resultUI.itemTray.gameObject.SetActive(true);
+        resultUI.itemTray.onFinish += ShowExitButton;
+        resultUI.itemTray.ShowItem(m_item);
+    }
+
+    void ShowExitButton()
+    {
+        resultUI.exitBtn.gameObject.SetActive(true);
+    }
+
+
+    // void GiveReward()
+    // {
+    //     PlayerManager.instance.AddGold(m_gold);
+    //     PlayerManager.instance.AddExp(m_exp);
+    //     PartyManager.instance.AddExp(m_exp);
+        
+    //     for (int i = 0; i < m_item.Count; i++)
+    //     {
+    //         if (m_item[i] is WeaponItemData)
+    //         {
+    //             InventoryManager.instance.AddItem(m_item[i] as WeaponItemData);
+    //         }
+    //         else if (m_item[i] is ArmorItemData)
+    //         {
+    //             InventoryManager.instance.AddItem(m_item[i] as ArmorItemData);
+    //         }
+    //         else
+    //         {
+    //             InventoryManager.instance.AddItem(m_item[i] as AccessoryItemData);
+    //         }
+    //     }
+        
+    //     m_gold = 0;
+    //     m_exp = 0;
+    //     m_item.Clear();
+    // }
 
     public void Exit()  // 버튼 이벤트
     {

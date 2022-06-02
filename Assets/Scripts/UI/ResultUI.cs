@@ -6,65 +6,59 @@ using UnityEngine.UI;
 public class ResultUI : MonoBehaviour
 {
     [Header("bar")]
-    public ProgressBar waveBar;
-    public ProgressBar playerExpBar;
+    public Result_WaveBar waveBar;
+    public Result_ExpBar playerExpBar;
     //[Header("Hero Exp")]
-    //public HeroExpUnit
-    
-    public int beforeExp;
+    //public HeroExpTray
+    public GameObject heroExpTray;  // temp
+    [Header("Item")]
+    public Result_ItemTray itemTray;
+    public Button exitBtn;
 
     private void OnEnable() { Init(); }
-    private void OnDisable() {
-        TurnOnUI(false);
-    }
     
     void Init()
     {
-        TurnOnUI(false);
-        SetWave();
-    }
-
-    void TurnOnUI(bool isOn)
-    {
-        waveBar.gameObject.SetActive(isOn);
-        playerExpBar.gameObject.SetActive(isOn);
-    }
-
-    void SetWave()
-    {
         waveBar.gameObject.SetActive(true);
-        waveBar.onFinishFill += SetExp;
-
-        waveBar.SetBar(DungeonManager.instance.curDungeon.curWave - 1, DungeonManager.instance.curDungeon.maxWave);
+        playerExpBar.gameObject.SetActive(false);
+        heroExpTray.gameObject.SetActive(false);
+        itemTray.gameObject.SetActive(false);
+        exitBtn.gameObject.SetActive(false);
     }
-
-    void SetExp()
-    {   
-        waveBar.onFinishFill -= SetExp; 
-
-        playerExpBar.gameObject.SetActive(true);
-        playerExpBar.onFinishFill += SetHeroExp;
-
-        playerExpBar.SetBar(
-            PlayerManager.instance.curExp, 
-            PlayerManager.instance.maxExp, 
-            beforeExp / PlayerManager.instance.maxExp);
-
-        // playerExpBar.SetBar(beforeExp, PlayerManager.instance.curExp)
-
-        // playerExpBar.SetBar(PlayerManager.instance.curExp, 
-        //     PlayerManager.instance.curExp);// 
-    }
-
-    void SetHeroExp()
-    {
-        playerExpBar.onFinishFill -= SetExp; 
         
-    }
 
-    void SetItem()
-    {
+    // public void SetWave()
+    // {
+    //     waveBar.SetBar(DungeonManager.instance.curDungeon.curWave - 1, DungeonManager.instance.curDungeon.maxWave);
+    // }
 
-    }
+    // void SetExp()
+    // {   
+    //     waveBar.onFinishFill -= SetExp; 
+
+    //     playerExpBar.gameObject.SetActive(true);
+    //     playerExpBar.onFinishFill += SetHeroExp;
+
+    //     playerExpBar.SetBar(
+    //         PlayerManager.instance.curExp, 
+    //         PlayerManager.instance.maxExp, 
+    //         beforeExp / PlayerManager.instance.maxExp);
+
+    //     // playerExpBar.SetBar(beforeExp, PlayerManager.instance.curExp)
+
+    //     // playerExpBar.SetBar(PlayerManager.instance.curExp, 
+    //     //     PlayerManager.instance.curExp);// 
+    // }
+
+    // void SetHeroExp()
+    // {
+    //     playerExpBar.onFinishFill -= SetExp; 
+        
+    // }
+
+    // void SetItem()
+    // {
+
+    // }
     
 }
