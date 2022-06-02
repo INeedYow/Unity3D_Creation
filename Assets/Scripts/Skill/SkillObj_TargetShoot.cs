@@ -35,6 +35,19 @@ public class SkillObj_TargetShoot : SkillObject
                     skill.owner.powerRate,
                     data.area);
             }
+
+            if (data.eUserEffect != EEffect.None)
+            {   // effect에서 따라다닐지, 높이 등 정보 가지고 있음
+                eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                //eff.transform.position = skill.owner.transform.position;
+                eff.SetPosition(skill.owner);
+            }
+
+            if (data.eTargetEffect != EEffect.None)
+            {
+                eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                eff.SetPosition(skill.target);
+            }
         
         }
        

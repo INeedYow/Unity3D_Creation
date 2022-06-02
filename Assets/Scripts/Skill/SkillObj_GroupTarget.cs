@@ -16,6 +16,18 @@ public class SkillObj_GroupTarget : SkillObject
 
                 //ch.Damaged(10, 1f, null, true);
                 //AddBuff(ch);
+
+                // if (data.eUserEffect != EEffect.None)
+                // {
+                //     eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                //     eff.transform.position = skill.owner.transform.position;
+                // }
+
+                // if (data.eTargetEffect != EEffect.None)
+                // {
+                //     eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                //     m_target.Effected(eff);
+                // }
             }
         }
 
@@ -27,6 +39,18 @@ public class SkillObj_GroupTarget : SkillObject
 
                 //ch.Damaged(10, 1f, null, true);
                 //AddBuff(ch);
+
+                // if (data.eUserEffect != EEffect.None)
+                // {
+                //     eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                //     eff.transform.position = skill.owner.transform.position;
+                // }
+
+                // if (data.eTargetEffect != EEffect.None)
+                // {
+                //     eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                //     m_target.Effected(eff);
+                // }
             }
         }
     }

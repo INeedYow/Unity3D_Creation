@@ -35,6 +35,7 @@ public class Buff_Damage : Buff
         if (target != null)
         {   
             target.buffDamage -= ratio; 
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
         }
         
@@ -49,6 +50,7 @@ public class Buff_Damage : Buff
         if (target != null)
         {   
             target.buffDamage -= ratio;
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
         }

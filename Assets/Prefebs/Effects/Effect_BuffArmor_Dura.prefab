@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 4847703647130086308}
+  duration: 0
+  isFollowOwner: 1
 --- !u!1001 &4721498263411532468
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -35,6 +35,7 @@ public class Buff_Frozen : Buff
         if (target != null)
         {   
             target.buffFrozen -= ratio; 
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
         }
 
@@ -48,6 +49,7 @@ public class Buff_Frozen : Buff
         if (target != null)
         {   
             target.buffFrozen -= ratio;
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
         }

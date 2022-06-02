@@ -6,7 +6,7 @@ using UnityEngine;
 public class RuneSkillObjectData : ScriptableObject
 {
     [Header("Info--------")]
-    public float damage;
+    public float power;
     public float area;
     [Range(1, 20)]  public int repeat;
     [Range(0f, 2f)] public float interval;

@@ -22,7 +22,7 @@ public class SkillObj_TargetAttack : SkillObject
                     data.powerRatio * skill.owner.magicDamage,
                     skill.owner.powerRate,
                     skill.owner,
-                true
+                    true
                 );
             }
             else
@@ -33,6 +33,18 @@ public class SkillObj_TargetAttack : SkillObject
                     skill.owner,
                     false
                 );
+            }
+
+            if (data.eUserEffect != EEffect.None)
+            {
+                eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                eff.SetPosition(skill.owner);
+            }
+
+            if (data.eTargetEffect != EEffect.None)
+            {
+                eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                eff.SetPosition(skill.target);
             }
         }
         

@@ -106,6 +106,19 @@ public class Hero : Character
         heroGFX.gameObject.SetActive(false);
     }
 
+    public override void Revive(float rateHp)
+    {
+        isDead = false;
+        
+        rateHp = Mathf.Clamp(0.01f * rateHp, 0.2f, 1f);
+
+        curHp = rateHp * maxHp;
+        
+        Debug.Log("hero Revive // ratio : " + rateHp);
+
+        heroGFX.gameObject.SetActive(true);
+    }
+
     public void ResetPos()
     {   
         transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; 

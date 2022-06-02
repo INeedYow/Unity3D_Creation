@@ -34,7 +34,8 @@ public class Buff_Armor : Buff
     {   
         if (target != null)
         {   
-            target.buffArmor -= ratio; 
+            target.buffArmor -= ratio;
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
         }
         
@@ -49,6 +50,7 @@ public class Buff_Armor : Buff
         if (target != null)
         {   
             target.buffArmor -= ratio;
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
         }

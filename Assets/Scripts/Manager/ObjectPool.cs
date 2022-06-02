@@ -15,7 +15,7 @@ public enum ESkillObj {
 
 public enum EEffect {
     None = -1,
-    Stun, Blood, Buff_ArmorInit, Buff_ArmorDura, Rune_World2, Rune_OnWorks2,
+    Stun, Blood, Buff_ArmorInit, Buff_ArmorDura, Rune_World2, Rune_OnWorks2, Knight_GroundCrack, Angel_Heal,
     Size,
 }
 

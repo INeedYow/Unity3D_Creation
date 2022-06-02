@@ -28218,6 +28218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle: {fileID: 4058219100927022805}
   duration: 4
+  isFollowOwner: 1
+  heightTF: 0
 --- !u!1 &4221466794464433503
 GameObject:
   m_ObjectHideFlags: 0

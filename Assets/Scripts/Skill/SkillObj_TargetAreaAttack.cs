@@ -45,11 +45,12 @@ public class SkillObj_TargetAreaAttack : SkillObject
         // FinishWorks();
 
         // after
+
         if (eTargetGroup == EGroup.Monster)
-        {
+        {   
             foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
             {
-                if (mon.isDead) continue;
+                if (mon.isDead || mon.isStop) continue;
                 if (skill.target == null) break;
 
                 m_sqrDist = (skill.target.transform.position - mon.transform.position).sqrMagnitude;
@@ -67,13 +68,29 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 }
 
                 AddBuff(mon);
+
+                if (data.eTargetEffect != EEffect.None)
+                {  
+                    eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                    eff.SetPosition(mon);
+                }
             }
+
+            if (data.eUserEffect != EEffect.None)
+            {   
+                eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                eff.SetPosition(skill.owner);
+            }
+
+            
+
         }
+
         else
         {
             foreach (Hero hero in PartyManager.instance.heroParty)
             {
-                if (hero.isDead) continue;
+                if (hero.isDead || hero.isStop) continue;
                 
                 m_sqrDist = (skill.target.transform.position - hero.transform.position).sqrMagnitude;
 
@@ -90,6 +107,18 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 }
 
                 AddBuff(hero);
+
+                if (data.eTargetEffect != EEffect.None)
+                {  
+                    eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                    eff.SetPosition(hero); 
+                }   
+            }
+
+            if (data.eUserEffect != EEffect.None)
+            {   
+                eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                eff.SetPosition(skill.owner);
             }
         }
     }

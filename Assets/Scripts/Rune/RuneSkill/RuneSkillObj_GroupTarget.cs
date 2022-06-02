@@ -14,7 +14,7 @@ public class RuneSkillObj_GroupTarget : RuneSkillObject
             {
                 if (ch.isDead || ch.isStop) continue;
 
-                ch.Damaged(data.damage);
+                ch.Damaged(data.power);
                 AddBuff(ch);
 
                 if (data.eOnWorksEffect != EEffect.None)
@@ -32,7 +32,7 @@ public class RuneSkillObj_GroupTarget : RuneSkillObject
             {
                 if (ch.isDead || ch.isStop) continue;
 
-                ch.Damaged(data.damage);
+                ch.Damaged(data.power);
                 AddBuff(ch);
 
                 if (data.eOnWorksEffect != EEffect.None)

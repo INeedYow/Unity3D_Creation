@@ -111,11 +111,18 @@ public class Monster : Character
         monsGFX.gameObject.SetActive(false);
     }
 
-    // public void Reset()
-    // {
-    //     ResetBuffs();
-    // }
-    
+    public override void Revive(float rateHp)
+    {
+        isDead = false;
+        
+        rateHp = Mathf.Clamp(0.01f * rateHp, 0.1f, 1f);
+
+        curHp = rateHp * maxHp;
+
+        Debug.Log("mon Revive // ratio : " + rateHp);
+        
+        monsGFX.gameObject.SetActive(true);
+    }
 
     private void OnMouseDown() { DungeonManager.instance.ShowMonInfoUI(this); }
 }

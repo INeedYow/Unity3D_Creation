@@ -19,3 +19,6 @@ MonoBehaviour:
   eBuff: 2
   duration: 2
   buffRatio: -0.8
+  eStartEffect: -1
+  eUserEffect: -1
+  eTargetEffect: -1

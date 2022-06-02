@@ -33,6 +33,10 @@ public class DungeonManager : MonoBehaviour
     public Skill prfPlantSkill;
     public Skill[] prfChewerSkills = new Skill[2];
 
+    [Space(10f)] [Header("Rewards")]
+    [SerializeField] int m_exp;
+    [SerializeField] int m_gold;
+
     [Space(4f)] [Header("ETC")]
     public Transform worldEffectTF;
 
@@ -68,7 +72,25 @@ public class DungeonManager : MonoBehaviour
 
     public void BattleEnd()
     {
+        GiveReward();
         ShowResult();
+    }
+
+    public void AddReward(int gold, int exp)
+    {
+        m_gold += gold;
+        m_exp += exp;
+    }
+
+    void GiveReward()
+    {
+        resultUI.beforeExp = PlayerManager.instance.curExp;
+        
+        PlayerManager.instance.AddGold(m_gold);
+        PlayerManager.instance.AddExp(m_exp);
+        PartyManager.instance.AddExp(m_exp);
+        m_gold = 0;
+        m_exp = 0;
     }
 
     void ShowResult()

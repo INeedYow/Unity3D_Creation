@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public enum EBuff {
     None = -1,
     Armor, Damage, Speed,//Magic, MagicArmor, AttSpeed,
-    Stun, Frozen,
+    Stun, Frozen, Provoke,
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -77,8 +77,9 @@ public abstract class Character : MonoBehaviour, IDamagable
                 if (m_stunEff == null)
                 {
                     m_stunEff = ObjectPool.instance.GetEffect((int)EEffect.Stun);
-                    m_stunEff.transform.SetParent(transform);
-                    m_stunEff.transform.position = HpBarTF.position;
+                    // m_stunEff.transform.SetParent(transform);
+                    // m_stunEff.transform.position = HpBarTF.position;
+                    m_stunEff.SetPosition(this);
                 }
             }
             else{
@@ -110,6 +111,7 @@ public abstract class Character : MonoBehaviour, IDamagable
             }
         }
     }
+
     
     
     [Header("Transform")]
@@ -147,6 +149,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     //[HideInInspector] 
     public bool isDead;
     public Character attacker;
+    public Character provoker;      // TODO
     protected int getDamage;
     float m_lastMoveOrderTime;
     // Vector3 defaultScale;
@@ -202,8 +205,7 @@ public abstract class Character : MonoBehaviour, IDamagable
             if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);    // 원거리의 경우 죽었을 수 있어서
 
             Effect blood = ObjectPool.instance.GetEffect((int)EEffect.Blood);
-            blood.transform.position = targetTF.position;
-            //blood.SetDuration(1f);
+            blood.SetPosition(this);
 
             //Debug.Log(name + "가 " + getDamage + " 마법피해 입음");
         }
@@ -222,8 +224,7 @@ public abstract class Character : MonoBehaviour, IDamagable
                 if (newAttacker != null) newAttacker.onAttackGetDamage?.Invoke((float)getDamage);
                 
                 Effect blood = ObjectPool.instance.GetEffect((int)EEffect.Blood);
-                blood.transform.position = targetTF.position;
-                //blood.SetDuration(1f);
+                blood.SetPosition(this);
 
                 //Debug.Log(name + "가 " + getDamage + " 물리피해 입음");
             }
@@ -241,7 +242,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     }
 
     public void Damaged(float damage)
-    {
+    {   // 플레이어 스킬용 Damaged
         if (isDead || isStop) return;
 
         curHp -= damage;
@@ -264,19 +265,26 @@ public abstract class Character : MonoBehaviour, IDamagable
         ShowDamageText(heal, true, true);
     }
 
+    public void Effected(Effect effect, float duration = 0f)
+    {
+        effect.transform.position = targetTF.position;
+        
+        if (duration != 0f)
+        {
+            effect.SetDuration(duration);
+        }
+    }
+
     protected abstract void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false);
 
     public abstract void Death();
+    public abstract void Revive(float rateHp); 
 
     // void TargetDead(Character character) { 
     //     character.onDeadGetThis -= TargetDead;
     //     target = null; 
     // }
 
-    public void Revive(float rateHp) {
-        isDead = false;
-        curHp = 0.01f * rateHp * maxHp;
-    }
 
     public void AttackInit(Character target)
     {          

@@ -23,8 +23,13 @@ public class HeroInfoUI : MonoBehaviour
     public Text criticalDamage;
     public Text dodge;
 
+    public Text abilityName;
+    public Text abilityDesc;
+
     [Header("Skill")]
     public Image[] skill = new Image[4];
+    public Text skillName;
+    public Text skillDesc;
 
     [Header("Empty")]
     public Sprite emptyIcon;
@@ -32,10 +37,15 @@ public class HeroInfoUI : MonoBehaviour
 
     private void Start() {  
         HeroManager.instance.onChangeSelectedHero += RenewUI;
+        //HeroManager.instance.onChangeSelectedHero += RenewAbilityDesc;
     }
 
     private void OnEnable() {
         RenewUI(HeroManager.instance.selectedHero);
+    }
+
+    private void OnDisable() {
+        EmptySkillDesc();
     }
 
     public void RenewUI(Hero hero){
@@ -88,5 +98,40 @@ public class HeroInfoUI : MonoBehaviour
             }
             
         }
+    }
+
+    public void RenewSkillDesc(int number)
+    {   
+        if (HeroManager.instance.selectedHero == null) return;  
+
+        if (HeroManager.instance.selectedHero.skills.Length <= number) return;  // 아직 스킬 다 없기 때문에 임시로
+
+        skillName.text = string.Format("[ {0} ]", HeroManager.instance.selectedHero.skills[number].data.skillName);
+        skillDesc.text = HeroManager.instance.selectedHero.skills[number].data.description;
+    }
+
+    public void EmptySkillDesc()
+    {   Debug.Log("djfdfjdkdjk");
+        skillName.text = " [ 스킬 이름 ] ";
+        skillDesc.text = " ";
+    }
+
+    public void RenewAbilityDesc(Hero hero)     // TODO 선택 영웅 변경시 호출해주기
+    {
+        if (hero == null)
+        {
+            abilityName.text = " ";
+            abilityDesc.text = " ";
+        }
+        else if (hero.accessoryData == null)
+        {
+            abilityName.text = "[ 특수 능력 ]";
+            abilityDesc.text = " 없음 ";
+        }
+        else{
+            abilityName.text = hero.accessoryData.itemName;
+            abilityDesc.text = hero.accessoryData.desc;
+        }
+        
     }
 }

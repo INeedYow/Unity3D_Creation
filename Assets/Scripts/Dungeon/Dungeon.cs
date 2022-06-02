@@ -22,9 +22,9 @@ public class Dungeon : MonoBehaviour
 
     [Header("Rewards--------------------------")]
     public RewardData rewardData;
-    int m_gold;
-    [SerializeField]
-    int m_exp;
+    // int m_gold;
+    // [SerializeField]
+    // int m_exp;
     
 
     private void Awake() {
@@ -53,18 +53,25 @@ public class Dungeon : MonoBehaviour
         Invoke("SpawnWave", 1f);
     }
 
+    void AddWaveReward()
+    {
+        DungeonManager.instance.AddReward(rewardData.GetWaveGold(), rewardData.GetWaveExp());
+    }
+
+    void AddClearReward()
+    {
+        DungeonManager.instance.AddReward(rewardData.gold_clear, rewardData.exp_clear);
+    }
+
     public void MonsterDie()
     {   
         curMonsterCount--;
-        m_gold += Random.Range(0, dungeonLevel + 3);
-        m_exp += Random.Range(0, dungeonLevel + 1);
-        //Debug.Log("count-- : " + curMonsterCount);
+
         if (curMonsterCount <= 0)
         {   // 웨이브 클리어
             WaveEnd();
             Invoke("WaveClear", 1f);
-            m_gold += rewardData.gold_perWave;
-            m_exp += rewardData.exp_perWave;
+            AddWaveReward();
         }
     }
 
@@ -86,29 +93,28 @@ public class Dungeon : MonoBehaviour
         }
     }
 
-    void EndDungeon(){     
-        // 중간 종료
-        GetReward();
+    void EndDungeon()
+    {   // 중간에 종료
+        //GetReward();
         //
         DungeonManager.instance.BattleEnd();
     }
 
-    void ClearDungeon(){   Debug.Log("clear DG");
-        // TODO 
-        m_gold += rewardData.gold_clear;
-        m_exp += rewardData.exp_clear;
-        GetReward();
+    void ClearDungeon()
+    {   // 클리어
+        AddClearReward();
+        //GetReward();
         //
         DungeonManager.instance.BattleEnd();
     }
 
-    void GetReward(){
-        PlayerManager.instance.AddGold(m_gold);   //Debug.Log(m_gold);
-        PlayerManager.instance.AddExp(m_exp);     //Debug.Log(m_exp);
-        PartyManager.instance.AddExp(m_exp);
-        m_gold = 0;
-        m_exp = 0;
-    }
+    // void GetReward(){
+    //     PlayerManager.instance.AddGold(m_gold);   //Debug.Log(m_gold);
+    //     PlayerManager.instance.AddExp(m_exp);     //Debug.Log(m_exp);
+    //     PartyManager.instance.AddExp(m_exp);
+    //     m_gold = 0;
+    //     m_exp = 0;
+    // }
 
     void SpawnWave()
     {   

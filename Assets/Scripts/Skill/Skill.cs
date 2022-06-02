@@ -38,9 +38,7 @@ public class Skill : MonoBehaviour
     }
 
     public void EffectSkill(){  // 실제 스킬 효과부
-
         skillObj.gameObject.SetActive(true);
-        
     }
 
 }

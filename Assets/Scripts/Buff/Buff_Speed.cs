@@ -36,6 +36,7 @@ public class Buff_Speed : Buff
         if (target != null)
         {
             target.buffSpeed -= ratio;
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
         }
         
@@ -51,6 +52,7 @@ public class Buff_Speed : Buff
         if (target != null)
         {   
             target.buffSpeed -= ratio;
+            target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
         }
