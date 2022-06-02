@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DungeonManager : MonoBehaviour
 {   //
     public UnityAction onSomeoneDead;
+    public UnityAction onSomeoneAdd;
     public UnityAction onChangeAnyHP;
     public UnityAction onChangeAnyPower;
     public UnityAction onChangeAnyArmor;
@@ -117,6 +118,8 @@ public class DungeonManager : MonoBehaviour
             yield return null;
         }
 
+        resultUI.playerExpBar.SetFinish();
+
         ShowResultItem();
     }
 
@@ -205,6 +208,17 @@ public class DungeonManager : MonoBehaviour
         bar.SetOwner(monster);
 
         dungeonUI.SetCount(curDungeon.curMonsterCount);
+    }
+
+    public void ReviveMonster()
+    {
+        curDungeon.curMonsterCount++;
+        dungeonUI.SetCount(curDungeon.curMonsterCount);
+    }
+
+    public void RemoveMonster(Monster monster)
+    {
+        curDungeon.curMonsters.Remove(monster);
     }
 
     public void OnMonsterDie(Character character)

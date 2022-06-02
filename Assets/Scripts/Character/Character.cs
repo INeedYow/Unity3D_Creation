@@ -105,6 +105,11 @@ public abstract class Character : MonoBehaviour, IDamagable
             if (_buffFrozen < -0.01f)
             {
                 anim.speed = Mathf.Clamp(2f * (1f + _buffFrozen), 0f, 2f);
+                if (anim.speed < 0.1f)
+                {
+                    nav.isStopped = true;
+                    nav.velocity = Vector3.zero;
+                }
             }
             else{
                 anim.speed = 2f;
@@ -119,26 +124,11 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Transform HpBarTF;                           // 체력바 위치
     public Transform projectileTF;                      // 투사체 생성 위치
     
-    //[HideInInspector]
-    //public Character targetForDebug;                    // 임시 디버그용
-    //Character _target;
-    // public Character target{
-    //     get { return _target; } 
-    //     set { 
-    //         //if (_target != value && eGroup == EGroup.Hero) Debug.Log(string.Format("_T, value : {0}, {1}" , _target, value));
-    //         _target = value;        targetForDebug = _target;
-    //         if (null != _target)
-    //         { _target.onDeadGetThis += TargetDead; }
-    //     }
-    // }      
     [HideInInspector]   public NavMeshAgent nav;
 
     [Header("Macro")]
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
-
-    //public int prevMacro = -1;
-
     [Header("Skill")]
     public Skill[] skills;
 
@@ -152,7 +142,6 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Character provoker;      // TODO
     protected int getDamage;
     float m_lastMoveOrderTime;
-    // Vector3 defaultScale;
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -300,6 +289,10 @@ public abstract class Character : MonoBehaviour, IDamagable
         
         if (Time.time < m_lastMoveOrderTime + 0.2f) return;
         
+        if (anim.speed < 0.1f) return;
+
+        if (isDead) return;
+
         nav.SetDestination(target.transform.position);
         m_lastMoveOrderTime = Time.time;
         if (nav.isStopped) nav.isStopped = false;
@@ -309,8 +302,21 @@ public abstract class Character : MonoBehaviour, IDamagable
     {
         if (target == null) return false;
 
+        if (nav.stoppingDistance > range)
+        {
+            nav.stoppingDistance = range;
+        }
+
         return (target.transform.position - transform.position).sqrMagnitude <= range * range;
 
+    }
+
+    public void ResetNavDistance()
+    {
+        if (nav.stoppingDistance != attackRange)
+        {
+            nav.stoppingDistance = attackRange;
+        }
     }
 
     private void OnDrawGizmosSelected() {

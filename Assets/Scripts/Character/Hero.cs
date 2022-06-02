@@ -57,9 +57,10 @@ public class Hero : Character
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
         // Attack Command
         switch(eClass){
-            case EClass.Knight: attackCommand = new NormalAttackCommand(this); break;
-            case EClass.Archer: attackCommand = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
-            case EClass.Angel:  attackCommand = new ProjectileAttackCommand(this, EProjectile.YellowMarble); break;
+            case EClass.Knight: attackCommand       = new NormalAttackCommand(this); break;
+            case EClass.Archer: attackCommand       = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
+            case EClass.Angel:  attackCommand       = new ProjectileAttackCommand(this, EProjectile.YellowMarble); break;
+            case EClass.Necromancer: attackCommand  = new NormalAttackCommand(this); break;
         }
     }
 
@@ -69,11 +70,11 @@ public class Hero : Character
             case EClass.Knight      : 
             case EClass.Templar     : maxHp += 15;  break;
             
-            case EClass.Angel       :
+            case EClass.Necromancer : 
             case EClass.Bard        : maxHp += 12;  break;
 
             case EClass.Archer      : 
-            case EClass.Necromancer : maxHp += 10;  break;
+            case EClass.Angel       : maxHp += 10;  break;
 
         }
         minDamage += 1;
@@ -117,6 +118,11 @@ public class Hero : Character
         Debug.Log("hero Revive // ratio : " + rateHp);
 
         heroGFX.gameObject.SetActive(true);
+        isStop = false;                 // gfx OnEnable 때 true해줘서 순서 중요
+        
+        onHpChange?.Invoke();
+        DungeonManager.instance.onChangeAnyHP?.Invoke();
+        DungeonManager.instance.onSomeoneAdd?.Invoke();
     }
 
     public void ResetPos()

@@ -25,11 +25,15 @@ public class HeroManager : MonoBehaviour
     public Hero prfKngiht;
     public Hero prfArcher;
     public Hero prfAngel;
+    public Hero prfNecromancer;
 
     [Header("Hero prfSkill")]
     public Skill[] prfKnightSkills;
     public Skill[] prfArcherSkills;
     public Skill[] prfAngelSkills;
+    public Skill[] prfNecromancerSkills;
+
+
 
     private void Awake() { 
         instance = this; 
@@ -63,6 +67,7 @@ public class HeroManager : MonoBehaviour
         dummyInfoUnit.transform.position = dummy.transform.position + Vector3.right * 3f;
         dummyInfoUnit.SetOwner(dummy.owner);
     }
+
     public void HideDummyInfo() { dummyInfoUnit.gameObject.SetActive(false); }
 
     public void GetNewHero(Hero.EClass eClass){
@@ -100,6 +105,18 @@ public class HeroManager : MonoBehaviour
                 for (int i = 0; i < prfAngelSkills.Length; i++)
                 {
                     hero.skills[i] = Instantiate(prfAngelSkills[i], hero.transform);
+                    hero.skills[i].Init(hero, i + 1);
+                }
+                break;
+            }
+
+            case Hero.EClass.Necromancer:
+            {
+                hero = Instantiate(prfNecromancer);
+
+                for (int i = 0; i < prfNecromancerSkills.Length; i++)
+                {
+                    hero.skills[i] = Instantiate(prfNecromancerSkills[i], hero.transform);
                     hero.skills[i].Init(hero, i + 1);
                 }
                 break;
@@ -144,7 +161,8 @@ public class HeroManager : MonoBehaviour
         return heroCost * (int)Mathf.Pow(costMultiple, heroList.Count - 3);
     }
 
-    public void ShowHeroUI(bool isOn){
+    public void ShowHeroUI(bool isOn)
+    {
         heroListUI.gameObject.SetActive(isOn);
         heroInfoUI.gameObject.SetActive(isOn);
         //heroSetUI.gameObject.SetActive(isOn);

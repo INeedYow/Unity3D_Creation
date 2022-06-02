@@ -9,17 +9,20 @@ public class Condition_CharacterCount : ConditionMacro
     [Tooltip("> < ==")]
     public EType eType;
     
-    bool m_hasSomeoneDead;
+    bool m_hasChanged;
     bool m_isSatisfy;
     int m_count;
 
-    private void OnEnable() { DungeonManager.instance.onSomeoneDead += SomeoneDead; }
+    private void OnEnable() { 
+        DungeonManager.instance.onSomeoneDead += SomeoneChanged; 
+        DungeonManager.instance.onSomeoneAdd += SomeoneChanged; 
+    }
 
-    void SomeoneDead() { m_hasSomeoneDead = true; }
+    void SomeoneChanged() { m_hasChanged = true; }
 
     public override bool IsSatisfy()
     {
-        if (m_hasSomeoneDead) { CheckCount(); }
+        if (m_hasChanged) { CheckCount(); }
 
         return m_isSatisfy;
     }

@@ -23,9 +23,6 @@ public class HeroInfoUI : MonoBehaviour
     public Text criticalDamage;
     public Text dodge;
 
-    public Text abilityName;
-    public Text abilityDesc;
-
     [Header("Skill")]
     public Image[] skill = new Image[4];
     public Text skillName;
@@ -111,27 +108,8 @@ public class HeroInfoUI : MonoBehaviour
     }
 
     public void EmptySkillDesc()
-    {   Debug.Log("djfdfjdkdjk");
+    {   
         skillName.text = " [ 스킬 이름 ] ";
         skillDesc.text = " ";
-    }
-
-    public void RenewAbilityDesc(Hero hero)     // TODO 선택 영웅 변경시 호출해주기
-    {
-        if (hero == null)
-        {
-            abilityName.text = " ";
-            abilityDesc.text = " ";
-        }
-        else if (hero.accessoryData == null)
-        {
-            abilityName.text = "[ 특수 능력 ]";
-            abilityDesc.text = " 없음 ";
-        }
-        else{
-            abilityName.text = hero.accessoryData.itemName;
-            abilityDesc.text = hero.accessoryData.desc;
-        }
-        
     }
 }

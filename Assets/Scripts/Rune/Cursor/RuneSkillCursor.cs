@@ -8,21 +8,24 @@ public abstract class RuneSkillCursor : MonoBehaviour
 {
     public UnityAction onWorks;
 
-    //public Texture2D texture;
-    //public Sprite mouseIcon;
+    public Texture2D texture;
     public RuneSkillObject skillObj;
 
     protected Ray ray;
     protected RaycastHit hit;
 
     private void OnEnable() {   Debug.Log("Cursor OnEnable");
-        //Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
+        DungeonManager.instance.onWaveEnd += Cancel;
+        
+
         // todo MGR.Plane.SetActive(true);
-        //PlayerManager.instance.runeSkillUI.cursorImage.sprite = mouseIcon;
+        
     }
 
     private void OnDisable() {
-        //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        DungeonManager.instance.onWaveEnd -= Cancel;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update() 
@@ -34,6 +37,7 @@ public abstract class RuneSkillCursor : MonoBehaviour
     protected abstract void CursorPosition();
 
     // 스킬 사용한 경우 onWorks?.Invoke(); 해주기
-    // 사용 후 마우스 돌려놓기
+    // 사용 후 마우스 돌려놓기 
     protected abstract void CheckInput();
+    protected void Cancel() { gameObject.SetActive(false); }
 }

@@ -15,9 +15,10 @@ public class Action_UseSkill : ActionMacro
 
     public override void Execute(Character target)
     {
-        //if (owner.skills[skillNumber - 1] == null) return false;  // IsReady()에서 걸러짐
-
+        
         owner.skills[skillNumber - 1].Use(target);
-        LookTarget(target.transform);
+
+        if (target != null)
+        {LookTarget(target.transform);}
     }
 }

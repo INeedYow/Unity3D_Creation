@@ -16,5 +16,17 @@ public class SkillObj_TargetRevive : SkillObject
         if (m_target == null) return;
 
         m_target.Revive(30 + data.powerRatio * skill.owner.magicDamage);
+        
+        if (data.eTargetEffect != EEffect.None)
+        {
+            eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+            eff.SetPosition(skill.target);
+        }
+
+        if (data.eUserEffect != EEffect.None)
+        {   
+            eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+            eff.SetPosition(skill.owner);
+        }
     }
 }

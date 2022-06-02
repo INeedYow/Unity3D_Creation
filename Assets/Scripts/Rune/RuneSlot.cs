@@ -23,8 +23,15 @@ public class RuneSlot : MonoBehaviour
         if (tree == null) tree = GetComponentInParent<RuneTree>();
     }
 
+    private void OnEnable() {
+        if (!m_isOpen)
+        {
+            IsLevelEnough(PlayerManager.instance.LV);
+        }
+    }
+
     void IsLevelEnough(int lv)
-    {   Debug.Log("Lv : " + lv + " / reqLv : " + requireLv);
+    {   //Debug.Log("Lv : " + lv + " / reqLv : " + requireLv);
         if (lv >= requireLv)
         {
             m_isOpen = true;

@@ -102,8 +102,8 @@ public class Monster : Character
         }
     }
 
-    public override void Death(){
-        //
+    public override void Death()
+    {
         isDead = true;
         onDeadGetThis?.Invoke(this);
         onDead?.Invoke();
@@ -122,6 +122,12 @@ public class Monster : Character
         Debug.Log("mon Revive // ratio : " + rateHp);
         
         monsGFX.gameObject.SetActive(true);
+        isStop = false; 
+
+        onHpChange?.Invoke();
+        DungeonManager.instance.onChangeAnyHP?.Invoke();
+        DungeonManager.instance.onSomeoneAdd?.Invoke();
+        DungeonManager.instance.ReviveMonster();
     }
 
     private void OnMouseDown() { DungeonManager.instance.ShowMonInfoUI(this); }

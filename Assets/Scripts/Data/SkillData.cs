@@ -11,6 +11,6 @@ public class SkillData : ScriptableObject
     public Sprite icon;
     [Space(10f)]
     [Tooltip("습득 레벨")]   public int requireLevel;
-    [Range(1f, 30f)]        public float cooldown;
+    [Range(1f, 40f)]        public float cooldown;
     [Range(0f, 20f)]        public float skillRange;     // 스킬 발동 사거리
 }

@@ -17,6 +17,16 @@ public class Effect : MonoBehaviour
         if (particle == null) particle = GetComponentInParent<ParticleSystem>();
     }
 
+    private void OnEnable() 
+    { 
+        particle.Play(); 
+
+        if (duration != 0f)
+        {
+            SetDuration(duration);
+        }
+    }
+    
     public void SetPosition(Character owner)
     {
         switch (heightTF)
@@ -28,19 +38,7 @@ public class Effect : MonoBehaviour
 
         if (isFollowOwner)
         {   
-            if(owner.eGroup == EGroup.Hero) { Debug.Log("follow Hero"); }
-        
             transform.SetParent(owner.transform);
-        }
-    }
-
-    private void OnEnable() 
-    { 
-        particle.Play(); 
-
-        if (duration != 0f)
-        {
-            SetDuration(duration);
         }
     }
 

@@ -22307,12 +22307,12 @@ MonoBehaviour:
   maxHp: 200
   minDamage: 11
   maxDamage: 17
-  magicDamage: 30
+  magicDamage: 20
   lastAttackTime: 0
   attackDelay: 1.4
   attackRange: 9
   aoeRange: 0
-  moveSpeed: 15
+  moveSpeed: 13
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 1.5
@@ -22331,6 +22331,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
+  attacker: {fileID: 0}
+  provoker: {fileID: 0}
   heroGFX: {fileID: 5052197994113970145}
   dummy: {fileID: 6567157394458848257}
   eClass: 2

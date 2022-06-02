@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     [Header("UI")]
     public PlayerInfoUI playerInfoUI;
     public RuneSkillUI runeSkillUI;     // 던전에서 사용할 UI
+    //public 
 
 
     [Header("Rune Tree")]

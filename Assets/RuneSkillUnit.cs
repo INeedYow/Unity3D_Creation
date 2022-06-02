@@ -15,9 +15,16 @@ public class RuneSkillUnit : MonoBehaviour
     [Header("KeyCode")]
     public KeyCode keyCode;
 
+    bool m_isLock;
+
     private void Start() {
         DungeonManager.instance.onWaveEnd += EndWave;
+        DungeonManager.instance.onWaveEnd += LockInput;
+        DungeonManager.instance.onWaveStart += UnLockInput;
     }
+
+    void LockInput()    { m_isLock = true; }
+    void UnLockInput()  { m_isLock = false; }
 
     public void SetInfo(SkillRuneData data)
     {   
@@ -70,6 +77,8 @@ public class RuneSkillUnit : MonoBehaviour
 
     private void Update() 
     {  
+        if (m_isLock) return;
+
         if (Input.GetKeyDown(keyCode))
         {   
             if (curCooldown > 0)

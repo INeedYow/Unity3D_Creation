@@ -28,7 +28,7 @@ public class Result_ExpBar : MonoBehaviour
     }
 
     void RenewLevelText(int lv)
-    {
+    {   //Debug.Log("RenewExpBar LV : " + lv + " / max : " + PlayerManager.instance.maxExp);
         LV.text = lv.ToString();
         max.text = PlayerManager.instance.maxExp.ToString();
     }
@@ -38,5 +38,11 @@ public class Result_ExpBar : MonoBehaviour
         if (isFinish) return;
 
         bar.fillAmount = (float)PlayerManager.instance.curExp / (float)PlayerManager.instance.maxExp;
+        cur.text = PlayerManager.instance.curExp.ToString();
+    }
+
+    public void SetFinish()
+    {
+        isFinish = true;
     }
 }

@@ -1801,7 +1801,7 @@ MonoBehaviour:
   attackRange: 11
   aoeRange: 0
   moveSpeed: 14
-  criticalChance: 10
+  criticalChance: 12
   dodgeChance: 1
   criticalRate: 1.5
   powerRate: 1
@@ -1819,6 +1819,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
+  attacker: {fileID: 0}
+  provoker: {fileID: 0}
   heroGFX: {fileID: 2436992690794004522}
   dummy: {fileID: 4020090406503507079}
   eClass: 1

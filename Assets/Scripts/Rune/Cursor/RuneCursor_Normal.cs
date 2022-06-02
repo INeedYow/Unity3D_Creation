@@ -16,7 +16,7 @@ public class RuneCursor_Normal : RuneSkillCursor
         }
         else if (Input.GetMouseButtonDown(1))
         {   
-            gameObject.SetActive(false);
+            Cancel();
         }
     }
 }
