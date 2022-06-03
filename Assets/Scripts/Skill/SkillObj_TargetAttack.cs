@@ -8,13 +8,32 @@ public class SkillObj_TargetAttack : SkillObject
 
     public override void Works()
     {
-        if (skill.target == null) return;
+        StartCoroutine("OnWorks");
+    }
+
+    IEnumerator OnWorks()
+    {
+        if (skill.target == null)
+        {
+            FinishWorks();
+            yield break;
+        }
+
+        if (data.eStartEffect != EEffect.None)
+        {
+            eff = ObjectPool.instance.GetEffect((int)data.eStartEffect);
+            eff.SetPosition(skill.owner);
+        }
         
         m_target = skill.target.GetComponent<IDamagable>();
 
-        for (int i = 0; i < data.count; i++)
+        for (int i = 0; i < data.repeat; i++)
         {
-            if (m_target == null) { FinishWorks(); }
+            if (skill.target == null)
+            {
+                FinishWorks();
+                yield break;
+            }
 
             if (data.isMagic)
             {
@@ -46,10 +65,13 @@ public class SkillObj_TargetAttack : SkillObject
                 eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
                 eff.SetPosition(skill.target);
             }
+
+            yield return new WaitForSeconds(data.interval);
         }
         
         if (skill.target != null) AddBuff(skill.target);
             
         m_target = null;
+        FinishWorks();
     }
 }

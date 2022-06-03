@@ -12,13 +12,7 @@ public abstract class SkillObject : MonoBehaviour
     private void Awake() { gameObject.SetActive(false); }
     private void OnEnable() { 
         StartEffect();
-        SkillWorks(); 
-    }
-
-    void SkillWorks() { 
-        Works();
-        //AddBuff();        // 이렇게 하면 범위 공격에 광역 스턴이 안 됨
-        FinishWorks();
+        Works(); 
     }
 
     void StartEffect()

@@ -7,11 +7,27 @@ public class SkillObj_TargetHeal : SkillObject
     IDamagable m_target;
     public override void Works()
     {
-        if (skill.target == null) return;
+        StartCoroutine("OnWorks");
+    }
+
+    IEnumerator OnWorks()
+    {
+        if (skill.target == null)
+        {
+            FinishWorks();
+            yield break;
+        }
+
 
         m_target = skill.target.GetComponent<IDamagable>(); 
+        
+        if (data.eStartEffect != EEffect.None)
+        {
+            eff = ObjectPool.instance.GetEffect((int)data.eStartEffect);
+            eff.SetPosition(skill.owner);
+        }
 
-        for (int i = 0; i < data.count; i++)
+        for (int i = 0; i < data.repeat; i++)
         {
             if (m_target == null) break;
             
@@ -28,10 +44,13 @@ public class SkillObj_TargetHeal : SkillObject
                 eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
                eff.SetPosition(skill.target);
             }
+
+            yield return new WaitForSeconds(data.interval);
         }
 
         AddBuff(skill.target);
             
         m_target = null;
+        FinishWorks();
     }
 }

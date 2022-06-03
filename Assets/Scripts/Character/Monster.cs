@@ -126,6 +126,13 @@ public class Monster : Character
         isDead = true;
         onDeadGetThis?.Invoke(this);
         onDead?.Invoke();
+
+        if (provoker)
+        {
+            CancelInvoke("FinishProvoke");
+            provoker = null;
+        }
+        
         DungeonManager.instance.onSomeoneDead?.Invoke();
         monsGFX.gameObject.SetActive(false);
     }

@@ -18,13 +18,16 @@ public class Projectile : MonoBehaviour
     Vector3     m_lastPos;          // 중간에 타겟이 죽으면 그 때 가지고 있던 최종 위치까지 날아가고 사라지게
     float       m_sqrDist;
 
-    public void Launch(Character target, Character owner, float damage, float powerRate, float area)
+    EEffect     m_eEffect;
+
+    public void Launch(Character target, Character owner, float damage, float powerRate, float area, EEffect eEffect = EEffect.None)
     {
         m_target = target;
         m_owner = owner;
         m_damage = damage;
         m_powerRate = powerRate;
         m_area = area;
+        m_eEffect = eEffect;
 
         InvokeRepeating("LookTarget", 0f, 0.2f);
         m_isLaunch = true;
@@ -53,18 +56,25 @@ public class Projectile : MonoBehaviour
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
     }
 
-    void Hit(){
+    void Hit()
+    {
         if (null != m_target && !m_target.isStop)
         {   //Debug.Log("proj's owner : " + m_owner);
             IDamagable target = m_target.GetComponent<IDamagable>();
             target?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
+
+            if (m_eEffect != EEffect.None)
+            {
+                Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
+                eff.SetPosition(m_target);
+            }
         }
         
         //if (m_target != null)
         //{   // 오브젝트 풀 적용 중인데 몬스터 삭제하면서 화살도 같이 사라져버려서 일단 주석처리
             //gameObject.transform.SetParent(m_target.transform);
         //}
-
+        
         CancelInvoke("Return");
         Invoke("Return", remainTime);
     }
@@ -85,6 +95,12 @@ public class Projectile : MonoBehaviour
                 IDamagable tempTarget = mon.GetComponent<IDamagable>();
                 
                 m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
+
+                if (m_eEffect != EEffect.None)
+                {
+                    Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
+                    eff.SetPosition(m_target);
+                }
             }
         }
         else
@@ -101,6 +117,12 @@ public class Projectile : MonoBehaviour
                 IDamagable tempTarget = hero.GetComponent<IDamagable>();
                 
                 m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
+
+                if (m_eEffect != EEffect.None)
+                {
+                    Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
+                    eff.SetPosition(m_target);
+                }
             }
         }
 
@@ -124,7 +146,7 @@ public class Projectile : MonoBehaviour
         
         CancelInvoke("Return");
         Invoke("Return", remainTime);
-        }
+    }
     
 
     void LookTarget()

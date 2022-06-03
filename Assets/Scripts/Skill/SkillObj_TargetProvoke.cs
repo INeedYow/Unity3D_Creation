@@ -8,7 +8,11 @@ public class SkillObj_TargetProvoke : SkillObject
 
     public override void Works()
     {
-        if (skill.target == null) return;
+        if (skill.target == null) 
+        {
+            FinishWorks();
+            return;
+        }
 
         skill.target.SetProvoke(skill.owner, duration);
 
@@ -25,5 +29,6 @@ public class SkillObj_TargetProvoke : SkillObject
         }
 
         AddBuff(skill.target);
+        FinishWorks();
     }
 }

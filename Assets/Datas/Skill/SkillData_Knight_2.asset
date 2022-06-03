@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: SkillData_Knight_2
   m_EditorClassIdentifier: 
   skillName: "\uB3C4\uBC1C"
-  description: "\uB300\uC0C1\uC744 \uB3C4\uBC1C\uD558\uACE0 \uACF5\uACA9\uB825\uC744
-    \uAC10\uC18C\uC2DC\uD0B4"
-  icon: {fileID: 21300000, guid: 87cb80b28a26948bab802db554863a96, type: 3}
+  description: "\uB300\uC0C1 \uB3C4\uBC1C \uBC0F \uACF5\uACA9\uB825 \uAC10\uC18C"
+  icon: {fileID: 21300000, guid: e75d9d4c30c8b41c09846ad70007862e, type: 3}
   requireLevel: 1
   cooldown: 8
   skillRange: 11

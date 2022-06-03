@@ -15,10 +15,11 @@ MonoBehaviour:
   isMagic: 0
   powerRatio: 2
   area: 0
-  count: 1
+  repeat: 3
+  interval: 0.2
   eBuff: 0
   duration: 4
   buffRatio: -0.5
-  eStartEffect: -1
+  eStartEffect: 7
   eUserEffect: -1
-  eTargetEffect: -1
+  eTargetEffect: 10

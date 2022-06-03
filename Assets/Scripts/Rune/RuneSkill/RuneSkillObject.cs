@@ -31,7 +31,7 @@ public abstract class RuneSkillObject : MonoBehaviour
     }
 
     protected void FinishWorks()
-    {   Debug.Log("finish");
+    {   //Debug.Log("finish");
         gameObject.SetActive(false);
     }
 

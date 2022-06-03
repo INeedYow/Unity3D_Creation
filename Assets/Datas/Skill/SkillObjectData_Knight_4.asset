@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8c701f02225f0f4bbb1f75185280617, type: 3}
-  m_Name: SkillObjectData_Angel_3
+  m_Name: SkillObjectData_Knight_4
   m_EditorClassIdentifier: 
-  isMagic: 1
+  isMagic: 0
   powerRatio: 1.2
-  area: 0
-  repeat: 3
-  interval: 1
-  eBuff: -1
-  duration: 0
+  area: 5
+  count: 1
+  eBuff: 3
+  duration: 2.5
   buffRatio: 0
   eStartEffect: -1
-  eUserEffect: 8
-  eTargetEffect: 7
+  eUserEffect: 6
+  eTargetEffect: -1

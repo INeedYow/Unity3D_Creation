@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillData_Archer_1
   m_EditorClassIdentifier: 
   skillName: "\uB454\uD654 \uD654\uC0B4"
-  description: "\uB300\uC0C1\uC758 \uC774\uB3D9\uC18D\uB3C4 \uAC10\uC18C"
+  description: "\uB300\uC0C1 \uC774\uB3D9\uC18D\uB3C4 \uAC10\uC18C"
   icon: {fileID: 21300000, guid: 9257faaf4f9604399a8681876a7f4059, type: 3}
   requireLevel: 1
   cooldown: 5
-  skillRange: 13
+  skillRange: 11

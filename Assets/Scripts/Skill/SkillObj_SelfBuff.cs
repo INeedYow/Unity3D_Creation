@@ -13,5 +13,6 @@ public class SkillObj_SelfBuff : SkillObject
         }
 
         AddBuff(skill.owner);
+        FinishWorks();
     }
 }

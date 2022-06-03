@@ -9,12 +9,27 @@ public class SkillObj_TargetShoot : SkillObject
 
     public override void Works()
     {   
-        for (int i = 0; i < data.count; i++)        
+        StartCoroutine("OnWorks");
+    }
+
+    IEnumerator OnWorks()
+    {
+        if (skill.target == null) 
+        {
+            FinishWorks();
+            yield break;
+        }
+
+        for (int i = 0; i < data.repeat; i++)        
         {
             m_proj = ObjectPool.instance.GetProjectile((int)eProjectile);  
             m_proj.transform.position = skill.owner.projectileTF.position;
 
-            if (skill.target == null) break;
+            if (skill.target == null) 
+            {
+                FinishWorks();
+                yield break;
+            }
 
             if (data.isMagic)           
             {
@@ -23,7 +38,8 @@ public class SkillObj_TargetShoot : SkillObject
                     skill.owner,
                     skill.owner.magicDamage * data.powerRatio, 
                     skill.owner.powerRate, 
-                    data.area);
+                    data.area,
+                    data.eTargetEffect);
             }
             
             else                        
@@ -33,24 +49,22 @@ public class SkillObj_TargetShoot : SkillObject
                     skill.owner,
                     skill.owner.curDamage * data.powerRatio,
                     skill.owner.powerRate,
-                    data.area);
+                    data.area,
+                    data.eTargetEffect);
             }
 
             if (data.eUserEffect != EEffect.None)
-            {   // effect에서 따라다닐지, 높이 등 정보 가지고 있음
+            { 
                 eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
-                //eff.transform.position = skill.owner.transform.position;
                 eff.SetPosition(skill.owner);
             }
 
-            if (data.eTargetEffect != EEffect.None)
-            {
-                eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
-                eff.SetPosition(skill.target);
-            }
-        
+
+            yield return new WaitForSeconds(data.interval);
         }
        
         if (skill.target != null) AddBuff(skill.target);
+
+        FinishWorks();
     }
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
-  m_Name: SkillData_Angel_2
+  m_Name: SkillData_Necro_1
   m_EditorClassIdentifier: 
-  skillName: "\uB108\uAC00 \uB9DE\uC544\uB77C"
-  description: "\uB300\uC0C1 \uBC29\uC5B4\uB825 \uC99D\uAC00"
-  icon: {fileID: 21300000, guid: 577de0353c3f34e91b4bdeb038bcb2e9, type: 3}
+  skillName: "\uBBF8\uC815"
+  description: 
+  icon: {fileID: 21300000, guid: 04781ddf1640d48e4b784ad7268ba9ad, type: 3}
   requireLevel: 1
-  cooldown: 8
-  skillRange: 11
+  cooldown: 4
+  skillRange: 7

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: SkillData_Archer_3
   m_EditorClassIdentifier: 
-  skillName: "\uB2E4\uBC1C \uD654\uC0B4"
-  description: "\uB3D9\uC2DC\uC5D0 \uC5EC\uB7EC \uB300\uC0C1\uC744 \uACF5\uACA9"
+  skillName: "\uC544\uC9C1 \uBBF8\uC815"
+  description: 
   icon: {fileID: 21300000, guid: c81f834ae27f44bc3961ae6da1ea141b, type: 3}
   requireLevel: 1
   cooldown: 7

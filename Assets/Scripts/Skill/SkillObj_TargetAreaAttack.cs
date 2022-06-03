@@ -46,41 +46,58 @@ public class SkillObj_TargetAreaAttack : SkillObject
 
         // after
 
+        // after after
+
+        StartCoroutine("OnWorks");
+        Debug.Log("1");
+        
+    }
+
+
+    IEnumerator OnWorks()
+    {   Debug.Log("2");
+    
         if (eTargetGroup == EGroup.Monster)
         {   
-            foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
+            for (int i = 0; i < data.repeat; i++)
             {
-                if (mon.isDead || mon.isStop) continue;
-                if (skill.target == null) break;
-
-                m_sqrDist = (skill.target.transform.position - mon.transform.position).sqrMagnitude;
-
-                if (data.area * data.area < m_sqrDist) continue;
-
-                m_target = mon.GetComponent<IDamagable>();
-
-                if (data.isMagic)
+                foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
                 {
-                    m_target?.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
-                }
-                else{
-                    m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
+                    if (mon.isDead || mon.isStop) continue;
+                    if (skill.target == null) break;
+
+                    m_sqrDist = (skill.target.transform.position - mon.transform.position).sqrMagnitude;
+
+                    if (data.area * data.area < m_sqrDist) continue;
+
+                    m_target = mon.GetComponent<IDamagable>();
+
+                    if (data.isMagic)
+                    {
+                        m_target?.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
+                    }
+                    else{
+                        m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
+                    }
+
+                    AddBuff(mon);
+
+                    if (data.eTargetEffect != EEffect.None)
+                    {  
+                        eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                        eff.SetPosition(mon);
+                    }
                 }
 
-                AddBuff(mon);
-
-                if (data.eTargetEffect != EEffect.None)
-                {  
-                    eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
-                    eff.SetPosition(mon);
+                if (data.eUserEffect != EEffect.None)
+                {   
+                    eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                    eff.SetPosition(skill.owner);
                 }
+
+
             }
-
-            if (data.eUserEffect != EEffect.None)
-            {   
-                eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
-                eff.SetPosition(skill.owner);
-            }
+            
 
             
 
@@ -121,5 +138,8 @@ public class SkillObj_TargetAreaAttack : SkillObject
                 eff.SetPosition(skill.owner);
             }
         }
+
+        FinishWorks();
+        yield return null;
     }
 }

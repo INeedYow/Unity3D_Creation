@@ -21,7 +21,7 @@ public abstract class ConditionMacro : BattleMacro
     public Character GetTarget() 
     {   // 도발
         if (owner.IsProvoked())
-        {   Debug.Log("도발 : " + owner.GetProvoker().name);
+        {   //Debug.Log("도발 : " + owner.GetProvoker().name);
             return owner.GetProvoker();
         }
 

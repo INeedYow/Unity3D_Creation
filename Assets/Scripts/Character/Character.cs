@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public enum EBuff {
     None = -1,
     Armor, Damage, Speed,//Magic, MagicArmor, AttSpeed,
-    Stun, Frozen,
+    Stun, Frozen, DamageSaver,
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable

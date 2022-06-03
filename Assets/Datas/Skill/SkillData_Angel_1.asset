@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillData_Angel_1
   m_EditorClassIdentifier: 
   skillName: "\uD68C\uBCF5"
-  description: "\uB300\uC0C1\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5 \uC2DC\uD0A8\uB2E4"
+  description: "\uB300\uC0C1 \uCCB4\uB825 \uD68C\uBCF5"
   icon: {fileID: 21300000, guid: 41f765b960395416192f6fba79ab2dfe, type: 3}
   requireLevel: 1
   cooldown: 4

@@ -9,7 +9,9 @@ public class SkillObjectData : ScriptableObject
     [Tooltip("계수")]
     [Range(0f, 10f)]        public float powerRatio;    // 계수
     [Range(0f, 30f)]        public float area = 0f;
-    [Tooltip("개수")]       public int count = 1;
+    [Range(1, 30)]          public int repeat = 1;
+    [Range(0f, 3f)]         public float interval;
+
     
     [Header("Buff (+) / Nerf (-) ")]
     public EBuff eBuff;
