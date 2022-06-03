@@ -5,8 +5,8 @@ using UnityEngine;
 public class Condition_GetMostHpTarget : ConditionMacro
 {
     [Tooltip("Least : 최소 / Most : 최대")]
-    public EMost eMost;
-    public EGroup eTargetGroup;
+    public EMost    eMost;
+    public EGroup   eTargetGroup;
     float m_value;
     bool m_hasAnyHpChange;
 

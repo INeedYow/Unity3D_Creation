@@ -15,7 +15,7 @@ public class HeroMacroUI : MonoBehaviour
 
     private void OnEnable() {
         HeroManager.instance.onChangeSelectedHero += RenewUI;
-        RenewUI(HeroManager.instance.selectedHero); 
+        //RenewUI(HeroManager.instance.selectedHero); 
     }
 
     private void OnDisable() {

@@ -420,7 +420,7 @@ AnimatorStateMachine:
     m_Position: {x: 460, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2514237014634878597}
-    m_Position: {x: 990, y: 70, z: 0}
+    m_Position: {x: 1190, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2504246131201998604}
     m_Position: {x: 460, y: -10, z: 0}
@@ -429,7 +429,7 @@ AnimatorStateMachine:
     m_Position: {x: 250, y: -220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8440674900567130947}
-    m_Position: {x: 1020, y: 10, z: 0}
+    m_Position: {x: 1160, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6798701867028544206}
     m_Position: {x: 760, y: -20, z: 0}
@@ -441,10 +441,10 @@ AnimatorStateMachine:
     m_Position: {x: 50, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6459001885588305095}
-    m_Position: {x: 990, y: 230, z: 0}
+    m_Position: {x: 1200, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3503496723016580305}
-    m_Position: {x: 980, y: 150, z: 0}
+    m_Position: {x: 1170, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1072165436573195511}
     m_Position: {x: 1040, y: -90, z: 0}
@@ -523,6 +523,12 @@ AnimatorController:
   - m_Name: Skill 4
     m_Type: 4
     m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: SpinSpeed
+    m_Type: 1
+    m_DefaultFloat: 0.5
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
@@ -860,13 +866,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: f21cf475a935d4a469e60e9d8de6ff45, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: SpinSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 

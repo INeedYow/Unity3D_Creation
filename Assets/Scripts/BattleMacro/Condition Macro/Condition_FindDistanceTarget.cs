@@ -5,10 +5,11 @@ using UnityEngine;
 public class Condition_FindDistanceTarget : ConditionMacro
 {
     [Tooltip("Least : 최소 / Most : 최대")]
-    public EMost eMost;
-    public EGroup eTargetGroup;
+    public EMost        eMost;
+    public EGroup       eTargetGroup;
     [Tooltip("distance")] 
-    public float value;
+    public float        value;
+    
     float m_sqrValue;
     float m_sqrDist;
 

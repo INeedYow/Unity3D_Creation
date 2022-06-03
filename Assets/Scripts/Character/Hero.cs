@@ -8,7 +8,7 @@ public class Hero : Character
 {
     public UnityAction<int> onLevelUp;
 
-    public enum EClass { Knight, Archer, Angel, Necromancer, Bard, Templar,  }  // magician / wizard / sorcerer(sorceress)
+    public enum EClass { Knight, Archer, Angel, Necromancer, Bard, Templar,  }  // wizard / sorcerer(sorceress) / spear / assassin
     [Header("GFX")]
     public Hero_GFX heroGFX;
     public Dummy dummy;
@@ -57,10 +57,12 @@ public class Hero : Character
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
         // Attack Command
         switch(eClass){
-            case EClass.Knight: attackCommand       = new NormalAttackCommand(this); break;
-            case EClass.Archer: attackCommand       = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
-            case EClass.Angel:  attackCommand       = new ProjectileAttackCommand(this, EProjectile.YellowMarble); break;
-            case EClass.Necromancer: attackCommand  = new NormalAttackCommand(this); break;
+            case EClass.Knight:         attackCommand = new NormalAttackCommand(this); break;
+            case EClass.Archer:         attackCommand = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
+            case EClass.Angel:          attackCommand = new ProjectileAttackCommand(this, EProjectile.YellowMarble); break;
+            case EClass.Necromancer:    attackCommand = new NormalAttackCommand(this); break;
+            case EClass.Bard:           attackCommand = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
+            case EClass.Templar:        attackCommand = new NormalAttackCommand(this); break;
         }
     }
 

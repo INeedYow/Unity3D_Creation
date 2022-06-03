@@ -26,12 +26,16 @@ public class HeroManager : MonoBehaviour
     public Hero prfArcher;
     public Hero prfAngel;
     public Hero prfNecromancer;
+    public Hero prfBard;
+    public Hero prfTemplar;
 
     [Header("Hero prfSkill")]
     public Skill[] prfKnightSkills;
     public Skill[] prfArcherSkills;
     public Skill[] prfAngelSkills;
     public Skill[] prfNecromancerSkills;
+    public Skill[] prfBardSkills;
+    public Skill[] prfTemplarSkills;
 
 
 
@@ -83,6 +87,7 @@ public class HeroManager : MonoBehaviour
                     hero.skills[i] = Instantiate(prfKnightSkills[i], hero.transform);
                     hero.skills[i].Init(hero, i + 1);
                 }
+
                 break;
             }
 
@@ -117,6 +122,30 @@ public class HeroManager : MonoBehaviour
                 for (int i = 0; i < prfNecromancerSkills.Length; i++)
                 {
                     hero.skills[i] = Instantiate(prfNecromancerSkills[i], hero.transform);
+                    hero.skills[i].Init(hero, i + 1);
+                }
+                break;
+            }
+
+            case Hero.EClass.Bard:
+            {
+                hero = Instantiate(prfBard);
+
+                for (int i = 0; i < prfBardSkills.Length; i++)
+                {
+                    hero.skills[i] = Instantiate(prfBardSkills[i], hero.transform);
+                    hero.skills[i].Init(hero, i + 1);
+                }
+                break;
+            }
+
+            case Hero.EClass.Templar:
+            {
+                hero = Instantiate(prfTemplar);
+
+                for (int i = 0; i < prfTemplarSkills.Length; i++)
+                {
+                    hero.skills[i] = Instantiate(prfTemplarSkills[i], hero.transform);
                     hero.skills[i].Init(hero, i + 1);
                 }
                 break;

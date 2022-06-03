@@ -49,13 +49,13 @@ public class SkillObj_TargetAreaAttack : SkillObject
         // after after
 
         StartCoroutine("OnWorks");
-        Debug.Log("1");
+        //Debug.Log("1");
         
     }
 
 
     IEnumerator OnWorks()
-    {   Debug.Log("2");
+    {   //Debug.Log("2");
     
         if (eTargetGroup == EGroup.Monster)
         {   
@@ -87,55 +87,56 @@ public class SkillObj_TargetAreaAttack : SkillObject
                         eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
                         eff.SetPosition(mon);
                     }
+
+                    if (data.eUserEffect != EEffect.None)
+                    {   
+                        eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                        eff.SetPosition(skill.owner);
+                    }
                 }
 
-                if (data.eUserEffect != EEffect.None)
-                {   
-                    eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
-                    eff.SetPosition(skill.owner);
-                }
-
-
+                yield return new WaitForSeconds(data.interval);
             }
-            
-
-            
-
         }
 
         else
         {
-            foreach (Hero hero in PartyManager.instance.heroParty)
+            for (int i = 0; i < data.repeat; i++)
             {
-                if (hero.isDead || hero.isStop) continue;
-                
-                m_sqrDist = (skill.target.transform.position - hero.transform.position).sqrMagnitude;
-
-                if (data.area * data.area < m_sqrDist) continue;
-
-                m_target = hero.GetComponent<IDamagable>();
-
-                if (data.isMagic)
+                foreach (Hero hero in PartyManager.instance.heroParty)
                 {
-                    m_target?.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
+                    if (hero.isDead || hero.isStop) continue;
+                
+                    m_sqrDist = (skill.target.transform.position - hero.transform.position).sqrMagnitude;
+
+                    if (data.area * data.area < m_sqrDist) continue;
+
+                    m_target = hero.GetComponent<IDamagable>();
+
+                    if (data.isMagic)
+                    {
+                        m_target?.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
+                    }
+                    else{
+                        m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
+                    }
+
+                    AddBuff(hero);
+
+                    if (data.eTargetEffect != EEffect.None)
+                    {  
+                        eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
+                        eff.SetPosition(hero); 
+                    }   
+
+                    if (data.eUserEffect != EEffect.None)
+                    {   
+                        eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
+                        eff.SetPosition(skill.owner);
+                    }
                 }
-                else{
-                    m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
-                }
 
-                AddBuff(hero);
-
-                if (data.eTargetEffect != EEffect.None)
-                {  
-                    eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
-                    eff.SetPosition(hero); 
-                }   
-            }
-
-            if (data.eUserEffect != EEffect.None)
-            {   
-                eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
-                eff.SetPosition(skill.owner);
+                yield return new WaitForSeconds(data.interval);
             }
         }
 
