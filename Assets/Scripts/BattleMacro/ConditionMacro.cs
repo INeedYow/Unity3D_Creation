@@ -17,7 +17,16 @@ public abstract class ConditionMacro : BattleMacro
         }
     }
     public abstract bool IsSatisfy();
-    public Character GetTarget() { return target; }
+
+    public Character GetTarget() 
+    {   // 도발
+        if (owner.IsProvoked())
+        {   Debug.Log("도발 : " + owner.GetProvoker().name);
+            return owner.GetProvoker();
+        }
+
+        return target; 
+    }
 
     void TargetDead(Character character)
     {

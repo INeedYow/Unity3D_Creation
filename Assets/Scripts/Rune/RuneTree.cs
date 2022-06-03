@@ -42,15 +42,20 @@ public class RuneTree : MonoBehaviour
         {
             skillSlots[i].Apply();
         }
+
+        PlayerManager.instance.runePlane.gameObject.SetActive(true);
     }
 
-    public void Release(){
+    public void Release()
+    {
         firstStem.Release();
         
         for (int i = 0; i < skillSlots.Length; i++)
         {   
             skillSlots[i].Release();
         }
+
+        PlayerManager.instance.runePlane.gameObject.SetActive(false);
     }
 
     public void Reset()

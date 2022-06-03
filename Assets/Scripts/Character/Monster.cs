@@ -26,7 +26,10 @@ public class Monster : Character
         {
             case EMonster.RedSlime: 
             case EMonster.BlueSlime:
-            case EMonster.Plant:            monster.attackCommand = new NormalAttackCommand(monster); break;
+            case EMonster.Plant:            
+            case EMonster.Skeleton:         
+
+            { monster.attackCommand = new NormalAttackCommand(monster); break; }
 
 
             case EMonster.Spore:            monster.attackCommand = new NormalAttackCommand(monster);
@@ -62,6 +65,22 @@ public class Monster : Character
                     monster.skills[i] = Instantiate(DungeonManager.instance.prfChewerSkills[i], monster.transform);
                     monster.skills[i].Init(monster, i + 1);
                 }
+                break;
+            }
+
+            case EMonster.BraveSkeleton :   monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfSkeletonSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
+                break;
+            }
+
+            case EMonster.EvilMage :   monster.attackCommand = new ProjectileAttackCommand(monster, EProjectile.EvilMageAttack);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfEvilMageSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
                 break;
             }
 

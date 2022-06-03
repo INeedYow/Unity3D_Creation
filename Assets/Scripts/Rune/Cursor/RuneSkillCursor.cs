@@ -18,9 +18,6 @@ public abstract class RuneSkillCursor : MonoBehaviour
         Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
         DungeonManager.instance.onWaveEnd += Cancel;
         
-
-        // todo MGR.Plane.SetActive(true);
-        
     }
 
     private void OnDisable() {
@@ -37,7 +34,6 @@ public abstract class RuneSkillCursor : MonoBehaviour
     protected abstract void CursorPosition();
 
     // 스킬 사용한 경우 onWorks?.Invoke(); 해주기
-    // 사용 후 마우스 돌려놓기 
     protected abstract void CheckInput();
     protected void Cancel() { gameObject.SetActive(false); }
 }

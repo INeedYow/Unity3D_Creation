@@ -6,7 +6,7 @@ public class Effect : MonoBehaviour
 {
     public ParticleSystem particle;
 
-    [Range(0f, 10f)]public float duration;
+    [Range(0f, 30f)]public float duration;
     public bool isFollowOwner = false;
 
     [Tooltip("0 : Ground / 1 : Mid / 2 : Over Head")]

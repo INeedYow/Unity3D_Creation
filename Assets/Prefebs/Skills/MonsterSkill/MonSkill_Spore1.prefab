@@ -47,6 +47,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 3022a093697e83d40a427e895565dbc5, type: 2}
   owner: {fileID: 0}
   ID: 0
+  target: {fileID: 0}
   skillObj: {fileID: 8005491098993930165}
 --- !u!1 &4215092970546977487
 GameObject:

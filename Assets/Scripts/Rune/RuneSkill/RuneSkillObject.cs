@@ -11,12 +11,7 @@ public abstract class RuneSkillObject : MonoBehaviour
 
     private void OnEnable() {
         WorldEffect();
-        SkillWorks();
-    }
-
-    void SkillWorks() { 
         Works();
-        FinishWorks();
     }
 
     void WorldEffect()
@@ -36,7 +31,7 @@ public abstract class RuneSkillObject : MonoBehaviour
     }
 
     protected void FinishWorks()
-    {
+    {   Debug.Log("finish");
         gameObject.SetActive(false);
     }
 

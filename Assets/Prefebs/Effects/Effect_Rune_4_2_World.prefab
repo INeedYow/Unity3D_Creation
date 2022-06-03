@@ -4676,7 +4676,7 @@ GameObject:
   - component: {fileID: 5111578530241163742}
   - component: {fileID: 2140746508279635003}
   m_Layer: 0
-  m_Name: Effect_Rune_World2
+  m_Name: Effect_Rune_4_2_World
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

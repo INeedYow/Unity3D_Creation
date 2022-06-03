@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6102415422039161845}
-  - component: {fileID: 6102415422039161844}
+  - component: {fileID: 5867686164080012455}
   m_Layer: 0
   m_Name: SkillObject
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 6102415422789901603}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6102415422039161844
+--- !u!114 &5867686164080012455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,12 +40,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6102415422039161843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9baac205e2aa3a74db2ba4493a982488, type: 3}
+  m_Script: {fileID: 11500000, guid: f5a6d0f4334d40541b651fa031872eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 644a1b7a3725bf64fbd0dd9e91ca51ac, type: 2}
   skill: {fileID: 6102415422789901602}
-  eTargetGroup: 1
+  duration: 6
 --- !u!1 &6102415422789901601
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,4 +93,5 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: e8f3f010ecd63ed47aea6b477b94293b, type: 2}
   owner: {fileID: 0}
   ID: 0
-  skillObj: {fileID: 6102415422039161844}
+  target: {fileID: 0}
+  skillObj: {fileID: 5867686164080012455}

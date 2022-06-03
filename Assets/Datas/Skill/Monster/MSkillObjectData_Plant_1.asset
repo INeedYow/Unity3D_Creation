@@ -17,7 +17,7 @@ MonoBehaviour:
   area: 0
   count: 1
   eBuff: 4
-  duration: 3
+  duration: 1
   buffRatio: -0.95
   eStartEffect: -1
   eUserEffect: -1

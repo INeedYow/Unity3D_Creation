@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum EProjectile { 
-    ArcherArrow, SlowArrow, YellowMarble, CurseArrow, ChewerSkill,
+    ArcherArrow, SlowArrow, YellowMarble, CurseArrow, ChewerSkill, EvilMageAttack, EvilMageSkill, 
 }
 public enum EMonster { 
     RedSlime, BlueSlime, Spore, Pollen, Plant, OddPlant, PlantChewer, 
+    Skeleton, BraveSkeleton, EvilMage
 }
 public enum ESkillObj {
     Single,
@@ -15,7 +16,9 @@ public enum ESkillObj {
 
 public enum EEffect {
     None = -1,
-    Stun, Blood, Buff_ArmorInit, Buff_ArmorDura, Rune_World2, Rune_OnWorks2, Knight_GroundCrack, Angel_Heal, Angel_3_UserEff, Angel_4_TargetEff, Necro_3_TargetEff,
+    Stun, Blood, Buff_ArmorInit, Buff_ArmorDura, Rune_4_2_World, Rune_4_2_OnWorks, Knight_GroundCrack, Angel_Heal, Angel_3_UserEff, Angel_4_TargetEff, Necro_3_TargetEff,
+    Rune_4_1_OnWorks, Rune_4_1_World,
+
     Size,
 }
 

@@ -595,7 +595,7 @@ MonoBehaviour:
   dodgeChance: 1
   criticalRate: 1.5
   powerRate: 1
-  armorRate: 0.05
+  armorRate: 0.1
   magicArmorRate: 0.05
   buffDamage: 1
   buffArmor: 0
@@ -610,6 +610,7 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
+  provoker: {fileID: 0}
   monsGFX: {fileID: 7113632434603974152}
   macrosParent: {fileID: 8740393319684833133}
 --- !u!195 &952399998259112107

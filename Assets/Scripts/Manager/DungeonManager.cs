@@ -19,6 +19,7 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onDungeonExit;
 
     public static DungeonManager instance { get; private set; }
+    
     public List<Dungeon> listDungeon = new List<Dungeon>();
     public Dungeon curDungeon;
 
@@ -28,19 +29,26 @@ public class DungeonManager : MonoBehaviour
     public ResultUI resultUI;
     public GameObject runePlane;
 
+
     [Space(10f)] [Header("Monster prfSkill")]
     public Skill prfSporeSkill;
     public Skill prfPollenSkill;
     public Skill prfPlantSkill;
     public Skill[] prfChewerSkills = new Skill[2];
+    public Skill prfSkeletonSkill;
+    public Skill prfEvilMageSkill;
+
 
     [Space(10f)] [Header("Rewards")]
     [SerializeField] int m_exp;
     [SerializeField] int m_gold;
     [SerializeField] List<EquipItemData> m_item;
 
+
     [Space(4f)] [Header("ETC")]
     public Transform worldEffectTF;
+    public Transform monBackTF;
+    public Transform heroBackTF;
 
 
     HpBar bar;

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: SkillObjectData_Knight_2
   m_EditorClassIdentifier: 
   isMagic: 0
-  powerRatio: 1.2
-  area: 5
+  powerRatio: 0
+  area: 0
   count: 1
-  eBuff: 3
-  duration: 2.5
-  buffRatio: 0
+  eBuff: 1
+  duration: 6
+  buffRatio: -1
   eStartEffect: -1
-  eUserEffect: 6
+  eUserEffect: -1
   eTargetEffect: -1

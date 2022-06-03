@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public enum EBuff {
     None = -1,
     Armor, Damage, Speed,//Magic, MagicArmor, AttSpeed,
-    Stun, Frozen, Provoke,
+    Stun, Frozen,
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -139,7 +139,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     //[HideInInspector] 
     public bool isDead;
     public Character attacker;
-    public Character provoker;      // TODO
+    protected Character provoker;                    // 도발자
     protected int getDamage;
     float m_lastMoveOrderTime;
 
@@ -166,7 +166,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         anim = GetComponentInChildren<Animator>();      
         nav = GetComponent<NavMeshAgent>();
         // 컴포넌트 설정
-        anim.speed = 2f;
+        anim.speed = 3f;
         nav.enabled = false;
         nav.speed = moveSpeed;
         nav.stoppingDistance = attackRange;
@@ -233,8 +233,9 @@ public abstract class Character : MonoBehaviour, IDamagable
     public void Damaged(float damage)
     {   // 플레이어 스킬용 Damaged
         if (isDead || isStop) return;
+        if (damage <= 0f) return;
 
-        curHp -= damage;
+        curHp -= damage;    
         onHpChange?.Invoke();
         DungeonManager.instance.onChangeAnyHP?.Invoke();
 
@@ -346,4 +347,27 @@ public abstract class Character : MonoBehaviour, IDamagable
     //     Debug.Log("OnMouseExit" + name);
     //     transform.localScale = new Vector3(2f, 2f, 2f);
     // }  
+
+    public void SetProvoke(Character provoker, float duration)
+    {
+        if (this.provoker != null)
+        {   // 이미 있는 경우
+            CancelInvoke("FinishProvoke");
+        }
+
+        this.provoker = provoker;
+        
+        if (this.provoker != null)
+        {
+            Invoke("FinishProvoke", duration);
+        }
+    }
+
+    void FinishProvoke()
+    {
+        provoker = null;
+    }
+
+    public bool IsProvoked()        { return provoker != null; }
+    public Character GetProvoker()  { return provoker; }
 }

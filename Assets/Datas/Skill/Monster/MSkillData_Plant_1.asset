@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MSkillData_Plant_1
   m_EditorClassIdentifier: 
   skillName: "\uB9C8\uBE44 \uC77C\uACA9"
-  description: "\uB290\uB824\uC838\uB77C"
+  description: "\uC7A0\uC2DC\uB3D9\uC548 \uB290\uB824\uC9D0"
   icon: {fileID: 0}
   requireLevel: 0
   cooldown: 6

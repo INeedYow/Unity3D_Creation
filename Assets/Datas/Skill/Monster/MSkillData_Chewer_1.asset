@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MSkillData_Chewer_1
   m_EditorClassIdentifier: 
   skillName: "\uB3CC\uC9C4"
-  description: "\uB300\uC0C1\uC5D0\uAC8C \uB3CC\uC9C4\uD558\uACE0 \uAE30\uC808\uC2DC\uD0B4"
+  description: "\uB300\uC0C1\uC744 \uAE30\uC808\uC2DC\uD0B4"
   icon: {fileID: 0}
   requireLevel: 0
   cooldown: 6

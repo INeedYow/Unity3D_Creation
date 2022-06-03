@@ -8,8 +8,8 @@ public class RuneSkillObjectData : ScriptableObject
     [Header("Info--------")]
     public float power;
     public float area;
-    [Range(1, 20)]  public int repeat;
-    [Range(0f, 2f)] public float interval;
+    [Range(1, 40)]  public int repeat = 1;
+    [Range(0f, 2f)] public float repeatInterval;
 
 
     [Space(5f)] [Header("Buff--------")]
