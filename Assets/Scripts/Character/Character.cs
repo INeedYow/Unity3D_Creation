@@ -298,6 +298,19 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (nav.isStopped) nav.isStopped = false;
     }
 
+    public void MoveToPos(Vector3 pos)
+    {
+        if (Time.time < m_lastMoveOrderTime + 0.2f) return;
+
+        if (anim.speed < 0.1f) return;
+
+        if (isDead) return;
+
+        nav.SetDestination(pos);
+        m_lastMoveOrderTime = Time.time;
+        if (nav.isStopped) nav.isStopped = false;
+    }
+
     public bool IsTargetInRange(Character target, float range)
     {
         if (target == null) return false;

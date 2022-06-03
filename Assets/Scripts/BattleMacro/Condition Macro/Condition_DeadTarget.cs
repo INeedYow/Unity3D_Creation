@@ -14,6 +14,7 @@ public class Condition_DeadTarget : ConditionMacro
     }
 
     void SomeoneChanged() { m_hasChanged = true; }
+    
     public override bool IsSatisfy()
     {
         if (m_hasChanged) FindTarget();
