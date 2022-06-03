@@ -14,6 +14,7 @@ public class Buff_Speed : Buff
         target.buffs.AddLast(this);
         ratio = buffRatio;
 
+        isDebuff = buffRatio < 0f;
         //
         dura = duration;
         target.buffSpeed += ratio;

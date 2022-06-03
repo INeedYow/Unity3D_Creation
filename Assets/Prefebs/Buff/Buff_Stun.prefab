@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a57a65b3cbed548b136660e0eb69a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eBuff: 3
+  eBuff: 4
   target: {fileID: 0}
   ratio: 0
   dura: 0

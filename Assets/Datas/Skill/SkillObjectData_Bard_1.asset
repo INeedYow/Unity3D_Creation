@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: SkillObjectData_Bard_1
   m_EditorClassIdentifier: 
   isMagic: 1
-  powerRatio: 1.3
-  area: 6
-  count: 1
-  eBuff: -1
-  duration: 0
-  buffRatio: 0
+  powerRatio: 0
+  area: 0
+  repeat: 1
+  interval: 0
+  eBuff: 3
+  duration: 5
+  buffRatio: 0.15
   eStartEffect: -1
   eUserEffect: -1
-  eTargetEffect: 10
+  eTargetEffect: -1

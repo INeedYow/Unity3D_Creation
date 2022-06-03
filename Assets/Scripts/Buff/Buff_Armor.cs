@@ -13,6 +13,7 @@ public class Buff_Armor : Buff
         target.buffs.AddLast(this);
         ratio = buffRatio;
 
+        isDebuff = buffRatio < 0f;
         //
         dura = duration;
         target.buffArmor += ratio;

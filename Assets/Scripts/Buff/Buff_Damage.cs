@@ -13,11 +13,12 @@ public class Buff_Damage : Buff
         target.buffs.AddLast(this);
         ratio = buffRatio;
 
+        isDebuff = buffRatio < 0f;
         //
         dura = duration;
         target.buffDamage += ratio;
 
-        DungeonManager.instance.onChangeAnyPower?.Invoke();
+        DungeonManager.instance.onChangeAnyDamage?.Invoke();
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -39,7 +40,7 @@ public class Buff_Damage : Buff
             target.buffs.Remove(this);
         }
         
-        DungeonManager.instance.onChangeAnyPower?.Invoke();
+        DungeonManager.instance.onChangeAnyDamage?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 
@@ -55,7 +56,7 @@ public class Buff_Damage : Buff
             target = null;
         }
         
-        DungeonManager.instance.onChangeAnyPower?.Invoke();
+        DungeonManager.instance.onChangeAnyDamage?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

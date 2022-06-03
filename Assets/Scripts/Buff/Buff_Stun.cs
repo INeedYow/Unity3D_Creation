@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Buff_Stun : Buff
 {
-    private void Awake() { eBuff = EBuff.Stun; }
+    private void Awake() { 
+        eBuff = EBuff.Stun; 
+        isDebuff = true;
+    }
     public override void Add(Character target, float duration, float buffRatio)
     {
         if (target == null) return ;

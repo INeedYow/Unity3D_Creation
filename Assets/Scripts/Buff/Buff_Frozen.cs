@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Buff_Frozen : Buff
 {
-    private void Awake() { eBuff = EBuff.Frozen; }
+    private void Awake() { 
+        eBuff = EBuff.Frozen; 
+        isDebuff = true;
+    }
 
     public override void Add(Character target, float duration, float buffRatio)
     {

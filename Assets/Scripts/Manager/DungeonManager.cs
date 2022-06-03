@@ -8,9 +8,9 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onSomeoneDead;
     public UnityAction onSomeoneAdd;
     public UnityAction onChangeAnyHP;
-    public UnityAction onChangeAnyPower;
+    public UnityAction onChangeAnyDamage;
     public UnityAction onChangeAnyArmor;
-    public UnityAction onChangeAnyMagicPower;
+    public UnityAction onChangeAnyMagic;
     public UnityAction onChangeAnyMagicArmor;
     public UnityAction onChangeAnySpeed;
     public UnityAction onChangeAnyAttackSpeed;
