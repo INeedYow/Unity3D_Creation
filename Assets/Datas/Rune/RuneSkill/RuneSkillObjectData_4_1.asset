@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: RuneSkillObjectData_4_1
   m_EditorClassIdentifier: 
   power: 15
-  area: 0
-  repeat: 40
-  repeatInterval: 0.25
+  area: 4
+  repeat: 1
+  repeatInterval: 0.15
   eBuff: -1
   buffRatio: 0
-  duration: 0
-  eWorldEffect: 12
-  eOnWorksEffect: -1
+  duration: 20
+  eWorldEffect: 28
+  eOnWorksEffect: 29

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 382566145093907933}
   - component: {fileID: 591605913937238156}
   - component: {fileID: 38889906667427838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pollen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

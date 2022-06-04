@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10464ef2516e94a458c9cefc69552d02, type: 3}
   m_Name: StatRuneData 8_2
   m_EditorClassIdentifier: 
-  description: GG
+  description: "\uBBF8\uAD6C\uD604"
   eStat: 4
   values: 14000000280000003c000000

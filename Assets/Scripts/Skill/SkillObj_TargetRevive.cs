@@ -28,5 +28,7 @@ public class SkillObj_TargetRevive : SkillObject
             eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
             eff.SetPosition(skill.owner);
         }
+
+        FinishWorks();
     }
 }

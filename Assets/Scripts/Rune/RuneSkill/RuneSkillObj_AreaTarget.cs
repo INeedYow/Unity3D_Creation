@@ -4,43 +4,71 @@ using UnityEngine;
 
 public class RuneSkillObj_AreaTarget : RuneSkillObject
 {
-    public EGroup eTargetGroup;
+    public bool isHeal; 
+    float m_sqrDist;
 
     public override void Works()
     {
-        if (eTargetGroup == EGroup.Monster)
+        StartCoroutine("OnWorks");
+        Invoke("FinishWorks", data.duration);
+    }
+
+    IEnumerator OnWorks()
+    {
+        while (true)
         {
-            foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
-            {
-                if (ch.isDead || ch.isStop) continue;
-
-                ch.Damaged(data.power);
-                AddBuff(ch);
-
-                if (data.eOnWorksEffect != EEffect.None)
+                foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
                 {
-                    eff = ObjectPool.instance.GetEffect((int)data.eOnWorksEffect);
-                    eff.transform.position = ch.targetTF.position;
+                    if (ch.isDead || ch.isStop) continue;
+
+                    m_sqrDist = (ch.transform.position - transform.position).sqrMagnitude;
+                
+                    if (data.area * data.area < m_sqrDist) continue;
+                
+                    if (isHeal)
+                    {
+                        ch.Healed(data.power);
+                    }
+                    else{
+                        ch.Damaged(data.power);
+                    }
+                
+                    AddBuff(ch);
+
+                    if (data.eOnWorksEffect != EEffect.None)
+                    {
+                        eff = ObjectPool.instance.GetEffect((int)data.eOnWorksEffect);
+                        eff.transform.position = ch.targetTF.position;
+                    }
                 }
 
-            }
-        }
 
-        else
-        {
-            foreach (Character ch in PartyManager.instance.heroParty)
-            {
-                if (ch.isDead || ch.isStop) continue;
-
-                ch.Damaged(data.power);
-                AddBuff(ch);
-
-                if (data.eOnWorksEffect != EEffect.None)
+                foreach (Character ch in PartyManager.instance.heroParty)
                 {
-                    eff = ObjectPool.instance.GetEffect((int)data.eOnWorksEffect);
-                    eff.transform.position = ch.targetTF.position;
+                    if (ch.isDead || ch.isStop) continue;
+
+                    m_sqrDist = (ch.transform.position - transform.position).sqrMagnitude;
+                
+                    if (data.area * data.area < m_sqrDist) continue;
+
+                    if (isHeal)
+                    {
+                        ch.Healed(data.power);
+                    }
+                    else{
+                        ch.Damaged(data.power);
+                    }
+
+                    AddBuff(ch);
+
+                    if (data.eOnWorksEffect != EEffect.None)
+                    {
+                        eff = ObjectPool.instance.GetEffect((int)data.eOnWorksEffect);
+                        eff.transform.position = ch.targetTF.position;
+                    }
                 }
-            }
+
+            yield return new WaitForSeconds(data.repeatInterval);
         }
     }
 }

@@ -69,7 +69,13 @@ public class RuneTree : MonoBehaviour
     public void ShowRuneInfoUI(Rune rune)
     {
         infoUI.gameObject.SetActive(true);
-        infoUI.SetRune(rune);
+        infoUI.SetStatRune(rune);
+    }
+
+    public void ShowRuneSkillInfoUI(SkillRuneData skillData)
+    {
+        infoUI.gameObject.SetActive(true);
+        infoUI.SetSkillRune(skillData);
     }
 
     public void HideRuneInfoUI() { infoUI.gameObject.SetActive(false); }

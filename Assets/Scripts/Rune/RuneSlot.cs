@@ -87,4 +87,21 @@ public class RuneSlot : MonoBehaviour
         }
     }
 
+    public void ShowRuneInfoUI(int ID)
+    {
+        if (ID == 1)
+        {
+            tree.ShowRuneSkillInfoUI(skillData1);
+        }
+        else{
+            tree.ShowRuneSkillInfoUI(skillData2);
+        }
+        
+    }
+
+    public void HideRuneInfoUI()
+    {
+        tree.HideRuneInfoUI();
+    }
+
 }

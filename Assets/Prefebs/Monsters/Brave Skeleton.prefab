@@ -2192,7 +2192,7 @@ GameObject:
   - component: {fileID: 371888498534568640}
   - component: {fileID: 5659755582090165459}
   - component: {fileID: 3990065900951310555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Brave Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2262,7 +2262,6 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
-  provoker: {fileID: 0}
   monsGFX: {fileID: 5962830130248200400}
   macrosParent: {fileID: 941582732613422993}
 --- !u!195 &5659755582090165459

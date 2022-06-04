@@ -882,7 +882,7 @@ GameObject:
   - component: {fileID: 9110007209250463088}
   - component: {fileID: 952399998259112107}
   - component: {fileID: 3089399605762287566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spore
   m_TagString: Untagged
   m_Icon: {fileID: 0}

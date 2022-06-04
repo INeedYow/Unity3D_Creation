@@ -14,13 +14,13 @@ public abstract class RuneSkillCursor : MonoBehaviour
     protected Ray ray;
     protected RaycastHit hit;
 
-    private void OnEnable() {   Debug.Log("Cursor OnEnable");
+    protected virtual void OnEnable() {   Debug.Log("Cursor OnEnable");
         Cursor.SetCursor(texture, Vector2.zero, CursorMode.Auto);
         DungeonManager.instance.onWaveEnd += Cancel;
         
     }
 
-    private void OnDisable() {
+    protected virtual void OnDisable() {
         DungeonManager.instance.onWaveEnd -= Cancel;
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }

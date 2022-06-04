@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SkillObjectData_Angel_3
   m_EditorClassIdentifier: 
   isMagic: 1
-  powerRatio: 1.2
+  powerRatio: 1.3
   area: 0
-  repeat: 3
+  repeat: 2
   interval: 1
   eBuff: -1
   duration: 0
   buffRatio: 0
   eStartEffect: -1
   eUserEffect: 8
-  eTargetEffect: 7
+  eTargetEffect: -1

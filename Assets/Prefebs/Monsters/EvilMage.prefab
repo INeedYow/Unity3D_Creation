@@ -2469,7 +2469,7 @@ GameObject:
   - component: {fileID: 2568331076630725320}
   - component: {fileID: 2531138727013449698}
   - component: {fileID: 8872543693848066901}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EvilMage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2539,7 +2539,6 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
-  provoker: {fileID: 0}
   monsGFX: {fileID: 8246928844683748394}
   macrosParent: {fileID: 3662784995639579633}
 --- !u!195 &2531138727013449698

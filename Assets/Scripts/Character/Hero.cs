@@ -58,10 +58,10 @@ public class Hero : Character
         // Attack Command
         switch(eClass){
             case EClass.Knight:         attackCommand = new NormalAttackCommand(this); break;
-            case EClass.Archer:         attackCommand = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
-            case EClass.Angel:          attackCommand = new ProjectileAttackCommand(this, EProjectile.YellowMarble); break;
+            case EClass.Archer:         attackCommand = new ProjectileAttackCommand(this, EProjectile.Archer_0); break;
+            case EClass.Angel:          attackCommand = new ProjectileAttackCommand(this, EProjectile.Angel_0); break;
             case EClass.Necromancer:    attackCommand = new NormalAttackCommand(this); break;
-            case EClass.Bard:           attackCommand = new ProjectileAttackCommand(this, EProjectile.ArcherArrow); break;
+            case EClass.Bard:           attackCommand = new ProjectileAttackCommand(this, EProjectile.Bard_0); break;
             case EClass.Templar:        attackCommand = new NormalAttackCommand(this); break;
         }
     }

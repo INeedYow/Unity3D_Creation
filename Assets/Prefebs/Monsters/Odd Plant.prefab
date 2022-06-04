@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 371888498534568640}
   - component: {fileID: 5659755582090165459}
   - component: {fileID: 3990065900951310555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Odd Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}

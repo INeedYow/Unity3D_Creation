@@ -19,5 +19,5 @@ MonoBehaviour:
   eBuff: 4
   buffRatio: -1
   duration: 4.5
-  eWorldEffect: 4
-  eOnWorksEffect: 5
+  eWorldEffect: 26
+  eOnWorksEffect: 27

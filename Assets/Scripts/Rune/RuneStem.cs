@@ -25,7 +25,7 @@ public class RuneStem : MonoBehaviour
     {
         usePoints++;
         tree.point--;
-        tree.infoUI.RenewUI();
+        tree.infoUI.RenewStatUI();
 
         if (usePoints >= maxPoint)
         {

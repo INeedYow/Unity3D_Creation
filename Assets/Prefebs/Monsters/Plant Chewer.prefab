@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 9110007209250463088}
   - component: {fileID: 952399998259112107}
   - component: {fileID: 3089399605762287566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plant Chewer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,6 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
-  provoker: {fileID: 0}
   monsGFX: {fileID: 7113632434603974152}
   macrosParent: {fileID: 8740393319684833133}
 --- !u!195 &952399998259112107

@@ -22,4 +22,4 @@ MonoBehaviour:
   buffRatio: -0.8
   eStartEffect: -1
   eUserEffect: -1
-  eTargetEffect: 5
+  eTargetEffect: -1

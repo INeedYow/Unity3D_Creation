@@ -7,25 +7,53 @@ public class RuneInfoUI : MonoBehaviour
 {
     [SerializeField]
     Rune rune;
-    public Text desc;
+    SkillRuneData skillData;
+    public Text title;
+
+    [Header("Stat")]
+    public GameObject statPart;
     public Text curValue;
     public Text nextValue;
 
+    [Header("Skill")]
+    public GameObject skillPart;
+    public Text cooldown;
+
+    UIMouseTracker m_tracker;
     int m_value;
 
-    public void SetRune(Rune newRune)
-    {
-        rune = newRune;
-        SetInfo();
-        RenewUI();
+
+    private void Start() {
+        m_tracker = GetComponent<UIMouseTracker>();    
     }
 
-    void SetInfo()
+    public void SetStatRune(Rune statRune)
     {
-        desc.text = rune.data.description;
+        statPart.SetActive(true);
+        skillPart.SetActive(false);
+        rune = statRune;
+
+        title.text = rune.data.description;
+
+        m_tracker.offset.y = -200f;
+
+        RenewStatUI();
     }
 
-    public void RenewUI()
+    public void SetSkillRune(SkillRuneData data)
+    {
+        statPart.SetActive(false);
+        skillPart.SetActive(true);
+        skillData = data;
+
+        title.text = data.description;
+
+        m_tracker.offset.y = +200f;
+
+        RenewSkillUI();
+    }
+
+    public void RenewStatUI()
     {
         curValue.text = rune.data.GetCurValue(rune.point).ToString();
         
@@ -38,5 +66,10 @@ public class RuneInfoUI : MonoBehaviour
         else {
             nextValue.text = rune.data.GetNextValue(rune.point).ToString();
         }
+    }
+
+    public void RenewSkillUI()
+    {
+        cooldown.text = skillData.GetMax().ToString();
     }
 }

@@ -76,7 +76,7 @@ public class Monster : Character
                 break;
             }
 
-            case EMonster.EvilMage :   monster.attackCommand = new ProjectileAttackCommand(monster, EProjectile.EvilMageAttack);
+            case EMonster.EvilMage :   monster.attackCommand = new ProjectileAttackCommand(monster, EProjectile.EvilMage_0);
             {
                 monster.skills = new Skill[1];
                 monster.skills[0] = Instantiate(DungeonManager.instance.prfEvilMageSkill, monster.transform);

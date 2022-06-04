@@ -15,7 +15,7 @@ public class RuneSkillObjectData : ScriptableObject
     [Space(5f)] [Header("Buff--------")]
     public EBuff eBuff;
     [Range(-1f, 1f)] public float buffRatio;
-    [Range(0f, 10f)] public float duration;
+    [Range(0f, 20f)] public float duration;
 
 
     [Space(5f)] [Header("Effect--------")]
