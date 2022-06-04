@@ -111,6 +111,11 @@ public class Hero : Character
             CancelInvoke("FinishProvoke");
             provoker = null;
         }
+        
+        if (isStasis) 
+        { 
+            SetStasis(false); 
+        }
 
         DungeonManager.instance.onSomeoneDead?.Invoke();
         heroGFX.gameObject.SetActive(false);
@@ -233,4 +238,7 @@ public class Hero : Character
         accessoryData = null;
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }
+
+
+    
 }

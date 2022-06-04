@@ -13,7 +13,10 @@ public abstract class ConditionMacro : BattleMacro
         set {
             _target = value;
             if (null != _target)
-            { _target.onDeadGetThis += TargetDead;}
+            { 
+                _target.onDeadGetThis += NullTarget;
+                _target.onUntouchableGetThis += NullTarget;
+            }
         }
     }
     public abstract bool IsSatisfy();
@@ -28,9 +31,10 @@ public abstract class ConditionMacro : BattleMacro
         return target; 
     }
 
-    void TargetDead(Character character)
+    void NullTarget(Character character)
     {
-        character.onDeadGetThis -= TargetDead;
+        character.onDeadGetThis -= NullTarget;
+        character.onUntouchableGetThis -= NullTarget;
         target = null;
     }
 }

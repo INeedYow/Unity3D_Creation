@@ -13,6 +13,10 @@ public class RuneSkillObj_AreaTarget : RuneSkillObject
         Invoke("FinishWorks", data.duration);
     }
 
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(transform.position, data.area);
+    }
+
     IEnumerator OnWorks()
     {
         while (true)

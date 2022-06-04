@@ -16,7 +16,7 @@ MonoBehaviour:
   area: 0
   repeat: 1
   repeatInterval: 0
-  eBuff: 4
+  eBuff: 5
   buffRatio: -1
   duration: 4.5
   eWorldEffect: 26

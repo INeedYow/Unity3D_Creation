@@ -14,6 +14,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
     public UnityAction onDead;
+    public UnityAction<Character> onUntouchableGetThis;
     public UnityAction<Character> onDeadGetThis;
     public UnityAction<int> onMacroChangeGetIndex;
     public UnityAction<float> onAttackGetDamage;
@@ -140,6 +141,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public bool isDead;
     public Character attacker;
     protected Character provoker;                    // 도발자
+    [SerializeField] protected bool isStasis;
     protected int getDamage;
     float m_lastMoveOrderTime;
 
@@ -294,6 +296,8 @@ public abstract class Character : MonoBehaviour, IDamagable
 
         if (isDead) return;
 
+        if (!nav.isOnNavMesh) return;
+
         nav.SetDestination(target.transform.position);
         m_lastMoveOrderTime = Time.time;
         if (nav.isStopped) nav.isStopped = false;
@@ -348,6 +352,10 @@ public abstract class Character : MonoBehaviour, IDamagable
     //     transform.localScale = new Vector3(2f, 2f, 2f);
     // }  
 
+
+
+
+    // provoke
     public void SetProvoke(Character provoker, float duration)
     {
         if (this.provoker != null)
@@ -370,4 +378,42 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     public bool IsProvoked()        { return provoker != null; }
     public Character GetProvoker()  { return provoker; }
+
+
+    //// stasis
+    public bool IsStasis() { return isStasis; }
+
+    public void SetStasis(bool isOn)
+    {
+        if (isOn && !isStasis)
+        {   // 정지 상태 처음 진입
+            anim.StartPlayback();
+            
+            nav.isStopped = true;
+            nav.velocity = Vector3.zero;
+            isStop = true;
+            isStasis = true;
+
+            // 매크로 타겟 초기화
+            onUntouchableGetThis?.Invoke(this);
+        }
+        else if (!isOn && isStasis)
+        {   // 정지 상태 해제
+            anim.StopPlayback();
+
+            nav.isStopped = false;
+            isStop = false;
+            isStasis = false;
+
+            onUntouchableGetThis?.Invoke(this);
+        }
+    }
+
+    // private void OnMouseEnter() {   
+    //     SetStasis(true);
+    // }
+
+    // private void OnMouseExit() {    
+    //     SetStasis(false);
+    // }
 }

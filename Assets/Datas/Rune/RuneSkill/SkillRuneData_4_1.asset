@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca945043751933846967d80458b3e5d0, type: 3}
   m_Name: SkillRuneData_4_1
   m_EditorClassIdentifier: 
-  description: "\uD1A0\uB124\uC774\uB3C4"
+  description: "\uD1A0\uB124\uC774\uB3C4\uB97C \uC0DD\uC131\uD574 \uD070 \uD53C\uD574\uB97C
+    \uC900\uB2E4"
   icon: {fileID: 21300000, guid: b67c8de302d4142cda6993d305fa0ca9, type: 3}
   cooldown: 3
   ID: 4
