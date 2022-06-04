@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkillObj_AroundAreaAttack : SkillObject
 {
     public EGroup eTargetGroup;
-    IDamagable m_target;
+    //IDamagable m_target;
     float m_sqrDist;
     float m_sqrArea;
 
@@ -32,14 +32,14 @@ public class SkillObj_AroundAreaAttack : SkillObject
 
                     if (m_sqrArea < m_sqrDist) continue;
 
-                    m_target = mon.GetComponent<IDamagable>();
+                    //m_target = mon.GetComponent<IDamagable>();
 
                     if (data.isMagic)
                     {
-                        m_target?.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
+                       mon.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
                     }
                     else{
-                        m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
+                        mon.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
                     }
 
                     AddBuff(mon);
@@ -73,14 +73,14 @@ public class SkillObj_AroundAreaAttack : SkillObject
 
                     if (m_sqrArea < m_sqrDist) continue;
 
-                    m_target = hero.GetComponent<IDamagable>();
+                    //m_target = hero.GetComponent<IDamagable>();
 
                     if (data.isMagic)
                     {
-                        m_target?.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
+                        hero.Damaged(data.powerRatio * skill.owner.magicDamage, skill.owner.powerRate, skill.owner, true);
                     }
                     else{
-                        m_target?.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
+                        hero.Damaged(data.powerRatio * skill.owner.curDamage, skill.owner.powerRate, skill.owner, false);
                     }
 
                     AddBuff(hero);
@@ -103,6 +103,5 @@ public class SkillObj_AroundAreaAttack : SkillObject
         }
 
         FinishWorks();
-        yield return null;
     }
 }

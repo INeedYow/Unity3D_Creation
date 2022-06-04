@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public enum EBuff {
     None = -1,
-    Armor, Damage, Speed, Power, //Magic, MagicArmor, AttSpeed,
-    Stun, Frozen, Stasis,
+    Armor, Damage, Speed, Power,  //Magic, , AttSpeed,
+    Stun, Frozen, MagicArmor,
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -57,6 +57,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public LinkedList<Buff> buffs;              
     public float buffDamage = 1f;
     public float buffArmor = 0f;
+    public float buffMagicArmor = 0f;
 
     float _buffSpeed = 1f;
     public float buffSpeed {
@@ -78,8 +79,6 @@ public abstract class Character : MonoBehaviour, IDamagable
                 if (m_stunEff == null)
                 {
                     m_stunEff = ObjectPool.instance.GetEffect((int)EEffect.Stun);
-                    // m_stunEff.transform.SetParent(transform);
-                    // m_stunEff.transform.position = HpBarTF.position;
                     m_stunEff.SetPosition(this);
                 }
             }
@@ -186,7 +185,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
         if (isMagic)
         {   
-            getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate  - buffArmor));
+            getDamage = Mathf.RoundToInt(damage * damageRate * (1f - magicArmorRate  - buffMagicArmor));
             if (getDamage < 1) getDamage = 1;
             curHp -= getDamage;
 
@@ -383,7 +382,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     //// stasis
     public bool IsStasis() { return isStasis; }
 
-    public void SetStasis(bool isOn)
+    public void SetStasis(bool isOn, float duration = 0f)
     {
         if (isOn && !isStasis)
         {   // 정지 상태 처음 진입
@@ -393,6 +392,11 @@ public abstract class Character : MonoBehaviour, IDamagable
             nav.velocity = Vector3.zero;
             isStop = true;
             isStasis = true;
+
+            if (duration != 0f)
+            {
+                Invoke("FinishStasis" , duration);
+            }
 
             // 매크로 타겟 초기화
             onUntouchableGetThis?.Invoke(this);
@@ -407,6 +411,11 @@ public abstract class Character : MonoBehaviour, IDamagable
 
             onUntouchableGetThis?.Invoke(this);
         }
+    }
+
+    public void FinishStasis()
+    {
+        SetStasis(false);
     }
 
     // private void OnMouseEnter() {   

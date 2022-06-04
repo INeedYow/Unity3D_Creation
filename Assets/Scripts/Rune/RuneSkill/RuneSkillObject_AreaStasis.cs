@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+//using UnityEngine.Events;
 
 public class RuneSkillObject_AreaStasis : RuneSkillObject
 {
-    public UnityAction onFinishStasis;
+    //public UnityAction onFinishStasis;
     float m_sqrDist;
     float m_timer;
     float m_sqrArea;

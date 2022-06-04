@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: SkillData_Archer_3
   m_EditorClassIdentifier: 
-  skillName: "\uC544\uC9C1 \uBBF8\uC815"
-  description: 
-  icon: {fileID: 21300000, guid: c81f834ae27f44bc3961ae6da1ea141b, type: 3}
+  skillName: "\uB109\uBC31"
+  description: "\uC8FC\uBCC0 \uC801 \uB109\uBC31 \uBC0F \uB454\uD654"
+  icon: {fileID: 21300000, guid: d5fc92820481b43a2986103f885cef46, type: 3}
   requireLevel: 1
-  cooldown: 7
-  skillRange: 11
+  cooldown: 10
+  skillRange: 0

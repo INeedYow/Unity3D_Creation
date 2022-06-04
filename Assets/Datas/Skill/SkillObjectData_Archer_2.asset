@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SkillObjectData_Archer_2
   m_EditorClassIdentifier: 
   isMagic: 0
-  powerRatio: 2
+  powerRatio: 1.5
   area: 0
-  repeat: 3
-  interval: 0.2
+  repeat: 1
+  interval: 0
   eBuff: 0
   duration: 4
   buffRatio: -0.5

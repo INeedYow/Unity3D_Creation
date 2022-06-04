@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RuneSkillObjectData_3_2
   m_EditorClassIdentifier: 
   power: 0
-  area: 5
+  area: 4
   repeat: 1
   repeatInterval: 0
   eBuff: -1
