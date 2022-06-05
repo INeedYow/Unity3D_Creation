@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ItemData_Necromancer
   m_EditorClassIdentifier: 
   itemName: Necromancer
-  desc: "\uB4E0\uB4E0\uD55C \uC911\uAC70\uB9AC \uB9C8\uBC95 \uB51C\uB7EC"
+  desc: "\uB4E0\uB4E0\uD55C \uB51C\uB7EC"
   icon: {fileID: 0}
   eClass: 3
   skillDatas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 46bfb0e49eed9be4f8e20cbc7f5a2f1b, type: 2}
+  - {fileID: 11400000, guid: bea2abe006407a542a3b20c9f0d65eed, type: 2}
+  - {fileID: 11400000, guid: c4b5207f50548f24eae43305b4db7145, type: 2}
+  - {fileID: 11400000, guid: 7f5607993a7e8c049a93ecc15fcc4498, type: 2}

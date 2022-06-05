@@ -14,6 +14,8 @@ public class Buff_Power : Buff
         ratio = buffRatio;
 
         isDebuff = buffRatio < 0f;
+        if (isDebuff) { target.debuffCount++; }
+        else { target.buffCount++; }
         //
         dura = duration;
         target.powerRate += ratio;
@@ -35,6 +37,9 @@ public class Buff_Power : Buff
         if (target != null)
         {   
             target.powerRate -= ratio; 
+            if (isDebuff) { target.debuffCount--; }
+            else { target.buffCount--; }
+            
             target.onDead -= Remove; 
             target.buffs.Remove(this);
         }
@@ -49,6 +54,9 @@ public class Buff_Power : Buff
         if (target != null)
         {   
             target.powerRate -= ratio;
+            if (isDebuff) { target.debuffCount--; }
+            else { target.buffCount--; }
+
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;

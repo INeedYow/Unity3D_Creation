@@ -21,10 +21,10 @@ public abstract class ConditionMacro : BattleMacro
     }
     public abstract bool IsSatisfy();
 
-    public Character GetTarget() 
+    public virtual Character GetTarget() 
     {   // 도발
         if (owner.IsProvoked())
-        {   //Debug.Log("도발 : " + owner.GetProvoker().name);
+        {   
             return owner.GetProvoker();
         }
 

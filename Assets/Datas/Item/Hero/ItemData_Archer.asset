@@ -19,5 +19,5 @@ MonoBehaviour:
   skillDatas:
   - {fileID: 11400000, guid: 9723eb2756475a84ba528be624501597, type: 2}
   - {fileID: 11400000, guid: e3f9d2093c0f3e1409247376b5d4be87, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: cedbb180d9448ee4ca534c61859b618a, type: 2}
+  - {fileID: 11400000, guid: 5b5af1caf569b7e4e952d1c030e83543, type: 2}

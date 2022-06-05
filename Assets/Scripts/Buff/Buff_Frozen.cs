@@ -16,6 +16,7 @@ public class Buff_Frozen : Buff
         this.target = target;
         target.buffs.AddLast(this);
         
+        target.debuffCount++;
         //
         ratio = buffRatio;
         dura = duration;
@@ -38,6 +39,8 @@ public class Buff_Frozen : Buff
         if (target != null)
         {   
             target.buffFrozen -= ratio; 
+            target.debuffCount--;
+            
             target.onDead -= Remove; 
             target.buffs.Remove(this);
         }
@@ -52,6 +55,8 @@ public class Buff_Frozen : Buff
         if (target != null)
         {   
             target.buffFrozen -= ratio;
+            target.debuffCount--;
+            
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;

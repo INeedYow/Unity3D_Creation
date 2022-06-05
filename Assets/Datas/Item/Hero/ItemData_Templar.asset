@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4154e8ca75231424dbe9e7b1cd802305, type: 3}
+  m_Name: ItemData_Templar
+  m_EditorClassIdentifier: 
+  itemName: Templar
+  desc: "\uB4E0\uB4E0\uD55C \uD0F1\uCEE4"
+  icon: {fileID: 0}
+  eClass: 5
+  skillDatas:
+  - {fileID: 11400000, guid: 499f35e54cbf7bc4f9d9409c8a473ea0, type: 2}
+  - {fileID: 11400000, guid: b9e51fab22a8b4b4dbcc4d01d77b8ca8, type: 2}
+  - {fileID: 11400000, guid: 237edcc277a4dba47bf5a51fc6377466, type: 2}
+  - {fileID: 11400000, guid: f00c1abc5ec740847b07de0bdf6897b9, type: 2}

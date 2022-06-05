@@ -18,4 +18,10 @@ public abstract class Buff : MonoBehaviour
     public abstract void Finish();
     public abstract void Remove();
     public bool IsDebuff() { return isDebuff; }
+
+    public void Restoration(SkillObj_BuffRestoration restoration)
+    {
+        restoration.onRestoration -= Restoration;
+        Remove();
+    }
 }

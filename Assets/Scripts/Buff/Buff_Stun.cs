@@ -14,6 +14,7 @@ public class Buff_Stun : Buff
         
         this.target = target;
         target.buffs.AddLast(this);
+        target.debuffCount++;
         
         //
         dura = duration;
@@ -36,6 +37,7 @@ public class Buff_Stun : Buff
         if (target != null)
         {
             target.buffStun -= dura; 
+            target.debuffCount--;
             target.onDead -= Remove; 
             target.buffs.Remove(this);
         }
@@ -50,6 +52,7 @@ public class Buff_Stun : Buff
         if (target != null)
         {   
             target.buffStun -= dura;
+            target.debuffCount--;
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;

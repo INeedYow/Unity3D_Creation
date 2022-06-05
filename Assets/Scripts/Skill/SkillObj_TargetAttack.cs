@@ -18,12 +18,6 @@ public class SkillObj_TargetAttack : SkillObject
             FinishWorks();
             yield break;
         }
-
-        if (data.eStartEffect != EEffect.None)
-        {
-            eff = ObjectPool.instance.GetEffect((int)data.eStartEffect);
-            eff.SetPosition(skill.owner);
-        }
         
         m_target = skill.target.GetComponent<IDamagable>();
 

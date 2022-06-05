@@ -11062,7 +11062,7 @@ Animator:
   m_GameObject: {fileID: 329591688834564415}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 231d45dba8bff13478d80904318e7bc4, type: 3}
-  m_Controller: {fileID: 9100000, guid: b28a5814760ae474880bf98404639623, type: 2}
+  m_Controller: {fileID: 9100000, guid: a76ad81b090732f459190a5a61323b7d, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -11274,8 +11274,11 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0.05
   magicArmorRate: 0
+  buffCount: 0
+  debuffCount: 0
   buffDamage: 1
   buffArmor: 0
+  buffMagicArmor: 0
   targetTF: {fileID: 5105215773378413718}
   HpBarTF: {fileID: 4553991733542452845}
   projectileTF: {fileID: 5085808401628143386}
@@ -11287,6 +11290,7 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
+  isStasis: 0
   heroGFX: {fileID: 3925214605520752145}
   dummy: {fileID: 8017951671207473478}
   eClass: 5

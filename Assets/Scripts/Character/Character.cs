@@ -54,7 +54,10 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
    
     // buffs
-    public LinkedList<Buff> buffs;              
+    public LinkedList<Buff> buffs;
+    public int buffCount;
+    public int debuffCount;
+
     public float buffDamage = 1f;
     public float buffArmor = 0f;
     public float buffMagicArmor = 0f;

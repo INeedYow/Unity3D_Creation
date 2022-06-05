@@ -90,5 +90,7 @@ public class SkillObj_DeadTargetExplosion : SkillObject
                 eff.SetPosition(skill.owner);
             }
         }
+
+        FinishWorks();
     }
 }
