@@ -10,6 +10,9 @@ public class Action_UseSkill : ActionMacro
     public override bool IsReady()
     {
         if (owner.skills[skillNumber - 1] == null) return false;
+
+        if (owner.silence > 0) return false;
+
         return owner.skills[skillNumber - 1].IsReady();
     }
 

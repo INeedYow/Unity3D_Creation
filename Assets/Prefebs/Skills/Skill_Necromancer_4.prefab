@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eef0befab3467745b254f5d4fddc0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: c4b5207f50548f24eae43305b4db7145, type: 2}
+  data: {fileID: 11400000, guid: 7f5607993a7e8c049a93ecc15fcc4498, type: 2}
   owner: {fileID: 0}
   ID: 0
   target: {fileID: 0}
-  skillObj: {fileID: 41192024487911050}
+  skillObj: {fileID: 2061888203778779322}
 --- !u!1 &8252886956595247901
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5196158180282267496}
-  - component: {fileID: 41192024487911050}
+  - component: {fileID: 2061888203778779322}
   m_Layer: 0
   m_Name: SkillObject
   m_TagString: Untagged
@@ -80,7 +80,7 @@ Transform:
   m_Father: {fileID: 8895012793921468057}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &41192024487911050
+--- !u!114 &2061888203778779322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,9 +89,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8252886956595247901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fe82310b5f456448993a556903c4533, type: 3}
+  m_Script: {fileID: 11500000, guid: 9baac205e2aa3a74db2ba4493a982488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: fd16d4d73ea852447a7e04a82a68f472, type: 2}
+  data: {fileID: 11400000, guid: 7f64c5187a5c4784db4e291d49a940f6, type: 2}
   skill: {fileID: 1571861380200495957}
   eTargetGroup: 1

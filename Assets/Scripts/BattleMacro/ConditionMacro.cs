@@ -30,7 +30,18 @@ public abstract class ConditionMacro : BattleMacro
     public abstract bool IsSatisfy();
 
     public virtual Character GetTarget() 
-    {   // 도발
+    {   
+        if (owner.madness > 0)
+        {
+            if (owner.eGroup == EGroup.Hero)
+            {
+                return PartyManager.instance.GetAliveHero();
+            }
+            else{
+                return DungeonManager.instance.curDungeon.GetAliveMonster();
+            }
+        }
+        
         if (owner.IsProvoked())
         {   
             return owner.GetProvoker();

@@ -7,11 +7,10 @@ public class SkillObj_Fairy : SkillObject
 {
     public EGroup eTargetGroup;
     public EProjectile eProjectile;
+    public ParticleSystem fairyParticle;
 
-    public float moveRange;
-    public float moveSpeed;
-    float m_sqrMoveRange;
-    float m_sqrMoveDist;
+    public float rotRange;
+    public float rotSpeed;
 
     Projectile m_proj;
     float m_sqrRange;
@@ -22,8 +21,9 @@ public class SkillObj_Fairy : SkillObject
         skill.owner.onDead += OnDead;
 
         m_sqrRange = data.area * data.area;
-        m_sqrMoveRange = moveRange * moveRange;
 
+        transform.SetParent(null);
+        fairyParticle.Play();
         StartCoroutine("Move");
         StartCoroutine("OnWorks");
     }
@@ -31,21 +31,29 @@ public class SkillObj_Fairy : SkillObject
     void OnDead()
     {
         skill.owner.onDead -= OnDead;
+        fairyParticle.Stop();
+        transform.SetParent(skill.transform);
         FinishWorks();
     }
 
     IEnumerator Move()
     {
-        yield return null;
+        //float y = 0f;
+
+        transform.position = skill.owner.HpBarTF.position + Vector3.right * rotRange;
+
+        while (true)
+        {
+            transform.RotateAround(skill.owner.HpBarTF.position, Vector3.up, rotSpeed * Time.deltaTime);
+
+            yield return null;
+        }
     }
 
     IEnumerator OnWorks()
     {
         for (int i = 0; i < data.repeat; i++)
         {
-            m_proj = m_proj = ObjectPool.instance.GetProjectile((int)eProjectile);  
-            m_proj.transform.position = transform.position;
-
             if (eTargetGroup == EGroup.Monster)
             {
                 foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
@@ -55,6 +63,9 @@ public class SkillObj_Fairy : SkillObject
                     m_sqrDist = (ch.transform.position - skill.owner.transform.position).sqrMagnitude;
 
                     if (m_sqrDist > m_sqrRange) continue;
+
+                    m_proj = m_proj = ObjectPool.instance.GetProjectile((int)eProjectile);  
+                    m_proj.transform.position = transform.position;
 
                     m_proj.Launch(
                         ch,
@@ -80,6 +91,9 @@ public class SkillObj_Fairy : SkillObject
 
                     if (m_sqrDist > m_sqrRange) continue;
 
+                    m_proj = m_proj = ObjectPool.instance.GetProjectile((int)eProjectile);  
+                    m_proj.transform.position = transform.position;
+
                     m_proj.Launch(
                         ch,
                         skill.owner,
@@ -95,8 +109,13 @@ public class SkillObj_Fairy : SkillObject
                     break;
                 }
             }
+
+            yield return new WaitForSeconds(data.interval);
         }
 
-         yield return null;
+        fairyParticle.Stop();
+        transform.SetParent(skill.transform);
+        StopCoroutine("Move");
+        FinishWorks();
     }
 }

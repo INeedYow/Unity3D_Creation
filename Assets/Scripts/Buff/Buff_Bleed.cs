@@ -38,7 +38,7 @@ public class Buff_Bleed : Buff
         float timer = 0f;
         while (timer < dura)
         {
-            target.Damaged(ratio);
+            target.Bleed(ratio);
             timer += 0.5f;
             yield return new WaitForSeconds(0.5f);
         }

@@ -8,7 +8,7 @@ public enum EBuff {
     None = -1,
     Armor, Damage, Speed, Power,  //Magic,
     Stun, Frozen, MagicArmor, Invincible,
-    Bleed, Blind,
+    Bleed, Blind, Silence, Madness,
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -143,24 +143,24 @@ public abstract class Character : MonoBehaviour, IDamagable
             {
                 if (!isInvincible) isInvincible = true;
 
-                if (m_InvincibleEff == null)
+                if (m_invincibleEff == null)
                 {
-                    m_InvincibleEff = ObjectPool.instance.GetEffect((int)EEffect.Invincible);
-                    m_InvincibleEff.SetPosition(this);
+                    m_invincibleEff = ObjectPool.instance.GetEffect((int)EEffect.Invincible);
+                    m_invincibleEff.SetPosition(this);
                 }
             }
             else{
                 if (isInvincible) isInvincible = false;
 
-                if (m_InvincibleEff != null)
+                if (m_invincibleEff != null)
                 {
-                    m_InvincibleEff.Return();
-                    m_InvincibleEff = null;
+                    m_invincibleEff.Return();
+                    m_invincibleEff = null;
                 }
             }
         }
     }
-    Effect m_InvincibleEff;
+    Effect m_invincibleEff;
 
 
     
@@ -187,12 +187,73 @@ public abstract class Character : MonoBehaviour, IDamagable
     public bool isStop;    
     //[HideInInspector] 
     public bool isDead;
+
+
+    // etc
     public Character attacker;
     protected Character provoker;                    // 도발자
     [SerializeField] protected bool isStasis;
     [SerializeField] protected bool isInvincible;
+
+
+    int _silence;
+    public int silence {
+        get { return _silence; }
+        set {
+            _silence = value;
+
+            if (_silence > 0)
+            {
+                if (m_silenceEff == null)
+                {
+                    m_silenceEff = ObjectPool.instance.GetEffect((int)EEffect.Silence);
+                    m_silenceEff.SetPosition(this);
+                }
+            }
+            else{
+                if (m_silenceEff != null)
+                {
+                    m_silenceEff.Return();
+                    m_silenceEff = null;
+                }
+            }
+        }
+    }
+    Effect m_silenceEff;
+
+    int _madness;
+    public int madness{
+        get { return _madness; }
+        set {
+            _madness = value;
+
+            if (_madness > 0)
+            {
+                if (m_madnessEff == null)
+                {
+                    m_madnessEff = ObjectPool.instance.GetEffect((int)EEffect.Madness);
+                    m_madnessEff.SetPosition(this);
+                }
+            }
+            else{
+                if (m_madnessEff != null)
+                {
+                    m_madnessEff.Return();
+                    m_madnessEff = null;
+                }
+            }
+        }
+    }
+    Effect m_madnessEff;
+
+
+
     protected int getDamage;
     float m_lastMoveOrderTime;
+
+
+
+
 
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
@@ -287,6 +348,24 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (damage <= 0f) return;
 
         curHp -= damage;    
+        onHpChange?.Invoke();
+        DungeonManager.instance.onChangeAnyHP?.Invoke();
+
+        ShowDamageText(damage);
+
+        if (curHp <= 0) { Death(); }
+    }
+
+    public void Bleed(float ratio)
+    {
+        if (isDead || isStop) return;
+
+        float damage = curHp * ratio;
+        
+        if (damage > 30f) damage = 30f;
+
+        curHp -= damage;
+
         onHpChange?.Invoke();
         DungeonManager.instance.onChangeAnyHP?.Invoke();
 
@@ -444,12 +523,20 @@ public abstract class Character : MonoBehaviour, IDamagable
         else if (!isOn && isStasis)
         {   // 정지 상태 해제
             anim.StopPlayback();
-
-            nav.isStopped = false;
+            
+            if (nav.isOnNavMesh)
+            {
+                nav.isStopped = false;
+            }
             isStop = false;
             isStasis = false;
 
             onUntouchableGetThis?.Invoke(this);
         }
+    }
+
+    void FinishStasis()
+    {
+        SetStasis(false);
     }
 }

@@ -248,13 +248,29 @@ public class DungeonManager : MonoBehaviour
 
     public Monster GetAliveMonster()
     {
-        foreach (Monster aliveMon in curDungeon.curMonsters)
+        // foreach (Monster aliveMon in curDungeon.curMonsters)
+        // {
+        //     if (!aliveMon.isDead && !aliveMon.isStop)
+        //     {
+        //         return aliveMon;
+        //     }
+        // }
+
+        int random = Random.Range(0, curDungeon.curMonsters.Count);
+
+        for (int i = 0; i < curDungeon.curMonsters.Count; i++)
         {
-            if (!aliveMon.isDead && !aliveMon.isStop)
+            if (curDungeon.curMonsters[random].isDead || curDungeon.curMonsters[random].isStop)
             {
-                return aliveMon;
+                random++;
+                random %= curDungeon.curMonsters.Count;
+                continue;
             }
+
+            return curDungeon.curMonsters[random];
         }
+
+
         return null;
     }
 }

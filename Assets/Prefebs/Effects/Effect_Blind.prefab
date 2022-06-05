@@ -47,7 +47,7 @@ MonoBehaviour:
   particle: {fileID: 1886419075361903961}
   duration: 0
   isFollowOwner: 1
-  heightTF: 1
+  heightTF: 2
 --- !u!1001 &2049646031401292750
 PrefabInstance:
   m_ObjectHideFlags: 0

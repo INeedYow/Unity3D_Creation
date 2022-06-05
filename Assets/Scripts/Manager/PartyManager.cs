@@ -86,13 +86,27 @@ public class PartyManager : MonoBehaviour
 
     public Hero GetAliveHero()
     {
-        foreach (Hero aliveHero in heroParty)
+        int random = Random.Range(0, heroParty.Count);
+
+        for (int i = 0; i < heroParty.Count; i++)
         {
-            if (!aliveHero.isDead && !aliveHero.isStop)
+            if (heroParty[random].isDead || heroParty[random].isStop)
             {
-                return aliveHero;
+                random++;
+                random %= heroParty.Count;
+                continue;
             }
+
+            return heroParty[random];
         }
+
+        // foreach (Hero aliveHero in heroParty)
+        // {
+        //     if (!aliveHero.isDead && !aliveHero.isStop)
+        //     {
+        //         return aliveHero;
+        //     }
+        // }
         return null;
     }
 

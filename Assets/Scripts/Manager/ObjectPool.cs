@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum EProjectile { 
-    Archer_0, Archer_1, Angel_0, Archer_2, Chewer_1, EvilMage_0, EvilMage_1, Bard_0,
+    Archer_0, Archer_1, Angel_0, Archer_2, Chewer_1, EvilMage_0, EvilMage_1, Bard_0, Archer_4,
 }
 public enum EMonster { 
     RedSlime, BlueSlime, Spore, Pollen, Plant, OddPlant, PlantChewer, 
@@ -16,12 +16,12 @@ public enum EEffect {
     Stun, Blood, 
     Knight_1_TargetEff, Knight_2_TargetEff, Knight_3_StartEff, Knight_4_StartEff,           // knight
     Angel_1_TargetEff, Angel_2_TargetEff, Angel_3_UserEff, Angel_4_TargetEff,               // angel
-    Archer_1_TargetEff, Archer_2_TargetEff, Archer_3_StartEff, Archer_4_TargetEff,         // archer
+    Archer_1_TargetEff, Archer_2_TargetEff, Archer_3_StartEff, Archer_4_StartEff,           // archer
     Necro_1_TargetEff, Necro_2, Necro_3_TargetEff, Necro_4,  
     Bard_1_TargetEff, Bard_2_TargetEff, Bard_3_TargetEff, Bard_4_StartEff,
     Templar_1_, Templar_2_, Templar_3_, Templar_4_,
     Rune_4_2_World, Rune_4_2_OnWorks, Rune_4_1_World, Rune_4_1_OnWorks, 
-    Invincible, Bleed, Blind,
+    Invincible, Bleed, Blind, Silence, Madness,
 
     Size,
 }
