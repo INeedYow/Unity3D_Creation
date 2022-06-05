@@ -10,8 +10,16 @@ public abstract class ConditionMacro : BattleMacro
     Character _target;
     protected Character target{
         get { return _target; }
-        set {
+        set 
+        {
+            if (null != _target)
+            {
+                _target.onDeadGetThis -= NullTarget;
+                _target.onUntouchableGetThis -= NullTarget;
+            }
+
             _target = value;
+
             if (null != _target)
             { 
                 _target.onDeadGetThis += NullTarget;

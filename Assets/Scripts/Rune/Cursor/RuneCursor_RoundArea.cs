@@ -52,8 +52,8 @@ public class RuneCursor_RoundArea : RuneSkillCursor
         {
             if (m_isReady)
             {   //Debug.Log("RoundAreaCursor 스킬 발동");
-                skillObj.gameObject.SetActive(true);
                 skillObj.transform.position = m_cursorPos;
+                skillObj.gameObject.SetActive(true);
                 onWorks?.Invoke();
                 gameObject.SetActive(false);
             }

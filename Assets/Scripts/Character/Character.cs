@@ -451,10 +451,4 @@ public abstract class Character : MonoBehaviour, IDamagable
             onUntouchableGetThis?.Invoke(this);
         }
     }
-
-    public void FinishStasis()
-    {
-        SetStasis(false);
-    }
-
 }

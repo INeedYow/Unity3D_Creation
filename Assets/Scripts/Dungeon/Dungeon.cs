@@ -147,7 +147,9 @@ public class Dungeon : MonoBehaviour
     {
         foreach (Monster aliveMons in curMonsters)
         {
-            if (aliveMons.isDead == false) return aliveMons;
+            if (aliveMons.isDead || aliveMons.isStop) continue;
+            
+            return aliveMons;
         }
         return null;
     }
