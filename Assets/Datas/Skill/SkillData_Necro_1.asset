@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: SkillData_Necro_1
   m_EditorClassIdentifier: 
-  skillName: "\uBBF8\uC815"
-  description: 
-  icon: {fileID: 21300000, guid: 012deee41ffa241ceb581fb6acc2b3f3, type: 3}
+  skillName: "\uBE14\uB77C\uC778\uB4DC"
+  description: "\uB300\uC0C1 \uD53C\uD574 \uBC0F \uC0AC\uAC70\uB9AC \uCD95\uC18C"
+  icon: {fileID: 21300000, guid: e232be18a379a459980a86a9ae0b97bb, type: 3}
   requireLevel: 1
-  cooldown: 4
-  skillRange: 7
+  cooldown: 5
+  skillRange: 10

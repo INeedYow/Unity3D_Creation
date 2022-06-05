@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SkillObjectData_Necro_1
   m_EditorClassIdentifier: 
   isMagic: 1
-  powerRatio: 1.3
-  area: 6
+  powerRatio: 1.5
+  area: 0
   repeat: 1
   interval: 0
-  eBuff: -1
-  duration: 0
+  eBuff: 9
+  duration: 3
   buffRatio: 0
   eStartEffect: -1
   eUserEffect: -1
-  eTargetEffect: -1
+  eTargetEffect: 14

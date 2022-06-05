@@ -14,7 +14,7 @@ public class Effect : MonoBehaviour
 
 
     private void Awake() {
-        if (particle == null) particle = GetComponentInParent<ParticleSystem>();
+        if (particle == null) particle = GetComponentInChildren<ParticleSystem>();
     }
 
     private void OnEnable() 

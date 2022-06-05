@@ -22,7 +22,7 @@ public class SkillObj_TargetAttack : SkillObject
         m_target = skill.target.GetComponent<IDamagable>();
 
         for (int i = 0; i < data.repeat; i++)
-        {
+        {   
             if (skill.target == null)
             {
                 FinishWorks();
