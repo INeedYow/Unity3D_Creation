@@ -21,6 +21,7 @@ public class Buff_Damage : Buff
         target.buffDamage += ratio;
 
         DungeonManager.instance.onChangeAnyDamage?.Invoke();
+        DungeonManager.instance.onChangeAnyBuff?.Invoke();
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -43,9 +44,12 @@ public class Buff_Damage : Buff
 
             target.onDead -= Remove; 
             target.buffs.Remove(this);
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnyDamage?.Invoke();
         }
         
-        DungeonManager.instance.onChangeAnyDamage?.Invoke();
+        
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 
@@ -62,9 +66,11 @@ public class Buff_Damage : Buff
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnyDamage?.Invoke();
         }
         
-        DungeonManager.instance.onChangeAnyDamage?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

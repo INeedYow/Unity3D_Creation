@@ -22,6 +22,7 @@ public class Buff_Speed : Buff
         target.buffSpeed += ratio;
 
         DungeonManager.instance.onChangeAnySpeed?.Invoke();
+        DungeonManager.instance.onChangeAnyBuff?.Invoke();
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -44,10 +45,11 @@ public class Buff_Speed : Buff
 
             target.onDead -= Remove; 
             target.buffs.Remove(this);
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnySpeed?.Invoke();
         }
         
-        //effect.Return();
-        DungeonManager.instance.onChangeAnySpeed?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 
@@ -64,9 +66,11 @@ public class Buff_Speed : Buff
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnySpeed?.Invoke();
         }
         
-        DungeonManager.instance.onChangeAnySpeed?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

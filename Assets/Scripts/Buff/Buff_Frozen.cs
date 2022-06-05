@@ -21,6 +21,8 @@ public class Buff_Frozen : Buff
         ratio = buffRatio;
         dura = duration;
         target.buffFrozen += ratio;
+
+        DungeonManager.instance.onChangeAnyBuff?.Invoke();
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -43,6 +45,8 @@ public class Buff_Frozen : Buff
             
             target.onDead -= Remove; 
             target.buffs.Remove(this);
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
         }
 
         ObjectPool.instance.ReturnObj(this.gameObject);
@@ -60,6 +64,8 @@ public class Buff_Frozen : Buff
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
         }
         
         ObjectPool.instance.ReturnObj(this.gameObject);

@@ -30,6 +30,8 @@ public class SkillObj_GroupHeal : SkillObject
                         eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
                         eff.SetPosition(ch);
                     }
+
+                    AddBuff(ch);
                 }
             }   
 
@@ -46,6 +48,8 @@ public class SkillObj_GroupHeal : SkillObject
                         eff = ObjectPool.instance.GetEffect((int)data.eTargetEffect);
                         eff.SetPosition(ch);
                     }
+
+                    AddBuff(ch);
                 }
             }
         
@@ -54,6 +58,7 @@ public class SkillObj_GroupHeal : SkillObject
                 eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
                 eff.SetPosition(skill.owner);
             }
+
 
             yield return new WaitForSeconds(data.interval);
         }

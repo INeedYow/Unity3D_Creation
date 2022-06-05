@@ -19,8 +19,12 @@ public class Projectile : MonoBehaviour
     float       m_sqrDist;
 
     EEffect     m_eEffect;
+    EBuff       m_eBuff;
+    float       m_buffDura;
+    float       m_buffRatio;
 
-    public void Launch(Character target, Character owner, float damage, float powerRate, float area, EEffect eEffect = EEffect.None)
+    public void Launch(Character target, Character owner, float damage, float powerRate, float area, EEffect eEffect = EEffect.None, 
+        EBuff eBuff = EBuff.None, float buffDuration = 0f, float buffRatio = 0f)
     {
         m_target = target;
         m_owner = owner;
@@ -28,6 +32,9 @@ public class Projectile : MonoBehaviour
         m_powerRate = powerRate;
         m_area = area;
         m_eEffect = eEffect;
+        m_eBuff = eBuff;
+        m_buffDura = buffDuration;
+        m_buffRatio = buffRatio;
 
         InvokeRepeating("LookTarget", 0f, 0.2f);
         m_isLaunch = true;
@@ -60,13 +67,19 @@ public class Projectile : MonoBehaviour
     {
         if (null != m_target && !m_target.isStop)
         {   //Debug.Log("proj's owner : " + m_owner);
-            IDamagable target = m_target.GetComponent<IDamagable>();
-            target?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
+            //IDamagable target = m_target.GetComponent<IDamagable>();
+            m_target.Damaged(m_damage, m_powerRate, m_owner, isMagic);
 
             if (m_eEffect != EEffect.None)
             {
                 Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
                 eff.SetPosition(m_target);
+            }
+
+            if (m_eBuff != EBuff.None)
+            {
+                Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                buff.Add(m_target, m_buffDura, m_buffRatio);
             }
         }
         
@@ -92,7 +105,7 @@ public class Projectile : MonoBehaviour
 
                 if (m_area * m_area < m_sqrDist) continue;
 
-                IDamagable tempTarget = mon.GetComponent<IDamagable>();
+                //IDamagable tempTarget = mon.GetComponent<IDamagable>();
                 
                 m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
 
@@ -100,6 +113,12 @@ public class Projectile : MonoBehaviour
                 {
                     Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
                     eff.SetPosition(m_target);
+                }
+
+                if (m_eBuff != EBuff.None)
+                {
+                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                    buff.Add(m_target, m_buffDura, m_buffRatio);
                 }
             }
         }
@@ -114,7 +133,7 @@ public class Projectile : MonoBehaviour
 
                 if (m_area * m_area < m_sqrDist) continue;
 
-                IDamagable tempTarget = hero.GetComponent<IDamagable>();
+                //IDamagable tempTarget = hero.GetComponent<IDamagable>();
                 
                 m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
 
@@ -123,8 +142,16 @@ public class Projectile : MonoBehaviour
                     Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
                     eff.SetPosition(m_target);
                 }
+
+                if (m_eBuff != EBuff.None)
+                {
+                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                    buff.Add(m_target, m_buffDura, m_buffRatio);
+                }
             }
         }
+
+        
 
 
         // Collider[] colls;

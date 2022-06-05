@@ -6617,8 +6617,11 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0.05
   magicArmorRate: 0
+  buffCount: 0
+  debuffCount: 0
   buffDamage: 1
   buffArmor: 0
+  buffMagicArmor: 0
   targetTF: {fileID: 5105215773378413718}
   HpBarTF: {fileID: 4553991733542452845}
   projectileTF: {fileID: 8705250063372014004}
@@ -6630,7 +6633,7 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
-  provoker: {fileID: 0}
+  isStasis: 0
   heroGFX: {fileID: 8224236421302679058}
   dummy: {fileID: 378227467548148874}
   eClass: 3

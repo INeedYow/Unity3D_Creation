@@ -15,6 +15,7 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnySpeed;
     public UnityAction onChangeAnyAttackSpeed;
     public UnityAction onChangeAnyRange;
+    public UnityAction onChangeAnyBuff;
     public UnityAction onWaveStart;
     public UnityAction onWaveEnd;
     public UnityAction onDungeonExit;

@@ -92,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 4522557944275250694}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 5373691462718910654}
   - {fileID: 2496582101564725405}
@@ -117,8 +117,8 @@ MonoBehaviour:
   name: Skeleton
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 170
-  maxHp: 170
+  curHp: 160
+  maxHp: 160
   minDamage: 3
   maxDamage: 4
   magicDamage: 0
@@ -133,8 +133,11 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0
   magicArmorRate: 0
+  buffCount: 0
+  debuffCount: 0
   buffDamage: 1
   buffArmor: 0
+  buffMagicArmor: 0
   targetTF: {fileID: 2496582101564725405}
   HpBarTF: {fileID: 3726595780996259423}
   projectileTF: {fileID: 2256110396378995348}
@@ -146,6 +149,7 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
+  isStasis: 0
   monsGFX: {fileID: 7155774512193221424}
   macrosParent: {fileID: 941582732613422993}
 --- !u!195 &5659755582090165459

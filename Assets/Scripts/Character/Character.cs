@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public enum EBuff {
     None = -1,
     Armor, Damage, Speed, Power,  //Magic, , AttSpeed,
-    Stun, Frozen, MagicArmor,
+    Stun, Frozen, MagicArmor, Invincible,
     Size,
 }
 public abstract class Character : MonoBehaviour, IDamagable
@@ -79,6 +79,12 @@ public abstract class Character : MonoBehaviour, IDamagable
             {
                 anim.SetBool("IsStuned", true);
                 
+                if (nav.isOnNavMesh)
+                {
+                    nav.isStopped = true;
+                    nav.velocity = Vector3.zero;
+                }
+                
                 if (m_stunEff == null)
                 {
                     m_stunEff = ObjectPool.instance.GetEffect((int)EEffect.Stun);
@@ -88,6 +94,11 @@ public abstract class Character : MonoBehaviour, IDamagable
             else{
                 _buffStun = 0f;
                 anim.SetBool("IsStuned", false);
+
+                if (nav.isOnNavMesh)
+                {
+                    nav.isStopped = false;
+                }
 
                 if (m_stunEff != null)
                 {
@@ -120,6 +131,37 @@ public abstract class Character : MonoBehaviour, IDamagable
         }
     }
 
+    float _buffInvincible = 0f;
+    public float buffInvincible {
+        get { return _buffInvincible; }
+        set
+        {
+            _buffInvincible = value;
+
+            if (_buffInvincible > 0.1f)
+            {
+                if (!isInvincible) isInvincible = true;
+
+                if (m_InvincibleEff == null)
+                {
+                    m_InvincibleEff = ObjectPool.instance.GetEffect((int)EEffect.Invincible);
+                    m_InvincibleEff.SetPosition(this);
+                }
+            }
+            else{
+                if (isInvincible) isInvincible = false;
+
+                if (m_InvincibleEff != null)
+                {
+                    m_InvincibleEff.Return();
+                    m_InvincibleEff = null;
+                }
+            }
+        }
+    }
+    Effect m_InvincibleEff;
+
+
     
     
     [Header("Transform")]
@@ -127,16 +169,19 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Transform HpBarTF;                           // 체력바 위치
     public Transform projectileTF;                      // 투사체 생성 위치
     
-    [HideInInspector]   public NavMeshAgent nav;
 
     [Header("Macro")]
     public ConditionMacro[]   conditionMacros;
     public ActionMacro[]      actionMacros;
+
+
     [Header("Skill")]
     public Skill[] skills;
 
-    [HideInInspector] public AttackCommand attackCommand;
+
+    [HideInInspector] public NavMeshAgent nav;
     [HideInInspector] public Animator anim;
+    [HideInInspector] public AttackCommand attackCommand;
     //[HideInInspector] 
     public bool isStop;    
     //[HideInInspector] 
@@ -144,6 +189,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public Character attacker;
     protected Character provoker;                    // 도발자
     [SerializeField] protected bool isStasis;
+    [SerializeField] protected bool isInvincible;
     protected int getDamage;
     float m_lastMoveOrderTime;
 
@@ -184,7 +230,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
     {                   // 공격자의 공격력, 공격자의 공격력 증가량, 공격자, 물리vs마법
-        if (isDead || isStop) return; // 범위 공격에서 GetComponent<Character>해서 예외처리하는 것보다 이게 좋아보임
+        if (isDead || isStop || isInvincible) return; 
 
         if (isMagic)
         {   
@@ -256,18 +302,20 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (curHp > maxHp) curHp = maxHp;
         onHpChange?.Invoke();
         DungeonManager.instance.onChangeAnyHP?.Invoke();
+
+        if (heal <= 0) return;
         ShowDamageText(heal, true, true);
     }
 
-    public void Effected(Effect effect, float duration = 0f)
-    {
-        effect.transform.position = targetTF.position;
+    // public void Effected(Effect effect, float duration = 0f)
+    // {
+    //     effect.transform.position = targetTF.position;
         
-        if (duration != 0f)
-        {
-            effect.SetDuration(duration);
-        }
-    }
+    //     if (duration != 0f)
+    //     {
+    //         effect.SetDuration(duration);
+    //     }
+    // }
 
     protected abstract void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false);
 
@@ -343,18 +391,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    //     private void OnMouseEnter() {
-    //     Debug.Log("OnMouseEnter" + name);
-    //     transform.localScale = new Vector3(3f, 3f, 3f);
-
-    // } 
-
-    // private void OnMouseExit() {
-    //     Debug.Log("OnMouseExit" + name);
-    //     transform.localScale = new Vector3(2f, 2f, 2f);
-    // }  
-
-
 
 
     // provoke
@@ -421,11 +457,4 @@ public abstract class Character : MonoBehaviour, IDamagable
         SetStasis(false);
     }
 
-    // private void OnMouseEnter() {   
-    //     SetStasis(true);
-    // }
-
-    // private void OnMouseExit() {    
-    //     SetStasis(false);
-    // }
 }

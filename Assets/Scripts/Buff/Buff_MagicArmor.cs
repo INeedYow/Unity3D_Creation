@@ -21,6 +21,7 @@ public class Buff_MagicArmor : Buff
         target.buffMagicArmor += ratio;
 
         DungeonManager.instance.onChangeAnyMagicArmor?.Invoke();
+        DungeonManager.instance.onChangeAnyBuff?.Invoke();
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -43,9 +44,11 @@ public class Buff_MagicArmor : Buff
 
             target.onDead -= Remove; 
             target.buffs.Remove(this);
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnyMagicArmor?.Invoke();
         }
         
-        DungeonManager.instance.onChangeAnyMagicArmor?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
     
@@ -62,9 +65,11 @@ public class Buff_MagicArmor : Buff
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnyMagicArmor?.Invoke();
         }
         
-        DungeonManager.instance.onChangeAnyMagicArmor?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

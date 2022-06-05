@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillData_Bard_4
   m_EditorClassIdentifier: 
   skillName: "\uBB34\uC801"
-  description: "\uB300\uC0C1 \uBB34\uC801"
+  description: "\uBAA8\uB4E0 \uC601\uC6C5 \uBB34\uC801"
   icon: {fileID: 21300000, guid: f3147281d18564c83aaab4ebae0b229e, type: 3}
   requireLevel: 1
-  cooldown: 10
-  skillRange: 9
+  cooldown: 12
+  skillRange: 0

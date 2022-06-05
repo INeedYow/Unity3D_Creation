@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MSkillData_EvilMage_1
   m_EditorClassIdentifier: 
   skillName: "\uC5D0\uB108\uC9C0 \uBCFC"
-  description: "\uB300\uC0C1 \uB9C8\uBC95 \uBC29\uC5B4\uB825 \uAC10\uC18C"
+  description: "\uB300\uC0C1 \uB9C8\uBC95 \uBC29\uC5B4\uB825 \uAC10\uC18C \uB514\uBC84\uD504"
   icon: {fileID: 0}
   requireLevel: 0
   cooldown: 4

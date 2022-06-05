@@ -2208,7 +2208,7 @@ Transform:
   m_GameObject: {fileID: 4522557944275250694}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_Children:
   - {fileID: 694947467905950413}
   - {fileID: 2496582101564725405}
@@ -2249,8 +2249,11 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0
   magicArmorRate: 0
+  buffCount: 0
+  debuffCount: 0
   buffDamage: 1
   buffArmor: 0
+  buffMagicArmor: 0
   targetTF: {fileID: 2496582101564725405}
   HpBarTF: {fileID: 3726595780996259423}
   projectileTF: {fileID: 2256110396378995348}
@@ -2262,6 +2265,7 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
+  isStasis: 0
   monsGFX: {fileID: 5962830130248200400}
   macrosParent: {fileID: 941582732613422993}
 --- !u!195 &5659755582090165459

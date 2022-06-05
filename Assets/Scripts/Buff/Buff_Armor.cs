@@ -21,6 +21,7 @@ public class Buff_Armor : Buff
         target.buffArmor += ratio;
 
         DungeonManager.instance.onChangeAnyArmor?.Invoke();
+        DungeonManager.instance.onChangeAnyBuff?.Invoke();
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -43,9 +44,11 @@ public class Buff_Armor : Buff
 
             target.onDead -= Remove; 
             target.buffs.Remove(this);
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnyArmor?.Invoke();
         }
         
-        DungeonManager.instance.onChangeAnyArmor?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
     
@@ -62,9 +65,11 @@ public class Buff_Armor : Buff
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
+            DungeonManager.instance.onChangeAnyArmor?.Invoke();
         }
         
-        DungeonManager.instance.onChangeAnyArmor?.Invoke();
         ObjectPool.instance.ReturnObj(this.gameObject);
     }
 

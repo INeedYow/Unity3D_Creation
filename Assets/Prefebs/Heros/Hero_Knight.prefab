@@ -1601,15 +1601,18 @@ MonoBehaviour:
   attackDelay: 1
   attackRange: 4
   aoeRange: 0
-  moveSpeed: 16
+  moveSpeed: 15
   criticalChance: 10
   dodgeChance: 1
   criticalRate: 1.5
   powerRate: 1
   armorRate: 0.05
   magicArmorRate: 0.05
+  buffCount: 0
+  debuffCount: 0
   buffDamage: 1
   buffArmor: 0
+  buffMagicArmor: 0
   targetTF: {fileID: 5105215773378413718}
   HpBarTF: {fileID: 4553991733542452845}
   projectileTF: {fileID: 0}
@@ -1621,6 +1624,7 @@ MonoBehaviour:
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
+  isStasis: 0
   heroGFX: {fileID: 4771493526772089886}
   dummy: {fileID: 8939804448577567632}
   eClass: 0

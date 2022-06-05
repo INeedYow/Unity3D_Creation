@@ -21,6 +21,7 @@ public class Buff_Stun : Buff
         target.buffStun += dura;
         target.onDead += Remove;
 
+        DungeonManager.instance.onChangeAnyBuff?.Invoke();
         StartCoroutine("Timer");
     }
 
@@ -40,6 +41,8 @@ public class Buff_Stun : Buff
             target.debuffCount--;
             target.onDead -= Remove; 
             target.buffs.Remove(this);
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
         }
 
         ObjectPool.instance.ReturnObj(this.gameObject);
@@ -56,6 +59,8 @@ public class Buff_Stun : Buff
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
         }
         
         ObjectPool.instance.ReturnObj(this.gameObject);

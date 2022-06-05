@@ -21,6 +21,7 @@ public enum EEffect {
     Bard_1_TargetEff, Bard_2_TargetEff, Bard_3_, Bard_4_,
     Templar_1_, Templar_2_, Templar_3_, Templar_4_,
     Rune_4_2_World, Rune_4_2_OnWorks, Rune_4_1_World, Rune_4_1_OnWorks, 
+    Invincible,
 
     Size,
 }

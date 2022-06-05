@@ -39,7 +39,10 @@ public class SkillObj_TargetShoot : SkillObject
                     skill.owner.magicDamage * data.powerRatio, 
                     skill.owner.powerRate, 
                     data.area,
-                    data.eTargetEffect);
+                    data.eTargetEffect,
+                    data.eBuff,
+                    data.duration,
+                    data.buffRatio);
             }
             
             else                        
@@ -50,11 +53,14 @@ public class SkillObj_TargetShoot : SkillObject
                     skill.owner.curDamage * data.powerRatio,
                     skill.owner.powerRate,
                     data.area,
-                    data.eTargetEffect);
+                    data.eTargetEffect,
+                    data.eBuff,
+                    data.duration,
+                    data.buffRatio);
             }
 
             if (data.eUserEffect != EEffect.None)
-            { 
+            {    
                 eff = ObjectPool.instance.GetEffect((int)data.eUserEffect);
                 eff.SetPosition(skill.owner);
             }
@@ -63,7 +69,8 @@ public class SkillObj_TargetShoot : SkillObject
             yield return new WaitForSeconds(data.interval);
         }
        
-        if (skill.target != null) AddBuff(skill.target);
+        // 투사체 맞을 때 버프 적용돼야 함
+        //if (skill.target != null) AddBuff(skill.target);
 
         FinishWorks();
     }

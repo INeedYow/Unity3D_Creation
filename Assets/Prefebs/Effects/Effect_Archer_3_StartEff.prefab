@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle: {fileID: 5868294973006213865}
   duration: 2.25
-  isFollowOwner: 1
+  isFollowOwner: 0
   heightTF: 1
 --- !u!1001 &3831409945856675890
 PrefabInstance:
@@ -98,7 +98,7 @@ PrefabInstance:
     - target: {fileID: 7391594363595125111, guid: 2a187aa34d9d954469c58ac5e0d1e048,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7391594363595125111, guid: 2a187aa34d9d954469c58ac5e0d1e048,
         type: 3}

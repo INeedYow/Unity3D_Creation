@@ -5,6 +5,7 @@ using UnityEngine;
 public class Buff_Power : Buff
 {
     private void Awake() { eBuff = EBuff.Power; }
+    
     public override void Add(Character target, float duration, float buffRatio)
     {
         if (target == null) return ;
@@ -20,6 +21,7 @@ public class Buff_Power : Buff
         dura = duration;
         target.powerRate += ratio;
 
+        DungeonManager.instance.onChangeAnyBuff?.Invoke();
         target.onDead += Remove;
 
         StartCoroutine("Timer");
@@ -42,6 +44,8 @@ public class Buff_Power : Buff
             
             target.onDead -= Remove; 
             target.buffs.Remove(this);
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
         }
         
         ObjectPool.instance.ReturnObj(this.gameObject);
@@ -60,6 +64,8 @@ public class Buff_Power : Buff
             target.onDead -= Remove; 
             target.buffs.Remove(this);
             target = null;
+
+            DungeonManager.instance.onChangeAnyBuff?.Invoke();
         }
         
         ObjectPool.instance.ReturnObj(this.gameObject);
