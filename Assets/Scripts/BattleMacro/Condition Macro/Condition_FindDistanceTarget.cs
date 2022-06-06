@@ -18,10 +18,12 @@ public class Condition_FindDistanceTarget : ConditionMacro
     private void OnEnable() {   
         DungeonManager.instance.onWaveStart += OnBattle; 
         DungeonManager.instance.onWaveEnd += OffBattle;   
+        DungeonManager.instance.onDungeonExit += OffBattle;
     }
     private void OnDisable() {   
         DungeonManager.instance.onWaveStart -= OnBattle; 
         DungeonManager.instance.onWaveEnd -= OffBattle;  
+        DungeonManager.instance.onDungeonExit -= OffBattle;
     }
 
     public override bool IsSatisfy()

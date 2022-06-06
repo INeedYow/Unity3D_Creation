@@ -8,6 +8,14 @@ public class HpBar : MonoBehaviour
     public Character owner;
     public Image hpBar;
 
+    private void OnEnable() {
+        DungeonManager.instance.onDungeonExit += Return;
+    }
+
+    private void OnDisable() {
+        DungeonManager.instance.onDungeonExit -= Return;
+    }
+
     public void SetOwner(Character ch)
     {
         owner = ch;

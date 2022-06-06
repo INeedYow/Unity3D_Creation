@@ -97,16 +97,23 @@ public class DungeonManager : MonoBehaviour
         m_item.Add(itemData);
     }
 
+
+    ////// ////// //////
+    ////// result //////
+    ////// ////// //////
+
     void ShowResultWave()
     {
         resultUI.gameObject.SetActive(true);
         resultUI.waveBar.onFinishFill += ShowResultExp;
+
         resultUI.waveBar.SetWaveBar(curDungeon.curWave - 1, curDungeon.maxWave);
     }
 
     void ShowResultExp()
-    {   // hero 도 추가
+    {   
         resultUI.waveBar.onFinishFill -= ShowResultExp;
+
         resultUI.playerExpBar.gameObject.SetActive(true);
         resultUI.heroExpTray.gameObject.SetActive(true);
         
@@ -129,11 +136,14 @@ public class DungeonManager : MonoBehaviour
 
         resultUI.playerExpBar.SetFinish();
 
-        ShowResultItem();
+        resultUI.heroExpTray.onFinish += ShowResultItem;
+        resultUI.heroExpTray.ShowExp();
     }
 
     void ShowResultItem()
     {
+        resultUI.heroExpTray.onFinish -= ShowResultItem;
+
         resultUI.itemTray.gameObject.SetActive(true);
         resultUI.itemTray.onFinish += ShowExitButton;
         resultUI.itemTray.ShowItem(m_item);
@@ -144,40 +154,22 @@ public class DungeonManager : MonoBehaviour
         resultUI.exitBtn.gameObject.SetActive(true);
     }
 
+    ////// ////// //////
+    ////// ////// //////
+    ////// ////// //////
 
-    // void GiveReward()
-    // {
-    //     PlayerManager.instance.AddGold(m_gold);
-    //     PlayerManager.instance.AddExp(m_exp);
-    //     PartyManager.instance.AddExp(m_exp);
-        
-    //     for (int i = 0; i < m_item.Count; i++)
-    //     {
-    //         if (m_item[i] is WeaponItemData)
-    //         {
-    //             InventoryManager.instance.AddItem(m_item[i] as WeaponItemData);
-    //         }
-    //         else if (m_item[i] is ArmorItemData)
-    //         {
-    //             InventoryManager.instance.AddItem(m_item[i] as ArmorItemData);
-    //         }
-    //         else
-    //         {
-    //             InventoryManager.instance.AddItem(m_item[i] as AccessoryItemData);
-    //         }
-    //     }
-        
-    //     m_gold = 0;
-    //     m_exp = 0;
-    //     m_item.Clear();
-    // }
+
+
+
 
     public void Exit()  // 버튼 이벤트
     {
         onDungeonExit?.Invoke();
         
+        curDungeon.ClearMonster();  // 전투 패배 시 남은 몬스터 제거
         curDungeon.gameObject.SetActive(false);
         curDungeon = null;
+
         PartyManager.instance.ExitDungeon();
         PlayerManager.instance.runeTree.Release();
 
@@ -243,18 +235,10 @@ public class DungeonManager : MonoBehaviour
         monInfoUI.RenewUI(monster);
     }
 
-    //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); } // 현재 클릭하면 사라지게 해뒀음
+    //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); } // 클릭하면 사라지게 해뒀음
 
     public Monster GetAliveMonster()
     {
-        // foreach (Monster aliveMon in curDungeon.curMonsters)
-        // {
-        //     if (!aliveMon.isDead && !aliveMon.isStop)
-        //     {
-        //         return aliveMon;
-        //     }
-        // }
-
         int random = Random.Range(0, curDungeon.curMonsters.Count);
 
         for (int i = 0; i < curDungeon.curMonsters.Count; i++)

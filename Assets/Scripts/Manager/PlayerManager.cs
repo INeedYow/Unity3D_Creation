@@ -71,10 +71,15 @@ public class PlayerManager : MonoBehaviour
 
         onLevelUp?.Invoke(LV);
         
-        if (LV % 5 == 1){
-            PartyManager.instance.maxCount++;
-            playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
+        if (LV % 5 == 1)
+        {
+            if (PartyManager.instance.maxCount < 6)
+            {
+                PartyManager.instance.maxCount++;
+                playerInfoUI.RenewMaxParty(PartyManager.instance.maxCount);
+            }
         }
+        
         if (LV == maxLV) curExp = maxExp;
     }
 

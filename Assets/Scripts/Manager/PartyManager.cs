@@ -101,13 +101,6 @@ public class PartyManager : MonoBehaviour
             return heroParty[random];
         }
 
-        // foreach (Hero aliveHero in heroParty)
-        // {
-        //     if (!aliveHero.isDead && !aliveHero.isStop)
-        //     {
-        //         return aliveHero;
-        //     }
-        // }
         return null;
     }
 

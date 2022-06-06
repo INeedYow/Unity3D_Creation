@@ -67,7 +67,6 @@ public class Dungeon : MonoBehaviour
             {   Debug.Log("Add Equip Reward");
                 DungeonManager.instance.AddReward(ItemManager.instance.GetRandEquipItem());
             }
-            //else{ Debug.Log("이게 꽝이 나오네"); }
         }
     }
 
@@ -89,12 +88,9 @@ public class Dungeon : MonoBehaviour
     }
 
     void WaveClear()
-    {   // 비활성화 했던 몬스터들 제거
-        foreach(Monster mons in curMonsters){
-            ObjectPool.instance.ReturnObj(mons.gameObject);
-        }
-        curMonsters.Clear();
-
+    {   
+        ClearMonster();
+        
         curWave++;
 
         if (curWave > maxWave) { 
@@ -142,6 +138,17 @@ public class Dungeon : MonoBehaviour
     void WaveStart()    { DungeonManager.instance.WaveStart(); }
 
     void WaveEnd()      { DungeonManager.instance.WaveEnd(); } 
+
+
+    public void ClearMonster()
+    {   
+        foreach(Monster mons in curMonsters)
+        {
+            ObjectPool.instance.ReturnObj(mons.gameObject);
+        }
+
+        curMonsters.Clear();
+    }
 
     public Monster GetAliveMonster()
     {

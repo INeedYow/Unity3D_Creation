@@ -23,16 +23,6 @@ public class Condition_Self : ConditionMacro
     
     void HpChange()     { m_hasChanged = true; }
 
-    // private void OnEnable() {
-    //     if (eInfo == EInfo.HP){
-    //         owner.onHpChange += HpChange;
-    //     }
-    // }
-
-    // private void OnDestroy() {
-    //     owner.onHpChange -= HpChange;
-    // }
-
     public override bool IsSatisfy(){
         target = owner;
         if (eInfo == EInfo.None)
