@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: MSkillData_Skeleton_1
   m_EditorClassIdentifier: 
-  skillName: "\uCAC4\uBCF4 \uD0DC\uC138"
-  description: "\uBC29\uC5B4\uB825\uC774 \uC99D\uAC00\uD558\uC9C0\uB9CC \uACF5\uACA9\uBABB\uD568"
+  skillName: "\uBC29\uC5B4 \uD0DC\uC138"
+  description: "\uBC29\uC5B4\uB825 \uC99D\uAC00"
   icon: {fileID: 0}
   requireLevel: 0
   cooldown: 1

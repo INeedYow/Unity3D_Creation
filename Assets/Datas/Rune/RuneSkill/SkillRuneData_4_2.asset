@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "\uBAA8\uB4E0 \uBAAC\uC2A4\uD130\uB97C \uC5BC\uB9B0\uB2E4"
   icon: {fileID: 21300000, guid: 44d37949ad5f3400996eda2b86ce5c98, type: 3}
-  cooldown: 3
+  cooldown: 5
   ID: 4

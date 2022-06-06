@@ -63,9 +63,6 @@ public class RuneSkillObject_AreaStasis : RuneSkillObject
             yield return new WaitForSeconds(0.1f);
         }
 
-       //onFinishStasis?.Invoke(this);
-
-        // 해제 // todo 현재 제대로 해제 안 되는 경우 있음
         foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
         {
             if (!ch.IsStasis()) continue;  // stasis 아닌 경우

@@ -127,34 +127,7 @@ public class PlayerManager : MonoBehaviour
     private void Update() {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //for (int i = 0; i < 20; i++)
-            //{
-                AddExp(maxExp);
-           // }
+            AddExp(maxExp);
         }
-        // else if (Input.GetKeyDown(KeyCode.P))
-        // {
-        //     if (DungeonManager.instance.curDungeon != null)
-        //     {
-        //         foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
-        //         {
-        //             if (mon.isDead) continue;
-
-        //             mon.anim.speed = 0f;
-        //         }
-        //     }
-        // }
-        // else if (Input.GetKeyDown(KeyCode.O))
-        // {
-        //     if (DungeonManager.instance.curDungeon != null)
-        //     {
-        //         foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
-        //         {
-        //             if (mon.isDead) continue;
-
-        //             mon.anim.speed = 2f;
-        //         }
-        //     }
-        // }
     }
 }

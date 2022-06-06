@@ -7,16 +7,28 @@ public class RuneSlot : MonoBehaviour
 {
     public RuneTree tree;
     public int requireLv;
+
+    [Header("-- Skill 1 --")]
     public SkillRuneData skillData1;
     public GameObject selectedLine1;
+    public RuneSkillCursor skillCursor1;
+    public Image icon1;
+
+
+    [Header("-- Skill 2 --")]
     public SkillRuneData skillData2;
     public GameObject selectedLine2;
-
-    public RuneSkillCursor skillCursor1;
     public RuneSkillCursor skillCursor2;
+    public Image icon2;
+
+    public int select = 0;       // 0 : 선택 안 함 , 1 : 위 , 2 : 아래
 
     bool m_isOpen = false;
-    int m_select = 0;       // 0 : 선택 안 함 , 1 : 위 , 2 : 아래
+
+    private void Awake() {
+        icon1.sprite = skillData1.icon;
+        icon2.sprite = skillData2.icon;
+    }
 
     private void Start() {
         PlayerManager.instance.onLevelUp += IsLevelEnough;
@@ -41,11 +53,11 @@ public class RuneSlot : MonoBehaviour
 
     public void Selected(int selectNumber)
     {   
-        if (!m_isOpen) return;      Debug.Log("selected : " + selectNumber);
+        if (!m_isOpen) return;      //Debug.Log("selected : " + selectNumber);
         
-        m_select = selectNumber;
+        select = selectNumber;
         
-        if (m_select == 1)
+        if (select == 1)
         {
             selectedLine1.SetActive(true);
             selectedLine2.SetActive(false);
@@ -61,12 +73,12 @@ public class RuneSlot : MonoBehaviour
     {   
         if (!m_isOpen) return;
         
-        if (m_select == 1)
+        if (select == 1)
         {
             skillData1?.Apply(1);
             PlayerManager.instance.runeSkillUI.SetCursor(skillData1.ID, skillCursor1);
         }
-        else if (m_select == 2)
+        else if (select == 2)
         {
             skillData2?.Apply(1);
             PlayerManager.instance.runeSkillUI.SetCursor(skillData2.ID, skillCursor2);
@@ -77,11 +89,11 @@ public class RuneSlot : MonoBehaviour
     {
         if (!m_isOpen) return;
 
-        if (m_select == 1)
+        if (select == 1)
         {
             skillData1?.Release(1);
         }
-        else if (m_select == 2)
+        else if (select == 2)
         {
             skillData2?.Release(1);
         }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: MSkillData_Chewer_1
   m_EditorClassIdentifier: 
-  skillName: "\uB3CC\uC9C4"
-  description: "\uB300\uC0C1\uC744 \uAE30\uC808\uC2DC\uD0B4"
+  skillName: "\uBC15\uCE58\uAE30"
+  description: "\uB300\uC0C1 \uAE30\uC808"
   icon: {fileID: 0}
   requireLevel: 0
   cooldown: 6

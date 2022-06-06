@@ -22,6 +22,7 @@ public enum EEffect {
     Templar_1_, Templar_2_, Templar_3_, Templar_4_,
     Rune_4_2_World, Rune_4_2_OnWorks, Rune_4_1_World, Rune_4_1_OnWorks, 
     Invincible, Bleed, Blind, Silence, Madness,
+    Rune_1_2_OnWorks, Rune_3_1_OnWorks_UnLucky, Rune_3_1_OnWorks_Lucky,
 
     Size,
 }

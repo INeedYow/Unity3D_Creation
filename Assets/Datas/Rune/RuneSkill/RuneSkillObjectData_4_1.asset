@@ -18,6 +18,6 @@ MonoBehaviour:
   repeatInterval: 0.15
   eBuff: -1
   buffRatio: 0
-  duration: 20
+  duration: 15
   eWorldEffect: 28
   eOnWorksEffect: 29

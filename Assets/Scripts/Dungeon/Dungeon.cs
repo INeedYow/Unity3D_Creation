@@ -67,7 +67,7 @@ public class Dungeon : MonoBehaviour
             {   Debug.Log("Add Equip Reward");
                 DungeonManager.instance.AddReward(ItemManager.instance.GetRandEquipItem());
             }
-            else{ Debug.Log("이게 꽝이 나오네"); }
+            //else{ Debug.Log("이게 꽝이 나오네"); }
         }
     }
 

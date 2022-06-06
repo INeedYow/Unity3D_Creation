@@ -5,13 +5,9 @@ using UnityEngine;
 public class Hero_GFX : GFX
 {
     public Hero hero;
-    bool hasChange;
 
     private void Start() { repeat = MacroManager.instance.maxMacroCount; }
-    // new protected void OnEnable() { 
-    //     base.OnEnable();
-    //     hero.isStop = true; 
-    // }
+
 
     private void OnEnable() {
         hero.isStop = true;

@@ -6,10 +6,6 @@ public class Monster_GFX : GFX
 {
     public Monster monster;
 
-    // new protected void OnEnable() { 
-    //     base.OnEnable();
-    //     monster.isStop = true; 
-    // }
 
     private void OnEnable() {
         monster.isStop = true;

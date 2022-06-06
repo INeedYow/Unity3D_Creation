@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34596c8150e42f418c65dfe4a47e861, type: 3}
   m_Name: RuneSkillObjectData_1_2
   m_EditorClassIdentifier: 
-  power: 10
-  area: 6
-  repeat: 5
-  repeatInterval: 0.8
-  eBuff: 0
-  buffRatio: -0.04
-  duration: 4
+  power: 20
+  area: 4
+  repeat: 2
+  repeatInterval: 1
+  eBuff: -1
+  buffRatio: 0
+  duration: 1
   eWorldEffect: -1
-  eOnWorksEffect: -1
+  eOnWorksEffect: 35

@@ -7,8 +7,12 @@ public class RuneSkillUI : MonoBehaviour
 {
     public RuneSkillUnit[] skillUnits = new RuneSkillUnit[4];
 
-    //public Image cursorImage;
-
+    private void OnEnable() {
+        for (int i = 0; i < skillUnits.Length; i++)
+        {
+            skillUnits[i].gameObject.SetActive(false);
+        }
+    }
 
     public void SetSkillUnit(int IdNumber, bool isOn)
     {

@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class RuneSkillObject : MonoBehaviour
 {
     public RuneSkillObjectData data;
-    // cursor
     protected Buff buff;
     protected Effect eff;
 

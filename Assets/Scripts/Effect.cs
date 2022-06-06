@@ -29,6 +29,12 @@ public class Effect : MonoBehaviour
     
     public void SetPosition(Character owner)
     {
+        if (owner == null) 
+        {
+            transform.SetParent(null);
+            return;
+        }
+
         switch (heightTF)
         {
             case 0: transform.position = owner.transform.position;  break;

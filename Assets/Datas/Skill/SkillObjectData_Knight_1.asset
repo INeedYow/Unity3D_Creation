@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillObjectData_Knight_1
   m_EditorClassIdentifier: 
   isMagic: 0
-  powerRatio: 2
+  powerRatio: 1.6
   area: 0
   repeat: 1
   interval: 0

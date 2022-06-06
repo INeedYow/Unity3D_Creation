@@ -23,7 +23,7 @@ public class RuneInfoUI : MonoBehaviour
     int m_value;
 
 
-    private void Start() {
+    private void Awake() {
         m_tracker = GetComponent<UIMouseTracker>();    
     }
 
