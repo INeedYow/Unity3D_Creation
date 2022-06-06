@@ -14,8 +14,25 @@ public class Condition_CharacterCount : ConditionMacro
     int m_count;
 
     private void OnEnable() { 
-        DungeonManager.instance.onSomeoneDead += SomeoneChanged; 
-        DungeonManager.instance.onSomeoneAdd += SomeoneChanged; 
+        if (eCountGroup == EGroup.Hero)
+        {
+            DungeonManager.instance.onHeroDead += SomeoneChanged; 
+        }
+        else{
+            DungeonManager.instance.onMonsterDead += SomeoneChanged; 
+        }
+        DungeonManager.instance.onSomeoneAdd += SomeoneChanged;    
+    }
+
+    private void OnDisable() {
+        if (eCountGroup == EGroup.Hero)
+        {
+            DungeonManager.instance.onHeroDead -= SomeoneChanged; 
+        }
+        else{
+            DungeonManager.instance.onMonsterDead -= SomeoneChanged; 
+        }
+        DungeonManager.instance.onSomeoneAdd -= SomeoneChanged;    
     }
 
     void SomeoneChanged() { m_hasChanged = true; }

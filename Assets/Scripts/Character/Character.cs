@@ -253,8 +253,6 @@ public abstract class Character : MonoBehaviour, IDamagable
 
 
 
-
-
     bool IsDodge()      { return Random.Range(1f, 100f) <= dodgeChance; }
     bool IsCritical()   { return Random.Range(1f, 100f) <= criticalChance; }
 
@@ -287,7 +285,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         // 버프 배열 초기화 
         buffs = new LinkedList<Buff>();
         
-        //defaultScale = GetComponent<Transform>().localScale;
     }
 
     public void Damaged(float damage, float damageRate, Character newAttacker, bool isMagic = false)
@@ -338,12 +335,12 @@ public abstract class Character : MonoBehaviour, IDamagable
         if (curHp <= 0) 
         {
             Death();
-            if (attacker != null) attacker.onKill?.Invoke();
+            if (newAttacker != null) newAttacker.onKill?.Invoke();
         }
     }
 
     public void Damaged(float damage)
-    {   // 플레이어 스킬용 Damaged
+    {   
         if (isDead || isStop) return;
         if (damage <= 0f) return;
 
@@ -387,25 +384,11 @@ public abstract class Character : MonoBehaviour, IDamagable
         ShowDamageText(heal, true, true);
     }
 
-    // public void Effected(Effect effect, float duration = 0f)
-    // {
-    //     effect.transform.position = targetTF.position;
-        
-    //     if (duration != 0f)
-    //     {
-    //         effect.SetDuration(duration);
-    //     }
-    // }
 
     protected abstract void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false);
 
     public abstract void Death();
     public abstract void Revive(float rateHp); 
-
-    // void TargetDead(Character character) { 
-    //     character.onDeadGetThis -= TargetDead;
-    //     target = null; 
-    // }
 
 
     public void AttackInit(Character target)

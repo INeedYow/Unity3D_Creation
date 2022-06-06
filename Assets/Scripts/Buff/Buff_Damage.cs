@@ -7,7 +7,7 @@ public class Buff_Damage : Buff
     private void Awake() { eBuff = EBuff.Damage; }
     public override void Add(Character target, float duration, float buffRatio)
     {
-        if (target == null) return ;
+        if (target == null || target.isDead) return ;
         
         this.target = target;
         target.buffs.AddLast(this);

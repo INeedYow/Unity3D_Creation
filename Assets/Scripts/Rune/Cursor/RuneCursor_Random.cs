@@ -7,8 +7,9 @@ public class RuneCursor_Random : RuneSkillCursor
     public Transform skillObjsParentTF;
     List<RuneSkillObject> skillObjs;
 
-    private void Start() {
+    private void Awake() {
         skillObjs = new List<RuneSkillObject>();
+        skillObjsParentTF.gameObject.SetActive(true);
 
         for (int i = 0; i < skillObjsParentTF.childCount; i++)
         {
@@ -20,7 +21,7 @@ public class RuneCursor_Random : RuneSkillCursor
     protected override void CheckInput()
     {
         if (Input.GetMouseButtonDown(0))
-        {
+        {   
             int random = Random.Range(-1, skillObjs.Count);
 
             while (random < 0)
@@ -28,7 +29,6 @@ public class RuneCursor_Random : RuneSkillCursor
                 skillObjs[Random.Range(0, skillObjs.Count)].gameObject.SetActive(true);
                 random = Random.Range(-1, skillObjs.Count);
             }
-            
             skillObjs[random].gameObject.SetActive(true);
 
             onWorks?.Invoke();

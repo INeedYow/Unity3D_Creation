@@ -138,7 +138,7 @@ public class Monster : Character
             SetStasis(false); 
         }
         
-        DungeonManager.instance.onSomeoneDead?.Invoke();
+        DungeonManager.instance.onMonsterDead?.Invoke();
         monsGFX.gameObject.SetActive(false);
     }
 

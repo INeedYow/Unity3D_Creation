@@ -47,13 +47,16 @@ public class RuneSkillUnit : MonoBehaviour
         {
             if (cursor != null)
             {   // 이전 등록된 거 있으면 제거
-                cursor.onWorks -= SetCooldown;
+                cursor.onWorks -= InitCooldown;
             }
             cursor = skillCursor;
-            cursor.onWorks += SetCooldown;
+            cursor.onWorks += InitCooldown;
         }
 
-        cursor.skillObj.gameObject.SetActive(false);
+        if (cursor.skillObj != null)
+        {
+            cursor.skillObj.gameObject.SetActive(false);
+        }
         cursor.gameObject.SetActive(false);
     }
 
@@ -65,10 +68,10 @@ public class RuneSkillUnit : MonoBehaviour
         }
     }
 
-    void RenewCooldown()
+    public void RenewCooldown()
     { cooldownImg.fillAmount = 1 - (float)curCooldown / (float)maxCooldown; }
 
-    void SetCooldown()
+    void InitCooldown()
     {
         curCooldown = maxCooldown;
         RenewCooldown();

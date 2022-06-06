@@ -8,12 +8,12 @@ public class RuneSkillObj_GroupTarget : RuneSkillObject
     [Range(0f, 5f)] public float targetInterval;
 
     public override void Works()
-    {
+    {   
         StartCoroutine("IntervalWorks");
     }
 
     IEnumerator IntervalWorks()
-    {
+    {   
 
         if (eTargetGroup == EGroup.Monster)
         {
@@ -60,7 +60,7 @@ public class RuneSkillObj_GroupTarget : RuneSkillObject
                 yield return new WaitForSeconds(data.repeatInterval);
             }
         }
-
+        
         FinishWorks();
     }
 }

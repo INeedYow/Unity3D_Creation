@@ -7,10 +7,26 @@ public class Condition_DeadTarget : ConditionMacro
     public EGroup eTargetGroup;
     bool m_hasChanged;
 
-    private void OnEnable() {
-        DungeonManager.instance.onSomeoneDead += SomeoneChanged;
-        DungeonManager.instance.onSomeoneAdd += SomeoneChanged;
-        DungeonManager.instance.onWaveStart += SomeoneChanged;
+    private void OnEnable() { 
+        if (eTargetGroup == EGroup.Hero)
+        {
+            DungeonManager.instance.onHeroDead += SomeoneChanged; 
+        }
+        else{
+            DungeonManager.instance.onMonsterDead += SomeoneChanged; 
+        }
+        DungeonManager.instance.onSomeoneAdd += SomeoneChanged;    
+    }
+
+    private void OnDisable() {
+        if (eTargetGroup == EGroup.Hero)
+        {
+            DungeonManager.instance.onHeroDead -= SomeoneChanged; 
+        }
+        else{
+            DungeonManager.instance.onMonsterDead -= SomeoneChanged; 
+        }
+        DungeonManager.instance.onSomeoneAdd -= SomeoneChanged;    
     }
 
     void SomeoneChanged() { m_hasChanged = true; }

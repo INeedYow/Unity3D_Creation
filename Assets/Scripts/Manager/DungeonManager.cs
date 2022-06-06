@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class DungeonManager : MonoBehaviour
 {   //
-    public UnityAction onSomeoneDead;
+    public UnityAction onHeroDead;
+    public UnityAction onMonsterDead;
     public UnityAction onSomeoneAdd;
     public UnityAction onChangeAnyHP;
     public UnityAction onChangeAnyDamage;
@@ -181,20 +182,20 @@ public class DungeonManager : MonoBehaviour
 
     public void WaveStart()
     {
-        onWaveStart?.Invoke();
         foreach (Character hero in PartyManager.instance.heroParty)
         { hero.Resume(); }
         foreach (Character mons in curDungeon.curMonsters)
         { mons.Resume(); }
+        onWaveStart?.Invoke();
     }
 
     public void WaveEnd()
     {
-        onWaveEnd?.Invoke();
         foreach (Character hero in PartyManager.instance.heroParty)
         { hero.Pause(); }
         foreach (Character mons in curDungeon.curMonsters)
         { mons.Pause(); }
+        onWaveEnd?.Invoke();
     }
 
     public void AddMonster(Monster monster)
@@ -256,4 +257,5 @@ public class DungeonManager : MonoBehaviour
 
         return null;
     }
+
 }

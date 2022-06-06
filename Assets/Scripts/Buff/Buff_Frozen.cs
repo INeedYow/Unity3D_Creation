@@ -11,7 +11,7 @@ public class Buff_Frozen : Buff
 
     public override void Add(Character target, float duration, float buffRatio)
     {
-        if (target == null) return ;
+        if (target == null || target.isDead) return ;
         
         this.target = target;
         target.buffs.AddLast(this);

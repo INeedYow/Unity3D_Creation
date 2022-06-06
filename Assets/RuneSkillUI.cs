@@ -32,5 +32,14 @@ public class RuneSkillUI : MonoBehaviour
         SetSkillUnit(IdNumber, true);
         skillUnits[IdNumber - 1].SetCursor(skillCursor);
     }
+
+    public void ResetCooldown()
+    {
+        foreach (RuneSkillUnit unit in skillUnits)
+        {
+            unit.curCooldown = 0;
+            unit.RenewCooldown();
+        }
+    }
 }
  

@@ -120,7 +120,7 @@ public class Hero : Character
             SetStasis(false); 
         }
 
-        DungeonManager.instance.onSomeoneDead?.Invoke();
+        DungeonManager.instance.onHeroDead?.Invoke();
         PartyManager.instance.HeroDead();
         heroGFX.gameObject.SetActive(false);
     }

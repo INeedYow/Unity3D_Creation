@@ -8,17 +8,17 @@ public abstract class RuneSkillObject : MonoBehaviour
     protected Buff buff;
     protected Effect eff;
 
-    private void OnEnable() {
-        WorldEffect();
-        Works();
+    private void OnEnable() {   
+        WorldEffect();  
+        Works();    
     }
 
     void WorldEffect()
-    {
+    {   
         if (data.eWorldEffect == EEffect.None) return;
         
         eff = ObjectPool.instance.GetEffect((int)data.eWorldEffect);
-        eff.transform.position = DungeonManager.instance.worldEffectTF.position;
+        eff.transform.position = DungeonManager.instance.worldEffectTF.position;    
     }
 
     public abstract void Works();

@@ -108,7 +108,7 @@ public class PartyManager : MonoBehaviour
     {
         foreach(Hero hero in heroParty)
         {
-            if (hero.isDead) continue;
+            //if (hero.isDead) continue;
             
             hero.curExp += exp;
         }
