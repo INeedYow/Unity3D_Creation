@@ -362,7 +362,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
         float damage = curHp * ratio;
         
-        if (damage > 30f) damage = 30f;
+        damage = Mathf.Clamp(damage, 1f, 30f);
 
         curHp -= damage;
 

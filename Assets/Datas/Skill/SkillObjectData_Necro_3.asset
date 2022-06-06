@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillObjectData_Necro_3
   m_EditorClassIdentifier: 
   isMagic: 1
-  powerRatio: 1.3
+  powerRatio: 2
   area: 6
   repeat: 1
   interval: 0

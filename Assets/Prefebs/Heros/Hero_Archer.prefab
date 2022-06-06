@@ -1797,7 +1797,7 @@ MonoBehaviour:
   maxDamage: 24
   magicDamage: 0
   lastAttackTime: 0
-  attackDelay: 0.8
+  attackDelay: 0.6
   attackRange: 11
   aoeRange: 0
   moveSpeed: 13
@@ -1815,15 +1815,16 @@ MonoBehaviour:
   targetTF: {fileID: 7011910697539786449}
   HpBarTF: {fileID: 938162364103702889}
   projectileTF: {fileID: 4806247788938896005}
-  nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
   skills: []
+  nav: {fileID: 0}
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
   isStasis: 0
+  isInvincible: 0
   heroGFX: {fileID: 2436992690794004522}
   dummy: {fileID: 4020090406503507079}
   eClass: 1

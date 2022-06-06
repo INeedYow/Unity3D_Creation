@@ -18,8 +18,8 @@ MonoBehaviour:
   repeat: 1
   interval: 0
   eBuff: 11
-  duration: 5
+  duration: 4
   buffRatio: 0
   eStartEffect: -1
   eUserEffect: -1
-  eTargetEffect: -1
+  eTargetEffect: 17

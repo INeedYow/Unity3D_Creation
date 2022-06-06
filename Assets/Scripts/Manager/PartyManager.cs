@@ -17,8 +17,7 @@ public class PartyManager : MonoBehaviour
 
     public int maxCount = 3;
     public List<Hero> heroParty;
-    [Header("Board")]
-    public Board board;
+    public int aliveHeroCount;
     
 
     HpBar bar;
@@ -29,6 +28,8 @@ public class PartyManager : MonoBehaviour
         SwapDummy2GFX();
         ResetHeroPos();
         SetOnHpBar();
+
+        aliveHeroCount = heroParty.Count;
     }
 
     public void ExitDungeon(){
@@ -126,6 +127,16 @@ public class PartyManager : MonoBehaviour
         {
             bar = ObjectPool.instance.GetHpBar(true);
             bar.SetOwner(hero);
+        }
+    }
+
+    public void HeroDead()
+    {
+        aliveHeroCount--;
+
+        if (aliveHeroCount == 0)
+        {
+            DungeonManager.instance.BattleEnd();
         }
     }
 }

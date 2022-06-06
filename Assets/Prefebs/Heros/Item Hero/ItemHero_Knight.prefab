@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1890241207311045641}
   - component: {fileID: 8654045198884619994}
   - component: {fileID: 6974250066560515166}
+  - component: {fileID: -7141789854748220687}
   m_Layer: 9
   m_Name: ItemHero_Knight
   m_TagString: Untagged
@@ -59,6 +60,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.5, z: 1}
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &-7141789854748220687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890241207311045639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d49d36411a54b4bb9344164efc8b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusedScale: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &2593416317579036307
 GameObject:
   m_ObjectHideFlags: 0

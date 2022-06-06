@@ -15,8 +15,9 @@ MonoBehaviour:
   isMagic: 0
   powerRatio: 1.5
   area: 0
-  count: 1
-  eBuff: 4
+  repeat: 1
+  interval: 0
+  eBuff: 5
   duration: 1
   buffRatio: -0.95
   eStartEffect: -1

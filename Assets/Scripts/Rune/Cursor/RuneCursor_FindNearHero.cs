@@ -11,9 +11,8 @@ public class RuneCursor_FindNearHero : RuneSkillCursor
         set {
             if (_target != null)
             {
-                _target.transform.localScale = normalScale;
-                //focusedEff.SetPosition(null);
-                //focusedEff.gameObject.SetActive(false);
+                //_target.transform.localScale = normalScale;
+
                 _target.onDead -= NullTarget;
                 _target.onUntouchableGetThis -= NullTarget;
             }
@@ -22,23 +21,35 @@ public class RuneCursor_FindNearHero : RuneSkillCursor
 
             if (_target != null)
             {   //Debug.Log("Target " + _target.name);
-                _target.transform.localScale = focusedScale;
-                //focusedEff.SetPosition(_target);
-                //focusedEff.gameObject.SetActive(true);
+                //_target.transform.localScale = focusedScale;
+
                 _target.onDead += NullTarget;
                 _target.onUntouchableGetThis += NullTarget;
             }
         }
     }
-    Vector3 normalScale = new Vector3(2f, 2f, 2f);
-    Vector3 focusedScale = new Vector3(2.8f, 2.8f, 2.8f);
-    Character m_tempTarget;
 
-    //public Effect focusedEff;
+    //Vector3 normalScale = new Vector3(2f, 2f, 2f);
+    //Vector3 focusedScale = new Vector3(2.8f, 2.8f, 2.8f);
+
+    public LineRenderer line;
+    Vector3[] m_vecArr = new Vector3[2];
 
     float m_sqrDist;
     float m_min;
     float m_lastTime;
+
+
+    private void Start() {
+        if (line == null) line = GetComponent<LineRenderer>();
+
+        if (line != null)
+        {
+            line.startWidth = 0.7f;
+            line.endWidth = 0.35f;
+        }
+        
+    }
 
     void NullTarget()               { target = null; }
     void NullTarget(Character ch)   { NullTarget(); }
@@ -50,6 +61,13 @@ public class RuneCursor_FindNearHero : RuneSkillCursor
         if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("RunePlane")))
         {   
             transform.position = hit.point;
+
+            if (target != null)
+            {
+                m_vecArr[0] = hit.point;
+                m_vecArr[1] = target.transform.position;
+                line.SetPositions(m_vecArr);
+            }
         }
 
         GetNearestHero();
@@ -88,12 +106,9 @@ public class RuneCursor_FindNearHero : RuneSkillCursor
             {   
                 if (skillObj is RuneSkillObj_TargetBuff)
                 {   
-                    m_tempTarget = target;
-                    target = null;
-
-                    (skillObj as RuneSkillObj_TargetBuff).SetTarget(m_tempTarget);
+                    (skillObj as RuneSkillObj_TargetBuff).SetTarget(target);
                     skillObj.gameObject.SetActive(true);
-                    //target = null;
+                    target = null;
 
                     onWorks?.Invoke();
                     gameObject.SetActive(false);

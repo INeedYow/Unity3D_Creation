@@ -36,7 +36,6 @@ public class FloatingBlock : MonoBehaviour
         while (m_floatHeight > transform.position.y)
         {
             transform.Translate(0f, curFloatSpeed * Time.deltaTime, 0f);
-            yield return null;
 
             if (curFloatSpeed > minFloatSpeed)
             {
@@ -44,7 +43,6 @@ public class FloatingBlock : MonoBehaviour
             }
             yield return null;
         }
-        yield return null;
     }
 
     IEnumerator Falldown(){                
@@ -52,7 +50,6 @@ public class FloatingBlock : MonoBehaviour
         while (m_defaultHeight < transform.position.y)
         {   
             transform.Translate(0f, -curFloatSpeed * Time.deltaTime, 0f);
-            yield return null;
 
             if (curFloatSpeed < maxFloatSpeed)
             {
@@ -60,6 +57,5 @@ public class FloatingBlock : MonoBehaviour
             }
             yield return null;
         }
-        yield return null;
     }
 }

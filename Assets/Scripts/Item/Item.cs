@@ -33,12 +33,10 @@ public class Item : MonoBehaviour
 
     // 
     private void OnMouseEnter() {   //Debug.Log("enter");
-        m_tf.localScale += GameManager.instance.focusedScale;
         ItemManager.instance.ShowInfoUI(data);
     }
 
     private void OnMouseExit() {    //Debug.Log("exit");
-        m_tf.localScale -= GameManager.instance.focusedScale;
         ItemManager.instance.HideInfoUI();
     }
 }

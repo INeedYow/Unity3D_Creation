@@ -7,6 +7,7 @@ public enum BattleInfoType { Hero_damage, Hero_magic, Hero_heal, Monster_damage,
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
+
     [Header("Cube Planet")]
     public CubePlanet cubePlanet;
     [Header("Dummy tools")]
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Etc")]
     public Vector3 focusedScale = new Vector3 (0.5f, 0.5f, 0.5f);
+    public bool isLockFocus;
     BattleInfoText m_battleInfotext;
     
     //

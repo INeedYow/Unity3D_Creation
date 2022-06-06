@@ -5,7 +5,6 @@ using UnityEngine;
 public class SkillObj_AroundAreaAttack : SkillObject
 {
     public EGroup eTargetGroup;
-    //IDamagable m_target;
     float m_sqrDist;
     float m_sqrArea;
 

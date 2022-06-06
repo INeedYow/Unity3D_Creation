@@ -161,5 +161,8 @@ public class Monster : Character
         DungeonManager.instance.ReviveMonster();
     }
 
-    private void OnMouseDown() { DungeonManager.instance.ShowMonInfoUI(this); }
+    private void OnMouseDown() { 
+        if (isDead) return;
+        DungeonManager.instance.ShowMonInfoUI(this); 
+    }
 }

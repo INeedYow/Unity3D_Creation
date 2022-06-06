@@ -45,16 +45,19 @@ public class Hero : Character
         InitHero();
     }
 
-    void InitHero(){
+    void InitHero()
+    {
         eGroup = EGroup.Hero;
         heroGFX.hero = this;
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);
         dummy.gameObject.SetActive(false);
         skills = new Skill[4];
+
         // 매크로 배열 초기화
         conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
         actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
+
         // Attack Command
         switch(eClass){
             case EClass.Knight:         attackCommand = new NormalAttackCommand(this); break;
@@ -118,6 +121,7 @@ public class Hero : Character
         }
 
         DungeonManager.instance.onSomeoneDead?.Invoke();
+        PartyManager.instance.HeroDead();
         heroGFX.gameObject.SetActive(false);
     }
 
@@ -129,12 +133,13 @@ public class Hero : Character
 
         curHp = rateHp * maxHp;
         
-        Debug.Log("hero Revive // ratio : " + rateHp);
+        //Debug.Log("hero Revive // ratio : " + rateHp);
 
         heroGFX.gameObject.SetActive(true);
-        isStop = false;                 // gfx OnEnable 때 true해줘서 순서 중요
+        isStop = false;                     // gfx OnEnable 때 true해줘서 순서 중요
         
         onHpChange?.Invoke();
+        PartyManager.instance.aliveHeroCount++;
         DungeonManager.instance.onChangeAnyHP?.Invoke();
         DungeonManager.instance.onSomeoneAdd?.Invoke();
     }

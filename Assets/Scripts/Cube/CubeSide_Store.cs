@@ -12,6 +12,7 @@ public class CubeSide_Store : CubeSide
 
     public override void Exit()
     {
+        ItemManager.instance.itemInfoUI.gameObject.SetActive(false);
         onExitFinish?.Invoke(this);
     }
 }
