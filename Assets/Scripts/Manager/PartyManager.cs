@@ -105,7 +105,7 @@ public class PartyManager : MonoBehaviour
         return null;
     }
 
-    public void AddExp(int exp)
+    public void AddExp(float exp)
     {
         foreach(Hero hero in heroParty)
         {

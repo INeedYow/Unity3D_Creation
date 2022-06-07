@@ -84,6 +84,7 @@ public class DungeonManager : MonoBehaviour
 
     public void BattleEnd()
     {
+        ClearEvent();
         curDungeon.BattleEnd();
         WaveEnd();
         ShowResultWave();
@@ -124,15 +125,15 @@ public class DungeonManager : MonoBehaviour
     }
 
     IEnumerator GiveExp()
-    {
+    {   //Debug.Log("reward exp / gold : " + m_exp + " / " + m_gold);
         float dura = 0f;
         float gainExp;
 
         while (dura < 1f)
         {
             gainExp = Time.deltaTime * m_exp;
-            PlayerManager.instance.AddExp((int)gainExp);
-            PartyManager.instance.AddExp((int)gainExp);
+            PlayerManager.instance.AddExp(gainExp);
+            PartyManager.instance.AddExp(gainExp);
             dura += Time.deltaTime;
             yield return null;
         }
@@ -168,7 +169,7 @@ public class DungeonManager : MonoBehaviour
     public void Exit()  // 버튼 이벤트
     {
         onDungeonExit?.Invoke();
-        
+
         curDungeon.ClearMonster();  // 전투 패배 시 남은 몬스터 제거
         curDungeon.gameObject.SetActive(false);
         curDungeon = null;
@@ -231,6 +232,14 @@ public class DungeonManager : MonoBehaviour
         character.onDeadGetThis -= OnMonsterDie;
 
         dungeonUI.SetCount(curDungeon.curMonsterCount);
+    }
+
+    public void ClearEvent()
+    {
+        foreach(Monster mons in curDungeon.curMonsters)
+        {
+            mons.onDeadGetThis -= OnMonsterDie;
+        }
     }
 
     public void ShowMonInfoUI(Monster monster) {    

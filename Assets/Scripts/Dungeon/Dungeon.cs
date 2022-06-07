@@ -22,9 +22,6 @@ public class Dungeon : MonoBehaviour
 
     [Header("Rewards--------------------------")]
     public RewardData rewardData;
-    // int m_gold;
-    // [SerializeField]
-    // int m_exp;
     
 
     private void Awake() {
@@ -50,7 +47,13 @@ public class Dungeon : MonoBehaviour
 
     void OnEnable() {
         curWave = 1;
+        
         Invoke("SpawnWave", 1f);
+    }
+
+    private void OnDisable() {
+        //ClearMonster();
+        curMonsterCount = 0;
     }
 
     void AddWaveReward()
@@ -77,10 +80,10 @@ public class Dungeon : MonoBehaviour
 
     public void MonsterDie()
     {   
-        curMonsterCount--;
+        curMonsterCount--;  
 
         if (curMonsterCount <= 0)
-        {   Debug.Log("curMon " + curMonsterCount);
+        {   
             WaveEnd();
             AddWaveReward();
             Invoke("WaveClear", 1f);
@@ -117,14 +120,6 @@ public class Dungeon : MonoBehaviour
         DungeonManager.instance.BattleEnd();
     }
 
-    // void GetReward(){
-    //     PlayerManager.instance.AddGold(m_gold);   //Debug.Log(m_gold);
-    //     PlayerManager.instance.AddExp(m_exp);     //Debug.Log(m_exp);
-    //     PartyManager.instance.AddExp(m_exp);
-    //     m_gold = 0;
-    //     m_exp = 0;
-    // }
-
     void SpawnWave()
     {   
         spawnTransformIndex = 0;
@@ -142,6 +137,7 @@ public class Dungeon : MonoBehaviour
 
     public void ClearMonster()
     {   
+
         foreach(Monster mons in curMonsters)
         {
             ObjectPool.instance.ReturnObj(mons.gameObject);

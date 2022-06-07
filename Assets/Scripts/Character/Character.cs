@@ -127,7 +127,7 @@ public abstract class Character : MonoBehaviour, IDamagable
                 }
             }
             else{
-                anim.speed = 2f;
+                anim.speed = 3f;
             }
         }
     }
@@ -328,7 +328,22 @@ public abstract class Character : MonoBehaviour, IDamagable
             }
         }
 
-        if (newAttacker != null) { attacker = newAttacker; }
+        if (newAttacker != null) 
+        { 
+            if (newAttacker != attacker)
+            {   // 공격자가 바뀐경우
+                if (attacker != null)
+                {   // 이전 이벤트 함수 제거
+                    attacker.onDead -= AttackerDead;
+                }
+                attacker = newAttacker; 
+            }
+            
+            if (attacker != null)
+            {   // 새 공격자가 null 아니면 이벤트 등록
+                attacker.onDead += AttackerDead;
+            }
+        }
         
         ShowDamageText(getDamage, isMagic);
 
@@ -337,6 +352,11 @@ public abstract class Character : MonoBehaviour, IDamagable
             Death();
             if (newAttacker != null) newAttacker.onKill?.Invoke();
         }
+    }
+
+    void AttackerDead()
+    {
+        attacker = null;
     }
 
     public void Damaged(float damage)

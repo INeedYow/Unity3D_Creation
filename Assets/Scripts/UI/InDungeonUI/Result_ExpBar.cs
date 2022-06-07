@@ -37,7 +37,7 @@ public class Result_ExpBar : MonoBehaviour
     {
         if (isFinish) return;
 
-        bar.fillAmount = (float)PlayerManager.instance.curExp / (float)PlayerManager.instance.maxExp;
+        bar.fillAmount = PlayerManager.instance.curExp / PlayerManager.instance.maxExp;
         cur.text = PlayerManager.instance.curExp.ToString();
     }
 

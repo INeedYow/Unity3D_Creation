@@ -21,7 +21,7 @@ public class Hero : Character
     [HideInInspector] public float maxExp; 
     float _curExp;  
     public float curExp {
-        get { return _curExp; } 
+        get { return  Mathf.RoundToInt(_curExp); } 
         set { 
             _curExp = value ;
             if (_curExp >= maxExp)

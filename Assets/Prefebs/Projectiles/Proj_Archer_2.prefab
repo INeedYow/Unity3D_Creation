@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eTargetGroup: 1
-  speed: 30
+  speed: 36
   isMagic: 0
   remainTime: 0.1
 --- !u!1001 &6758029624611684611

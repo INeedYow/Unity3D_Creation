@@ -24,9 +24,9 @@ public class PlayerManager : MonoBehaviour
     public int maxLV    { get { return 25; } }
     public int LV       { get; private set; }
     public int maxExp   { get; private set; }
-    int _curExp;
-    public int curExp{
-        get { return _curExp; }
+    float _curExp;
+    public float curExp{
+        get { return  Mathf.RoundToInt(_curExp); }
         set {
             if (LV == maxLV) return;
             _curExp = value;
@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
     void SetBeginInfo(){
         LV = 1;
         maxExp = 150;
-        gold = 500000;  
+        gold = 500000;
     }
     void InitUI(){
         playerInfoUI.RenewCurParty(PartyManager.instance.heroParty.Count);
@@ -88,7 +88,7 @@ public class PlayerManager : MonoBehaviour
         playerInfoUI.RenewGold(gold);
     }
 
-    public void AddExp(int amount){ 
+    public void AddExp(float amount){ 
         curExp += amount;   
         playerInfoUI.RenewExp(curExp, maxExp);
     }

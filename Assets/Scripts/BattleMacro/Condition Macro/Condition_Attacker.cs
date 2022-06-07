@@ -11,4 +11,6 @@ public class Condition_Attacker : ConditionMacro
         if (target == null) return false;
         return true;
     }
+
+    
 }
