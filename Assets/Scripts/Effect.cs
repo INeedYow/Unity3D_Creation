@@ -48,6 +48,7 @@ public class Effect : MonoBehaviour
         }
     }
 
+    
     public void SetDuration(float duration) { Invoke("Return", duration); }
 
     public void Return()

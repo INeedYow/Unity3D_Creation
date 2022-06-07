@@ -13,7 +13,7 @@ public class Buff_Blind : Buff
 
     public override void Add(Character target, float duration, float buffRatio)
     {   // ratio를 데미지로
-        if (target == null || target.isDead) return ;
+        if (target == null ) return;
         
         this.target = target;       
         target.buffs.AddLast(this);

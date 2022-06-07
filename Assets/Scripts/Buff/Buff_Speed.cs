@@ -8,7 +8,7 @@ public class Buff_Speed : Buff
 
     public override void Add(Character target, float duration, float buffRatio)
     {
-        if (target == null || target.isDead) return ;
+        if (target == null ) return;
         
         this.target = target;
         target.buffs.AddLast(this);

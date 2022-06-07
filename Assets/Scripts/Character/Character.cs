@@ -427,7 +427,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         
         if (anim.speed < 0.1f) return;
 
-        if (isDead) return;
+        //if (isDead) return;
 
         if (!nav.isOnNavMesh) return;
 

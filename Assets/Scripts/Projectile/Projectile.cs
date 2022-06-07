@@ -78,8 +78,11 @@ public class Projectile : MonoBehaviour
 
             if (m_eBuff != EBuff.None)
             {
-                Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
-                buff.Add(m_target, m_buffDura, m_buffRatio);
+                if (!m_target.isDead)
+                {
+                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                    buff.Add(m_target, m_buffDura, m_buffRatio);
+                }
             }
         }
         
@@ -117,8 +120,11 @@ public class Projectile : MonoBehaviour
 
                 if (m_eBuff != EBuff.None)
                 {
-                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
-                    buff.Add(m_target, m_buffDura, m_buffRatio);
+                    if (!m_target.isDead)
+                    {
+                        Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                        buff.Add(m_target, m_buffDura, m_buffRatio);
+                    }
                 }
             }
         }
@@ -145,8 +151,11 @@ public class Projectile : MonoBehaviour
 
                 if (m_eBuff != EBuff.None)
                 {
-                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
-                    buff.Add(m_target, m_buffDura, m_buffRatio);
+                    if (!m_target.isDead)
+                    {
+                        Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                        buff.Add(m_target, m_buffDura, m_buffRatio);
+                    }
                 }
             }
         }

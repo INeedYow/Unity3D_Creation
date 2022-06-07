@@ -11,7 +11,7 @@ public class Action_UseSkill : ActionMacro
     {
         if (owner.skills[skillNumber - 1] == null) return false;
 
-        if (owner.silence > 0) return false;
+        if (owner.silence > 0 || owner.madness > 0) return false;
 
         return owner.skills[skillNumber - 1].IsReady();
     }

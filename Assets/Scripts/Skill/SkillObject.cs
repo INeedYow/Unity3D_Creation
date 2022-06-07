@@ -27,6 +27,7 @@ public abstract class SkillObject : MonoBehaviour
 
     protected void AddBuff(Character target)
     {   // buff None 이거나 잘못된 값이면 null 받아옴
+        if (target.isDead) return;                                  // 데미지 준 후라서 죽었으면 줄 필요없음
         buff = ObjectPool.instance.GetBuff((int)data.eBuff);
         buff?.Add(target, data.duration, data.buffRatio);
     }
