@@ -12,6 +12,7 @@ public class MacroManager : MonoBehaviour
     [Header("Hero Macro")]
     public List<ConditionMacro> prfConditionMacros;
     public List<ActionMacro>    prfActionMacros;
+    public List<ActionMacro>    prfSkillMacros;
     public int maxMacroCount { get { return 5; } }
 
     private void Awake() { 
@@ -20,12 +21,18 @@ public class MacroManager : MonoBehaviour
     }
     void SetMacroDataID(){ // 각 macro data가 dropdown의 value랑 같게 쓰려고 
         int id = 0;
-        foreach (BattleMacro macro in prfConditionMacros){
+        foreach (BattleMacro macro in prfConditionMacros)
+        {
             macro.data.ID = id++;
         }
 
         id = 0;
-        foreach (BattleMacro macro in prfActionMacros){
+        foreach (BattleMacro macro in prfActionMacros)
+        {
+            macro.data.ID = id++;
+        }
+        foreach (BattleMacro macro in prfSkillMacros)
+        {
             macro.data.ID = id++;
         }
     }
@@ -41,7 +48,16 @@ public class MacroManager : MonoBehaviour
         }
         else{   //Debug.Log("SetMacro_Act");
             Destroy(hero.actionMacros[macroUnitID].gameObject);
-            hero.actionMacros[macroUnitID] = Instantiate(prfActionMacros[value], hero.transform);
+
+            if (value < prfActionMacros.Count)
+            {   // 공통 매크로인 경우
+                hero.actionMacros[macroUnitID] = Instantiate(prfActionMacros[value], hero.transform);
+            }
+            else
+            {   // 스킬 매크로인 경우
+                hero.actionMacros[macroUnitID] = Instantiate(prfSkillMacros[value - prfActionMacros.Count], hero.transform);
+            }
+            
             hero.actionMacros[macroUnitID].owner = hero;
         }
     }

@@ -25,4 +25,9 @@ public class HeroMacroUnit : MonoBehaviour
         }
         dropdown.value = value;
     }
+
+    public void ClearOption()
+    {
+        dropdown.ClearOptions();
+    }
 }

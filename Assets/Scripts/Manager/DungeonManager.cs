@@ -44,7 +44,7 @@ public class DungeonManager : MonoBehaviour
     [Space(10f)] [Header("Rewards")]
     [SerializeField] int m_exp;
     [SerializeField] int m_gold;
-    [SerializeField] List<EquipItemData> m_item;
+    [SerializeField] List<EquipItemData> m_items;
 
 
     [Space(4f)] [Header("ETC")]
@@ -98,7 +98,7 @@ public class DungeonManager : MonoBehaviour
 
     public void AddReward(EquipItemData itemData)
     {
-        m_item.Add(itemData);
+        m_items.Add(itemData);
     }
 
 
@@ -148,9 +148,26 @@ public class DungeonManager : MonoBehaviour
     {
         resultUI.heroExpTray.onFinish -= ShowResultItem;
 
+        foreach (EquipItemData item in m_items)
+        {
+            if (item is WeaponItemData)
+            {
+                InventoryManager.instance.AddItem(item as WeaponItemData);
+            }
+            else if (item is ArmorItemData)
+            {
+                InventoryManager.instance.AddItem(item as ArmorItemData);
+            }
+            else
+            {
+                InventoryManager.instance.AddItem(item as AccessoryItemData);
+            }
+            
+        }
+        
         resultUI.itemTray.gameObject.SetActive(true);
         resultUI.itemTray.onFinish += ShowExitButton;
-        resultUI.itemTray.ShowItem(m_item);
+        resultUI.itemTray.ShowItem(m_items);
     }
 
     void ShowExitButton()

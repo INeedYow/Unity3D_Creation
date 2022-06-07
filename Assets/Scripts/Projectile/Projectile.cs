@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour
         if (!m_isLaunch) return;
         m_sqrDist = (transform.position - m_lastPos).sqrMagnitude;
         
-        if (m_sqrDist < 1.5f)
+        if (m_sqrDist < 1f)
         {   
             m_isLaunch = false;
             if (m_area != 0f)   { AreaHit(); }
@@ -65,34 +65,52 @@ public class Projectile : MonoBehaviour
 
     void Hit()
     {
-        if (null != m_target && !m_target.isStop)
+        if (null != m_target && !m_target.isStop && !m_target.isDead)
         {   //Debug.Log("proj's owner : " + m_owner);
             //IDamagable target = m_target.GetComponent<IDamagable>();
             m_target.Damaged(m_damage, m_powerRate, m_owner, isMagic);
 
             if (m_eEffect != EEffect.None)
             {
-                Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
-                eff.SetPosition(m_target);
-            }
-
-            if (m_eBuff != EBuff.None)
-            {
-                if (!m_target.isDead)
-                {
-                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
-                    buff.Add(m_target, m_buffDura, m_buffRatio);
-                }
+                ObjectPool.instance.GetEffect((int)m_eEffect).SetPosition(m_target);
             }
         }
-        
-        //if (m_target != null)
-        //{   // 오브젝트 풀 적용 중인데 몬스터 삭제하면서 화살도 같이 사라져버려서 일단 주석처리
-            //gameObject.transform.SetParent(m_target.transform);
-        //}
-        
+        else{
+            CancelInvoke("Return");
+            Return();
+            return;
+        }
+
+        if (m_target.isDead)
+        {
+            CancelInvoke("Return");
+            Return();
+            return;
+        }
+
+        if (m_eBuff != EBuff.None)
+        {
+            ObjectPool.instance.GetBuff((int)m_eBuff).Add(m_target, m_buffDura, m_buffRatio);
+        }
+
         CancelInvoke("Return");
-        Invoke("Return", remainTime);
+
+        if (remainTime > 0f)
+        {
+            m_target.onDeadGetThis += StopRemain;           //Debug.Log("Add Event StopRemain()");
+            gameObject.transform.SetParent(m_target.transform);
+            Invoke("Return", remainTime);
+        }
+        else{
+            Return();
+        }
+    }
+
+    void StopRemain(Character owner)
+    {   // 잔존 중 대상이 사망한 경우
+        owner.onDeadGetThis -= StopRemain;
+        CancelInvoke("Return");                             //Debug.Log("StopRemain()");
+        Return();
     }
 
     void AreaHit()
@@ -107,8 +125,6 @@ public class Projectile : MonoBehaviour
                 m_sqrDist = (m_target.transform.position - mon.transform.position).sqrMagnitude;
 
                 if (m_area * m_area < m_sqrDist) continue;
-
-                //IDamagable tempTarget = mon.GetComponent<IDamagable>();
                 
                 m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
 
@@ -138,8 +154,6 @@ public class Projectile : MonoBehaviour
                 m_sqrDist = (m_target.transform.position - hero.transform.position).sqrMagnitude;
 
                 if (m_area * m_area < m_sqrDist) continue;
-
-                //IDamagable tempTarget = hero.GetComponent<IDamagable>();
                 
                 m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
 
@@ -178,10 +192,24 @@ public class Projectile : MonoBehaviour
         //     damagableTarget?.Damaged(m_damage, m_powerRate, m_owner, isMagic);
         // }
 
-        //gameObject.transform.SetParent(m_target.transform); //
-        
+        if (m_target.isDead || m_target.isStop)
+        {
+            CancelInvoke("Return");
+            Return();
+            return;
+        }
+
         CancelInvoke("Return");
-        Invoke("Return", remainTime);
+
+        if (remainTime > 0f)
+        {
+            m_target.onDeadGetThis += StopRemain;               
+            gameObject.transform.SetParent(m_target.transform);
+            Invoke("Return", remainTime);
+        }
+        else{
+            Return();
+        }
     }
     
 
@@ -198,6 +226,6 @@ public class Projectile : MonoBehaviour
     }
 
     void Return(){
-        ObjectPool.instance.ReturnObj(gameObject);
+        ObjectPool.instance.ReturnObj(this.gameObject);
     }
 }

@@ -8,7 +8,10 @@ public class HeroMacroUI : MonoBehaviour
     public HeroMacroUnit[] conditonMacroUnits = new HeroMacroUnit[5];
     public HeroMacroUnit[] actionMacroUnits = new HeroMacroUnit[5];
 
-    private void Start() {
+    List<Dropdown.OptionData> m_ActionOptionDatas;
+    Dropdown.OptionData[] m_skillOptionDatas;
+
+    private void Awake() {
         InitConditionUnits();
         InitActionUnits();
     }
@@ -42,20 +45,31 @@ public class HeroMacroUI : MonoBehaviour
 
     void InitActionUnits()
     {
-        List<Dropdown.OptionData> optionDatas = new List<Dropdown.OptionData>();
+        //List<Dropdown.OptionData> optionDatas = new List<Dropdown.OptionData>();
+        m_ActionOptionDatas  = new List<Dropdown.OptionData>();
+
+        m_skillOptionDatas = new Dropdown.OptionData[4];
 
         foreach (BattleMacro macro in MacroManager.instance.prfActionMacros)
         {  
-            optionDatas.Add(new Dropdown.OptionData(macro.data.desc));
+            //optionDatas.Add(new Dropdown.OptionData(macro.data.desc));
+            m_ActionOptionDatas.Add(new Dropdown.OptionData(macro.data.desc));
+        }
+
+        for (int i = 0; i < MacroManager.instance.prfSkillMacros.Count; i++)
+        {
+            m_skillOptionDatas[i] = new Dropdown.OptionData(MacroManager.instance.prfSkillMacros[i].data.desc);
         }
 
         int id = 0;
         foreach (HeroMacroUnit unit in actionMacroUnits)
         {  
-            unit.SetOptions(optionDatas);
+            //unit.SetOptions(optionDatas);
+            unit.SetOptions(m_ActionOptionDatas);
             unit.ID = id++;
             unit.isConditionMacro = false;
         }
+
     }
 
     public void RenewUI(Hero hero){ //Debug.Log("RenewUI");
@@ -64,14 +78,50 @@ public class HeroMacroUI : MonoBehaviour
             foreach (HeroMacroUnit unit in actionMacroUnits)    { unit.dropdown.interactable = false; }
         }
         else{
+            SetSkillMacro(hero);
+
             for (int i = 0; i < MacroManager.instance.maxMacroCount; i++)
             { 
                 if (null != hero.conditionMacros[i])
+                {
                     conditonMacroUnits[i].SetValue(hero.conditionMacros[i].data.ID);
+                }
                 
                 if (null != hero.actionMacros[i])
+                {
                     actionMacroUnits[i].SetValue(hero.actionMacros[i].data.ID);
+                }
             }
+        }
+    }
+
+
+
+    // 스킬 매크로 추가 관리 (해당 영웅 레벨과 스킬 획득 레벨 비교해서 매크로 dropdown 옵션에 추가, 삭제 관리)
+    public void SetSkillMacro(Hero hero)
+    {
+        for (int i = 0; i < hero.skills.Length; i++)
+        {
+            if (hero.level >= hero.skills[i].data.requireLevel)
+            {   // 영웅 레벨이 스킬 레벨제한 이상일 때
+                if (!m_ActionOptionDatas.Contains(m_skillOptionDatas[i]))
+                {   // 해당 스킬 사용 매크로가 없는 경우 -> 추가
+                    m_ActionOptionDatas.Add(m_skillOptionDatas[i]);
+                }
+            }
+            else
+            {   // 레벨이 부족한 경우
+                if (m_ActionOptionDatas.Contains(m_skillOptionDatas[i]))
+                {   // 스킬 매크로가 있는 경우 -> 제거
+                    m_ActionOptionDatas.Remove(m_skillOptionDatas[i]);
+                }
+            }
+        }
+
+        foreach (HeroMacroUnit unit in actionMacroUnits)
+        {
+            unit.ClearOption();
+            unit.SetOptions(m_ActionOptionDatas);
         }
     }
 

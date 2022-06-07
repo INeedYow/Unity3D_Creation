@@ -427,7 +427,7 @@ public abstract class Character : MonoBehaviour, IDamagable
         
         if (anim.speed < 0.1f) return;
 
-        //if (isDead) return;
+        if (isDead|| isStop) return;
 
         if (!nav.isOnNavMesh) return;
 
@@ -442,7 +442,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
         if (anim.speed < 0.1f) return;
 
-        if (isDead) return;
+        if (isDead || isStop) return;
 
         nav.SetDestination(pos);
         m_lastMoveOrderTime = Time.time;
