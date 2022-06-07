@@ -15,6 +15,6 @@ MonoBehaviour:
   skillName: "\uBD80\uD65C"
   description: "\uC8FD\uC740 \uB300\uC0C1 \uBD80\uD65C"
   icon: {fileID: 21300000, guid: 11f9f7135112e48f4a6bab32d0ce98aa, type: 3}
-  requireLevel: 1
-  cooldown: 5
+  requireLevel: 16
+  cooldown: 15
   skillRange: 5

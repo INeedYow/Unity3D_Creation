@@ -25,8 +25,13 @@ public class HeroInfoUI : MonoBehaviour
 
     [Header("Skill")]
     public Image[] skill = new Image[4];
+    public GameObject[] lvTextBox = new GameObject[4];
+    public Text[] lvText = new Text[4];
+
+    [Space(4f)]
     public Text skillName;
     public Text skillDesc;
+
 
     [Header("Empty")]
     public Sprite emptyIcon;
@@ -66,6 +71,7 @@ public class HeroInfoUI : MonoBehaviour
             for(int i = 0; i < 4; i++)
             {
                 skill[i].sprite = emptySkill;
+                lvTextBox[i].SetActive(false);
             }
 
         }
@@ -88,10 +94,26 @@ public class HeroInfoUI : MonoBehaviour
 
             for(int i = 0; i < 4; i++)
             {
-                if (hero.skills[i] == null) continue;
-                if (hero.skills[i].data == null) continue;
-                if (hero.skills[i].data.icon == null) continue;
+                // if (hero.skills[i] == null) continue;
+                // if (hero.skills[i].data == null) continue;
+                // if (hero.skills[i].data.icon == null) continue;
                 skill[i].sprite = hero.skills[i].data.icon;
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (hero.level >= hero.skills[i].data.requireLevel)
+                {
+                    lvTextBox[i].SetActive(false);
+
+                    skill[i].color = Color.white;
+                }
+                else{
+                    lvTextBox[i].SetActive(true);
+                    lvText[i].text = hero.skills[i].data.requireLevel.ToString();
+
+                    skill[i].color = Color.gray;
+                }
             }
             
         }

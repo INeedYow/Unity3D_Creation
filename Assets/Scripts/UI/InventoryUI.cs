@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     public RectTransform weaponParent;
     public RectTransform armorParent;
     public RectTransform accessoryParent;
+
 
     // Macro UI랑 Inven UI랑 같은 오브젝트 하위에서 존재하는데
     // invenUI를 초기화 해주고 active 끄고 싶은데 

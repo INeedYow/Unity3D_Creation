@@ -117,6 +117,7 @@ public class Dungeon : MonoBehaviour
         AddClearReward();
         //GetReward();
         //
+        DungeonManager.instance.ClearDungeon(dungeonLevel);
         DungeonManager.instance.BattleEnd();
     }
 

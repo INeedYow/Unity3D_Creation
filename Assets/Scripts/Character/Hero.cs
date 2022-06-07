@@ -48,7 +48,7 @@ public class Hero : Character
     void InitHero()
     {
         eGroup = EGroup.Hero;
-        maxExp = 100;
+        maxExp = 50;
         heroGFX.hero = this;
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);

@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    public int clearLevel;  // TODO
-
     [Header("Cube Planet")]
     public CubePlanet cubePlanet;
 
@@ -32,21 +30,6 @@ public class GameManager : MonoBehaviour
     public bool isLockFocus;
     BattleInfoText m_battleInfotext;
     
-    //
-
-    // public int maxLV    { get { return 25; } }
-    // public int LV       { get; private set; }
-    // public int maxExp   { get; private set; }
-    // int _curExp;
-    // public int curExp{
-    //     get { return _curExp; }
-    //     set {
-    //         if (LV == maxLV) return;
-    //         _curExp = value;
-    //         if (_curExp >= maxExp) { LevelUp(); } 
-    //     }
-    // }
-    // public int gold         { get; private set; }
     public bool isMouseOnLeaveArea;
 
     private void Awake() { 

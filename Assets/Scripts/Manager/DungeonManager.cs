@@ -21,9 +21,17 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onDungeonExit;
 
     public static DungeonManager instance { get; private set; }
-    
+
+    [Header("Portals")]
+    public int clearLevel = 0;
+    public GameObject[] curPortals = new GameObject[5];                         // 현재 레벨 포탈
+    public GameObject[] clearPortals = new GameObject[5];                       // 클리어한 던전 재진입 용도 포탈
+
+
+    [Header("Dungeons")]
     public List<Dungeon> listDungeon = new List<Dungeon>();
     public Dungeon curDungeon;
+
 
     [Space(10f)] [Header("Dungeon UI")]
     public DungeonUI dungeonUI;
@@ -65,6 +73,11 @@ public class DungeonManager : MonoBehaviour
         {
             listDungeon.Add(transform.GetChild(i).GetComponent<Dungeon>());
         }
+
+        for (int i = 0; i < clearPortals.Length; i++)
+        {
+            clearPortals[i].SetActive(false);
+        }
     }
 
     public void Enter(int index)
@@ -101,6 +114,22 @@ public class DungeonManager : MonoBehaviour
         m_items.Add(itemData);
     }
 
+    public void ClearDungeon(int level)
+    {
+        if (clearLevel < level)
+        {
+            curPortals[clearLevel].SetActive(false);
+            clearPortals[clearLevel].SetActive(true);
+            // TODO planet에 붙이기
+
+            for (int i = clearLevel; i < curPortals.Length; i++)
+            {
+                curPortals[i].transform.Translate(0f, 0f, -8f);
+            }
+            clearLevel = level;
+            
+        }
+    }
 
     ////// ////// //////
     ////// result //////
@@ -162,8 +191,10 @@ public class DungeonManager : MonoBehaviour
             {
                 InventoryManager.instance.AddItem(item as AccessoryItemData);
             }
-            
         }
+
+        m_items.Clear();
+
         
         resultUI.itemTray.gameObject.SetActive(true);
         resultUI.itemTray.onFinish += ShowExitButton;
@@ -178,9 +209,6 @@ public class DungeonManager : MonoBehaviour
     ////// ////// //////
     ////// ////// //////
     ////// ////// //////
-
-
-
 
 
     public void Exit()  // 버튼 이벤트
@@ -281,7 +309,6 @@ public class DungeonManager : MonoBehaviour
 
             return curDungeon.curMonsters[random];
         }
-
 
         return null;
     }

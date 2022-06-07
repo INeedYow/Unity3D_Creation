@@ -19,6 +19,12 @@ public class InventoryManager : MonoBehaviour
     public List<ArmorItemData>      armorDatas;
     public List<AccessoryItemData>  accessoryDatas;
 
+    [Header("Interact box")]
+    public GameObject interactBox;          // 장착, 판매 버튼 UI
+    public Text sellCost;
+
+    InventoryUnit m_selectedUnit;
+
     public int maxCount { get { return 18; } }
 
 
@@ -119,5 +125,32 @@ public class InventoryManager : MonoBehaviour
        
         accessoryDatas.Remove(itemData);
         RenewAccessoryInven();
+    }
+
+    public void ShowInteractBox(InventoryUnit unit)
+    {   Debug.Log("1");
+        m_selectedUnit = unit;
+
+        interactBox.SetActive(true);
+        interactBox.transform.position = Input.mousePosition + Vector3.down * 130f;
+        sellCost.text = m_selectedUnit.curData.sellCost.ToString();
+    }
+
+    public void HideInteractBox()
+    {
+        m_selectedUnit = null;
+        interactBox.SetActive(false);
+    }
+
+    public void OnEquipButton()
+    {
+        m_selectedUnit.EquipItem();
+        HideInteractBox();
+    }
+
+    public void OnSellButton()
+    {
+        m_selectedUnit.SellItem();
+        HideInteractBox();
     }
 }

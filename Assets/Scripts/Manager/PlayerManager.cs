@@ -133,6 +133,11 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             AddExp(maxExp);
+            
+            foreach (Hero hero in HeroManager.instance.heroList)
+            {
+                hero.curExp += hero.maxExp;
+            }
         }
     }
 }
