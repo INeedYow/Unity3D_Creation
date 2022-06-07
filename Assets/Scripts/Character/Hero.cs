@@ -18,7 +18,7 @@ public class Hero : Character
     
     [Header("Level")]
     public int level = 1;
-    [HideInInspector] public float maxExp = 100;
+    [HideInInspector] public float maxExp; 
     float _curExp;  
     public float curExp {
         get { return _curExp; } 
@@ -48,6 +48,7 @@ public class Hero : Character
     void InitHero()
     {
         eGroup = EGroup.Hero;
+        maxExp = 100;
         heroGFX.hero = this;
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);

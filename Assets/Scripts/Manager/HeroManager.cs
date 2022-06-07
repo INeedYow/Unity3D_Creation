@@ -167,7 +167,7 @@ public class HeroManager : MonoBehaviour
             hero.actionMacros[i] = Instantiate(MacroManager.instance.prfActionMacros[0], hero.transform);
             hero.actionMacros[i].owner = hero;
         }
-
+        
         AddHero(hero);
     }
 

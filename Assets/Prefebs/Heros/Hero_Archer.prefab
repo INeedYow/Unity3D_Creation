@@ -1830,7 +1830,7 @@ MonoBehaviour:
   eClass: 1
   isJoin: 0
   level: 1
-  maxExp: 0
+  maxExp: 100
   weaponData: {fileID: 0}
   armorData: {fileID: 0}
   accessoryData: {fileID: 0}

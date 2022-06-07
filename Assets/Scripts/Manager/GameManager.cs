@@ -8,8 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
+    public int clearLevel;  // TODO
+
     [Header("Cube Planet")]
     public CubePlanet cubePlanet;
+
     [Header("Dummy tools")]
     public GameObject dummyPlane;
     public DummyCursor cursor;

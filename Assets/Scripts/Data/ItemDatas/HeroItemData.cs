@@ -7,10 +7,6 @@ using UnityEngine.UI;
 public class HeroItemData : ItemData
 {
     public Hero.EClass eClass;
-    // public SkillData skilldata_1;
-    // public SkillData skilldata_2;
-    // public SkillData skilldata_3;
-    // public SkillData skilldata_4;
     public SkillData[] skillDatas = new SkillData[4];
 
     public override bool Buy()
@@ -36,7 +32,7 @@ public class HeroItemData : ItemData
     public override bool SetOptionText(int optionNumber, ItemOptionUnit optionUnit)
     {
         if (skillDatas[optionNumber] == null)
-        {   // 나중에 스킬 다 넣어주면 없어질 코드..?
+        {   // 나중에 스킬 다 넣어주면 없어질 코드
             optionUnit.option.text = "스킬";
             optionUnit.value.text = "정보 없음";
             return true;

@@ -38,6 +38,7 @@ public class PartyManager : MonoBehaviour
         foreach(Hero hero in heroParty)
         {
             hero.curHp = hero.maxHp;
+            hero.powerRate = 1f;
             
             if (hero.isDead) hero.isDead = false;
         }
@@ -80,7 +81,7 @@ public class PartyManager : MonoBehaviour
 
     public void Leave(Hero hero)
     {   //Debug.Log("Leave()" + hero.name);
-        heroParty.Remove(hero); //Debug.Log(heroParty.Contains(hero) ? "contain" : "nope");
+        heroParty.Remove(hero); 
         hero.isJoin = false;
         PlayerManager.instance.RenewCurParty(heroParty.Count);
     }

@@ -80,7 +80,7 @@ public class Dungeon : MonoBehaviour
         curMonsterCount--;
 
         if (curMonsterCount <= 0)
-        {   // 웨이브 클리어
+        {   Debug.Log("curMon " + curMonsterCount);
             WaveEnd();
             AddWaveReward();
             Invoke("WaveClear", 1f);
@@ -166,5 +166,12 @@ public class Dungeon : MonoBehaviour
         int curIndex = spawnTransformIndex++;
         spawnTransformIndex %= spawnTransforms.Length;
         return spawnTransforms[curIndex];
+    }
+
+    public void BattleEnd()
+    {
+        CancelInvoke("WaveStart");
+        CancelInvoke("SpawnWave");
+        CancelInvoke("WaveClear");
     }
 }

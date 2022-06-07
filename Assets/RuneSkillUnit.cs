@@ -21,10 +21,11 @@ public class RuneSkillUnit : MonoBehaviour
         DungeonManager.instance.onWaveEnd += EndWave;
         DungeonManager.instance.onWaveEnd += LockInput;
         DungeonManager.instance.onWaveStart += UnLockInput;
+        
     }
 
-    void LockInput()    { m_isLock = true; }
-    void UnLockInput()  { m_isLock = false; }
+    public void LockInput()    { m_isLock = true; }
+    public void UnLockInput()  { m_isLock = false; }
 
     public void SetInfo(SkillRuneData data)
     {   

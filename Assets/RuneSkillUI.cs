@@ -41,5 +41,21 @@ public class RuneSkillUI : MonoBehaviour
             unit.RenewCooldown();
         }
     }
+
+    public void LockSkillInput()
+    {
+        foreach (RuneSkillUnit unit in skillUnits)
+        {
+            unit.LockInput();
+        }
+    }
+
+    public void UnLockSkillInput()
+    {
+        foreach (RuneSkillUnit unit in skillUnits)
+        {
+            unit.UnLockInput();
+        }
+    }
 }
  

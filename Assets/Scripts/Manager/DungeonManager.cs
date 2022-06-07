@@ -84,6 +84,8 @@ public class DungeonManager : MonoBehaviour
 
     public void BattleEnd()
     {
+        curDungeon.BattleEnd();
+        WaveEnd();
         ShowResultWave();
     }
 
