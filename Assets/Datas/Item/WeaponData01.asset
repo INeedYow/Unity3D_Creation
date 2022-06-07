@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WeaponData01
   m_EditorClassIdentifier: 
   itemName: "\uBB34\uAE30 1"
-  desc: "\uCD08\uC2EC\uC790\uC6A9 \uBB34\uAE30"
-  icon: {fileID: -4255921865672632082, guid: 37c228f9541674b4cb42da85a6783ec5, type: 3}
-  requireLevel: 1
-  cost: 400
-  sellCost: 200
+  desc: "\uCD5C\uD558\uAE09 \uBB34\uAE30"
+  icon: {fileID: -2262602574866384894, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
+  requireLevel: 3
+  cost: 300
+  sellCost: 100
   minDamage: 3
-  maxDamage: 5
-  magicDamage: 0
+  maxDamage: 4
+  magicDamage: 5

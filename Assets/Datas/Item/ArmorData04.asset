@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad644ceae1047d4ba69df2520de3fd7, type: 3}
+  m_Name: ArmorData04
+  m_EditorClassIdentifier: 
+  itemName: "\uBC29\uC5B4\uAD6C 4"
+  desc: "\uC0C1\uAE09 \uBC29\uC5B4\uAD6C"
+  icon: {fileID: -8582435088932248154, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
+  requireLevel: 12
+  cost: 8100
+  sellCost: 2700
+  armor: 0.2
+  magicArmor: 0.1
+  Hp: 240

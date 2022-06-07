@@ -2233,8 +2233,8 @@ MonoBehaviour:
   name: Brave Skeleton
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 200
-  maxHp: 200
+  curHp: 240
+  maxHp: 240
   minDamage: 4
   maxDamage: 4
   magicDamage: 0
@@ -2247,7 +2247,7 @@ MonoBehaviour:
   dodgeChance: 1
   criticalRate: 1.5
   powerRate: 1
-  armorRate: 0
+  armorRate: -0.1
   magicArmorRate: 0
   buffCount: 0
   debuffCount: 0
@@ -2257,15 +2257,16 @@ MonoBehaviour:
   targetTF: {fileID: 2496582101564725405}
   HpBarTF: {fileID: 3726595780996259423}
   projectileTF: {fileID: 2256110396378995348}
-  nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
   skills: []
+  nav: {fileID: 0}
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
   isStasis: 0
+  isInvincible: 0
   monsGFX: {fileID: 5962830130248200400}
   macrosParent: {fileID: 941582732613422993}
 --- !u!195 &5659755582090165459

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdbddd4217737e44585a27942ff39853, type: 3}
-  m_Name: AcceData_Drain
+  m_Name: AcceData_Thorns01
   m_EditorClassIdentifier: 
-  itemName: "\uD761\uD608 \uAC08\uD034"
-  desc: "\uD53C \uCABD\uCABD"
-  icon: {fileID: -7880560510917792541, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
-  requireLevel: 1
-  cost: 2000
+  itemName: "\uBC18\uC0AC"
+  desc: "\uACF5\uACA9\uC790\uC5D0\uAC8C \uBC18\uC0AC\uD53C\uD574"
+  icon: {fileID: -8059942497137214069, guid: 37c228f9541674b4cb42da85a6783ec5, type: 3}
+  requireLevel: 5
+  cost: 3000
   sellCost: 1000
-  ability: {fileID: 8874223264946920548, guid: 039a5021b82aa1f4da0819be96eebd7f, type: 3}
+  ability: {fileID: 979895400572977150, guid: efc6b4688c105144da32c27540afe9fd, type: 3}

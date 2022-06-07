@@ -18,6 +18,7 @@ public class CubeSide_Board : CubeSide
     {
         StartCoroutine("OpenBoard"); 
         PlayerManager.instance.playerInfoUI.gameObject.SetActive(true);
+        DungeonManager.instance.isLockClick = false;
     }
 
     public override void Exit()
@@ -31,6 +32,7 @@ public class CubeSide_Board : CubeSide
         }
 
         PlayerManager.instance.playerInfoUI.gameObject.SetActive(false);
+        DungeonManager.instance.isLockClick = true;
     }
 
     public void TurnOnBoard(){

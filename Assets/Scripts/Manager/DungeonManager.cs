@@ -23,8 +23,9 @@ public class DungeonManager : MonoBehaviour
     public static DungeonManager instance { get; private set; }
 
     [Header("Portals")]
-    public int clearLevel = 0;
-    public GameObject[] curPortals = new GameObject[5];                         // 현재 레벨 포탈
+    [HideInInspector] public int clearLevel = 0;
+    public GameObject[] monsterPlanets = new GameObject[5];                         // 현재 레벨 포탈
+    public GameObject[] bossPortals = new GameObject[5];
     public GameObject[] clearPortals = new GameObject[5];                       // 클리어한 던전 재진입 용도 포탈
 
 
@@ -59,6 +60,7 @@ public class DungeonManager : MonoBehaviour
     public Transform worldEffectTF;
     public Transform monBackTF;
     public Transform heroBackTF;
+    public bool isLockClick;
 
 
     HpBar bar;
@@ -116,18 +118,21 @@ public class DungeonManager : MonoBehaviour
 
     public void ClearDungeon(int level)
     {
+        if (level >= monsterPlanets.Length) return;
+
         if (clearLevel < level)
         {
-            curPortals[clearLevel].SetActive(false);
+            monsterPlanets[clearLevel].SetActive(false);
             clearPortals[clearLevel].SetActive(true);
-            // TODO planet에 붙이기
 
-            for (int i = clearLevel; i < curPortals.Length; i++)
+            for (int i = clearLevel; i < monsterPlanets.Length; i++)
             {
-                curPortals[i].transform.Translate(0f, 0f, -8f);
+                monsterPlanets[i].transform.Translate(0f, 0f, -8f);
             }
             clearLevel = level;
             
+            bossPortals[clearLevel].AddComponent<Portal>().index = clearLevel;
+            bossPortals[clearLevel].AddComponent<FocusEffetor>().focusedScale = new Vector3(3f, 3f, 3f);
         }
     }
 
@@ -192,9 +197,6 @@ public class DungeonManager : MonoBehaviour
                 InventoryManager.instance.AddItem(item as AccessoryItemData);
             }
         }
-
-        m_items.Clear();
-
         
         resultUI.itemTray.gameObject.SetActive(true);
         resultUI.itemTray.onFinish += ShowExitButton;
@@ -214,10 +216,12 @@ public class DungeonManager : MonoBehaviour
     public void Exit()  // 버튼 이벤트
     {
         onDungeonExit?.Invoke();
+        m_items.Clear();
 
         curDungeon.ClearMonster();  // 전투 패배 시 남은 몬스터 제거
         curDungeon.gameObject.SetActive(false);
         curDungeon = null;
+        
 
         PartyManager.instance.ExitDungeon();
         PlayerManager.instance.runeTree.Release();

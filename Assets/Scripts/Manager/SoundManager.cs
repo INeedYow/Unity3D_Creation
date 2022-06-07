@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
     void Init()
     {
         audioSource.clip = clip_bgm;
-        curBGMVolume = 0.01f;
+        curBGMVolume = 0.03f;
         audioSource.volume = curBGMVolume;
         audioSource.Play();
     }

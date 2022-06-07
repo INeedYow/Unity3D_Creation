@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ArmorData01
   m_EditorClassIdentifier: 
   itemName: "\uBC29\uC5B4\uAD6C 1"
-  desc: "\uCD08\uC2EC\uC790\uC6A9 \uBC29\uC5B4\uAD6C"
+  desc: "\uCD5C\uD558\uAE09 \uBC29\uC5B4\uAD6C"
   icon: {fileID: -6971892982610373682, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
-  requireLevel: 1
-  cost: 400
-  sellCost: 200
+  requireLevel: 3
+  cost: 300
+  sellCost: 100
   armor: 0.05
-  magicArmor: 0
+  magicArmor: 0.03
   Hp: 30

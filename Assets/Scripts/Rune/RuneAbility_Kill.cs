@@ -21,6 +21,6 @@ public class RuneAbility_Kill : RuneAbility
 
     public override int GetCurValue()
     {
-        return Mathf.RoundToInt(powerGain * 100f);
+        return (int)(powerGain * 100f);
     }
 }

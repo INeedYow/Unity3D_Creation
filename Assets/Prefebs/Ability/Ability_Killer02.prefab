@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2910580941285240574}
-  - component: {fileID: 979895400572977150}
+  - component: {fileID: 6467371280754365297}
   m_Layer: 0
-  m_Name: Ability_Thorns
+  m_Name: Ability_Killer02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &979895400572977150
+--- !u!114 &6467371280754365297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,8 +40,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9061522785314666278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af0d242eca0b5984284f88b7f30d349d, type: 3}
+  m_Script: {fileID: 11500000, guid: eaa76938294927a4cacb41d42d394a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thornsDamageMin: 3
-  thornsDamageMax: 6
+  duration: 5
+  damageRatio: 0.1

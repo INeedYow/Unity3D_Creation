@@ -41,7 +41,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     public float maxDamage;
     public float magicDamage;
     [HideInInspector] public float lastAttackTime;
-    [Range(0.1f, 2f)] public float attackDelay;
+    [Range(0.2f, 2f)] public float attackDelay;
     [Range(2f, 20f)] public float attackRange;                      // 사정거리
     [Range(0f, 10f)] public float aoeRange;                         // 범위공격
     [Range(1f, 20f)] public float moveSpeed;                        // 
@@ -51,7 +51,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     [Space(10f)]
     [Range(1f, 4f)] public float criticalRate = 1.5f;               // 치명타 배율 (%)
     [Range(0f, 2f)] public float powerRate = 1f;                    // 추가 피해 (%)
-    [Range(0f, 1f)] public float armorRate = 0f;                    // 방어율 (%)
+    [Range(-0.2f, 1f)] public float armorRate = 0f;                    // 방어율 (%)
     [Range(0f, 1f)] public float magicArmorRate = 0f;               // 마법방어율 (%)
    
     // buffs

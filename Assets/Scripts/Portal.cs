@@ -8,6 +8,7 @@ public class Portal : MonoBehaviour
     
     private void OnMouseDown() {
         if (GameManager.instance.isLockFocus) return;
+        if (DungeonManager.instance.isLockClick) return;
         
         DungeonManager.instance.Enter(index);
     }

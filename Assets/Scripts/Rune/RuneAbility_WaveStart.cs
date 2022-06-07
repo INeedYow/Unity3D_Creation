@@ -20,6 +20,6 @@ public class RuneAbility_WaveStart : RuneAbility
 
     public override int GetCurValue()
     {
-        return Mathf.RoundToInt(healRatio * 100f);
+        return (int)(healRatio * 100f);
     }
 }

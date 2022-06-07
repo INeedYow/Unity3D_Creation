@@ -26,8 +26,7 @@ public class Monster : Character
         {
             case EMonster.RedSlime: 
             case EMonster.BlueSlime:
-            case EMonster.Plant:            
-            case EMonster.Skeleton:         
+            case EMonster.Plant:       
 
             { monster.attackCommand = new NormalAttackCommand(monster); break; }
 
@@ -67,7 +66,8 @@ public class Monster : Character
                 }
                 break;
             }
-
+            
+            case EMonster.Skeleton:  
             case EMonster.BraveSkeleton :   monster.attackCommand = new NormalAttackCommand(monster);
             {
                 monster.skills = new Skill[1];

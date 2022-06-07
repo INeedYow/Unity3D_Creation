@@ -583,9 +583,9 @@ MonoBehaviour:
   eGroup: 0
   curHp: 1000
   maxHp: 1000
-  minDamage: 8
-  maxDamage: 11
-  magicDamage: 10
+  minDamage: 9
+  maxDamage: 13
+  magicDamage: 13
   lastAttackTime: 0
   attackDelay: 1.9
   attackRange: 5
@@ -597,19 +597,24 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0.1
   magicArmorRate: 0.05
+  buffCount: 0
+  debuffCount: 0
   buffDamage: 1
   buffArmor: 0
+  buffMagicArmor: 0
   targetTF: {fileID: 2632091679261891676}
   HpBarTF: {fileID: 6405710229451659556}
   projectileTF: {fileID: 1901804239235766634}
-  nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
   skills: []
+  nav: {fileID: 0}
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
+  isStasis: 0
+  isInvincible: 0
   monsGFX: {fileID: 7113632434603974152}
   macrosParent: {fileID: 8740393319684833133}
 --- !u!195 &952399998259112107
