@@ -2510,11 +2510,11 @@ MonoBehaviour:
   name: EvilMage
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 130
-  maxHp: 130
-  minDamage: 2
-  maxDamage: 3
-  magicDamage: 8
+  curHp: 180
+  maxHp: 180
+  minDamage: 8
+  maxDamage: 10
+  magicDamage: 15
   lastAttackTime: 0
   attackDelay: 1.1
   attackRange: 7
@@ -2526,19 +2526,24 @@ MonoBehaviour:
   powerRate: 1
   armorRate: 0
   magicArmorRate: 0
+  buffCount: 0
+  debuffCount: 0
   buffDamage: 1
   buffArmor: 0
+  buffMagicArmor: 0
   targetTF: {fileID: 5979870273859772481}
   HpBarTF: {fileID: 7547096593192814207}
   projectileTF: {fileID: 2730908227306199045}
-  nav: {fileID: 0}
   conditionMacros: []
   actionMacros: []
   skills: []
+  nav: {fileID: 0}
   anim: {fileID: 0}
   isStop: 0
   isDead: 0
   attacker: {fileID: 0}
+  isStasis: 0
+  isInvincible: 0
   monsGFX: {fileID: 8246928844683748394}
   macrosParent: {fileID: 3662784995639579633}
 --- !u!195 &2531138727013449698

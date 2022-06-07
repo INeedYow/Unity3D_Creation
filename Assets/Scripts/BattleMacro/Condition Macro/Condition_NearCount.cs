@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Condition_NearCount : ConditionMacro
 {
-    public EType        eType;
     public EGroup       eCountGroup;
     [Range(0, 13)]      public int count;
     [Range(0f, 20f)]    public float distance;

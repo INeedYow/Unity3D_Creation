@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MSkillObjectData_EvilMage_1
   m_EditorClassIdentifier: 
   isMagic: 1
-  powerRatio: 1
+  powerRatio: 1.2
   area: 0
   repeat: 1
   interval: 0

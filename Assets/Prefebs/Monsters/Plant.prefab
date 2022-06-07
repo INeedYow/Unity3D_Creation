@@ -1865,10 +1865,10 @@ MonoBehaviour:
   name: Plant
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 100
-  maxHp: 100
-  minDamage: 3
-  maxDamage: 5
+  curHp: 130
+  maxHp: 130
+  minDamage: 4
+  maxDamage: 6
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 1.4
@@ -1879,7 +1879,7 @@ MonoBehaviour:
   dodgeChance: 1
   criticalRate: 1.5
   powerRate: 1
-  armorRate: 0
+  armorRate: 0.01
   magicArmorRate: 0
   buffCount: 0
   debuffCount: 0

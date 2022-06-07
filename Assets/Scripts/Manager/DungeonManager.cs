@@ -48,6 +48,7 @@ public class DungeonManager : MonoBehaviour
     public Skill[] prfChewerSkills = new Skill[2];
     public Skill prfSkeletonSkill;
     public Skill prfEvilMageSkill;
+    public Skill prfGolemEarthSkill;
 
 
     [Space(10f)] [Header("Rewards")]

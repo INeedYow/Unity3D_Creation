@@ -119,8 +119,8 @@ MonoBehaviour:
   eGroup: 0
   curHp: 195
   maxHp: 195
-  minDamage: 5
-  maxDamage: 7
+  minDamage: 7
+  maxDamage: 10
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 1.4
@@ -131,7 +131,7 @@ MonoBehaviour:
   dodgeChance: 1
   criticalRate: 1.5
   powerRate: 1
-  armorRate: 0
+  armorRate: 0.03
   magicArmorRate: 0.05
   buffCount: 0
   debuffCount: 0

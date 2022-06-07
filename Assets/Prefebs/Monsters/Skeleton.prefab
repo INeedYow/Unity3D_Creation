@@ -117,10 +117,10 @@ MonoBehaviour:
   name: Skeleton
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 210
-  maxHp: 210
-  minDamage: 3
-  maxDamage: 4
+  curHp: 300
+  maxHp: 300
+  minDamage: 8
+  maxDamage: 10
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 1.5

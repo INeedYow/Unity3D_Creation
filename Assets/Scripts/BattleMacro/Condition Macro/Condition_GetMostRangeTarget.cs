@@ -11,15 +11,15 @@ public class Condition_GetMostRangeTarget : ConditionMacro
     bool m_hasAnyRangeChange;
 
     private void OnEnable()     { // 누군가 사거리 변경, 웨이브 시작할 때 재검사
-        DungeonManager.instance.onChangeAnyRange += AnyHpChange; 
-        DungeonManager.instance.onWaveStart += AnyHpChange; 
+        DungeonManager.instance.onChangeAnyRange += AnyRangeChange; 
+        DungeonManager.instance.onWaveStart += AnyRangeChange; 
     }
     private void OnDisable()    { 
-        DungeonManager.instance.onChangeAnyRange -= AnyHpChange; 
-        DungeonManager.instance.onWaveStart -= AnyHpChange;
+        DungeonManager.instance.onChangeAnyRange -= AnyRangeChange; 
+        DungeonManager.instance.onWaveStart -= AnyRangeChange;
     }
 
-    void AnyHpChange() { m_hasAnyRangeChange = true; }
+    void AnyRangeChange() { m_hasAnyRangeChange = true; }
 
 
     public override bool IsSatisfy( )

@@ -10,28 +10,39 @@ public class Condition_GetMostDistanceTarget : ConditionMacro
     float m_value;
     float m_sqrDist;
 
-    private void OnEnable() {   // 웨이브 진행 중에만 거리 검사하도록.(isStop과 별개로 Invoke는 돌지 않나?)
-        DungeonManager.instance.onWaveStart += OnBattle; 
-        DungeonManager.instance.onWaveEnd += OffBattle;  
-        DungeonManager.instance.onDungeonExit += OffBattle;
-    }
-    private void OnDisable() {   
-        DungeonManager.instance.onWaveStart -= OnBattle; 
-        DungeonManager.instance.onWaveEnd -= OffBattle;  
-        DungeonManager.instance.onDungeonExit -= OffBattle;
-    }
+    float m_lastFindTime;
+
+    // private void OnEnable() {   
+    //     DungeonManager.instance.onWaveStart += OnBattle; 
+    //     DungeonManager.instance.onWaveEnd += OffBattle;  
+    //     DungeonManager.instance.onDungeonExit += OffBattle;
+    // }
+    // private void OnDisable() {   
+    //     DungeonManager.instance.onWaveStart -= OnBattle; 
+    //     DungeonManager.instance.onWaveEnd -= OffBattle;  
+    //     DungeonManager.instance.onDungeonExit -= OffBattle;
+    // }
 
     public override bool IsSatisfy(){  
-        if (target == null) FindTarget();
+        if (target == null) 
+        {
+            FindTarget();
+        }
+        else if (Time.time >= m_lastFindTime + 0.2f) 
+        {
+            FindTarget();
+        }
         return true;
     }
 
-    public void OnBattle() { InvokeRepeating("FindTarget", 0f, 0.2f); }
-    public void OffBattle() { CancelInvoke("FindTarget"); }
+    // public void OnBattle() { InvokeRepeating("FindTarget", 0f, 0.2f); }  // 이러면 항상 찾고있음
+    // public void OffBattle() { CancelInvoke("FindTarget"); }
     
     
     void FindTarget()
     {   //Debug.Log("get dist target()");
+        m_lastFindTime = Time.time;
+
        if (eTargetGroup == EGroup.Hero)
         {   // 아군
             target = PartyManager.instance.GetAliveHero();

@@ -84,6 +84,13 @@ public class Monster : Character
                 break;
             }
 
+            case EMonster.Golem_Earth : monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfGolemEarthSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
+                break;
+            }
 
         }
 
