@@ -254,6 +254,8 @@ public class DungeonManager : MonoBehaviour
     public void AddMonster(Monster monster)
     {
         monster.transform.position = curDungeon.GetNextSpawnTransform().position;
+        ObjectPool.instance.GetEffect((int)EEffect.Spawn).SetPosition(monster);
+        
         curDungeon.curMonsters.Add(monster);
         curDungeon.curMonsterCount++;
         monster.onDeadGetThis += OnMonsterDie;

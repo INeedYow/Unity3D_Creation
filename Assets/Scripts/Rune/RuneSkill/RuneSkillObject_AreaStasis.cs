@@ -12,7 +12,16 @@ public class RuneSkillObject_AreaStasis : RuneSkillObject
     {
         m_timer = 0f;
         m_sqrArea = data.area * data.area;
+
+        DungeonManager.instance.onWaveEnd += EarlyQuit;
         StartCoroutine("OnWorks");
+    }
+
+    public void EarlyQuit()
+    {
+        DungeonManager.instance.onWaveEnd -= EarlyQuit;
+        StopCoroutine("OnWorks");
+        Finish();
     }
 
     private void OnDrawGizmos() {
@@ -35,9 +44,6 @@ public class RuneSkillObject_AreaStasis : RuneSkillObject
                 //float distance = Vector3.Distance(ch.transform.position, transform.position);
                 //if (data.area < distance) continue;
 
-                //Debug.Log(string.Format("적용 {0} : dist [{1}] / area [{2}]", ch.name, m_sqrDist, m_sqrArea));
-
-
                 ch.SetStasis(true);
 
             }
@@ -51,10 +57,7 @@ public class RuneSkillObject_AreaStasis : RuneSkillObject
                 if (m_sqrArea < m_sqrDist) continue;
 
                 //float distance = Vector3.Distance(ch.transform.position, transform.position);
-                //Debug.Log(string.Format("적용 {0} : dist [{1}] / area [{2}]", ch.name, distance, data.area));
                 //if (data.area < distance) continue;
-
-                //Debug.Log(string.Format("적용 {0} : dist [{1}] / area [{2}]", ch.name, m_sqrDist, m_sqrArea));
 
                 ch.SetStasis(true);
             }
@@ -63,19 +66,17 @@ public class RuneSkillObject_AreaStasis : RuneSkillObject
             yield return new WaitForSeconds(0.1f);
         }
 
+        Finish();
+    }
+
+    public void Finish()
+    {
         foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
         {
             if (!ch.IsStasis()) continue;  // stasis 아닌 경우
 
             m_sqrDist = (ch.transform.position - transform.position).sqrMagnitude;
 
-            //float distance = Vector3.Distance(ch.transform.position, transform.position);
-            //if (data.area < distance) continue;
-
-            //Debug.Log(string.Format("해제 {0} : dist [{1}] / area [{2}]", ch.name, distance, data.area));
-
-                
-            //Debug.Log(string.Format("해제 {0} : dist [{1}] / area [{2}]", ch.name, m_sqrDist, m_sqrArea));
             if (m_sqrArea < m_sqrDist) continue;
                 
             ch.SetStasis(false);
@@ -87,20 +88,13 @@ public class RuneSkillObject_AreaStasis : RuneSkillObject
             if (!ch.IsStasis()) continue;
 
             m_sqrDist = (ch.transform.position - transform.position).sqrMagnitude;
-
-            //float distance = Vector3.Distance(ch.transform.position, transform.position);
-            //if (data.area < distance) continue;
-
-            //Debug.Log(string.Format("해제 {0} : dist [{1}] / area [{2}]", ch.name, distance, data.area));
-
-            //Debug.Log(string.Format("해제 {0} : dist [{1}] / area [{2}]", ch.name, m_sqrDist, m_sqrArea));
                 
             if (m_sqrArea < m_sqrDist) continue;
 
             ch.SetStasis(false);
 
         }
-        
+
         FinishWorks();
     }
 }

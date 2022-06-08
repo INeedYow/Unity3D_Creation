@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MSkillData_GolemEarth_1
   m_EditorClassIdentifier: 
   skillName: "\uB3CC\uC8FC\uBA39"
-  description: "\uC2A4\uD134"
+  description: "\uB300\uC0C1 \uAE30\uC808"
   icon: {fileID: 0}
   requireLevel: 0
   cooldown: 4

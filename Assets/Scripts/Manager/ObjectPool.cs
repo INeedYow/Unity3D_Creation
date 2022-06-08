@@ -23,7 +23,7 @@ public enum EEffect {
     Rune_4_2_World, Rune_4_2_OnWorks, Rune_4_1_World, Rune_4_1_OnWorks, 
     Invincible, Bleed, Blind, Silence, Madness,
     Rune_1_2_OnWorks, Rune_3_1_OnWorks_UnLucky, Rune_3_1_OnWorks_Lucky,
-    GolemEarth_1_TargetEff,
+    GolemEarth_1_TargetEff, Spawn,
 
     Size,
 }
