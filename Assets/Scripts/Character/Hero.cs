@@ -28,7 +28,7 @@ public class Hero : Character
             {
                 level++;
                 _curExp -= maxExp;
-                maxExp += 50f; 
+                maxExp += 70f; 
                 StatUp();
                 onLevelUp?.Invoke(level);
             }
@@ -48,7 +48,7 @@ public class Hero : Character
     void InitHero()
     {
         eGroup = EGroup.Hero;
-        maxExp = 50;
+        maxExp = 30;
         heroGFX.hero = this;
         dummy.owner = this;
         heroGFX.gameObject.SetActive(false);
@@ -74,13 +74,13 @@ public class Hero : Character
         switch (eClass)
         {
             case EClass.Knight      : 
-            case EClass.Templar     : maxHp += 15;  break;
+            case EClass.Templar     : maxHp += 10;  break;
             
             case EClass.Necromancer : 
-            case EClass.Bard        : maxHp += 12;  break;
+            case EClass.Bard        : maxHp += 8;  break;
 
             case EClass.Archer      : 
-            case EClass.Angel       : maxHp += 10;  break;
+            case EClass.Angel       : maxHp += 6;  break;
 
         }
         minDamage += 1;
@@ -92,15 +92,15 @@ public class Hero : Character
     {   
         if (isHeal) {
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Hero_heal, targetTF.position + Vector3.up * 3f, damage );
+                BattleInfoType.Hero_heal, HpBarTF.position + Vector3.up * 3f, damage );
         }
         else if (isMagic){  // 피해 받았을 때 동작하기 때문에 InfoType enemy
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Monster_magic, targetTF.position + Vector3.up * 3f, damage );
+                BattleInfoType.Monster_magic, HpBarTF.position + Vector3.up * 3f, damage );
         }
         else{
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Monster_damage, targetTF.position + Vector3.up * 3f, damage );
+                BattleInfoType.Monster_damage, HpBarTF.position + Vector3.up * 3f, damage );
         }
     }
 

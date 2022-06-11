@@ -49,6 +49,8 @@ public class DungeonManager : MonoBehaviour
     public Skill prfSkeletonSkill;
     public Skill prfEvilMageSkill;
     public Skill prfGolemEarthSkill;
+    public Skill prfGolemIceSkill;
+    public Skill prfGolemFireSkill;
 
 
     [Space(10f)] [Header("Rewards")]

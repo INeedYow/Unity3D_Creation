@@ -550,8 +550,8 @@ MonoBehaviour:
   name: Red Slime
   icon: {fileID: 0}
   eGroup: 1
-  curHp: 80
-  maxHp: 80
+  curHp: 85
+  maxHp: 85
   minDamage: 3
   maxDamage: 4
   magicDamage: 0

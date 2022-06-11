@@ -17,4 +17,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: ef65aab13e15a4980bc0a51d43ee69e9, type: 3}
   requireLevel: 7
   cooldown: 7
-  skillRange: 7
+  skillRange: 0

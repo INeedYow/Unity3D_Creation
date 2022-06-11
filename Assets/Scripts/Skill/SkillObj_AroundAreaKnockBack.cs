@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +9,17 @@ public class SkillObj_AroundAreaKnockBack : SkillObject
     float m_sqrDist;
     float m_sqrArea;
 
-    private void Start() {
+    private void Start() { 
         m_sqrArea = data.area * data.area;
     }
 
     public override void Works()
-    {
+    {   //Debug.Log("OnWorks");
         StartCoroutine("OnWorks");
     }
 
     IEnumerator OnWorks()
-    {
+    {   
         if (eOwnerGroup == EGroup.Hero)
         {   
             for (int i = 0; i < data.repeat; i++)

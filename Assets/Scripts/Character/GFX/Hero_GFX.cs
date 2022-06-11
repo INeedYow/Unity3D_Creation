@@ -19,15 +19,15 @@ public class Hero_GFX : GFX
         if (hero.isDead || hero.isStop) return;
 
         for (int i = 0; i < repeat; i++)
-        {   //Debug.Log(i);
+        {   
             if (hero.actionMacros[i] == null) continue;
-            //Debug.Log("AM isReady()");
+            
             if (hero.actionMacros[i].IsReady())
-            {   //Debug.Log("AM isReady() true");
+            {   
                 if (hero.conditionMacros[i] == null) continue;
-                //Debug.Log("AM isSatisfy()");
+                
                 if (hero.conditionMacros[i].IsSatisfy())
-                {   //Debug.Log("AM isSatisfy() true");
+                {   
                     hero.onMacroChangeGetIndex?.Invoke(i);
                     hero.actionMacros[i].Execute(hero.conditionMacros[i].GetTarget());
                     break;

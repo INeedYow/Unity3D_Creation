@@ -45,10 +45,10 @@ public class Effect : MonoBehaviour
         if (isFollowOwner)
         {   
             transform.SetParent(owner.transform);
+            owner.onDeadGetThis += NullOwner;
         }
     }
 
-    
     public void SetDuration(float duration) { Invoke("Return", duration); }
 
     public void Return()
@@ -61,5 +61,12 @@ public class Effect : MonoBehaviour
         }
         
         ObjectPool.instance.ReturnObj(gameObject);
+    }
+
+    public void NullOwner(Character owner)
+    {
+        owner.onDeadGetThis -= NullOwner;
+        CancelInvoke("Return");
+        Return();
     }
 }

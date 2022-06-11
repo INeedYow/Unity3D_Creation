@@ -2233,8 +2233,8 @@ MonoBehaviour:
   name: Brave Skeleton
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 400
-  maxHp: 400
+  curHp: 370
+  maxHp: 370
   minDamage: 9
   maxDamage: 12
   magicDamage: 0

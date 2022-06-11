@@ -20,7 +20,7 @@ public class Condition_NearCount : ConditionMacro
 
     public override bool IsSatisfy()
     {
-        CheckCount();
+        CheckCount(); 
         return m_isSatisfy;
     }
 
@@ -41,7 +41,7 @@ public class Condition_NearCount : ConditionMacro
 
                 if (m_sqrDist <= m_sqrGoalDist)
                 {
-                    m_count++;
+                    m_count++;      //
                 }
             }
 
@@ -57,7 +57,7 @@ public class Condition_NearCount : ConditionMacro
 
                 if (m_sqrDist <= m_sqrGoalDist)
                 {
-                    m_count++;
+                    m_count++;      
                 }
             }
 

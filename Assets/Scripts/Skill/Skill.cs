@@ -24,6 +24,7 @@ public class Skill : MonoBehaviour
     public void Use(Character target) { 
         this.target = target;
         skillcommand.Use();
+        Debug.Log("Use");
     }
 
     public void Init(Character character, int id) { 

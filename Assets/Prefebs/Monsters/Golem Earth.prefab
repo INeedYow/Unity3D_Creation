@@ -586,13 +586,13 @@ MonoBehaviour:
   name: Golem Earth
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 700
-  maxHp: 700
+  curHp: 777
+  maxHp: 777
   minDamage: 14
   maxDamage: 18
   magicDamage: 0
   lastAttackTime: 0
-  attackDelay: 1.5
+  attackDelay: 1.4
   attackRange: 4
   aoeRange: 0
   moveSpeed: 11

@@ -119,11 +119,11 @@ MonoBehaviour:
   eGroup: 0
   curHp: 195
   maxHp: 195
-  minDamage: 7
-  maxDamage: 10
+  minDamage: 11
+  maxDamage: 14
   magicDamage: 0
   lastAttackTime: 0
-  attackDelay: 1.4
+  attackDelay: 1.6
   attackRange: 4
   aoeRange: 0
   moveSpeed: 13

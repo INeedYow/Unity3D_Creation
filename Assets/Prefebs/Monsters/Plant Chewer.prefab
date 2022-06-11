@@ -581,13 +581,13 @@ MonoBehaviour:
   name: Spore
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 1000
-  maxHp: 1000
-  minDamage: 11
-  maxDamage: 14
-  magicDamage: 13
+  curHp: 1100
+  maxHp: 1100
+  minDamage: 12
+  maxDamage: 17
+  magicDamage: 15
   lastAttackTime: 0
-  attackDelay: 1.9
+  attackDelay: 1.8
   attackRange: 5
   aoeRange: 0
   moveSpeed: 8

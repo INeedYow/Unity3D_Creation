@@ -502,7 +502,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
 
     //// stasis
-    public bool IsStasis() { return isStasis; }
+    public bool IsStasis() { return isStasis; } 
 
     public void SetStasis(bool isOn, float duration = 0f)
     {

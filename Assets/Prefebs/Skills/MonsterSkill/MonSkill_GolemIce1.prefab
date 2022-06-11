@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eef0befab3467745b254f5d4fddc0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: b0e6a7e87915a284e8ac3d77ee93623e, type: 2}
+  data: {fileID: 11400000, guid: 94b7130cd900f6b4f8ba7280a8bcbf4f, type: 2}
   owner: {fileID: 0}
   ID: 0
   target: {fileID: 0}
-  skillObj: {fileID: 7645917854233860052}
+  skillObj: {fileID: 1672206037270218554}
 --- !u!1 &4215092970546977487
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4215092970546977481}
-  - component: {fileID: 7645917854233860052}
+  - component: {fileID: 1672206037270218554}
   m_Layer: 0
   m_Name: MonSkillObj
   m_TagString: Untagged
@@ -80,7 +80,7 @@ Transform:
   m_Father: {fileID: 4215092969697540009}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7645917854233860052
+--- !u!114 &1672206037270218554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,9 +89,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4215092970546977487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21758ee992415fb47af72af7260fbf55, type: 3}
+  m_Script: {fileID: 11500000, guid: b6efa674e7fa84646aa8c2e13b42bb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: c400bf531a644fc4b97218f843c8c0c7, type: 2}
   skill: {fileID: 4215092969697540014}
-  eTargetGroup: 0
+  eOwnerGroup: 1
+  knockBackSpeed: 12

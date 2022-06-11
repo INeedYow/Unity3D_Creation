@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum EProjectile { 
-    Archer_0, Archer_1, Angel_0, Archer_2, Chewer_1, EvilMage_0, EvilMage_1, Bard_0, Archer_4,
+    Archer_0, Archer_1, Angel_0, Archer_2, Chewer_1, EvilMage_0, EvilMage_1, Bard_0, Archer_4, Golem_Fire_0, Golem_Fire_1,
 }
 public enum EMonster { 
     RedSlime, BlueSlime, Spore, Pollen, Plant, OddPlant, PlantChewer, 
-    Skeleton, BraveSkeleton, EvilMage, Golem_Earth,
+    Skeleton, BraveSkeleton, EvilMage, Golem_Earth, Golem_Ice, Golem_Fire,
 }
 
 public enum EEffect {
@@ -23,7 +23,7 @@ public enum EEffect {
     Rune_4_2_World, Rune_4_2_OnWorks, Rune_4_1_World, Rune_4_1_OnWorks, 
     Invincible, Bleed, Blind, Silence, Madness,
     Rune_1_2_OnWorks, Rune_3_1_OnWorks_UnLucky, Rune_3_1_OnWorks_Lucky,
-    GolemEarth_1_TargetEff, Spawn,
+    GolemEarth_1_TargetEff, Spawn, GolemIce_1_UserEff, GolemFire_1_TargetEff,
 
     Size,
 }

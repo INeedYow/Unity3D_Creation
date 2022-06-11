@@ -550,9 +550,9 @@ MonoBehaviour:
   name: Blue Slime
   icon: {fileID: 0}
   eGroup: 1
-  curHp: 100
-  maxHp: 100
-  minDamage: 3
+  curHp: 110
+  maxHp: 110
+  minDamage: 4
   maxDamage: 5
   magicDamage: 0
   lastAttackTime: 0

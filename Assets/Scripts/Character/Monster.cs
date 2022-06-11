@@ -92,6 +92,22 @@ public class Monster : Character
                 break;
             }
 
+            case EMonster.Golem_Ice : monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfGolemIceSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
+                break;
+            }
+
+            case EMonster.Golem_Fire : monster.attackCommand = new ProjectileAttackCommand(monster, EProjectile.Golem_Fire_0);
+            {
+                monster.skills = new Skill[1];
+                monster.skills[0] = Instantiate(DungeonManager.instance.prfGolemFireSkill, monster.transform);
+                monster.skills[0].Init(monster, 1);
+                break;
+            }
+
         }
 
 
@@ -116,15 +132,15 @@ public class Monster : Character
     {   
         if (isHeal) {
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Monster_heal, targetTF.position + Vector3.up * 3f, damage );
+                BattleInfoType.Monster_heal, HpBarTF.position + Vector3.up * 3f, damage );
         }
         else if (isMagic){  
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Hero_magic, targetTF.position + Vector3.up * 3f, damage );
+                BattleInfoType.Hero_magic, HpBarTF.position + Vector3.up * 3f, damage );
         }
         else{
             GameManager.instance.ShowBattleInfoText( 
-                BattleInfoType.Hero_damage, targetTF.position + Vector3.up * 3f, damage );
+                BattleInfoType.Hero_damage, HpBarTF.position + Vector3.up * 3f, damage );
         }
     }
 

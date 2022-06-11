@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour
         if (!m_isLaunch) return;
         m_sqrDist = (transform.position - m_lastPos).sqrMagnitude;
         
-        if (m_sqrDist < 1f)
+        if (m_sqrDist < 0.5f)
         {   
             m_isLaunch = false;
             if (m_area != 0f)   { AreaHit(); }
@@ -67,7 +67,6 @@ public class Projectile : MonoBehaviour
     {
         if (null != m_target && !m_target.isStop && !m_target.isDead)
         {   //Debug.Log("proj's owner : " + m_owner);
-            //IDamagable target = m_target.GetComponent<IDamagable>();
             m_target.Damaged(m_damage, m_powerRate, m_owner, isMagic);
 
             if (m_eEffect != EEffect.None)
@@ -109,38 +108,36 @@ public class Projectile : MonoBehaviour
     void StopRemain(Character owner)
     {   // 잔존 중 대상이 사망한 경우
         owner.onDeadGetThis -= StopRemain;
-        CancelInvoke("Return");                             //Debug.Log("StopRemain()");
+        CancelInvoke("Return");                             
         Return();
     }
 
     void AreaHit()
     {
+        if (m_eEffect != EEffect.None)
+        {
+            Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
+            eff.SetPosition(m_target);
+        }
+
         if (eTargetGroup == EGroup.Monster)
         {
             foreach (Monster mon in DungeonManager.instance.curDungeon.curMonsters)
             {
                 if (mon.isDead || mon.isStop) continue;
-                if (m_target == null) break;
 
-                m_sqrDist = (m_target.transform.position - mon.transform.position).sqrMagnitude;
+                m_sqrDist = (m_lastPos - mon.transform.position).sqrMagnitude;
 
                 if (m_area * m_area < m_sqrDist) continue;
                 
-                m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
+                mon.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
 
-                if (m_eEffect != EEffect.None)
-                {
-                    Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
-                    eff.SetPosition(m_target);
-                }
+                if (mon.isDead) continue;
 
                 if (m_eBuff != EBuff.None)
                 {
-                    if (!m_target.isDead)
-                    {
-                        Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
-                        buff.Add(m_target, m_buffDura, m_buffRatio);
-                    }
+                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                    buff.Add(mon, m_buffDura, m_buffRatio);
                 }
             }
         }
@@ -149,27 +146,19 @@ public class Projectile : MonoBehaviour
             foreach (Hero hero in PartyManager.instance.heroParty)
             {
                 if (hero.isDead || hero.isStop) continue;
-                if (m_target == null) break;
 
-                m_sqrDist = (m_target.transform.position - hero.transform.position).sqrMagnitude;
+                m_sqrDist = (m_lastPos - hero.transform.position).sqrMagnitude;
 
                 if (m_area * m_area < m_sqrDist) continue;
                 
-                m_target?.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
+                hero.Damaged(m_damage, m_powerRate, m_owner, isMagic ? true : false);
 
-                if (m_eEffect != EEffect.None)
-                {
-                    Effect eff = ObjectPool.instance.GetEffect((int)m_eEffect);
-                    eff.SetPosition(m_target);
-                }
+                if (hero.isDead) continue;
 
                 if (m_eBuff != EBuff.None)
                 {
-                    if (!m_target.isDead)
-                    {
-                        Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
-                        buff.Add(m_target, m_buffDura, m_buffRatio);
-                    }
+                    Buff buff = ObjectPool.instance.GetBuff((int)m_eBuff);
+                    buff.Add(hero, m_buffDura, m_buffRatio);
                 }
             }
         }

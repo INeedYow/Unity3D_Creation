@@ -16,8 +16,8 @@ MonoBehaviour:
   desc: "\uC0C1\uAE09 \uBC29\uC5B4\uAD6C"
   icon: {fileID: -8582435088932248154, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
   requireLevel: 12
-  cost: 8100
-  sellCost: 2700
+  cost: 16200
+  sellCost: 4050
   armor: 0.2
   magicArmor: 0.1
-  Hp: 240
+  Hp: 130

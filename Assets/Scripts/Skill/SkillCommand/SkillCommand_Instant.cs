@@ -7,9 +7,9 @@ public class SkillCommand_Instant : SkillCommand
     public SkillCommand_Instant(Skill skill) : base(skill){}
     
     public override void Use()
-    {
+    {   
         if (isUsing) return;
-
+        
         if (!skill.owner.nav.isStopped) { skill.owner.nav.isStopped = true; }
         
         isUsing = true;

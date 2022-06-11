@@ -47,7 +47,7 @@ MonoBehaviour:
   particle: {fileID: 8559932118812298952}
   duration: 1
   isFollowOwner: 0
-  heightTF: 2
+  heightTF: 1
 --- !u!1 &8390338971096829266
 GameObject:
   m_ObjectHideFlags: 0

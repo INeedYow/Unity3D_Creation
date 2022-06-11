@@ -69,8 +69,6 @@ public class SkillObj_TargetShoot : SkillObject
             yield return new WaitForSeconds(data.interval);
         }
        
-        // 투사체 맞을 때 버프 적용돼야 함
-        //if (skill.target != null) AddBuff(skill.target);
 
         FinishWorks();
     }
