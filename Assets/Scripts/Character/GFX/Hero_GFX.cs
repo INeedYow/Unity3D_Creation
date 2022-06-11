@@ -80,17 +80,10 @@ public class Hero_GFX : GFX
     //// Animation Event 함수들 ////
     void OnAttack() { hero.attackCommand.Attack(); }
 
-    void OnEffectSkill(int number){ 
-        //if (hero.eClass == Hero.EClass.Angel)
-            //Debug.Log(string.Format("OnSkillEffect // Target : {0}", hero.target));
+    void OnEffectSkill(int number) { hero.skills[number - 1].EffectSkill(); }
 
-        hero.skills[number - 1].EffectSkill();
-    }
-
-    void OnFinishSkill(int number){  
-        //if (hero.eClass == Hero.EClass.Angel)
-            //Debug.Log(string.Format("OnSkillFinish // Target : {0}", hero.target));
-
+    void OnFinishSkill(int number)
+    {  
         hero.skills[number - 1].FinishSKill();
         hero.anim.SetBool(string.Format("Skill {0}", number), false);
     }

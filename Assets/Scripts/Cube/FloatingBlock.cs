@@ -10,6 +10,7 @@ public class FloatingBlock : MonoBehaviour
     public float minFloatSpeed ;
     public float curFloatSpeed;
     public float accel ;
+    public bool isMoving;
     float m_floatHeight = 10;
     float m_defaultHeight;
 
@@ -31,8 +32,11 @@ public class FloatingBlock : MonoBehaviour
         StartCoroutine("Falldown");
     }
 
-    IEnumerator InitFloating(){             
+    IEnumerator InitFloating()
+    {
+        isMoving = true;
         curFloatSpeed = maxFloatSpeed;
+
         while (m_floatHeight > transform.position.y)
         {
             transform.Translate(0f, curFloatSpeed * Time.deltaTime, 0f);
@@ -43,10 +47,15 @@ public class FloatingBlock : MonoBehaviour
             }
             yield return null;
         }
+
+        isMoving = false;
     }
 
-    IEnumerator Falldown(){                
+    IEnumerator Falldown()
+    {                
+        isMoving = true;
         curFloatSpeed = minFloatSpeed;
+
         while (m_defaultHeight < transform.position.y)
         {   
             transform.Translate(0f, -curFloatSpeed * Time.deltaTime, 0f);
@@ -57,5 +66,7 @@ public class FloatingBlock : MonoBehaviour
             }
             yield return null;
         }
+
+        isMoving = false;
     }
 }

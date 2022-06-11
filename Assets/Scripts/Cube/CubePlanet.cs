@@ -114,19 +114,21 @@ public class CubePlanet : MonoBehaviour
         yield return null;
     }
 
-    public void AddFloatingBlock(Hero hero){                        //Debug.Log("AddFloatingBlock()");
+    public void AddFloatingBlock(Hero hero){                        
         if (floatingBlocks.Length == 0) return;
 
-        int randIndex = Random.Range(0, floatingBlocks.Length);     //Debug.Log("floatingBlocks.Length" + floatingBlocks.Length);
+        int randIndex = Random.Range(0, floatingBlocks.Length);     
 
-        for (int i = 0; i < floatingBlocks.Length; i++){            //Debug.Log("i / rand : " + i + " / " + rand);
-            if (floatingBlocks[randIndex].dummy == null){           //Debug.Log("dummy : " + floatingBlocks[rand].dummy);
-                floatingBlocks[randIndex].SetDummy(hero);           //Debug.Log("SetDummy");
-                break;
+        for (int i = 0; i < floatingBlocks.Length; i++)
+        {
+            if (floatingBlocks[randIndex].dummy != null || floatingBlocks[randIndex].isMoving)
+            {
+                randIndex++;                                        
+                randIndex %= floatingBlocks.Length;
             }
-            else{
-                randIndex++;                                        //Debug.Log("i++ : " + i);
-                randIndex %= floatingBlocks.Length;                 //Debug.Log("i %= length : " + i);
+            else{           
+                floatingBlocks[randIndex].SetDummy(hero);          
+                break;
             }
         }
     }

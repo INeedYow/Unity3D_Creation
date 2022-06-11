@@ -379,7 +379,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
         float damage = curHp * ratio;
         
-        damage = Mathf.Clamp(damage, 1f, 30f);
+        damage = Mathf.Clamp(damage, 1f, magicDamage * 0.5f);
 
         curHp -= damage;
 

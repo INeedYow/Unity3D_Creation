@@ -108,6 +108,30 @@ public class Monster : Character
                 break;
             }
 
+            case EMonster.Golem_Blue : monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[2];
+
+                for (int i = 0; i < DungeonManager.instance.prfGolemBlueSkills.Length; i++)
+                {
+                    monster.skills[i] = Instantiate(DungeonManager.instance.prfGolemBlueSkills[i], monster.transform);
+                    monster.skills[i].Init(monster, i + 1);
+                }
+                break;
+            }
+
+            case EMonster.Golem_Red : monster.attackCommand = new NormalAttackCommand(monster);
+            {
+                monster.skills = new Skill[2];
+
+                for (int i = 0; i < DungeonManager.instance.prfGolemRedSkills.Length; i++)
+                {
+                    monster.skills[i] = Instantiate(DungeonManager.instance.prfGolemRedSkills[i], monster.transform);
+                    monster.skills[i].Init(monster, i + 1);
+                }
+                break;
+            }
+
         }
 
 
@@ -173,7 +197,7 @@ public class Monster : Character
 
         curHp = rateHp * maxHp;
 
-        Debug.Log("mon Revive // ratio : " + rateHp);
+        //Debug.Log("mon Revive // ratio : " + rateHp);
         
         monsGFX.gameObject.SetActive(true);
         isStop = false; 

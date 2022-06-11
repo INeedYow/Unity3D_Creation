@@ -45,8 +45,8 @@ public class PlayerManager : MonoBehaviour
 
     void SetBeginInfo(){
         LV = 1;
-        maxExp = 150;
-        gold = 500000;
+        maxExp = 50;
+        gold = 0;
     }
     void InitUI(){
         playerInfoUI.RenewCurParty(PartyManager.instance.heroParty.Count);
@@ -62,7 +62,7 @@ public class PlayerManager : MonoBehaviour
     void LevelUp(){ 
         LV++;                       
         curExp -= maxExp;          
-        maxExp += 0;           
+        maxExp += 50;           
         runeTree.point++;
 
         playerInfoUI.RenewLV(LV);

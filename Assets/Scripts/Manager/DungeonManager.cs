@@ -51,6 +51,8 @@ public class DungeonManager : MonoBehaviour
     public Skill prfGolemEarthSkill;
     public Skill prfGolemIceSkill;
     public Skill prfGolemFireSkill;
+    public Skill[] prfGolemBlueSkills = new Skill[2];
+    public Skill[] prfGolemRedSkills = new Skill[2];
 
 
     [Space(10f)] [Header("Rewards")]
