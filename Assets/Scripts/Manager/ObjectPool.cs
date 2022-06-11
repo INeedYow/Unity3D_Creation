@@ -21,12 +21,13 @@ public enum EEffect {
     Archer_1_TargetEff, Archer_2_TargetEff, Archer_3_StartEff, Archer_4_StartEff,           // archer
     Necro_1_TargetEff, Necro_2_UserEff, Necro_3_TargetEff, Necro_4_TargetEff,  
     Bard_1_TargetEff, Bard_2_TargetEff, Bard_3_TargetEff, Bard_4_StartEff,
-    Templar_1_, Templar_2_, Templar_3_, Templar_4_,
+    Templar_1_UserEff, Templar_2_TargetEff, Templar_3_StartEff, Templar_4_TargetEff,
     Rune_4_2_World, Rune_4_2_OnWorks, Rune_4_1_World, Rune_4_1_OnWorks, 
     Invincible, Bleed, Blind, Silence, Madness,
     Rune_1_2_OnWorks, Rune_3_1_OnWorks_UnLucky, Rune_3_1_OnWorks_Lucky,
     GolemEarth_1_TargetEff, Spawn, GolemIce_1_UserEff, GolemFire_1_TargetEff,
     Golem_Red_2_TargetEff, Golem_Red_1_TargetEff, Golem_Blue_1_TargetEff,
+    Templar_1_StartEff, Templar_3_TargetEff,
 
     Size,
 }

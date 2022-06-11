@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
   m_Name: SkillData_Templar_4
   m_EditorClassIdentifier: 
-  skillName: "\uBBF8\uC815"
-  description: 
-  icon: {fileID: 21300000, guid: 04781ddf1640d48e4b784ad7268ba9ad, type: 3}
-  requireLevel: 1
-  cooldown: 4
-  skillRange: 7
+  skillName: "\uAD11\uC5ED \uB3C4\uBC1C"
+  description: "\uB300\uC0C1 \uC8FC\uBCC0 \uAD11\uC5ED \uB3C4\uBC1C \uBC0F \uACF5\uACA9\uB825
+    \uAC10\uC18C"
+  icon: {fileID: 21300000, guid: 87cb80b28a26948bab802db554863a96, type: 3}
+  requireLevel: 17
+  cooldown: 13
+  skillRange: 9

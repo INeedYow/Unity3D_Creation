@@ -20,7 +20,7 @@ public abstract class SkillObject : MonoBehaviour
         if (data.eStartEffect == EEffect.None) return;
 
         eff = ObjectPool.instance.GetEffect((int)data.eStartEffect);
-        eff.transform.position = skill.owner.transform.position;
+        eff.SetPosition(skill.owner);
     }
 
     public abstract void Works();

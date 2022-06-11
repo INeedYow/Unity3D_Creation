@@ -49,7 +49,7 @@ public class Buff_Stun : Buff
     }
 
     public override void Remove()
-    {
+    {   
         StopCoroutine("Timer");
 
         if (target != null)
