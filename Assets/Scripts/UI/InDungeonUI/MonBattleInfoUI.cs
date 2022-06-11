@@ -14,8 +14,8 @@ public class MonBattleInfoUI : MonoBehaviour
     public Text magic;
     public Text armor;
     public Text magicArmor;
-    public MonBattleInfoUnit[] macroInfoUnits;
-    public MonBattleInfoUnit[] skillInfoUnits;
+    public MacroInfoUnit[] macroInfoUnits;
+    public MacroInfoUnit[] skillInfoUnits;
 
     void OnEnable() { DungeonManager.instance.onWaveEnd += Hide; }
 

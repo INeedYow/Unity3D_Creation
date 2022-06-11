@@ -12,7 +12,7 @@ public class HeroManager : MonoBehaviour
     public int maxCount { get { return 12; } }
 
     public Hero selectedHero;
-    int heroCost = 1000;
+    int heroCost = 1500;
     int costMultiple = 2;
 
     [Header("UI")]

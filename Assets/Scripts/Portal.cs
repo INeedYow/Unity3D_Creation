@@ -6,7 +6,9 @@ public class Portal : MonoBehaviour
 {
     public int index;
     
-    private void OnMouseDown() {
+    private void OnMouseDown() 
+    {
+        if (PartyManager.instance.heroParty.Count == 0) return;
         if (GameManager.instance.isLockFocus) return;
         if (DungeonManager.instance.isLockClick) return;
         

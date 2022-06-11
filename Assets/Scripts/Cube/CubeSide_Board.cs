@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CubeSide_Board : CubeSide
 {
-    [Space(10f)][Header("--------------UI--------------")]
-    //public GameObject UI;
+    [Header("Guide UI")]
+    public GameObject boardGuide;
 
     [Space(4f)][Header("------------------------------")]
     public Board board;
@@ -14,9 +14,15 @@ public class CubeSide_Board : CubeSide
     float m_boardRot;
     bool m_isExit;
 
+    private void Awake() {
+        DungeonManager.instance.onDungeonEnter += TurnOffGuide;
+        DungeonManager.instance.onDungeonExit += TurnOnGuide;
+    }
+
     public override void Enter()
     {
         StartCoroutine("OpenBoard"); 
+        boardGuide.SetActive(true);
         PlayerManager.instance.playerInfoUI.gameObject.SetActive(true);
         DungeonManager.instance.isLockClick = false;
     }
@@ -31,6 +37,7 @@ public class CubeSide_Board : CubeSide
             onExitFinish?.Invoke(this); 
         }
 
+        boardGuide.SetActive(false);
         PlayerManager.instance.playerInfoUI.gameObject.SetActive(false);
         DungeonManager.instance.isLockClick = true;
     }
@@ -84,5 +91,15 @@ public class CubeSide_Board : CubeSide
         if (m_isExit) onExitFinish?.Invoke(this);
 
         yield return null;
+    }
+
+    void TurnOnGuide()
+    {
+        boardGuide.SetActive(true);
+    }
+
+    void TurnOffGuide()
+    {
+        boardGuide.SetActive(false);
     }
 }

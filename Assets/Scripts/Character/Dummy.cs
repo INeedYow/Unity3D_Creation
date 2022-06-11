@@ -34,42 +34,88 @@ public class Dummy : MonoBehaviour
             }
         }
     }
-    [HideInInspector] public BoardBlock tempBlock;          // 드래그 중에 저장되는 블럭
-    [HideInInspector] public bool isOnBlock;
-    float m_lastClickTime;
+    public BoardBlock tempBlock;          // 드래그 중에 저장되는 블럭
+    public bool isOnBlock;
     Transform m_tf;
 
     private void Start() {
         m_tf = GetComponent<Transform>();
     }
 
+    public void FocusedScale()
+    {
+        m_tf.localScale = GameManager.instance.focusedScale;
+    }
+
+    public void NormalScale()
+    {
+        m_tf.localScale = GameManager.instance.normalScale;
+    }
+
     private void OnMouseEnter() {   //Debug.Log("enter");
-        m_tf.localScale += GameManager.instance.focusedScale;
-        HeroManager.instance.ShowDummyInfo(this);
+        FocusedScale();
+        //HeroManager.instance.ShowDummyInfo(this);
     }
 
     private void OnMouseExit() {    //Debug.Log("exit");
-        m_tf.localScale -= GameManager.instance.focusedScale;
+        NormalScale();
     }
 
-    private void OnMouseDown() {
-
-        // if (Time.time < m_lastClickTime + 1f && placedBlock != null)    // DB click && 배치된 상태
-        // {   
-        //     if (HeroManager.instance.IsFull()) return;
-        //     GameManager.instance.cubePlanet.AddFloatingBlock(owner);    // 돌고 돌아 null 처리까지 다 해줌
-        //     PartyManager.instance.Leave(owner);
-
-        //     m_lastClickTime = 0f;
-        //     return;
-        // }
-        // m_lastClickTime = Time.time;
+    private void OnMouseDown() 
+    {
+        if (GameManager.instance.isLockFocus) return;
         
+        m_tf.localScale = GameManager.instance.focusedScale;
         HeroManager.instance.PickUpDummy(owner);
     }
 
-    private void OnMouseUp()
+    // private void OnMouseUp()
+    // {  
+    //     m_tf.localScale = GameManager.instance.normalScale;
+    //     if (GameManager.instance.isMouseOnLeaveArea)
+    //     {   
+    //         if (placedBlock != null)
+    //         {   // 파티에서 영웅 해제
+    //             placedBlock.dummy = null;
+    //             placedBlock = null;
+    //             PartyManager.instance.Leave(owner);
+    //             HeroManager.instance.PutDownDummy();
+    //             GameManager.instance.cubePlanet.AddFloatingBlock(owner);
+    //             return;
+    //         }
+    //     }
+
+    //     HeroManager.instance.PutDownDummy();
+
+
+    //     // 이미 보드에 있던 경우
+    //     if (owner.isJoin)
+    //     {  
+    //         if (tempBlock == null)
+    //         {   // 빈 땅 -> 제자리
+    //             Debug.Log("tempBlock");
+    //             transform.position = placedBlock.dummyTf.position;
+    //         }
+    //         else{
+    //             tempBlock.MoveDummy(this);
+    //         }
+    //     }
+    //     // floatingBlock에서 드래그한 경우
+    //     else{   
+    //         if (tempBlock == null)
+    //         {   // 빈 땅 -> 제자리
+    //             transform.position = placedFloat.dummyTF.position;
+    //         }
+    //         else{
+    //             tempBlock.TrySetDummy(this);
+    //         }
+    //     }
+    // }
+
+    public void OnLeftMouseUp()
     {  
+        NormalScale();
+        
         if (GameManager.instance.isMouseOnLeaveArea)
         {   
             if (placedBlock != null)
@@ -91,9 +137,10 @@ public class Dummy : MonoBehaviour
         {  
             if (tempBlock == null)
             {   // 빈 땅 -> 제자리
+                Debug.Log("tempBlock null");
                 transform.position = placedBlock.dummyTf.position;
             }
-            else{
+            else{   Debug.Log("MoveDummy");
                 tempBlock.MoveDummy(this);
             }
         }
@@ -109,7 +156,8 @@ public class Dummy : MonoBehaviour
         }
     }
 
-    public void OnBlock(BoardBlock block){  // 드래그 도중 처리
+    public void OnBlock(BoardBlock block)
+    {  // 드래그 도중 처리
         if (block == null){     
             tempBlock = null;
             isOnBlock = false;

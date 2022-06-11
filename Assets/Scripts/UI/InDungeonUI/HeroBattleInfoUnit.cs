@@ -15,21 +15,27 @@ public class HeroBattleInfoUnit : MonoBehaviour
     {
         m_owner = owner;
         icon.sprite = m_owner.icon;
+
         m_owner.onHpChange += RenewHpBar;
         m_owner.onMacroChangeGetIndex += RenewMacroBox;
+        m_owner.onDead += OwnerDead;
+        (m_owner as Hero).onRevive += SetDefault;
 
         RenewHpBar();
     }
 
     private void OnEnable() {
-        ResetMacroBox();
+        SetDefault();
     }
 
-    private void OnDisable() {
+    private void OnDisable() 
+    {
         if (m_owner != null)
         {
             m_owner.onHpChange -= RenewHpBar;
             m_owner.onMacroChangeGetIndex -= RenewMacroBox;
+            m_owner.onDead -= OwnerDead;
+            (m_owner as Hero).onRevive -= SetDefault;
         }
     }
 
@@ -37,7 +43,8 @@ public class HeroBattleInfoUnit : MonoBehaviour
         HpBar.fillAmount = m_owner.curHp / m_owner.maxHp;
     }
 
-    void RenewMacroBox(int index){
+    void RenewMacroBox(int index)
+    {
         if (m_prevIndex != index) 
         {
             macroCheckBoxes[m_prevIndex].color = Color.white;
@@ -45,13 +52,45 @@ public class HeroBattleInfoUnit : MonoBehaviour
             macroCheckBoxes[m_prevIndex].color = new Color(0f, 1f, 1f);
         }
     }
+    void OwnerDead()
+    {
+        icon.color = Color.red;
+        AllOffMacroBox();
+    }
 
-    void ResetMacroBox(){
+    void SetDefault()
+    {
+        icon.color = Color.white;
+        ResetMacroBox();
+    }
+
+    void ResetMacroBox()
+    {
         macroCheckBoxes[0].color = new Color(0f, 1f, 1f);
         for (int i = 1 ; i < macroCheckBoxes.Length; i++)
         {
             macroCheckBoxes[i].color = Color.white;
         }
         m_prevIndex = 0;
+    }
+
+    void AllOffMacroBox()
+    {
+        for (int i = 0 ; i < macroCheckBoxes.Length; i++)
+        {
+            macroCheckBoxes[i].color = Color.white;
+        }
+        m_prevIndex = 0;
+    }
+
+    public void ShowMacroInfoBox()
+    {   
+        if (m_owner.isDead) return;
+        DungeonManager.instance.dungeonUI.heroBattleInfoUI.ShowMacroInfoUI(m_owner, m_prevIndex);
+    }
+
+    public void HideMacroInfoBox()
+    {
+        DungeonManager.instance.dungeonUI.heroBattleInfoUI.HideMacroInfoUI();
     }
 }

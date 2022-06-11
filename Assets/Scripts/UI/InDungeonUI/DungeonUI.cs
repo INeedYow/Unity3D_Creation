@@ -7,7 +7,6 @@ public class DungeonUI : MonoBehaviour
     public DungeonInfoUI dungeonInfoUI;
     public GameObject menuButton;
     public GameObject menuUI;
-    public MiniMacroInfoUI miniMacroUI;
 
     public void Init(Dungeon dungeon){
         dungeonInfoUI.Init(dungeon);

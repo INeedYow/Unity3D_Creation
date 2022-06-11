@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     public Buff[] prfBUffs = new Buff[(int)EBuff.Size];   // 공, 마공, 방, 마방, 공속
 
     [Header("Etc")]
-    public Vector3 focusedScale = new Vector3 (0.5f, 0.5f, 0.5f);
+    public Vector3 focusedScale = new Vector3 (1.5f, 1.5f, 1.5f);
+    public Vector3 normalScale = new Vector3 (1f, 1f, 1f);
     public bool isLockFocus;
     BattleInfoText m_battleInfotext;
     

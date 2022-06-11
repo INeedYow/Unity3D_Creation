@@ -48,6 +48,12 @@ public class RuneSlot : MonoBehaviour
         {
             m_isOpen = true;
             PlayerManager.instance.onLevelUp -= IsLevelEnough;
+            icon1.color = Color.white;
+            icon2.color = Color.white;
+        }
+        else{
+            icon1.color = Color.gray;
+            icon2.color = Color.gray;
         }
     }
 

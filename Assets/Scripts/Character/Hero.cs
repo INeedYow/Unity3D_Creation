@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Hero : Character
 {
     public UnityAction<int> onLevelUp;
+    public UnityAction onRevive;
 
     public enum EClass { Knight, Archer, Angel, Necromancer, Bard, Templar,  }  // wizard / sorcerer(sorceress) / spear / assassin
     [Header("GFX")]
@@ -28,7 +29,7 @@ public class Hero : Character
             {
                 level++;
                 _curExp -= maxExp;
-                maxExp += 70f; 
+                maxExp += 40f; 
                 StatUp();
                 onLevelUp?.Invoke(level);
             }
@@ -140,6 +141,7 @@ public class Hero : Character
         isStop = false;                     // gfx OnEnable 때 true해줘서 순서 중요
         
         onHpChange?.Invoke();
+        onRevive?.Invoke();
         PartyManager.instance.aliveHeroCount++;
         DungeonManager.instance.onChangeAnyHP?.Invoke();
         DungeonManager.instance.onSomeoneAdd?.Invoke();

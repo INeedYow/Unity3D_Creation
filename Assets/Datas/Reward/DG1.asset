@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp_perWaveMin: 16
   exp_perWaveMax: 24
-  gold_perWaveMin: 30
-  gold_perWaveMax: 40
+  gold_perWaveMin: 40
+  gold_perWaveMax: 60
   exp_clear: 50
-  gold_clear: 150
+  gold_clear: 200

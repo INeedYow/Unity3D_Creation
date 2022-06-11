@@ -18,6 +18,7 @@ public class DungeonManager : MonoBehaviour
     public UnityAction onChangeAnyBuff;
     public UnityAction onWaveStart;
     public UnityAction onWaveEnd;
+    public UnityAction onDungeonEnter;
     public UnityAction onDungeonExit;
 
     public static DungeonManager instance { get; private set; }
@@ -36,6 +37,8 @@ public class DungeonManager : MonoBehaviour
 
     [Space(10f)] [Header("Dungeon UI")]
     public DungeonUI dungeonUI;
+    public GameObject monInfoGuideUI;
+    public GameObject heroInfoGuideUI;
     public MonBattleInfoUI monInfoUI;
     public ResultUI resultUI;
     public GameObject runePlane;
@@ -92,9 +95,12 @@ public class DungeonManager : MonoBehaviour
         curDungeon = listDungeon[index];
         curDungeon.gameObject.SetActive(true);
         PartyManager.instance.EnterDungeon();
+        onDungeonEnter?.Invoke();
 
         // UI
         dungeonUI.gameObject.SetActive(true);
+        monInfoGuideUI.SetActive(true);
+        heroInfoGuideUI.SetActive(true);
         PlayerManager.instance.runeTree.Apply();        // dungeonUI 보다 늦게 적용해야지 UI Active 돼서 적용 됨
 
         dungeonUI.Init(curDungeon);
@@ -147,6 +153,8 @@ public class DungeonManager : MonoBehaviour
 
     void ShowResultWave()
     {
+        PlayerManager.instance.AddGold(m_gold);
+
         resultUI.gameObject.SetActive(true);
         resultUI.waveBar.onFinishFill += ShowResultExp;
 
@@ -220,6 +228,9 @@ public class DungeonManager : MonoBehaviour
 
     public void Exit()  // 버튼 이벤트
     {
+        m_gold = 0;
+        m_exp = 0;
+
         onDungeonExit?.Invoke();
         m_items.Clear();
 
@@ -298,9 +309,21 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    public void ShowMonInfoUI(Monster monster) {    
+    public void ShowMonInfoUI(Monster monster) 
+    {
+        HideMonInfoGuideUI();
         monInfoUI.gameObject.SetActive(true);
         monInfoUI.RenewUI(monster);
+    }
+
+    public void HideMonInfoGuideUI()
+    {
+        monInfoGuideUI.SetActive(false);
+    }
+
+    public void HideHeroInfoGuideUI()
+    {
+        heroInfoGuideUI.SetActive(false);
     }
 
     //public void HideMonInfoUI() { monInfoUI.gameObject.SetActive(false); } // 클릭하면 사라지게 해뒀음

@@ -16,8 +16,8 @@ MonoBehaviour:
   desc: "\uC911\uAE09 \uBB34\uAE30"
   icon: {fileID: 1180039066068472714, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
   requireLevel: 9
-  cost: 5400
-  sellCost: 1350
+  cost: 4950
+  sellCost: 990
   minDamage: 7
   maxDamage: 10
   magicDamage: 11

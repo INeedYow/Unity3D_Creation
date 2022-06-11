@@ -24,6 +24,7 @@ public class BoardBlock : MonoBehaviour
         // 빈 블럭인 경우
         if (dummy == null)
         {   //Debug.Log("빈 블럭에 옮김" + dummy);
+            dm.placedBlock.dummy = null;
             dummy = dm;
             dm.placedBlock = this;
             dm.transform.position = dummyTf.position;

@@ -8,10 +8,12 @@ public class CubePlanet : MonoBehaviour
     public CubeSide[] cubeSides = new CubeSide[4];
     public CubeSide curSide;
     CubeSide m_nextSide;
+
     [Space(6f)][Header("-------------------------------------------------")]
     public GameObject floatingblocksParent;
     public FloatingBlock[] floatingBlocks;
     public bool isRolling;
+
 
     float m_duration;
     Vector3 m_rot;

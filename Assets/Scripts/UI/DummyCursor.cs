@@ -11,8 +11,10 @@ public class DummyCursor : MonoBehaviour
     Vector3 half = new Vector3 (0.3f, 1f, 0.3f);
     BoardBlock block;
 
-    private void OnEnable() {
+    private void OnEnable() 
+    {
         dummy = HeroManager.instance.selectedHero.dummy;
+        dummy.FocusedScale();
     }
 
     void Update()
@@ -20,6 +22,7 @@ public class DummyCursor : MonoBehaviour
         if (dummy == null) return;
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("DummyPlane")))
         {
             transform.position = hit.point;
@@ -28,17 +31,28 @@ public class DummyCursor : MonoBehaviour
                 dummy.transform.position = hit.point;
             }
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            dummy.OnLeftMouseUp();
+        }
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
         colls = Physics.OverlapBox(transform.position, half, Quaternion.identity, LayerMask.GetMask("BoardBlock"));
-        if (colls.Length > 0){  //Debug.Log(colls.Length + "length");
+       
+        if (colls.Length > 0)
+        {   //Debug.Log(colls.Length + "length");
             block = colls[0].transform.GetComponent<BoardBlock>();
-            if (block != null){
+            
+            if (block != null)
+            {   //Debug.Log("OnBlock");
                 dummy.OnBlock(block);
             }
         }
-        else{
+
+        else{   //Debug.Log("NoneBlock");
             dummy.OnBlock(null);
         }
     }
