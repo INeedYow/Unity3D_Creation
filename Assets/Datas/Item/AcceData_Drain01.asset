@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdbddd4217737e44585a27942ff39853, type: 3}
   m_Name: AcceData_Drain01
   m_EditorClassIdentifier: 
-  itemName: "\uD761\uD608 \uAC08\uD034"
+  itemName: "\uD761\uD608 \uAC08\uD034 lv.1"
   desc: "\uACF5\uACA9 \uC2DC \uD68C\uBCF5"
   icon: {fileID: -7880560510917792541, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
   requireLevel: 5
   cost: 3000
-  sellCost: 1000
-  ability: {fileID: 8874223264946920548, guid: 039a5021b82aa1f4da0819be96eebd7f, type: 3}
+  sellCost: 500
+  prfAbility: {fileID: 8874223264946920548, guid: 039a5021b82aa1f4da0819be96eebd7f,
+    type: 3}

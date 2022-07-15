@@ -13,6 +13,14 @@ public class FocusEffetor : MonoBehaviour
 
     void Init() { m_defaultScale = GetComponent<Transform>().localScale; }
 
-    private void OnMouseEnter() { transform.localScale = focusedScale; }
-    private void OnMouseExit()  { transform.localScale = m_defaultScale; }
+    private void OnMouseEnter() 
+    {   
+        if (GameManager.instance.isLockFocus) return;
+        
+        transform.localScale = focusedScale; 
+    }
+    private void OnMouseExit()  
+    { 
+        transform.localScale = m_defaultScale; 
+    }
 }

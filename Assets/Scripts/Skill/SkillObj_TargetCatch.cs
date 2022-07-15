@@ -17,6 +17,10 @@ public class SkillObj_TargetCatch : SkillObject
             FinishWorks();
         }
         m_target = skill.target;
+
+        m_target.onDead += EarlyQuit;
+        skill.owner.onDead += EarlyQuit;
+        
         StartCoroutine("OnWorks");
     }
 
@@ -24,7 +28,7 @@ public class SkillObj_TargetCatch : SkillObject
     {
         StopCoroutine("OnWorks");
         m_target.onDead -= EarlyQuit;
-        m_target.onDead -= EarlyQuit;
+        skill.owner.onDead -= EarlyQuit;
 
         m_stun?.Remove();
         m_stun = null;
@@ -34,10 +38,6 @@ public class SkillObj_TargetCatch : SkillObject
 
     IEnumerator OnWorks()
     {
-        m_target.onDead += EarlyQuit;
-
-        skill.owner.onDead += EarlyQuit;
-
         m_sqrDist = (skill.owner.transform.position - m_target.transform.position).sqrMagnitude;
 
         m_stun = ObjectPool.instance.GetBuff((int)EBuff.Stun);

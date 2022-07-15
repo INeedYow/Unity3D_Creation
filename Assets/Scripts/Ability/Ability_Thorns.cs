@@ -42,7 +42,5 @@ public class Ability_Thorns : Ability
     }
 
     public override void OnAttack(float damage){}
-    public override void OnEquip(){}
-    public override void OnUnEquip(){}    
     public override void OnKill(){}
 }

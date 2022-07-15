@@ -17,7 +17,7 @@ MonoBehaviour:
   icon: {fileID: -2023592537140862632, guid: 78ed68a803d670649b4e4e7d82b9906a, type: 3}
   requireLevel: 15
   cost: 45000
-  sellCost: 9000
+  sellCost: 1100
   minDamage: 15
   maxDamage: 19
   magicDamage: 21

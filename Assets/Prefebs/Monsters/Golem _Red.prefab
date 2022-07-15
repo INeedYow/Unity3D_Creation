@@ -2083,13 +2083,13 @@ MonoBehaviour:
   name: Golem_Red
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 1400
-  maxHp: 1400
-  minDamage: 17
-  maxDamage: 23
-  magicDamage: 22
+  curHp: 2400
+  maxHp: 2400
+  minDamage: 25
+  maxDamage: 30
+  magicDamage: 35
   lastAttackTime: 0
-  attackDelay: 1.3
+  attackDelay: 1.2
   attackRange: 7
   aoeRange: 0
   moveSpeed: 10

@@ -6,7 +6,8 @@ public class Ability_Drain : Ability
 {
     [Range(0.01f, 1f)] public float drainRatio;
     
-    public override void OnAttack(float damage){
+    public override void OnAttack(float damage)
+    {   
         owner.Healed(damage * drainRatio);
     }
 
@@ -24,8 +25,6 @@ public class Ability_Drain : Ability
         }
     }
 
-    public override void OnEquip(){}
-    public override void OnUnEquip(){}
     public override void OnDamagedGetAttacker(Character attacker){}
     public override void OnKill(){}
 

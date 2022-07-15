@@ -7,19 +7,17 @@ using UnityEngine.UI;
 public class AccessoryItemData : EquipItemData
 {
     [Header("Item Spec------------------------")]
-    public Ability ability;  // 장착 관련 부분 외에는 모두 ability쪽에서
+    public Ability prfAbility;             // 장착 관련 부분 외에는 모두 ability쪽에서
 
     public override void Use()
-    {
+    {   
         HeroManager.instance.selectedHero.Equip(this);
         InventoryManager.instance.EquipItem(this);
-        ability.SetOwner(HeroManager.instance.selectedHero);
     }
 
     public override void UnEquip(){
         HeroManager.instance.selectedHero.UnEquipAccessory();
         InventoryManager.instance.AddItem(this);
-        ability.SetOwner(null);
     }
 
     protected override void AddItem()
@@ -46,7 +44,7 @@ public class AccessoryItemData : EquipItemData
             case 1: 
             case 2: 
             case 3:
-            { return ability.SetOptionText1to3(optionNumber, optionUnit); }
+            { return prfAbility.SetOptionText1to3(optionNumber, optionUnit); }
 
             default : return false;
         }

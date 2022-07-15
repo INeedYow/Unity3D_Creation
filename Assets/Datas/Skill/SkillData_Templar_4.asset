@@ -16,6 +16,6 @@ MonoBehaviour:
   description: "\uB300\uC0C1 \uC8FC\uBCC0 \uAD11\uC5ED \uB3C4\uBC1C \uBC0F \uACF5\uACA9\uB825
     \uAC10\uC18C"
   icon: {fileID: 21300000, guid: 87cb80b28a26948bab802db554863a96, type: 3}
-  requireLevel: 17
+  requireLevel: 11
   cooldown: 13
   skillRange: 9

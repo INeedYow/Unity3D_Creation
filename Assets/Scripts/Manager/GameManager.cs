@@ -18,9 +18,8 @@ public class GameManager : MonoBehaviour
     
     public GameObject worldCanvas;
     public GameObject heroLeaveBox;
-    public GameObject monsterPlanet;
-    public GameObject storeObjects;
     public GameObject floatingBlocks;
+    public GameObject gameQuitUI;
 
     [Header("prfBuffs")]
     public Buff[] prfBUffs = new Buff[(int)EBuff.Size];   // 공, 마공, 방, 마방, 공속
@@ -35,6 +34,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake() { 
         instance = this; 
+
+        Time.timeScale = 1.2f;
+
         Application.targetFrameRate = 60;   // 프레임
     }
 
@@ -109,6 +111,32 @@ public class GameManager : MonoBehaviour
         //storeObjects.SetActive(isEnter);
         //monsterPlanet.SetActive(isEnter);
         floatingBlocks.SetActive(!isEnter);
+    }
+
+    public void TurnOnQuitUI()
+    {
+        Time.timeScale = 0f;
+        isLockFocus = true;
+
+        gameQuitUI.SetActive(true);
+    }
+
+    public void TurnOffQuitUI()
+    {
+        Time.timeScale = 1f;
+        isLockFocus = false;
+
+        gameQuitUI.SetActive(false);
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
+    }
+
+    public void ClearAllStage()
+    {
+        Debug.Log("Clear All Stage");
     }
 
 }

@@ -29,7 +29,7 @@ public abstract class ConditionMacro : BattleMacro
     }
     public abstract bool IsSatisfy();
 
-    public virtual Character GetTarget() 
+    public Character GetTarget() 
     {   
         if (owner.madness > 0)
         {

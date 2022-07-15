@@ -553,7 +553,7 @@ MonoBehaviour:
   curHp: 110
   maxHp: 110
   minDamage: 4
-  maxDamage: 5
+  maxDamage: 6
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 2

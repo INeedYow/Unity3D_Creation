@@ -18,7 +18,8 @@ public class ItemManager : MonoBehaviour
     private void Start() { HideInfoUI(); }
 
 
-    public void ShowInfoUI(ItemData data){
+    public void ShowInfoUI(ItemData data)
+    {
         itemInfoUI.gameObject.SetActive(true);
         RenewItemInfo(data);
     }

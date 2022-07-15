@@ -2083,10 +2083,10 @@ MonoBehaviour:
   name: Golem_Blue
   icon: {fileID: 0}
   eGroup: 0
-  curHp: 1800
-  maxHp: 1800
-  minDamage: 23
-  maxDamage: 29
+  curHp: 2800
+  maxHp: 2800
+  minDamage: 29
+  maxDamage: 37
   magicDamage: 0
   lastAttackTime: 0
   attackDelay: 0.8

@@ -128,7 +128,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void ShowInteractBox(InventoryUnit unit)
-    {   Debug.Log("1");
+    {   
         m_selectedUnit = unit;
 
         interactBox.SetActive(true);

@@ -89,7 +89,7 @@ public class RuneSkillUnit : MonoBehaviour
             {   // 쿨타임
                 Debug.Log("cursor cooldown : " + curCooldown);
             }
-            else{   Debug.Log("cursor active");
+            else{   //Debug.Log("cursor active");
                 cursor.gameObject.SetActive(true);
             }
         }

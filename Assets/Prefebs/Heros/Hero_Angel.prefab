@@ -22318,7 +22318,7 @@ MonoBehaviour:
   criticalRate: 1.5
   powerRate: 1
   armorRate: 0
-  magicArmorRate: 0.1
+  magicArmorRate: 0.03
   buffCount: 0
   debuffCount: 0
   buffDamage: 1
@@ -22346,6 +22346,7 @@ MonoBehaviour:
   weaponData: {fileID: 0}
   armorData: {fileID: 0}
   accessoryData: {fileID: 0}
+  m_ability: {fileID: 0}
 --- !u!195 &404839799768936852
 NavMeshAgent:
   m_ObjectHideFlags: 0

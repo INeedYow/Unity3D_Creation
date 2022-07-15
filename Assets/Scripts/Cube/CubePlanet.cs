@@ -22,6 +22,10 @@ public class CubePlanet : MonoBehaviour
 
     private void Awake() { Init(); }
 
+    private void OnDisable() {
+        isRolling = false;
+    }
+
     void Init(){
         // 이벤트 함수 등록
         foreach(CubeSide cubeSide in cubeSides){ 
@@ -40,6 +44,12 @@ public class CubePlanet : MonoBehaviour
 
     private void Update() 
     {   
+        if (Input.GetButtonDown("Cancel"))
+        {
+            GameManager.instance.TurnOnQuitUI();
+        }
+
+
         if (isRolling) return;
 
         m_input = Input.GetAxisRaw("Vertical");

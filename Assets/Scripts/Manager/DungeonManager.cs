@@ -24,7 +24,8 @@ public class DungeonManager : MonoBehaviour
     public static DungeonManager instance { get; private set; }
 
     [Header("Portals")]
-    [HideInInspector] public int clearLevel = 0;
+    public int clearStage = 0;
+    public int maxStage = 2;
     public GameObject[] monsterPlanets = new GameObject[5];                         // 현재 레벨 포탈
     public GameObject[] bossPortals = new GameObject[5];
     public GameObject[] clearPortals = new GameObject[5];                       // 클리어한 던전 재진입 용도 포탈
@@ -71,6 +72,10 @@ public class DungeonManager : MonoBehaviour
     public bool isLockClick;
 
 
+    public float gameSpeed = 1f;
+    public bool isSpeed;
+
+
     HpBar bar;
 
     private void Awake() {
@@ -96,6 +101,8 @@ public class DungeonManager : MonoBehaviour
         curDungeon.gameObject.SetActive(true);
         PartyManager.instance.EnterDungeon();
         onDungeonEnter?.Invoke();
+        
+        Time.timeScale = gameSpeed;
 
         // UI
         dungeonUI.gameObject.SetActive(true);
@@ -127,24 +134,45 @@ public class DungeonManager : MonoBehaviour
         m_items.Add(itemData);
     }
 
-    public void ClearDungeon(int level)
+    public void ClearDungeon(int stage)
     {
-        if (level >= monsterPlanets.Length) return;
+        if (clearStage == maxStage) return;
 
-        if (clearLevel < level)
+        monsterPlanets[clearStage].SetActive(false);
+        clearPortals[clearStage].SetActive(true);
+
+        for (int i = clearStage; i < monsterPlanets.Length; i++)
         {
-            monsterPlanets[clearLevel].SetActive(false);
-            clearPortals[clearLevel].SetActive(true);
-
-            for (int i = clearLevel; i < monsterPlanets.Length; i++)
-            {
-                monsterPlanets[i].transform.Translate(0f, 0f, -8f);
-            }
-            clearLevel = level;
-            
-            bossPortals[clearLevel].AddComponent<Portal>().index = clearLevel;
-            bossPortals[clearLevel].AddComponent<FocusEffetor>().focusedScale = new Vector3(3f, 3f, 3f);
+            monsterPlanets[i].transform.Translate(0f, 0f, -8f);
         }
+
+        clearStage = stage;
+
+        if (clearStage == maxStage)
+        {   // 승리
+            GameManager.instance.ClearAllStage();
+        }
+        else if (clearStage < bossPortals.Length)
+        {   // 다음 스테이지 오픈
+            bossPortals[clearStage].AddComponent<Portal>().index = clearStage;
+            bossPortals[clearStage].AddComponent<FocusEffetor>().focusedScale = new Vector3(3f, 3f, 3f);
+        }
+
+        //////
+        // if (clearStage < stage)
+        // {
+        //     monsterPlanets[clearStage].SetActive(false);
+        //     clearPortals[clearStage].SetActive(true);
+
+        //     for (int i = clearStage; i < monsterPlanets.Length; i++)
+        //     {
+        //         monsterPlanets[i].transform.Translate(0f, 0f, -8f);
+        //     }
+        //     clearStage = stage;
+            
+        //     bossPortals[clearStage].AddComponent<Portal>().index = clearStage;
+        //     bossPortals[clearStage].AddComponent<FocusEffetor>().focusedScale = new Vector3(3f, 3f, 3f);
+        // }
     }
 
     ////// ////// //////
@@ -246,6 +274,8 @@ public class DungeonManager : MonoBehaviour
         dungeonUI.gameObject.SetActive(false);
 
         GameManager.instance.EnterDungeon(false);
+
+        Time.timeScale = 1f;
     }
 
     public void WaveStart()
@@ -347,4 +377,18 @@ public class DungeonManager : MonoBehaviour
         return null;
     }
 
+    public void ToggleGameSpeed()
+    {
+        if (isSpeed)
+        {
+            gameSpeed = 1f;
+        }
+        else{
+            gameSpeed = 1.4f;
+        }
+
+        Time.timeScale = gameSpeed;
+
+        isSpeed = !isSpeed;
+    }
 }

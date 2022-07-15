@@ -12,13 +12,18 @@ public class CubeSide_Hero : CubeSide
         HeroManager.instance.selectedHero = null;
         HeroManager.instance.ShowHeroUI(true);
         onEnterFinish?.Invoke();
+
+        
+        GameManager.instance.isLockFocus = true;
     }
 
     public override void Exit()
     {
         heroGuide.SetActive(false);
+        GameManager.instance.isLockFocus = false;
         HeroManager.instance.selectedHero = null;
         HeroManager.instance.ShowHeroUI(false);
+        ItemManager.instance.itemInfoUI.gameObject.SetActive(false);
         onExitFinish?.Invoke(this);
     }
 }

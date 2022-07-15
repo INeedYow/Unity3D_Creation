@@ -24,6 +24,7 @@ public class CubeSide_Board : CubeSide
         StartCoroutine("OpenBoard"); 
         boardGuide.SetActive(true);
         PlayerManager.instance.playerInfoUI.gameObject.SetActive(true);
+        ItemManager.instance.itemInfoUI.gameObject.SetActive(false);
         DungeonManager.instance.isLockClick = false;
     }
 

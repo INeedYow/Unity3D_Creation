@@ -1598,7 +1598,7 @@ MonoBehaviour:
   maxDamage: 22
   magicDamage: 0
   lastAttackTime: 0
-  attackDelay: 0.8
+  attackDelay: 0.85
   attackRange: 4
   aoeRange: 0
   moveSpeed: 15
@@ -1635,6 +1635,7 @@ MonoBehaviour:
   weaponData: {fileID: 0}
   armorData: {fileID: 0}
   accessoryData: {fileID: 0}
+  m_ability: {fileID: 0}
 --- !u!195 &1647395017060151591
 NavMeshAgent:
   m_ObjectHideFlags: 0

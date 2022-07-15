@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
 public class DungeonUI : MonoBehaviour
 {
     public HeroBattleInfoUI heroBattleInfoUI;
     public DungeonInfoUI dungeonInfoUI;
     public GameObject menuButton;
     public GameObject menuUI;
+    public Image speedIcon;
 
     public void Init(Dungeon dungeon){
         dungeonInfoUI.Init(dungeon);
@@ -30,7 +34,7 @@ public class DungeonUI : MonoBehaviour
 
     public void MenuOff()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = DungeonManager.instance.gameSpeed;
 
         menuUI.SetActive(false);
         PlayerManager.instance.runeSkillUI.UnLockSkillInput();
@@ -40,10 +44,20 @@ public class DungeonUI : MonoBehaviour
     {
         menuUI.SetActive(false);
         DungeonManager.instance.BattleEnd();
-        Time.timeScale = 1f;
+        Time.timeScale = DungeonManager.instance.gameSpeed;
     }
 
-    // public void SetMiniMacroUI(bool isOn){
-    //     miniMacroUI.gameObject.SetActive(isOn);
-    // }
+
+    public void ToggleGameSpeed()
+    {
+        DungeonManager.instance.ToggleGameSpeed();
+
+        if (DungeonManager.instance.isSpeed)
+        {
+            speedIcon.color = Color.yellow;
+        }
+        else{
+            speedIcon.color = Color.white;
+        }
+    }
 }

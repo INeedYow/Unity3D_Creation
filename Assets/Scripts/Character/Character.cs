@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
     public UnityAction onDead;
-    public UnityAction<Character> onUntouchableGetThis;
+    public UnityAction<Character> onUntouchableGetThis;     // 정지 상태
     public UnityAction<Character> onDeadGetThis;
     public UnityAction<int> onMacroChangeGetIndex;
     public UnityAction<float> onAttackGetDamage;
@@ -379,7 +379,7 @@ public abstract class Character : MonoBehaviour, IDamagable
 
         float damage = curHp * ratio;
         
-        damage = Mathf.Clamp(damage, 1f, magicDamage * 0.5f);
+        damage = Mathf.Clamp(damage, 1f, 20f);
 
         curHp -= damage;
 

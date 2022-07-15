@@ -24,7 +24,7 @@ public class Item : MonoBehaviour
                 return;
             }
         
-            else{   // todo 구매 못하는 경우 표시
+            else{   // 구매 못하는 경우
 
             }
         }
@@ -32,11 +32,15 @@ public class Item : MonoBehaviour
     }
 
     // 
-    private void OnMouseEnter() {   //Debug.Log("enter");
+    private void OnMouseEnter() 
+    {   //Debug.Log("enter");
+        if (GameManager.instance.isLockFocus) return;
+
         ItemManager.instance.ShowInfoUI(data);
     }
 
-    private void OnMouseExit() {    //Debug.Log("exit");
+    private void OnMouseExit() 
+    {    //Debug.Log("exit");
         ItemManager.instance.HideInfoUI();
     }
 }

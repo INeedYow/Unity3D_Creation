@@ -35,7 +35,7 @@ public class RuneInfoUI : MonoBehaviour
 
         title.text = rune.data.description;
 
-        m_tracker.offset.y = -200f;
+        m_tracker.offset.y = -300f;
 
         RenewStatUI();
     }
@@ -48,7 +48,7 @@ public class RuneInfoUI : MonoBehaviour
 
         title.text = data.description;
 
-        m_tracker.offset.y = +200f;
+        m_tracker.offset.y = +300f;
 
         RenewSkillUI();
     }

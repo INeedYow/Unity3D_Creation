@@ -139,5 +139,9 @@ public class PlayerManager : MonoBehaviour
                 hero.curExp += hero.maxExp;
             }
         }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            AddGold(1000);
+        }
     }
 }

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdbddd4217737e44585a27942ff39853, type: 3}
   m_Name: AcceData_Killer01
   m_EditorClassIdentifier: 
-  itemName: "\uACE0\uBB34\uC7A5\uAC11"
+  itemName: "\uACE0\uBB34\uC7A5\uAC11 lv.1"
   desc: "\uCC98\uCE58 \uC2DC \uACF5\uACA9\uB825 \uBC84\uD504"
   icon: {fileID: -3479977692670749668, guid: 37c228f9541674b4cb42da85a6783ec5, type: 3}
   requireLevel: 8
   cost: 5100
-  sellCost: 1700
-  ability: {fileID: 6467371280754365297, guid: d05db225c98b0ef4586c694c659c52aa, type: 3}
+  sellCost: 800
+  prfAbility: {fileID: 6467371280754365297, guid: d05db225c98b0ef4586c694c659c52aa,
+    type: 3}

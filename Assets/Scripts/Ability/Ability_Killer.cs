@@ -24,8 +24,6 @@ public class Ability_Killer : Ability
         }
     }
 
-    public override void OnEquip(){}
-    public override void OnUnEquip(){}
     public override void OnDamagedGetAttacker(Character attacker){}
     public override void OnKill()
     {

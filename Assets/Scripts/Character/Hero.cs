@@ -40,6 +40,7 @@ public class Hero : Character
     public WeaponItemData       weaponData;
     public ArmorItemData        armorData;
     public AccessoryItemData    accessoryData;
+    [SerializeField] Ability    m_ability;
 
     new protected void Awake() {
         base.Awake();
@@ -222,14 +223,17 @@ public class Hero : Character
     }
 
     public void Equip(AccessoryItemData itemData)
-    {
+    {   
         if (accessoryData != null) { accessoryData.UnEquip(); }
         accessoryData = itemData;
+        
+        m_ability = Instantiate(accessoryData.prfAbility, transform);
+        m_ability.SetOwner(this);
 
-        accessoryData.ability.OnEquip();
-        onAttackGetDamage       += accessoryData.ability.OnAttack;
-        onDamagedGetAttacker    += accessoryData.ability.OnDamagedGetAttacker;
-        onKill                  += accessoryData.ability.OnKill;
+        //m_ability.OnEquip();
+        onAttackGetDamage       += m_ability.OnAttack;
+        onDamagedGetAttacker    += m_ability.OnDamagedGetAttacker;
+        onKill                  += m_ability.OnKill;
 
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }
@@ -238,12 +242,14 @@ public class Hero : Character
     {
         if (accessoryData == null) return;
 
-        onAttackGetDamage       -= accessoryData.ability.OnAttack;
-        onDamagedGetAttacker    -= accessoryData.ability.OnDamagedGetAttacker;
-        onKill                  -= accessoryData.ability.OnKill;
-        accessoryData.ability.OnUnEquip();
+        onAttackGetDamage       -= m_ability.OnAttack;
+        onDamagedGetAttacker    -= m_ability.OnDamagedGetAttacker;
+        onKill                  -= m_ability.OnKill;
+        //m_ability.OnUnEquip();
 
         accessoryData = null;
+        Destroy(m_ability.gameObject);
+        m_ability = null;
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }
 

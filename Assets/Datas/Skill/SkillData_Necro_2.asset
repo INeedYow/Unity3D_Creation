@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillData_Necro_2
   m_EditorClassIdentifier: 
   skillName: "\uAC00\uC2DC \uC9C0\uC625"
-  description: "\uC8FC\uBCC0 \uAD11\uC5ED \uB9C8\uBC95 \uD53C\uD574"
+  description: "\uC8FC\uBCC0 \uAD11\uC5ED \uB9C8\uBC95 \uD53C\uD574 \uBC0F \uCD9C\uD608"
   icon: {fileID: 21300000, guid: ef65aab13e15a4980bc0a51d43ee69e9, type: 3}
-  requireLevel: 7
+  requireLevel: 4
   cooldown: 7
   skillRange: 0

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9513ec5e0d179b44f8549ac7cdf9afbb, type: 3}
   m_Name: DG1
   m_EditorClassIdentifier: 
-  exp_perWaveMin: 16
-  exp_perWaveMax: 24
-  gold_perWaveMin: 40
-  gold_perWaveMax: 60
-  exp_clear: 50
-  gold_clear: 200
+  exp_perWaveMin: 72
+  exp_perWaveMax: 96
+  gold_perWaveMin: 150
+  gold_perWaveMax: 300
+  exp_clear: 100
+  gold_clear: 600

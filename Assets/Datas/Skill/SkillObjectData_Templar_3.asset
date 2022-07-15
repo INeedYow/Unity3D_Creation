@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillObjectData_Templar_3
   m_EditorClassIdentifier: 
   isMagic: 1
-  powerRatio: 0.6
+  powerRatio: 0.7
   area: 0
   repeat: 1
   interval: 0

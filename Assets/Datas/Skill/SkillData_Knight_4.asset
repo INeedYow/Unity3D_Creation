@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SkillData_Knight_4
   m_EditorClassIdentifier: 
   skillName: "\uB80C\uAC00"
-  description: "\uAE00\uBE59\uAE00\uBE59"
+  description: "\uBE59\uAE00\uBE59\uAE00"
   icon: {fileID: 21300000, guid: c6c887cce7af543b0bf0b150917f449c, type: 3}
-  requireLevel: 17
+  requireLevel: 11
   cooldown: 14
-  skillRange: 5
+  skillRange: 0
