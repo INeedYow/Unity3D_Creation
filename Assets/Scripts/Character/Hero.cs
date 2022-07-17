@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -228,12 +228,13 @@ public class Hero : Character
         accessoryData = itemData;
         
         m_ability = Instantiate(accessoryData.prfAbility, transform);
-        m_ability.SetOwner(this);
+        //m_ability.SetOwner(this);
 
-        //m_ability.OnEquip();
-        onAttackGetDamage       += m_ability.OnAttack;
-        onDamagedGetAttacker    += m_ability.OnDamagedGetAttacker;
-        onKill                  += m_ability.OnKill;
+        m_ability.OnEquip(this);
+
+        // onAttackGetDamage       += m_ability.OnAttackGetDamage;
+        // onDamagedGetAttacker    += m_ability.OnDamagedGetAttacker;
+        // onKill                  += m_ability.OnKill;
 
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }
@@ -242,13 +243,12 @@ public class Hero : Character
     {
         if (accessoryData == null) return;
 
-        onAttackGetDamage       -= m_ability.OnAttack;
-        onDamagedGetAttacker    -= m_ability.OnDamagedGetAttacker;
-        onKill                  -= m_ability.OnKill;
-        //m_ability.OnUnEquip();
+        // onAttackGetDamage       -= m_ability.OnAttackGetDamage;
+        // onDamagedGetAttacker    -= m_ability.OnDamagedGetAttacker;
+        // onKill                  -= m_ability.OnKill;
 
         accessoryData = null;
-        Destroy(m_ability.gameObject);
+        Destroy(m_ability.gameObject);          //  Ability의 OnDestroy에서 이벤트 함수 등록 해제 진행
         m_ability = null;
         HeroManager.instance.heroInfoUI.RenewUI(this);
     }

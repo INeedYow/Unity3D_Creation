@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +9,10 @@ public class ItemManager : MonoBehaviour
 
     [Header("Equip Items _ Weapon & Armor")]
     public List<EquipItemData> items_equip;
-    //public List<int> equipTierIndexLine;    // 0 ~ list의 0번 인덱스까지 1티어 장비로 간주, 
+     
     [Header("Equip Items _ Accessory")]
     public List<AccessoryItemData> items_acce;
-    //public List<int> acceTierIndexLine;
+    
 
     private void Awake() { instance = this; }
     private void Start() { HideInfoUI(); }

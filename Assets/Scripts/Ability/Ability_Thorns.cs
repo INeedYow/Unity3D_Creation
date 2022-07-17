@@ -8,7 +8,24 @@ public class Ability_Thorns : Ability
     public int thornsDamageMax;
     Character m_attacker;
 
-    public override void OnDamagedGetAttacker(Character attacker){
+    public override void OnEquip(Character owner)
+    {
+        this.owner = owner;
+        
+        if (null == owner) return;
+
+        owner.onDamagedGetAttacker += OnDamagedGetAttacker;
+    }
+
+    protected override void OnUnEquip()
+    {
+        if (null == owner) return;
+        
+        owner.onDamagedGetAttacker -= OnDamagedGetAttacker;
+    }
+
+
+    void OnDamagedGetAttacker(Character attacker){
         if (m_attacker == attacker){                    // 기억하고 있는 공격자랑 같으면 탈출
             m_attacker = null; return;
         }
@@ -18,6 +35,22 @@ public class Ability_Thorns : Ability
         
         m_attacker = null;                              // 반사작업 후 초기화
     }
+
+    
+
+    // public override void OnDamagedGetAttacker(Character attacker){
+    //     if (m_attacker == attacker){                    // 기억하고 있는 공격자랑 같으면 탈출
+    //         m_attacker = null; return;
+    //     }
+
+    //     m_attacker = attacker;                          // 반사 전에 공격자 기억
+    //     attacker.Damaged(Random.Range(thornsDamageMin, thornsDamageMax + 1), 1f, owner, true);
+        
+    //     m_attacker = null;                              // 반사작업 후 초기화
+    // }
+    // public override void OnAttackGetDamage(float damage){}
+    // public override void OnKill(){}
+
 
     public override bool SetOptionText1to3(int optionNumber, ItemOptionUnit optionUnit)
     {
@@ -41,6 +74,4 @@ public class Ability_Thorns : Ability
         }
     }
 
-    public override void OnAttack(float damage){}
-    public override void OnKill(){}
 }

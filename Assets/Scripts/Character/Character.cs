@@ -15,12 +15,12 @@ public abstract class Character : MonoBehaviour, IDamagable
 {
     public UnityAction onHpChange;
     public UnityAction onDead;
+    public UnityAction onKill;
     public UnityAction<Character> onUntouchableGetThis;     // 정지 상태
     public UnityAction<Character> onDeadGetThis;
     public UnityAction<int> onMacroChangeGetIndex;
     public UnityAction<float> onAttackGetDamage;
     public UnityAction<Character> onDamagedGetAttacker;
-    public UnityAction onKill;
 
     new public string name;
     public Sprite icon;

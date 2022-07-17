@@ -14,7 +14,7 @@ public class SkillCommand_Targeting : SkillCommand
 
         if (!skill.owner.nav.isOnNavMesh) return;
 
-        if (!skill.owner.IsTargetInRange(skill.target, skill.data.skillRange)) 
+        if (!skill.owner.IsTargetInRange(skill.target, skill.data.skillRange))
         { 
             skill.owner.MoveToTarget(skill.target);
         }

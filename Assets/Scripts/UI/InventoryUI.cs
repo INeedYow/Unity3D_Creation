@@ -82,7 +82,6 @@ public class InventoryUI : MonoBehaviour
     }
 
 
-    // 바로 쓰는 게 아니라 Manager통해서만 호출되게 할 수 있나 event?
     public void AddItem(WeaponItemData itemData){
         weaponUnits[InventoryManager.instance.weaponDatas.Count].SetData(itemData);
     }

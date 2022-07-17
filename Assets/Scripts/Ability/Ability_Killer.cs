@@ -7,8 +7,38 @@ public class Ability_Killer : Ability
     public float duration;
     public float damageRatio;
     EBuff m_eBuff = EBuff.Damage;
+
+    public override void OnEquip(Character owner)
+    {
+        this.owner = owner;
+        
+        if (null == owner) return;
+
+        owner.onKill += OnKill;
+    }
+
+    protected override void OnUnEquip()
+    {
+        if (null == owner) return;
+
+        owner.onKill -= OnKill;
+    }
+
+    void OnKill()
+    {
+        ObjectPool.instance.GetBuff((int)m_eBuff).Add(owner, duration, damageRatio);
+    }
+
+
     
-    public override void OnAttack(float damage){}
+
+    // public override void OnKill()
+    // {
+    //     ObjectPool.instance.GetBuff((int)m_eBuff).Add(owner, duration, damageRatio);
+    // }
+    // public override void OnAttackGetDamage(float damage){}
+    // public override void OnDamagedGetAttacker(Character attacker){}
+    
 
     public override bool SetOptionText1to3(int optionNumber, ItemOptionUnit optionUnit)
     {
@@ -24,9 +54,4 @@ public class Ability_Killer : Ability
         }
     }
 
-    public override void OnDamagedGetAttacker(Character attacker){}
-    public override void OnKill()
-    {
-        ObjectPool.instance.GetBuff((int)m_eBuff).Add(owner, duration, damageRatio);
-    }
 }

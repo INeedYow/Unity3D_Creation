@@ -15,7 +15,7 @@ public abstract class EquipItemData : ItemData
         if (cost > PlayerManager.instance.gold) return false;
         AddItem();
 
-        PlayerManager.instance.AddGold(-cost); 
+        PlayerManager.instance.AddGold(-cost);
         return true;
     }
     protected abstract void AddItem();

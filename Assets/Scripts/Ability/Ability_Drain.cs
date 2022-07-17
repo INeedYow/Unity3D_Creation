@@ -5,11 +5,37 @@ using UnityEngine;
 public class Ability_Drain : Ability
 {
     [Range(0.01f, 1f)] public float drainRatio;
-    
-    public override void OnAttack(float damage)
+
+    public override void OnEquip(Character owner)
+    {
+        this.owner = owner;
+        
+        if (null == owner) return;
+
+        owner.onAttackGetDamage += OnAttackGetDamage;
+    }
+
+    protected override void OnUnEquip()
+    {
+        if (null == owner) return;
+
+        owner.onAttackGetDamage -= OnAttackGetDamage;
+    }
+
+
+    void OnAttackGetDamage(float damage)
     {   
         owner.Healed(damage * drainRatio);
     }
+
+    
+    // public override void OnAttackGetDamage(float damage)
+    // {   
+    //     owner.Healed(damage * drainRatio);
+    // }
+    // public override void OnDamagedGetAttacker(Character attacker){}
+    // public override void OnKill(){}
+
 
     public override bool SetOptionText1to3(int optionNumber, ItemOptionUnit optionUnit)
     {
@@ -25,7 +51,5 @@ public class Ability_Drain : Ability
         }
     }
 
-    public override void OnDamagedGetAttacker(Character attacker){}
-    public override void OnKill(){}
 
 }

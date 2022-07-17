@@ -88,17 +88,38 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Item 추가, 삭제
-    public void AddItem(WeaponItemData itemData) { 
+    public void AddItem(WeaponItemData itemData) 
+    { 
+        if (weaponDatas.Count >= maxCount)
+        {   
+            itemData.Sell();
+            return;
+        }
+
         invenUI.AddItem(itemData);          // weaponDatas의 count 값을 참조하기 때문에 순서 중요함
         weaponDatas.Add(itemData); 
     }
 
-    public void AddItem(ArmorItemData itemData) { 
+    public void AddItem(ArmorItemData itemData) 
+    { 
+        if (armorDatas.Count >= maxCount)
+        {   //Debug.Log("인벤토리가 가득 차서 아이템 자동판매");
+            itemData.Sell();
+            return;
+        }
+
         invenUI.AddItem(itemData);          
         armorDatas.Add(itemData); 
     }
 
-    public void AddItem(AccessoryItemData itemData) { 
+    public void AddItem(AccessoryItemData itemData) 
+    { 
+        if (accessoryDatas.Count >= maxCount)
+        {   
+            itemData.Sell();
+            return;
+        }
+
         invenUI.AddItem(itemData);          
         accessoryDatas.Add(itemData); 
     }
