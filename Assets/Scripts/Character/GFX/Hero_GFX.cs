@@ -69,6 +69,11 @@ public class Hero_GFX : GFX
         hero.anim.SetFloat("MoveSpeed", hero.nav.velocity.sqrMagnitude);
     }
 
+    public override void StopSKill(int id)
+    {
+        OnFinishSkill(id);
+    }
+
     // protected override void LookTarget()
     // {
     //     if (hero.target != null && hero.target != hero)

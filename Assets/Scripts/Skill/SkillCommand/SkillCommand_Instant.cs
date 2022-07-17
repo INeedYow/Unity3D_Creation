@@ -14,5 +14,7 @@ public class SkillCommand_Instant : SkillCommand
         
         isUsing = true;
         skill.owner.anim.SetBool(string.Format("Skill {0}", skill.ID), true);
+
+        DungeonManager.instance.onWaveEnd += skill.QuitSkill;
     }
 }

@@ -31,10 +31,23 @@ public class Skill : MonoBehaviour
         ID = id; 
         owner.onDead += FinishSKill;        // 안 해주면 스킬 도중에 죽고 재활용할 때 고장남
     }
+
+    public void QuitSkill()
+    {
+        owner.QuitSKill(ID);
+        skillObj.gameObject.SetActive(false);
+
+        DungeonManager.instance.onWaveEnd -= QuitSkill;
+    }
  
-    public void FinishSKill(){                         
+    public void FinishSKill()
+    {        
+        if (!skillcommand.isUsing) return;        
+
         skillcommand.lastSkillTime = Time.time;         
         skillcommand.isUsing = false;
+
+        DungeonManager.instance.onWaveEnd -= QuitSkill;
     }
 
     public void EffectSkill(){  // 실제 스킬 효과부

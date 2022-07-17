@@ -43,6 +43,14 @@ public class HeroBattleInfoUI : MonoBehaviour
         ResetColor();
     }
 
+    private void OnDisable() {
+        foreach(HeroBattleInfoUnit unit in battleHeroInfoUnits)
+        {
+            unit.gameObject.SetActive(false);
+        }
+    }
+
+
     //// Macro UI
 
     public void ShowMacroInfoUI(Character owner, int macroIndex)

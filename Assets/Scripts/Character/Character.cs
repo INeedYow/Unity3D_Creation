@@ -404,6 +404,8 @@ public abstract class Character : MonoBehaviour, IDamagable
         ShowDamageText(heal, true, true);
     }
 
+    public abstract void QuitSKill(int id);
+
 
     protected abstract void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false);
 

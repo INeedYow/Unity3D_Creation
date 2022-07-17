@@ -62,6 +62,11 @@ public class Monster_GFX : GFX
         monster.anim.SetFloat("MoveSpeed", monster.nav.velocity.sqrMagnitude);
     }
 
+    public override void StopSKill(int id)
+    {
+        OnFinishSkill(id);
+    }
+
     // protected override void LookTarget()
     // {
     //     if (monster.target != null && monster.target != monster)

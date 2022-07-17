@@ -26,6 +26,8 @@ public class SkillCommand_Targeting : SkillCommand
 
             isUsing = true;
             skill.owner.anim.SetBool(string.Format("Skill {0}", skill.ID), true);
+
+            DungeonManager.instance.onWaveEnd += skill.QuitSkill;
         }
         
     }

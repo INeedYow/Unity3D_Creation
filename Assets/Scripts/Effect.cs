@@ -20,11 +20,16 @@ public class Effect : MonoBehaviour
     private void OnEnable() 
     { 
         particle.Play(); 
+        DungeonManager.instance.onWaveEnd += Return;
 
         if (duration != 0f)
         {
             SetDuration(duration);
         }
+    }
+
+    private void OnDisable() {
+        DungeonManager.instance.onWaveEnd -= Return;
     }
     
     public void SetPosition(Character owner)

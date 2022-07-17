@@ -208,6 +208,11 @@ public class Monster : Character
         DungeonManager.instance.ReviveMonster();
     }
 
+    public override void QuitSKill(int id)
+    {
+        monsGFX.StopSKill(id);
+    }
+
     private void OnMouseDown() { 
         if (isDead) return;
         DungeonManager.instance.ShowMonInfoUI(this); 

@@ -153,6 +153,11 @@ public class Hero : Character
         transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; 
     }
 
+    public override void QuitSKill(int id)
+    {
+        heroGFX.StopSKill(id);
+    }
+
     // 파티 관련
 
     public void Join()
