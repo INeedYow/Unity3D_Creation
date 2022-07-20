@@ -138,14 +138,17 @@ public class DungeonManager : MonoBehaviour
     {
         if (clearStage == maxStage) return;
 
-        monsterPlanets[clearStage].SetActive(false);
-        clearPortals[clearStage].SetActive(true);
+        if (stage > clearStage)
+        {   // 현재 스테이지 클리어
+            monsterPlanets[clearStage].SetActive(false);
+            clearPortals[clearStage].SetActive(true);
 
-        for (int i = clearStage; i < monsterPlanets.Length; i++)
-        {
-            monsterPlanets[i].transform.Translate(0f, 0f, -8f);
+            for (int i = clearStage; i < monsterPlanets.Length; i++)
+            {
+                monsterPlanets[i].transform.Translate(0f, 0f, -8f);
+            }
         }
-
+        
         clearStage = stage;
 
         if (clearStage == maxStage)

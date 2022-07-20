@@ -16,7 +16,7 @@ public class Hero_GFX : GFX
     
     void Update()
     {
-        if (hero.isDead || hero.isStop) return;
+        if (hero.isStop) return;
 
         for (int i = 0; i < repeat; i++)
         {   
@@ -37,7 +37,6 @@ public class Hero_GFX : GFX
         }
 
 
-        // 타겟이 action 매크로 진행 중간에 바뀌는 현상 발생
         // for (int i = 0; i < repeat; i++)
         // {
         //     if (hero.conditionMacros[i] == null) continue;

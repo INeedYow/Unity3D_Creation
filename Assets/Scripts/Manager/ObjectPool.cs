@@ -57,10 +57,10 @@ public class ObjectPool : MonoBehaviour
 
     [Space(15f)]
 
-    [Header("SkillObject Pools")]
-    public SkillObject[] prfSkillObjs;
-    [Range(1, 100)] public int[] count_skillObjs;
-    List<SkillObject>[] poolSKillObjs; 
+    // [Header("SkillObject Pools")]
+    // public SkillObject[] prfSkillObjs;
+    // [Range(1, 100)] public int[] count_skillObjs;
+    // List<SkillObject>[] poolSKillObjs; 
 
     [Header("Hp bar")]
     public HpBar prfHeroHpBar;
@@ -97,7 +97,7 @@ public class ObjectPool : MonoBehaviour
         poolBattleInfoText      = new List<BattleInfoText>();
         poolProjectiles         = new List<Projectile>[prfProjectiles.Length];
         poolMonsters            = new List<Monster>[prfMonsters.Length];
-        poolSKillObjs           = new List<SkillObject>[prfSkillObjs.Length];
+        // poolSKillObjs           = new List<SkillObject>[prfSkillObjs.Length];
         poolHeroHp              = new List<HpBar>();
         poolMonHp               = new List<HpBar>();
         poolBuffs               = new List<Buff>[prfBuffs.Length];
@@ -108,7 +108,7 @@ public class ObjectPool : MonoBehaviour
 
         for(int i = 0; i < prfMonsters.Length; i++)     { poolMonsters[i] = new List<Monster>(); }
 
-        for(int i = 0; i < prfSkillObjs.Length; i++)    { poolSKillObjs[i] = new List<SkillObject>(); }
+        // for(int i = 0; i < prfSkillObjs.Length; i++)    { poolSKillObjs[i] = new List<SkillObject>(); }
 
         for(int i = 0; i < prfBuffs.Length; i++)        { poolBuffs[i] = new List<Buff>(); }
 
@@ -136,12 +136,12 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < prfSkillObjs.Length; i++){
-            if (null != prfSkillObjs[i])
-            {
-                for(int j = 0; j < count_skillObjs[i]; j++) { poolSKillObjs[i].Add(CreateNewSkillObject(i)); }
-            }
-        }
+        // for (int i = 0; i < prfSkillObjs.Length; i++){
+        //     if (null != prfSkillObjs[i])
+        //     {
+        //         for(int j = 0; j < count_skillObjs[i]; j++) { poolSKillObjs[i].Add(CreateNewSkillObject(i)); }
+        //     }
+        // }
 
         if (null != prfHeroHpBar){ 
             for(int i = 0; i < count_heroHp; i++)
@@ -255,30 +255,30 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
-    // SkillObjects
-    SkillObject CreateNewSkillObject(int index, bool isActive = false){
-        var obj = Instantiate(prfSkillObjs[index]);
-        obj.gameObject.SetActive(isActive);
-        obj.transform.SetParent(transform);
-        return obj;
-    }
+    // // SkillObjects
+    // SkillObject CreateNewSkillObject(int index, bool isActive = false){
+    //     var obj = Instantiate(prfSkillObjs[index]);
+    //     obj.gameObject.SetActive(isActive);
+    //     obj.transform.SetParent(transform);
+    //     return obj;
+    // }
 
-    public SkillObject GetSkillObject(int objId){
-        foreach (SkillObject obj in poolSKillObjs[objId]){
-            if (!obj.gameObject.activeSelf)
-            {   
-                obj.transform.SetParent(null);
-                obj.gameObject.SetActive(true);
-                return obj;
-            }
-        }
+    // public SkillObject GetSkillObject(int objId){
+    //     foreach (SkillObject obj in poolSKillObjs[objId]){
+    //         if (!obj.gameObject.activeSelf)
+    //         {   
+    //             obj.transform.SetParent(null);
+    //             obj.gameObject.SetActive(true);
+    //             return obj;
+    //         }
+    //     }
         
-        var newObj = CreateNewSkillObject(objId, true);
-        newObj.transform.SetParent(null);
-        poolSKillObjs[objId].Add(newObj);
+    //     var newObj = CreateNewSkillObject(objId, true);
+    //     newObj.transform.SetParent(null);
+    //     poolSKillObjs[objId].Add(newObj);
         
-        return newObj;
-    }
+    //     return newObj;
+    // }
 
     // Hp bars
     HpBar CreateNewHpBar(bool isHero, bool isActive = false)

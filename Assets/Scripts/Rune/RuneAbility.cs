@@ -4,9 +4,8 @@ using UnityEngine;
 
 public abstract class RuneAbility : MonoBehaviour
 {
-    public abstract void OnMonsterDead();
-    public abstract void OnHeroDead();
-    public abstract void OnWaveStart();
-
     public abstract int GetCurValue();
+
+    public abstract void Apply();
+    public abstract void Release();
 }

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2c4f70bffb90c42918ed9216b3bf8e, type: 3}
   m_Name: AbilityRuneData 8_3
   m_EditorClassIdentifier: 
-  description: "\uC6E8\uC774\uBE0C \uC2DC\uC791 \uC2DC \uCCB4\uB825 \uD68C\uBCF5"
+  description: "\uC6E8\uC774\uBE0C \uC2DC\uC791 \uC2DC \uBAA8\uB4E0 \uC601\uC6C5
+    \uCCB4\uB825 n% \uD68C\uBCF5"
   ability: {fileID: 8424037293306838560, guid: 873bfb45bc823a9438c77bb841d525da, type: 3}

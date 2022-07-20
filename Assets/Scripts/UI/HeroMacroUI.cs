@@ -98,7 +98,7 @@ public class HeroMacroUI : MonoBehaviour
 
 
     // 스킬 매크로 추가 관리 (해당 영웅 레벨과 스킬 획득 레벨 비교해서 매크로 dropdown 옵션에 추가, 삭제 관리)
-    public void SetSkillMacro(Hero hero)
+    void SetSkillMacro(Hero hero)
     {
         for (int i = 0; i < hero.skills.Length; i++)
         {

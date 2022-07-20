@@ -13,7 +13,7 @@ public class Monster_GFX : GFX
       
     private void Update() 
     {   
-        if (monster.isStop || monster.isDead) return;  
+        if (monster.isStop) return;  
 
         for (int i = 0; i < repeat; i++)
         {   

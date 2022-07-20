@@ -7,10 +7,8 @@ public class RuneAbility_WaveStart : RuneAbility
     [Range(0.01f, 0.1f)]
     public float healRatio;
 
-    public override void OnMonsterDead(){}
-    public override void OnHeroDead(){}
 
-    public override void OnWaveStart()
+    void OnWaveStart()
     {   //Debug.Log("스테이지 시작 회복");
         foreach(Hero hero in PartyManager.instance.heroParty)
         {   
@@ -20,6 +18,16 @@ public class RuneAbility_WaveStart : RuneAbility
 
     public override int GetCurValue()
     {
-        return (int)(healRatio * 100f);
+        return Mathf.RoundToInt(healRatio * 100f);
+    }
+
+    public override void Apply()
+    {
+        DungeonManager.instance.onWaveStart += OnWaveStart;
+    }
+
+    public override void Release()
+    {
+        DungeonManager.instance.onWaveStart -= OnWaveStart;
     }
 }

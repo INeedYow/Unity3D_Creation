@@ -13,16 +13,12 @@ public class AbilityRuneData : RuneData
 
     public override void Apply(int point)
     {
-        DungeonManager.instance.onWaveStart     += ability.OnWaveStart;
-        DungeonManager.instance.onHeroDead      += ability.OnHeroDead;
-        DungeonManager.instance.onMonsterDead   += ability.OnMonsterDead;
+        ability.Apply();
     }
 
     public override void Release(int point)
     {
-        DungeonManager.instance.onWaveStart     -= ability.OnWaveStart;
-        DungeonManager.instance.onHeroDead      -= ability.OnHeroDead;
-        DungeonManager.instance.onMonsterDead   -= ability.OnMonsterDead;
+        ability.Release();
     }
 
     public override int GetCurValue(int point)
