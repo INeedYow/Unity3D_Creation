@@ -429,10 +429,15 @@ public abstract class Character : MonoBehaviour, IDamagable
         
         if (anim.speed < 0.1f) return;
 
-        if (isDead|| isStop) return;
+        if (isStop) return;
 
         if (!nav.isOnNavMesh) return;
 
+        if (nav.stoppingDistance != 2f)
+        {
+            nav.stoppingDistance = 2f;
+        }
+        
         nav.SetDestination(target.transform.position);
         m_lastMoveOrderTime = Time.time;
         if (nav.isStopped) nav.isStopped = false;
@@ -455,7 +460,7 @@ public abstract class Character : MonoBehaviour, IDamagable
     {
         if (target == null) return false;
 
-        if (nav.stoppingDistance > range)
+        if ((int)nav.stoppingDistance != (int)range)
         {
             nav.stoppingDistance = range;
         }

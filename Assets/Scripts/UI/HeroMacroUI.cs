@@ -8,7 +8,7 @@ public class HeroMacroUI : MonoBehaviour
     public HeroMacroUnit[] conditonMacroUnits = new HeroMacroUnit[5];
     public HeroMacroUnit[] actionMacroUnits = new HeroMacroUnit[5];
 
-    List<Dropdown.OptionData> m_ActionOptionDatas;
+    List<Dropdown.OptionData> m_actionOptionDatas;
     Dropdown.OptionData[] m_skillOptionDatas;
 
     private void Awake() {
@@ -46,14 +46,14 @@ public class HeroMacroUI : MonoBehaviour
     void InitActionUnits()
     {
         //List<Dropdown.OptionData> optionDatas = new List<Dropdown.OptionData>();
-        m_ActionOptionDatas  = new List<Dropdown.OptionData>();
+        m_actionOptionDatas  = new List<Dropdown.OptionData>();
 
         m_skillOptionDatas = new Dropdown.OptionData[4];
 
         foreach (BattleMacro macro in MacroManager.instance.prfActionMacros)
         {  
             //optionDatas.Add(new Dropdown.OptionData(macro.data.desc));
-            m_ActionOptionDatas.Add(new Dropdown.OptionData(macro.data.desc));
+            m_actionOptionDatas.Add(new Dropdown.OptionData(macro.data.desc));
         }
 
         for (int i = 0; i < MacroManager.instance.prfSkillMacros.Count; i++)
@@ -65,7 +65,7 @@ public class HeroMacroUI : MonoBehaviour
         foreach (HeroMacroUnit unit in actionMacroUnits)
         {  
             //unit.SetOptions(optionDatas);
-            unit.SetOptions(m_ActionOptionDatas);
+            unit.SetOptions(m_actionOptionDatas);
             unit.ID = id++;
             unit.isConditionMacro = false;
         }
@@ -104,16 +104,16 @@ public class HeroMacroUI : MonoBehaviour
         {
             if (hero.level >= hero.skills[i].data.requireLevel)
             {   // 영웅 레벨이 스킬 레벨제한 이상일 때
-                if (!m_ActionOptionDatas.Contains(m_skillOptionDatas[i]))
+                if (!m_actionOptionDatas.Contains(m_skillOptionDatas[i]))
                 {   // 해당 스킬 사용 매크로가 없는 경우 -> 추가
-                    m_ActionOptionDatas.Add(m_skillOptionDatas[i]);
+                    m_actionOptionDatas.Add(m_skillOptionDatas[i]);
                 }
             }
             else
             {   // 레벨이 부족한 경우
-                if (m_ActionOptionDatas.Contains(m_skillOptionDatas[i]))
+                if (m_actionOptionDatas.Contains(m_skillOptionDatas[i]))
                 {   // 스킬 매크로가 있는 경우 -> 제거
-                    m_ActionOptionDatas.Remove(m_skillOptionDatas[i]);
+                    m_actionOptionDatas.Remove(m_skillOptionDatas[i]);
                 }
             }
         }
@@ -121,7 +121,7 @@ public class HeroMacroUI : MonoBehaviour
         foreach (HeroMacroUnit unit in actionMacroUnits)
         {
             unit.ClearOption();
-            unit.SetOptions(m_ActionOptionDatas);
+            unit.SetOptions(m_actionOptionDatas);
         }
     }
 
