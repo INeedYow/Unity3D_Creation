@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca945043751933846967d80458b3e5d0, type: 3}
+  m_Name: SkillRuneData_1_1
+  m_EditorClassIdentifier: 
+  description: "\uD074\uB9AD\uD55C \uB545\uC5D0\uC11C \uAC00\uC7A5 \uAC00\uAE4C\uC6B4
+    \uC544\uAD70 \uBB34\uC801"
+  icon: {fileID: 21300000, guid: 4d91779f49b864c149e194a5756ca87c, type: 3}
+  cooldown: 2
+  ID: 1

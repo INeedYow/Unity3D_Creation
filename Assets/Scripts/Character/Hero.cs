@@ -1,69 +1,263 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-// 캐릭터 전투, 비전투 구분하여 관리하는 법.?
+
 public class Hero : Character
 {
+    public UnityAction<int> onLevelUp;
+    public UnityAction onRevive;
+
+    public enum EClass { Knight, Archer, Angel, Necromancer, Bard, Templar,  }  // wizard / sorcerer(sorceress) / spear / assassin
     [Header("GFX")]
-    public GameObject grxHero;      // 전투 중에 보여질 캐릭터
-    [Header("Macro")]
-    [SerializeField] ConditionMacro[]   conditionMacros;
-    [SerializeField] ActionMacro[]      actionMacros;
-    int maxMacroCount = 5;          // 매니저에 둘 변수
-    [Header("Additional")]
-    public bool isDead;
-    public Vector3 beginPos;
-
-    private void Start() {
-        conditionMacros = new ConditionMacro[maxMacroCount];
-        actionMacros = new ActionMacro[maxMacroCount];
-        
-        beginPos = gameObject.transform.position;
-
-        conditionMacros[0] = new Condition_Self("체력 70% 이상일 때", this, Condition_Self.EInfo.HP, Condition_Self.EType.Least, 70f);
-        actionMacros[0] = new Action_NormalAttack("일반 공격", this);
-
-        conditionMacros[1] = new Condition_Self("체력 35% 이하일 때", this, Condition_Self.EInfo.HP, Condition_Self.EType.Most, 35f);
-        actionMacros[1] = new Action_FallBack("후퇴", this);
-    }
-    private void Update() {
-        
-        for (int i = 0; i < maxMacroCount; i++)
-        {
-            if (conditionMacros[i] == null) continue;
-
-            if (conditionMacros[i].IsSatisfy())
+    public Hero_GFX heroGFX;
+    public Dummy dummy;
+    [Header("Class")]
+    public EClass eClass;
+    [HideInInspector] public bool isJoin;
+    
+    [Header("Level")]
+    public int level = 1;
+    [HideInInspector] public float maxExp; 
+    float _curExp;  
+    public float curExp {
+        get { return  Mathf.RoundToInt(_curExp); } 
+        set { 
+            _curExp = value ;
+            if (_curExp >= maxExp)
             {
-                if (actionMacros[i] == null) continue;
-
-                actionMacros[i].Execute();
-                break;
+                level++;
+                _curExp -= maxExp;
+                maxExp += 40f; 
+                StatUp();
+                onLevelUp?.Invoke(level);
             }
         }
+    }
 
-        //test
-        if (Input.GetKeyDown(KeyCode.A))
+    [Header("Equipment")]
+    public WeaponItemData       weaponData;
+    public ArmorItemData        armorData;
+    public AccessoryItemData    accessoryData;
+    [SerializeField] Ability    m_ability;
+
+    new protected void Awake() {
+        base.Awake();
+        InitHero();
+    }
+
+    void InitHero()
+    {
+        eGroup = EGroup.Hero;
+        maxExp = 30;
+        heroGFX.hero = this;
+        dummy.owner = this;
+        heroGFX.gameObject.SetActive(false);
+        dummy.gameObject.SetActive(false);
+        skills = new Skill[4];
+
+        // 매크로 배열 초기화
+        conditionMacros = new ConditionMacro[MacroManager.instance.maxMacroCount];
+        actionMacros = new ActionMacro[MacroManager.instance.maxMacroCount];
+
+        // Attack Command
+        switch(eClass){
+            case EClass.Knight:         attackCommand = new NormalAttackCommand(this); break;
+            case EClass.Archer:         attackCommand = new ProjectileAttackCommand(this, EProjectile.Archer_0); break;
+            case EClass.Angel:          attackCommand = new ProjectileAttackCommand(this, EProjectile.Angel_0); break;
+            case EClass.Necromancer:    attackCommand = new NormalAttackCommand(this); break;
+            case EClass.Bard:           attackCommand = new ProjectileAttackCommand(this, EProjectile.Bard_0); break;
+            case EClass.Templar:        attackCommand = new NormalAttackCommand(this); break;
+        }
+    }
+
+    void StatUp(){
+        switch (eClass)
         {
-            this.Damaged(1f, 0f);
+            case EClass.Knight      : 
+            case EClass.Templar     : maxHp += 10;  break;
+            
+            case EClass.Necromancer : 
+            case EClass.Bard        : maxHp += 8;  break;
+
+            case EClass.Archer      : 
+            case EClass.Angel       : maxHp += 6;  break;
+
+        }
+        minDamage += 1;
+        maxDamage += 1;
+        magicDamage += 1;
+    }
+
+    protected override void ShowDamageText(float damage, bool isMagic = false, bool isHeal = false)
+    {   
+        if (isHeal) {
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Hero_heal, HpBarTF.position + Vector3.up * 3f, damage );
+        }
+        else if (isMagic){  // 피해 받았을 때 동작하기 때문에 InfoType enemy
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Monster_magic, HpBarTF.position + Vector3.up * 3f, damage );
+        }
+        else{
+            GameManager.instance.ShowBattleInfoText( 
+                BattleInfoType.Monster_damage, HpBarTF.position + Vector3.up * 3f, damage );
         }
     }
 
     public override void Death()
     {
         isDead = true;
-        grxHero.SetActive(false);
+        onDeadGetThis?.Invoke(this);
+        onDead?.Invoke();
+        
+        if (provoker)
+        {
+            CancelInvoke("FinishProvoke");
+            provoker = null;
+        }
+        
+        if (isStasis) 
+        { 
+            SetStasis(false); 
+        }
+
+        DungeonManager.instance.onHeroDead?.Invoke();
+        PartyManager.instance.HeroDead();
+        heroGFX.gameObject.SetActive(false);
     }
 
-    public bool IsTargetInRange()
+    public override void Revive(float rateHp)
     {
-        return (target.transform.position - gameObject.transform.position).sqrMagnitude <= attackRange * attackRange;
+        isDead = false;
+        
+        rateHp = Mathf.Clamp(0.01f * rateHp, 0.2f, 1f);
+
+        curHp = rateHp * maxHp;
+        
+        //Debug.Log("hero Revive // ratio : " + rateHp);
+
+        heroGFX.gameObject.SetActive(true);
+        isStop = false;                     // gfx OnEnable 때 true해줘서 순서 중요
+        
+        onHpChange?.Invoke();
+        onRevive?.Invoke();
+        PartyManager.instance.aliveHeroCount++;
+        DungeonManager.instance.onChangeAnyHP?.Invoke();
+        DungeonManager.instance.onSomeoneAdd?.Invoke();
     }
 
     public void ResetPos()
-    {
-        Debug.Log("ResetPos()");
-        transform.position = beginPos;
-        target = null;
+    {   
+        transform.position = dummy.placedBlock.beginPos + DungeonManager.instance.curDungeon.beginTf.position; 
     }
+
+    public override void QuitSKill(int id)
+    {
+        heroGFX.StopSKill(id);
+    }
+
+    // 파티 관련
+
+    public void Join()
+    {
+        if (isJoin) return;
+        PartyManager.instance.Join(this);
+        isJoin = true;
+    }
+
+    public void Leave()
+    {
+        if (!isJoin) return;
+        PartyManager.instance.Leave(this);
+        isJoin = false;
+        dummy.gameObject.SetActive(false);
+    }
+
+    // 장비 관련
+    
+    public void Equip(WeaponItemData itemData)
+    {
+        if (weaponData != null) { weaponData.UnEquip(); }
+        weaponData = itemData;
+
+        minDamage += itemData.minDamage;
+        maxDamage += itemData.maxDamage;
+        magicDamage += itemData.magicDamage;
+
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void UnEquipWeapon()
+    {
+        if (weaponData == null) return;
+
+        minDamage -= weaponData.minDamage;
+        maxDamage -= weaponData.maxDamage;
+        magicDamage -= weaponData.magicDamage;
+
+        weaponData = null;
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void Equip(ArmorItemData itemData)
+    {
+        if (armorData != null) { armorData.UnEquip(); }
+        armorData = itemData;
+
+        armorRate += itemData.armor;
+        magicArmorRate += itemData.magicArmor;
+        maxHp += itemData.Hp;
+        curHp = maxHp;
+
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void UnEquipArmor()
+    {
+        if (armorData == null) return;
+
+        armorRate -= armorData.armor;
+        magicArmorRate -= armorData.magicArmor;
+        maxHp -= armorData.Hp;
+        curHp = maxHp;
+
+        armorData = null;
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void Equip(AccessoryItemData itemData)
+    {   
+        if (accessoryData != null) { accessoryData.UnEquip(); }
+        accessoryData = itemData;
+        
+        m_ability = Instantiate(accessoryData.prfAbility, transform);
+        //m_ability.SetOwner(this);
+
+        m_ability.OnEquip(this);
+
+        // onAttackGetDamage       += m_ability.OnAttackGetDamage;
+        // onDamagedGetAttacker    += m_ability.OnDamagedGetAttacker;
+        // onKill                  += m_ability.OnKill;
+
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+    public void UnEquipAccessory()
+    {
+        if (accessoryData == null) return;
+
+        // onAttackGetDamage       -= m_ability.OnAttackGetDamage;
+        // onDamagedGetAttacker    -= m_ability.OnDamagedGetAttacker;
+        // onKill                  -= m_ability.OnKill;
+
+        accessoryData = null;
+        Destroy(m_ability.gameObject);          //  Ability의 OnDestroy에서 이벤트 함수 등록 해제 진행
+        m_ability = null;
+        HeroManager.instance.heroInfoUI.RenewUI(this);
+    }
+
+
+    
 }

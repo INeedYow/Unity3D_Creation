@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    public List<SpawnData> listSpawnData;
+    //public List<Monster> prfMonsters;
+    public List<EMonster> eMonsters;
+    public List<int> counts;
 
     public void SpawnWave()
     {
-        foreach (SpawnData data in listSpawnData)
+        //Monster monster;
+        for (int j = 0; j < eMonsters.Count; j++)
         {
-            data.Spawn();
+            for (int i = 0; i < counts[j]; i++)
+            {
+                DungeonManager.instance.AddMonster(ObjectPool.instance.GetMonster((int)eMonsters[j]));
+            }
         }
     }
 }

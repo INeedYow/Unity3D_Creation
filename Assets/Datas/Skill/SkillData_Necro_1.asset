@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14428776c7686da469a5c8ad1752a67c, type: 3}
+  m_Name: SkillData_Necro_1
+  m_EditorClassIdentifier: 
+  skillName: "\uBE14\uB77C\uC778\uB4DC"
+  description: "\uB300\uC0C1 \uD53C\uD574 \uBC0F \uC0AC\uAC70\uB9AC \uCD95\uC18C"
+  icon: {fileID: 21300000, guid: e232be18a379a459980a86a9ae0b97bb, type: 3}
+  requireLevel: 1
+  cooldown: 5
+  skillRange: 10

@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Monster HPbar
   layers:
   - Default
   - TransparentFX
@@ -15,6 +16,11 @@ TagManager:
   - 
   - Monster
   - Hero
+  - Ground
+  - DummyPlane
+  - BoardBlock
+  - RunePlane
+  - RuneBlock
   - 
   - 
   - 
@@ -31,12 +37,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - TextUI
   m_SortingLayers:
   - name: Default
     uniqueID: 0

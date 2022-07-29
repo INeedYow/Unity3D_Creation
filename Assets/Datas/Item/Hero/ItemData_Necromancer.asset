@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4154e8ca75231424dbe9e7b1cd802305, type: 3}
+  m_Name: ItemData_Necromancer
+  m_EditorClassIdentifier: 
+  itemName: Necromancer
+  desc: "\uB4E0\uB4E0\uD55C \uB51C\uB7EC"
+  icon: {fileID: 0}
+  eClass: 3
+  skillDatas:
+  - {fileID: 11400000, guid: 46bfb0e49eed9be4f8e20cbc7f5a2f1b, type: 2}
+  - {fileID: 11400000, guid: bea2abe006407a542a3b20c9f0d65eed, type: 2}
+  - {fileID: 11400000, guid: c4b5207f50548f24eae43305b4db7145, type: 2}
+  - {fileID: 11400000, guid: 7f5607993a7e8c049a93ecc15fcc4498, type: 2}
