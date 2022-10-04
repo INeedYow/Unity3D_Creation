@@ -13,6 +13,9 @@ public class Condition_FindDistanceTarget : ConditionMacro
     float m_sqrValue;
     float m_sqrDist;
 
+    WaitForSeconds  m_repeatInterval = new WaitForSeconds(0.2f);
+    Coroutine       m_coroutine;
+
     private void Start() { m_sqrValue = value * value; }
 
     private void OnEnable() {   
@@ -28,58 +31,64 @@ public class Condition_FindDistanceTarget : ConditionMacro
 
     public override bool IsSatisfy()
     {  
-        if (target != null) return true;
-        return false;
+        return target != null;
     }
 
-    public void OnBattle() { InvokeRepeating("FindTarget", 0f, 0.2f); }
-    public void OffBattle() { CancelInvoke("FindTarget"); }
+    
+    public void OnBattle() { m_coroutine = StartCoroutine(FindTarget()); }
+    public void OffBattle() { StopCoroutine(m_coroutine); }
 
-    void FindTarget()
+
+    IEnumerator FindTarget()
     {   
-        if (eTargetGroup == EGroup.Hero)
-        {   // 아군
-            foreach (Character ch in PartyManager.instance.heroParty)
-            {
-                if (ch.isDead || ch.isStop) continue;
-                if (eMost == EMost.Least)
-                {   // value 이상
-                    m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
-                    if (m_sqrValue <= m_sqrDist)
-                    {
-                        target = ch;
+        while (true)
+        {   
+            if (eTargetGroup == EGroup.Hero)
+            {   // 아군
+                foreach (Character ch in PartyManager.instance.heroParty)
+                {
+                    if (ch.isDead || ch.isStop) continue;
+                    if (eMost == EMost.Least)
+                    {   // value 이상
+                        m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
+                        if (m_sqrValue <= m_sqrDist)
+                        {
+                            target = ch;
+                        }
                     }
-                }
-                else{   // value 이하
-                    m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
-                    if (m_sqrValue >= m_sqrDist)
-                    {
-                        target = ch;
-                    }
-                }
-            }
-        }
-        else{   // 적군
-            foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
-            {   
-                if (ch.isDead || ch.isStop) continue;
-                if (eMost == EMost.Least)
-                {   // value 이상
-                    m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
-                    //Debug.Log("sqrDist : " + m_sqrDist + " / sqrValue : " + m_sqrValue);
-                    if (m_sqrValue <= m_sqrDist)
-                    {
-                        target = ch;
-                    }
-                }
-                else{   // value 이하
-                    m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
-                    if (m_sqrValue >= m_sqrDist)
-                    {
-                        target = ch;
+                    else{   // value 이하
+                        m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
+                        if (m_sqrValue >= m_sqrDist)
+                        {
+                            target = ch;
+                        }
                     }
                 }
             }
-        }
+            else{   // 적군
+                foreach (Character ch in DungeonManager.instance.curDungeon.curMonsters)
+                {   
+                    if (ch.isDead || ch.isStop) continue;
+                    if (eMost == EMost.Least)
+                    {   // value 이상
+                        m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
+                        //Debug.Log("sqrDist : " + m_sqrDist + " / sqrValue : " + m_sqrValue);
+                        if (m_sqrValue <= m_sqrDist)
+                        {
+                            target = ch;
+                        }
+                    }
+                    else{   // value 이하
+                        m_sqrDist = (ch.transform.position - owner.transform.position).sqrMagnitude;
+                        if (m_sqrValue >= m_sqrDist)
+                        {
+                            target = ch;
+                        }
+                    }
+                }
+            }
+
+            yield return m_repeatInterval;
+        }   
     }
 }
